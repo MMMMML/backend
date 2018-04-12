@@ -15,7 +15,7 @@
 				<span class="mui-tab-label">一键呼救</span>
 			</router-link>
 		
-			<router-link class="mui-tab-item" to="/search">
+			<router-link class="mui-tab-item" to="/mine">
 				<div><img src="./assets/image/home/button-me.png" alt=""></div>
 				<span class="mui-tab-label">我的</span>
 			</router-link>

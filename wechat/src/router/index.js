@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 // 导入自定义组件
 import home from '../components/home/home.vue'
 import Vip from '../components/vip/Vip.vue'
-import Search from '../components/search/Search.vue'
+import mine from '../components/mine/mine.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +13,7 @@ const router = new VueRouter({
     { path: '/', redirect: '/home' },
     { path: '/home', component: home, name: 'jack' },
     { path: '/vip', component: Vip },
-    { path: '/search', component: Search }
+    { path: '/mine', component: mine }
   ]
 })
 // 导出路由对象
