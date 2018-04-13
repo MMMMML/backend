@@ -30,8 +30,17 @@
 
 
 <script>
+import Cookies from 'js-cookie' 
 export default{
-   
+    data() {
+        return {}
+    },
+    created() {
+        if (!Cookies.get('sessionId')) {
+            const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
+            window.location.href = redirect
+        }
+    }
   
 }
     
