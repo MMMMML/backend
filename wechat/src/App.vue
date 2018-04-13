@@ -3,7 +3,6 @@
 		
     <!-- 路由出口 -->
     <router-view class="content"></router-view>
-		
      <!-- 页脚 -->
     <nav class="mui-bar mui-bar-tab">
 			<router-link class="mui-tab-item" to="/home">
@@ -37,7 +36,6 @@ export default {
 	methods:{
 		callphone:function(){
 			 window.location.href = "tel:10086";
-			console.log(12)
 		}
 	}
 }
