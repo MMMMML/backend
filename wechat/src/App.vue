@@ -10,10 +10,10 @@
 				<div><img src="./assets/image/home/button-homepage.png" alt=""></div>
 				<span class="mui-tab-label">首页</span>
 			</router-link>
-			<router-link class="mui-tab-item" to="/vip">
+			<div class="mui-tab-item" @click="callphone()">
 				<div> <img src="./assets/image/home/button-help.png" alt=""></div>
 				<span class="mui-tab-label">一键呼救</span>
-			</router-link>
+			</div>
 		
 			<router-link class="mui-tab-item" to="/mine">
 				<div><img src="./assets/image/home/button-me.png" alt=""></div>
@@ -33,7 +33,12 @@ export default {
 	},
 	components: {
 		MintHeader: Header
-		
+	},
+	methods:{
+		callphone:function(){
+			 window.location.href = "tel:10086";
+			console.log(12)
+		}
 	}
 }
 

@@ -104,6 +104,15 @@ export default {
       return{
           
       }
+  },
+  created(){
+     var url = 'auth/userCenter';
+      // this.$http.post(url).then(data => {
+      //   // this.catelist = data.data.payload
+      //   console.log(data)
+      // }).catch(err => {
+      //     alert('服务器错误，请稍后再试')
+      //   });
   }
 }
 </script>

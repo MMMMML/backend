@@ -16,8 +16,23 @@ import axios from 'axios'
 // 导入路由
 import router from './router'
 import { Swipe, SwipeItem } from 'mint-ui'
+import { getSessionId, getWxFrom } from '@/util'
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
+
+axios.interceptors.request.use(
+  config => {
+    // let whiteWord = ['/abc', '/132']
+    // if (!whiteWord.includes(config.url)) {  //如果不是这些url 就加入x-wxform
+      config.headers = {
+        ['X-WxFrom']: getWxFrom(),
+        ['X-SessionId']: getSessionId() 
+      }
+    // }
+    return config
+  }
+)
+
 // 将 axios 添加到 Vue 的原型对象中
 Vue.prototype.$http = axios
 
