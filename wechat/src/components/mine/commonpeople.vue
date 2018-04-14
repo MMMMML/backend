@@ -28,7 +28,7 @@
 
     <!-- 选填部分 -->
     <div class="must" style="margin-top:5px">
-      <p class="title">选填</p>
+      <p style="padding-left: 5%;height: 30px;line-height: 30px;font-size: 18px;font-weight: 700;">选填</p>
       <div class="man">
         <p class="human-name">血型</p>
         <p>o</p>
@@ -72,14 +72,14 @@
     bottom: 0;
     width:100%;
 }
-.title{
+/* .title{
     width: 100%;
     padding-left: 5%;
     font-size: 18px;
     font-weight: 700;
     height: 30px;
     line-height: 30px;
-}
+} */
   .must {
     background: #fff;
     width: 100%;
