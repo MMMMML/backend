@@ -1,6 +1,6 @@
 
 import Cookies from 'js-cookie'
-const TokenKey = 'X-SessionId'
+const TokenKey = 'sessionId'
 
 export function getSessionId() {
     // todo

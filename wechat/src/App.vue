@@ -1,56 +1,40 @@
 <template>
   <div class="my_container">
-		
+
     <!-- 路由出口 -->
     <router-view class="content"></router-view>
-     <!-- 页脚 -->
-    <nav class="mui-bar mui-bar-tab">
-			<router-link class="mui-tab-item" to="/home">
-				<div><img src="./assets/image/home/button-homepage.png" alt=""></div>
-				<span class="mui-tab-label">首页</span>
-			</router-link>
-			<div class="mui-tab-item" @click="callphone()">
-				<div> <img src="./assets/image/home/button-help.png" alt=""></div>
-				<span class="mui-tab-label">一键呼救</span>
-			</div>
-		
-			<router-link class="mui-tab-item" to="/mine">
-				<div><img src="./assets/image/home/button-me.png" alt=""></div>
-				<span class="mui-tab-label">我的</span>
-			</router-link>
-		</nav>
+    <!-- 页脚 -->
+    
   </div>
 </template>
 
 <script>
-import { Header } from 'mint-ui'
-export default {
-	data () {
-		return {
-			
-		}
-	},
-	components: {
-		MintHeader: Header
-	},
-	methods:{
-		callphone:function(){
-			 window.location.href = "tel:10086";
-		}
-	}
-}
+  import {
+    Header
+  } from 'mint-ui'
+  export default {
+    data() {
+      return {
+
+      }
+    },
+    components: {
+      MintHeader: Header
+    },
+    methods: {
+      callphone: function () {
+        window.location.href = "tel:10086";
+      }
+    }
+  }
 
 </script>
 
 <style>
-
-.mui-bar-tab div img{
-	border: 1px dashed #939393;
-	margin-top:0.2rem;
-}
- .mui-bar-tab span{
-	 
-	 font-size: 0.5rem;
- } 
+  .mui-bar-tab div img {
+    border: 1px dashed #939393;
+    margin-top: 0.2rem;
+  }
+	
 
 </style>

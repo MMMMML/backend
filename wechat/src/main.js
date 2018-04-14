@@ -13,13 +13,14 @@ import './lib/mui/css/icons-extra.css'
 import './assets/css/app.css'
 // 导入 axois 发送ajax请求
 import axios from 'axios'
+
 // 导入路由
 import router from './router'
 import { Swipe, SwipeItem } from 'mint-ui'
 import { getSessionId, getWxFrom } from '@/util'
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
-
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/wechat'
 axios.interceptors.request.use(
   config => {
     // let whiteWord = ['/abc', '/132']
