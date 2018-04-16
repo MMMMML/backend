@@ -37,7 +37,7 @@
       </div>
   </div>
 </template>
-<style>
+<style scoped>
 .contact{
     background: #fff;
     display: flex;

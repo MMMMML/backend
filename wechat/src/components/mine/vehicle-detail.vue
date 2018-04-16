@@ -25,7 +25,7 @@
     <div class="button">确认</div>
   </div>
 </template>
-<style>
+<style scoped>
 .button{
     color: #fff;
     background:red;

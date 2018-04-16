@@ -4,6 +4,7 @@
 import Vue from 'vue'
 // 导入APP.vue
 import App from './App'
+import qs from 'qs'
 
 // 导入mui的样式
 import './lib/mui/css/mui.css'
@@ -18,17 +19,23 @@ import axios from 'axios'
 import router from './router'
 import { Swipe, SwipeItem } from 'mint-ui'
 import { getSessionId, getWxFrom } from '@/util'
+
+// Vue.component(Picker, Picker);
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
-axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/wechat'
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.interceptors.request.use(
   config => {
+    config.headers = {
+      ['X-WxFrom']: getWxFrom(),
+      ['X-SessionId']: getSessionId() 
+    }
+    if (config.method === 'post') {
+      config.data = qs.stringify(config.data)
+      config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+    }
     // let whiteWord = ['/abc', '/132']
     // if (!whiteWord.includes(config.url)) {  //如果不是这些url 就加入x-wxform
-      config.headers = {
-        ['X-WxFrom']: getWxFrom(),
-        ['X-SessionId']: getSessionId() 
-      }
     // }
     return config
   }
