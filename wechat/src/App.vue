@@ -4,7 +4,7 @@
     <!-- 路由出口 -->
     <router-view class="content"></router-view>
     <!-- 页脚 -->
-    
+        
   </div>
 </template>
 
