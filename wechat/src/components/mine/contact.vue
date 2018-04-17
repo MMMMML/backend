@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='container'>
     <div class="contact">
       <p style="font-size:18px;font-weight:700;">常用权益人</p>
       <router-link class="mui-tab-item" to='/commonpeople'>

@@ -22,7 +22,6 @@
           <div class="msg">
               <p style="width:20%;margin-left: 12%;">昵称</p>
               <p style="width:60%">{{user.realName}}</p>
-                  <img style="" src="../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
       </div>
     <!-- 性别 -->
@@ -30,7 +29,6 @@
           <div class="msg">
               <p style="width:20%;margin-left: 12%;">性别</p>
               <p style="width:60%">男</p>
-                  <img style="" src="../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
       </div>
       <!-- 生日 -->
@@ -38,7 +36,6 @@
           <div class="msg">
               <p style="width:20%;margin-left: 12%;">性别</p>
               <p style="width:60%">{{user.gender}}</p>
-                  <img style="" src="../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
       </div>
       <!-- 所在地 -->
@@ -46,10 +43,10 @@
           <div class="msg">
               <p style="width:20%;margin-left: 12%;">所在地</p>
               <p style="width:60%">{{user.province+user.city}}</p>
-                  <img style="" src="../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
       </div>
       <!-- 手机号 -->
+      <router-link class="mui-tab-item" to='/editmobile'>
       <div class="message">
           <div class="msg">
               <p style="width:20%;margin-left: 12%;">手机号</p>
@@ -57,6 +54,7 @@
                   <img style="" src="../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
       </div>
+      </router-link>
       <!-- 身份证 -->
       <div class="message">
           <div class="msg">
@@ -78,7 +76,6 @@
           <div class="msg">
               <p style="width:20%;margin-left: 12%;">邮箱</p>
               <p style="width:60%">未绑定</p>
-              <img src="../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
       </div>
       </div>
@@ -134,7 +131,7 @@ export default {
   created(){
      var id = JSON.parse(window.sessionStorage.getItem('id')) 
     //  console.log(this.user)
-    var url =`auth/getUserInfo?id=${id}`
+    var url =`wechat/auth/getUserInfo?id=${id}`
     this.$http.get(url).then(data => {
        this.user = data.data.payload
         console.log(data)

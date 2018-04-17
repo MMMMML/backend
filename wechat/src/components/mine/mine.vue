@@ -142,7 +142,7 @@
       }
     },
     created() {
-      var url = 'auth/userCenter';
+      var url = 'wechat/auth/userCenter';
       this.$http.get(url).then(data => {
         const {
           user,
@@ -163,7 +163,7 @@
 
 
 
-<style>
+<style scoped>
   .header {
     background: url(../../assets/image/mine/Mask@3x.png) no-repeat center;
     background-size: 100% 100%;
