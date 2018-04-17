@@ -138,6 +138,8 @@ export default {
         if(this.user.gender==0) this.user.gender = '未知'
         if(this.user.gender==1) this.user.gender = '男'
         if(this.user.gender==2) this.user.gender = '女'
+
+        window.sessionStorage.setItem('mobile',this.user.mobile)
       })
   }
 }
