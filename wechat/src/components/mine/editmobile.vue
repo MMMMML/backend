@@ -89,11 +89,10 @@
       gain: function () {
         var url = 'common/sendVCode'
         var params = {
-          mobile: this.mobile
-        }
-        this.$http.post(url, params, {
+          mobile: this.mobile,
           type: 'updateMobile'
-        }).then(data => {
+        }
+        this.$http.post(url, params).then(data => {
           if (data.data.code = 200) {
             alert('短信发送成功，请注意查收')
           }
@@ -108,9 +107,9 @@
               vcode:this.vcode
           }
           this.$http.post(url, params).then(data => {
-        //   if (data.data.code = 200) {
-        //     alert('短信发送成功，请注意查收')
-        //   }
+          if (data.data.code = 200) {
+            this.$router.go(-1)
+          }
           console.log(data)
         })
       }

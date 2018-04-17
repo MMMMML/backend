@@ -21,7 +21,7 @@ import { Field } from 'mint-ui'
 import { getSessionId, getWxFrom } from '@/util'
 Vue.component(Field.name, Field)
 
-axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/wechat'
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.interceptors.request.use(
   config => {
     config.headers = {
