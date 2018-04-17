@@ -15,6 +15,8 @@ import './assets/css/app.css'
 // 导入 axois 发送ajax请求
 import axios from 'axios'
 
+
+
 // 导入路由
 import router from './router'
 import { Field } from 'mint-ui'
@@ -38,7 +40,6 @@ axios.interceptors.request.use(
     return config
   }
 )
-
 // 将 axios 添加到 Vue 的原型对象中
 Vue.prototype.$http = axios
 

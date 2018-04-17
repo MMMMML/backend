@@ -15,9 +15,11 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.3.3",
+    "element-ui": "^2.3.4",
     "js-cookie": "^2.2.0",
     "mint-ui": "^2.2.13",
+    "mobile-select": "^1.1.2",
+    "vant": "^1.0.7",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vux": "^2.8.1"

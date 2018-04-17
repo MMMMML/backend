@@ -19,13 +19,13 @@
       <div class="privilege">
           <p>专属特权</p>
           <div class="privilege-icon">
-              <div>
+              <div class="privilege-spuare">
                   <img src="../../assets/image/product/icon-helicopter.png" alt="">
-                  <span>直升机院前急救</span>
+                  <p>直升机院前急救</p>
               </div>
-              <div>
+              <div class="privilege-spuare" style="margin-left:10px">
                   <img src="../../assets/image/product/icon-call.png" alt="">
-                  <span>120协调</span>
+                  <p>120协调</p>
               </div>
           </div>
       </div>
@@ -80,8 +80,23 @@
         }
         .privilege-icon{
             display: flex;
+            .privilege-spuare{
+                text-align: center;
+                p{
+                    font-size: 12px;
+                    font-weight: 100;
+
+                }
+            }
         }
     }
 
 </style>
+<script>
+
+export default {
+  
+}
+</script>
+
 
