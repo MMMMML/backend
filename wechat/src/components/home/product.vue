@@ -1,6 +1,7 @@
 <template>
     <div class="product">
         <div class="tp">
+            <img src="../../assets/image/product/banner4.png" alt="">
         </div>
      <div class="title">
          <div class="title_o">7天自驾综合救援权益</div>
@@ -41,7 +42,7 @@
    
 
         <div class="money">
-                <i>增加权益人</i> <span>￥35/人</span>
+                <i>增加权益人</i> <span>￥{{main.addPrice}}/人</span>
                 
          <div class='wrapper'>
                 <div class='box minus' v-on:click='min' ref='minus'>-</div>
@@ -76,7 +77,7 @@
                 <img src="../../assets/image/product/icon_logo_color.png" alt="">
         </div>
     <div class="mz">
-        <p>合计：<i>￥ {{ 99+counter*35}}</i> </p>
+        <p>合计：<i>￥ {{ main.price + counter*main.addPrice}}</i> </p>
         <button v-on:click='buy'> 立即购买</button>
     </div>
 
@@ -85,22 +86,28 @@
 
 
 <script>
+import Check from '@/util/checkIDAuth'
 export default{
  data() {
       return {
-          counter :0,
-          birthday: ''
-          
-
+          birthday: '',
+          main: '',  
+         counter:0
+            
       }
     },
     created (){
         // 发送请求 
-    // this.$http.get('http://172.28.2.59:8101/wechat/package/queryPackageById').then(response => {
-    //            console.log(response.data);
-   // }
-
-  //  )
+     this.$http.get('wechat/package/queryPackageById?id=A').then(response => {
+               console.log(response.data);
+               var content = response.data.payload.specifics;
+            //    console.log(content);
+               const x = JSON.parse(content);
+            //    console.log(x);
+            this.main = x.main;
+            
+   }
+   )
     },
      methods: {
         add: function() {
@@ -113,17 +120,17 @@ export default{
         },
         // 点击
         buy: function(){
-            this.$http.get('http://aj.kingwingaviation.com/alliance-java/wechat/auth/getCurrentUser').then(response => {
-               console.log(response.data);
-               const verified=response.data.payload.verified;
-               console.log(verified); 
-                if(verified){
-              this.$router.push({path:'/id'})
-}
-               
-            }
-
-            )
+            Check().then(res => {
+                console.log('success');
+                // this.$router.push({
+                //     path:'/id', 
+                //     params:{
+                //         packageId: 'A',
+                //         counter: this.counter
+                //     }
+                // });
+                this.$router.push(`/id?packageId=A&counter=${this.counter}`)
+            })
         }
         
     }

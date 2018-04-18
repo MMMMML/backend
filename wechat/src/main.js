@@ -19,9 +19,12 @@ import axios from 'axios'
 import router from './router'
 import { Field } from 'mint-ui'
 import { getSessionId, getWxFrom } from '@/util'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 Vue.component(Field.name, Field)
 
-axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/wechat'
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.interceptors.request.use(
   config => {
     config.headers = {

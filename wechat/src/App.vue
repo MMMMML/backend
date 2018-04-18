@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import Storage from 'good-storage'
   import {
     Header
   } from 'mint-ui'
@@ -18,13 +19,22 @@
 
       }
     },
-    components: {
-      MintHeader: Header
+    created() {
+      this._getUserInfo()
     },
     methods: {
       callphone: function () {
         window.location.href = "tel:10086";
+      },
+      _getUserInfo() {
+        this.$http.get("http://aj.kingwingaviation.com/alliance-java/wechat/auth/getCurrentUser").then(res => {
+          const userinfo = res.data.payload
+          Storage.set('userInfo', JSON.stringify(userinfo))
+        })
       }
+    },
+    components: {
+      MintHeader: Header
     }
   }
 

@@ -1,66 +1,44 @@
 <template>
     <div class="msg">
 
-        <div class="qyr" v-for='(item, index) of meg.personUserInfo' :key='index'>
-            <div class="first" v-show='!isShow'>
-                <p >主权益人</p>
-                <span>未填写</span>
-                <button v-on:click="toggle()" >填写</button>              
-            </div>
-            <div v-show='isShow' class="">  
-                <div class="second" >
-                    <p>主权益人</p>
-                    <input type="text"  v-model="item.realName"> 
-                    <button class="tx">选择权益人</button>
-                    </div>
-                    <div class="sfz">
-                    <p>证件类型</p>
-                   <el-select v-model="value" placeholder="请选择" class='ys'>
-                     <el-option
-                       v-for="item in options"
-                       :key="item.value"
-                       :label="item.label"
-                       :value="item.value">
-                     </el-option>
-                    </el-select>
-                    
-                </div>
-                <div class="hm">
-                    <span>证件号码</span> <input type="text" style="width:160px;" v-model="item.idNumber">
-                </div>
-                <div class="phone">
-                    <span>手机号码</span> <input type="text" style="width:160px;" v-model="item.mobile">     
-                </div>
-            </div>
+        <div class="must" v-for="(item, index) of personUser" :key='index'>
+         <p style="padding:10px 20px 0">权益人{{index+1}}</p>
+      <div class="man">
+        <p class="human-name">姓名</p>
+        <!-- <p>马玲</p> -->
+        <input type="text" class="human-input" v-model="item.realName" placeholder="请输入姓名">
+        <div style="display:flex;align-items: center;" v-show="index==0">
+          <div class="btn" @click="select()">选择权益人</div>
         </div>
-
-
-   <!-- 多余的权益人 -->
-        <!-- <div class="qyr">
-            <div class="first" v-show='!find'>
-                <p>主权益人</p>
-                <span>未填写</span>
-                <button v-on:click="toggle1()" >填写</button>              
-            </div>
-            <div v-show='find'>  
-                <div class="second" >
-                    <p>主权益人</p>
-                    <input type="text"  v-model="meg.personUserInfo[0].realName"> 
-                    <button class="tx">选择权益人</button>
-                    </div>
-                    <div class="sfz">
-                    <p>证件类型</p>
-                    <p>身份证</p>
-                    <button> > </button>
-                </div>
-                <div class="hm">
-                    <span>证件号码</span> <input type="text" style="width:160px;" v-model="meg.personUserInfo[0].idNumber">
-                </div>
-                <div class="phone">
-                    <span>手机号码</span> <input type="text" style="width:160px;" v-model="meg.personUserInfo[0].mobile">     
-                </div>
-            </div>
-        </div> -->
+        <div class="warning" v-show="isChinaName">
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>姓名格式错误，请重新填写</span>
+        </div>
+      </div>
+      <div class="man">
+        <p style="width:25%;padding-left:5%">证件类型</p>
+        <p :id="'createId' + index" @click='createId(index)' style="width:62%;padding-left: 1rem;">{{item.idType && item.idType}}</p>
+        <div>
+          <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
+        </div>
+      </div>
+      <div class="man">
+        <p class="human-name">证件号码</p>
+        <input type="text" v-model="item.idNumber" class="human-input">
+        <div class="warning" v-show="isIdNumber">
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>证件号码不能为空</span>
+        </div>
+      </div>
+      <div class="man">
+        <p class="human-name">手机号码</p>
+        <input type="text" class="human-input" v-model="item.mobile" placeholder="请输入手机号码">
+        <div class="warning" v-show="isPhoneNo">
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>手机格式错误，请重新填写</span>
+        </div>
+      </div>
+    </div>
 
         <!-- 权益车辆 -->
         <div class="qyc">
@@ -94,9 +72,7 @@
         </div>
 
      
-
-
-            
+   
         <!-- 支付模块 -->
         <div class="mz">
             <p>合计：<i>￥889</i> </p>

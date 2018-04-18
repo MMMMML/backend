@@ -6,6 +6,11 @@ import VueRouter from 'vue-router'
 import home from '../components/home/home.vue'
 import product from '../components/home/product.vue'
 import id from '../components/home/id.vue'
+import zhi from '../components/home/zhi.vue'
+import pay from '../components/home/pay.vue'
+// 测试实名登录页
+import Auth from '@/components/auth'
+
 // 马哥的
 import mine from '../components/mine/mine.vue'
 import personal from '../components/mine/personal.vue'
@@ -17,6 +22,7 @@ import vehicledetail from '../components/mine/vehicle-detail.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
+  // mode: 'history',
   routes: [
     { path: '/', redirect: '/home' },
     { path: '/home', component: home, name: 'jack' },
@@ -27,7 +33,10 @@ const router = new VueRouter({
     { path: '/commonpeople', component: commonpeople },
     { path: '/contact', component: contact },
     { path: '/vehicle', component: vehicle },
-    { path: '/vehicledetail', component: vehicledetail }
+    { path: '/vehicledetail', component: vehicledetail },
+    { path: '/auth', component: Auth },
+    { path: '/zhi',  component: zhi },
+    { path: '/pay',  component: pay }
   ]
 })
 // 导出路由对象

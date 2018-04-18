@@ -12,13 +12,21 @@
 
     <!-- 轮播图 -->
   <div class="lb_t">
-    <router-link to='./product'> 
-      <div>
-        <img src="../../assets/image/home/banner.png" alt="">
-      </div>
-     </router-link>
-    
+    <router-link to='/product'>       
+  <img src="../../assets/image/home/banner4.png" alt="">
+  </router-link>
+  <a href="#">
+  <img src="../../assets/image/home/banner1.png" alt="">
+  </a>
+  <a href="#">
+  <img src="../../assets/image/home/banner2.png" alt="">
+  </a>
+  <a href="#">
+  <img src="../../assets/image/home/banner.png" alt="">
+  </a>
 </div>
+
+
      <!-- 文字信息 -->
       <div class="title_1">
         <p>直升机院前急救+医疗转运9折</p>
@@ -58,12 +66,12 @@
   export default {
     data() {
       return {
-       
       }
     },
+   
     // created() {
     //   if (!Cookies.get('sessionId')) {
-    //       const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
+    //       const redirect = `wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
     //       window.location.href = redirect
     //   }
     // },
@@ -120,6 +128,10 @@
   }
 
   /* 轮播图区域 */
+.lb_t img{
+  float:left;
+}
+
 
   .title {
     width: 10rem;
