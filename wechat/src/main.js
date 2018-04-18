@@ -20,6 +20,7 @@ import axios from 'axios'
 // 导入路由
 import router from './router'
 import { Field } from 'mint-ui'
+import { DatetimePicker } from 'mint-ui';
 import { getSessionId, getWxFrom } from '@/util'
 Vue.component(Field.name, Field)
 
@@ -42,6 +43,7 @@ axios.interceptors.request.use(
 )
 // 将 axios 添加到 Vue 的原型对象中
 Vue.prototype.$http = axios
+Vue.component(DatetimePicker.name, DatetimePicker);
 
 const vm = new Vue({
   el: '#app',

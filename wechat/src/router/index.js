@@ -17,6 +17,7 @@ import editotherinfo from '../components/mine/editotherinfo.vue'
 import editmobile from '../components/mine/editmobile.vue'
 import attestation from '../components/attestation/attestation.vue'
 import bodyguard from '../components/bodyguard/bodyguard.vue'
+import guarantee from '../components/bodyguard/guarantee.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,7 @@ const router = new VueRouter({
     { path: '/editcommonpeople/:id',name:'editcommonpeople', component: editcommonpeople },
     { path: '/attestation',name:'attestation', component: attestation },
     { path: '/bodyguard',name:'bodyguard', component: bodyguard },
+    { path: '/guarantee',name:'guarantee', component: guarantee },
   ]
 })
 // 导出路由对象
