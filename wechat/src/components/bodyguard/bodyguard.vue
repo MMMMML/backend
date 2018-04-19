@@ -425,7 +425,7 @@
           return  
         }else{
           window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))
-          this.$router.push('/alliance-html/wechat/guarantee')
+          this.$router.push('/guarantee')
         }
       }
     },
