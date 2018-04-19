@@ -42,7 +42,7 @@
    
 
         <div class="money">
-                <i>增加权益人</i> <span>￥{{main.addPrice}}/人</span>
+                <i>增加权益人</i> <span>￥{{main.addPrice || 0 }}/人</span>
                 
          <div class='wrapper'>
                 <div class='box minus' v-on:click='min' ref='minus'>-</div>
@@ -77,7 +77,7 @@
                 <img src="../../assets/image/product/icon_logo_color.png" alt="">
         </div>
     <div class="mz">
-        <p>合计：<i>￥ {{ main.price + counter*main.addPrice}}</i> </p>
+        <p>合计：<i>￥ {{ main.price + counter*main.addPrice ||0}}</i> </p>
         <button v-on:click='buy'> 立即购买</button>
     </div>
 
@@ -93,7 +93,7 @@ export default{
           birthday: '',
           main: '',  
          counter:0
-            
+        
       }
     },
     created (){
@@ -105,9 +105,11 @@ export default{
                const x = JSON.parse(content);
             //    console.log(x);
             this.main = x.main;
-            
+        // var money=99+this.counter*35;
+        //  console.log(money);
    }
-   )
+   );
+        
     },
      methods: {
         add: function() {
@@ -122,6 +124,8 @@ export default{
         buy: function(){
             Check().then(res => {
                 console.log('success');
+                // var money=99+this.counter*35;
+                // console.log(money);
                 // this.$router.push({
                 //     path:'/id', 
                 //     params:{
@@ -129,7 +133,7 @@ export default{
                 //         counter: this.counter
                 //     }
                 // });
-                this.$router.push(`/id?packageId=A&counter=${this.counter}`)
+                this.$router.push(`/pay?packageId=A&counter=${this.counter}`)
             })
         }
         

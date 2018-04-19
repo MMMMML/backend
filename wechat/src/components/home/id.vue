@@ -3,11 +3,11 @@
 
         <div class="qyr" v-for='(item, index) of meg.personUserInfo' :key='index'>
             <div class="first" v-show='!isShow'>
-                <p >主权益人</p>
+                <p>主权益人</p>
                 <span>未填写</span>
                 <button v-on:click="toggle()" >填写</button>              
             </div>
-            <div v-show='isShow' class="">  
+            <div v-show='isShow'>  
                 <div class="second" >
                     <p>主权益人</p>
                     <input type="text"  v-model="item.realName"> 
@@ -15,15 +15,8 @@
                     </div>
                     <div class="sfz">
                     <p>证件类型</p>
-                   <el-select v-model="value" placeholder="请选择" class='ys'>
-                     <el-option
-                       v-for="item in options"
-                       :key="item.value"
-                       :label="item.label"
-                       :value="item.value">
-                     </el-option>
-                    </el-select>
-                    
+                    <p>身份证</p>
+                    <button> > </button>
                 </div>
                 <div class="hm">
                     <span>证件号码</span> <input type="text" style="width:160px;" v-model="item.idNumber">
@@ -133,9 +126,7 @@ export default {
             ]
         },
         
-        counter: 1,
-    
-      
+        counter: 1
     }
   },
   created(){
@@ -206,11 +197,10 @@ export default {
                     signType: payload.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                     paySign: payload.paySign, // 支付签名
             success: function (res) {
-        // 支付成功后的回调函数 
-           
+// 支付成功后的回调函数 
+// alert(1)
         console.log(1);
     }
-    
 });
             }else{
                 console.log('hh')
@@ -286,7 +276,18 @@ export default {
     margin-top: 5px;
     border-bottom: 1px solid #A0A0A0;
 }
-
+.sfz p:nth-child(2) {
+  color: #4B4B4B;
+  margin-left: 80px;
+  margin-top: -30px;
+}
+.sfz button {
+    float: right;
+    margin-top:-30px;
+    background: none;
+    border: none;
+    color: #A0A0A0;
+} 
 .hm {
     margin-top:10px;
     margin-left: 20px;

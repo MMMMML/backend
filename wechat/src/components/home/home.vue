@@ -12,19 +12,17 @@
 
     <!-- 轮播图 -->
   <div class="lb_t">
-    <router-link to='/product'>       
-  <img src="../../assets/image/home/banner4.png" alt="">
-  </router-link>
-  <a href="#">
-  <img src="../../assets/image/home/banner1.png" alt="">
-  </a>
-  <a href="#">
-  <img src="../../assets/image/home/banner2.png" alt="">
-  </a>
-  <a href="#">
-  <img src="../../assets/image/home/banner.png" alt="">
-  </a>
-</div>
+    <swiper :options="swiperOption" ref="mySwiper">
+      <swiper-slide v-for="(banner,index) in banners" :key="index" @click.native='goproduct(index)'>
+        <img v-if="banner.src" :src="banner.src">
+      </swiper-slide>
+    <div class="swiper-pagination" slot="pagination"></div>
+  </swiper>
+    
+    
+
+
+  </div>
 
 
      <!-- 文字信息 -->
@@ -63,11 +61,46 @@
 
 <script>
   import Cookies from 'js-cookie'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   export default {
+    components: {  
+            swiper,  
+            swiperSlide  
+        },
+
+computed:{
+  swiper() {  
+                return this.$refs.mySwiper.swiper  
+            }  
+},
+
     data() {
+      
       return {
-      }
-    },
+        banners:[
+          { src :require('../../assets/image/home/banner4.png')},
+          { src :require('../../assets/image/home/banner1.png')},
+          { src :require('../../assets/image/home/banner2.png')},
+          { src :require('../../assets/image/home/banner.png')}
+
+          ],
+        swiperOption:{
+          notNextTick: true,  
+                pagination: '.swiper-pagination',  
+                slidesPerView: 'auto',  
+                centeredSlides: true,  
+                paginationClickable: true,  
+                spaceBetween: 30,
+                // preventClicks:false, 
+                    onSlideChangeEnd: swiper => {  
+                        //这个位置放swiper的回调方法    
+                        this.index = swiper.realIndex;  
+                    }  
+                }  
+        }
+
+      },
+    
    
     // created() {
     //   if (!Cookies.get('sessionId')) {
@@ -76,7 +109,18 @@
     //   }
     // },
     methods:{
-      
+        goproduct:function(index){
+           if( index==0){
+            this.$router.push('/cpa')
+           }
+          if(index==3){
+            this.$router.push('/cpb')
+          } 
+
+
+
+          console.log(index)
+        },
     }
   }
 
@@ -128,11 +172,20 @@
   }
 
   /* 轮播图区域 */
-.lb_t img{
-  float:left;
+   
+.swiper-wrapper {
+  margin-top: 10px;
+  height: 230px;
+}
+
+.lb_t img {
+  width: 100%;
+  height: 100%;
 }
 
 
+
+/* 轮播结束 */
   .title {
     width: 10rem;
     height: 2rem;

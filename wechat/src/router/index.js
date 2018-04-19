@@ -6,8 +6,10 @@ import VueRouter from 'vue-router'
 import home from '../components/home/home.vue'
 import product from '../components/home/product.vue'
 import id from '../components/home/id.vue'
-import zhi from '../components/home/zhi.vue'
 import pay from '../components/home/pay.vue'
+import cpb from '../components/home/cpb.vue'
+import cpa from '../components/home/cpa.vue'
+import payd from '../components/home/payd.vue'
 // 测试实名登录页
 import Auth from '@/components/auth'
 
@@ -35,8 +37,10 @@ const router = new VueRouter({
     { path: '/vehicle', component: vehicle },
     { path: '/vehicledetail', component: vehicledetail },
     { path: '/auth', component: Auth },
-    { path: '/zhi',  component: zhi },
-    { path: '/pay',  component: pay }
+    { path: '/pay', component: pay },
+    { path: '/cpb', component: cpb },
+    { path: '/cpa', component: cpa },
+    { path: '/payd', component: payd }
   ]
 })
 // 导出路由对象
