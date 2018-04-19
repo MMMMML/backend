@@ -208,7 +208,6 @@
         this.isChinaName = false
         this.isPhoneNo = false
         this.isIdNumber = false
-        console.log(this.user.idNumber == '')
         this.isChinaName = !this._isChinaName(this.user.realName)
         if (this.isChinaName) {
           return;

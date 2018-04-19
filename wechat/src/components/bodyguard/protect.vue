@@ -2,17 +2,18 @@
   <div>
     <!-- picture -->
     <div class="banner">
-      <img src="../../assets/image/product/banner-空降骑士@3x.png" alt="">
+      <img src="../../assets/image/product/banner-皇家护卫@3x.png" alt="">
     </div>
     <!-- nav -->
     <div class="nav-word">
-      <p>单人短期直升机院前急救权益</p>
+      <p>家庭全年综合救援权益</p>
       <div class="tips">
-        <div class="tips-bor" style="margin-left:0">两天起购</div>
-        <div class="tips-bor">日期自定义</div>
-        <div class="tips-bor">连续购买满15天享8折优惠</div>
+        <div class="tips-bor" style="margin-left:0">全年守护</div>
+        <div class="tips-bor">家庭专享</div>
+        <div class="tips-bor">赠道路救援</div>
+        <div class="tips-bor">蹭代步车服务</div>
       </div>
-      <div class="nav-text">户外徒步，独自旅行，商务出差…随心所欲却不小心遭遇突发意外？？？ 别担心！你的飞行保镖已上线！第一时间为你出动直升机紧急医疗救援，争分夺秒赶来你身边！同时还有地面救护车随时待命，双重应急方案上天入地守护你！即日起，还可为你的小伙伴雇佣飞行保镖哦！</div>
+      <div class="nav-text">幸福没有终点，守护永不停歇，一个人坚强，两个人成长，一家人平安才是生命中最大的幸运！ 今天起，你的私人皇家护卫队已经整装待发，肩负荣誉使命，为你和你的家人提供至高生命保障。 更有家庭专享的全年免费道路救援和代步车服务，全家出行没烦恼，沿途风景无限好！</div>
     </div>
 
     <!-- privilege  -->
@@ -23,43 +24,29 @@
           <img src="../../assets/image/product/icon-helicopter.png" alt="">
           <p>直升机院前急救</p>
         </div>
-        <div class="privilege-spuare" style="margin-left:10px">
+        <div class="privilege-spuare">
           <img src="../../assets/image/product/icon-call.png" alt="">
           <p>120协调</p>
         </div>
+        <div class="privilege-spuare">
+          <img src="../../assets/image/product/icon-stretcher.png" alt="">
+          <p>医疗转运9折</p>
+        </div>
+        <div class="privilege-spuare">
+          <img src="../../assets/image/product/icon-truck.png" alt="">
+          <p>道路救援</p>
+        </div>
+        <div class="privilege-spuare">
+          <img src="../../assets/image/product/icon-car.png" alt="">
+          <p>代步车</p>
+        </div>
       </div>
       <!-- 日期 -->
-      <div style="display:flex;margin-top:10px">
-        <p style="width:50%">生效日期</p>
-        <p>失效日期</p>
-      </div>
-      <div class="picker">
-        <div style="position: relative;width:100%">
-          <div class="datepicker" style="margin-left:0" @click="openPicker()">{{pickerStart}}</div>
-          <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
-            year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
-          </mt-datetime-picker>
-          <img style="width:14px;position: absolute;right: 8vw;top: 50%;transform: translateY(-50%);" class="date-icon" src="../../assets/image/product/icon-calendar@3x.png"
-            alt="">
-        </div>
-        <div style="position: relative;width:100%">
-          <div class="datepicker" style="margin-left:0;" @click="twoPicker()">{{pickerEnd}}</div>
-          <mt-datetime-picker ref="pickers" v-model="Visible" :startDate='startDates' :endDate='endDate' type="date" @confirm="confirm "
-            year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
-          </mt-datetime-picker>
-          <img style="width:14px;position: absolute;right: 8vw;top: 50%;transform: translateY(-50%);" class="date-icon" src="../../assets/image/product/icon-calendar@3x.png"
-            alt="">
-        </div>
-      </div>
-      <!-- 加减号 -->
-      <div class="num">
-        <p>权益人数</p>
-        <div class='wrapper'>
-          <div class='box minus' @click='minus' ref='minus'>-</div>
-          <span class='count'>{{ count }}</span>
-          <div class='box add' @click='add'>+</div>
-        </div>
-      </div>
+        <mt-radio
+            v-model="value"
+            :options="['2大1小', '1大2小', '2大2小']">
+        </mt-radio>
+      
       <div>
 
       </div>
@@ -130,6 +117,48 @@
         <p class="title-icon">服务热线</p>
         <p> 400-111-9299</p>
       </div>
+      <div class="notice-part" @click="showToggle3">
+        <p>道路救援服务</p>
+        <div>
+          <img src="../../assets/image//product/arrow@3x.png" alt="">
+        </div>
+      </div>
+
+      <div v-show="isShow3" style="padding:0 20px;border-bottom:1px dashed #ccc">
+        <p class="title-icon">权益人限定3</p>
+        <p>中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
+        <p class="title-icon">权益车辆要求</p>
+        <p>9座（含）以下、重量不超过3.5吨、长度不超过6米的非营运性四轮机动车辆</p>
+        <p class="title-icon">权益有效期</p>
+        <p>有效期为所选起始日起的连续7天</p>
+        <p class="title-icon"> 价格说明</p>
+        <p>【基础99元】包含一位权益人、一辆权益车辆有效期内的直升机院前急救、道路救援和代步车服务费用</p>
+        <p>【附加35元】每增加1位权益人需额外支付7天直升机院前急救服务费用</p>
+        <p>【每次呼叫1元】实际发生直升机院前急救时，权益人在有效期内每呼叫一次需支付1元呼叫调度费</p>
+        <p class="title-icon">服务热线</p>
+        <p> 400-111-9299</p>
+      </div>
+      <div class="notice-part" @click="showToggle3">
+        <p>代步车服务</p>
+        <div>
+          <img src="../../assets/image//product/arrow@3x.png" alt="">
+        </div>
+      </div>
+
+      <div v-show="isShow3" style="padding:0 20px;border-bottom:1px dashed #ccc">
+        <p class="title-icon">权益人限定3</p>
+        <p>中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
+        <p class="title-icon">权益车辆要求</p>
+        <p>9座（含）以下、重量不超过3.5吨、长度不超过6米的非营运性四轮机动车辆</p>
+        <p class="title-icon">权益有效期</p>
+        <p>有效期为所选起始日起的连续7天</p>
+        <p class="title-icon"> 价格说明</p>
+        <p>【基础99元】包含一位权益人、一辆权益车辆有效期内的直升机院前急救、道路救援和代步车服务费用</p>
+        <p>【附加35元】每增加1位权益人需额外支付7天直升机院前急救服务费用</p>
+        <p>【每次呼叫1元】实际发生直升机院前急救时，权益人在有效期内每呼叫一次需支付1元呼叫调度费</p>
+        <p class="title-icon">服务热线</p>
+        <p> 400-111-9299</p>
+      </div>
       <div @click="showToggle4" class="notice-part">
         <p>免责申明</p>
         <div>
@@ -163,6 +192,21 @@
   </div>
 </template>
 <style scoped lang='less'>
+.mint-radiolist{
+    display: flex;
+    width: 100vw;
+    .mint-cell-wrapper{
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+}
+ .mint-cell{
+        width: 33.33%;
+    }
+ 
+.mint-radiolist-label{
+        padding: 0;
+    }
   .banner {
     width: 100%;
     img {
@@ -213,8 +257,10 @@
     }
     .privilege-icon {
       display: flex;
+      flex-flow: row wrap;
       .privilege-spuare {
         text-align: center;
+        width: 25%;
         p {
           font-size: 12px;
           font-weight: 100;
@@ -328,6 +374,7 @@
   export default {
     data() {
       return {
+          
         pickerVisible: '',
         Visible: '',
         count: 1,
@@ -345,6 +392,7 @@
       }
     },
     created() {
+        
       var id = 'B'
       var url = `wechat/package/queryPackageById?id=${id}`
       this.$http.get(url).then(data => {
@@ -425,7 +473,7 @@
           return  
         }else{
           window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))
-          this.$router.push('/alliance-html/wechat/guarantee')
+          this.$router.push('/guarantee')
         }
       }
     },
