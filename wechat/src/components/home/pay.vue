@@ -26,7 +26,7 @@
 <!-- 证件类型  -->
       <div class="man">
         <p style="width:25%;padding-left:5%">证件类型</p>
-        <p  id='createId' @click='createId' style="width:62%;padding-left: 1rem;"> </p>
+        <p  class='createId' @click='createId(index)' style="width:62%;padding-left: 1rem;">{{item.idType && item.idType }} </p>
         <div>
           <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="" >
         </div>
@@ -53,10 +53,8 @@
        </div>
 
 </div>
-
-</div>
 <!-- 权益车 -->
-    <div class="qyc">
+    <div class="qyc"  v-if='index === 0'>
                         <!-- 填写页面 -->
         <div class="tianx" v-show="!show1">
                 <p>权益车</p>
@@ -70,7 +68,7 @@
     <div class="man">
         <p class="human-name">车牌号码</p>
         <input type="text" class="human-input"  placeholder="请输入车牌号" v-model="meg.plateNumber">
-        <div style="display:flex;align-items: center;" >
+        <div style="display:flex;align-items: center;"  v-show="index==0">
           <div class="btn" v-on:click='car' >选择车辆</div>
         </div>
         <div class="warning" v-show="isChinaName">
@@ -113,7 +111,7 @@
         <input type="text" class="human-input"  placeholder="请输入代号" v-model="meg.vin">
         <div class="warning" v-show="isPhone">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
-          <span>手机格式错误，请重新填写</span>
+          <span>车辆识别代号错误</span>
         </div>
        </div>
 
@@ -121,6 +119,10 @@
 
 
      </div>
+</div>
+
+
+
 </div>
 
 <!-- 支付功能 -->
@@ -182,6 +184,8 @@ mounted(){
         wx.ready(() => {
             console.log('jssdk ok!')
         })
+
+        
 },
 
 created(){
@@ -197,6 +201,7 @@ created(){
         })
       }
       console.log(this.meg.peopleNum)
+      // console.log(wx)
 },
 
 
@@ -220,8 +225,8 @@ methods:{
 
 // 点击下拉
     createId:function() {
-        var mobileSelect1 = new MobileSelect({
-          trigger: '#createId' ,
+         this.mobileSelect1 = new MobileSelect({
+          trigger: '.createId' ,
           title: '选择证件类型',
           wheels: [{
             data: [{
@@ -243,9 +248,14 @@ methods:{
             ]
           }],
           callback: (indexArr, data) => {
-            // this.personUser[index].idType = data[0].id;
-            // console.log(this.personUser[index].idType)
-            // console.log(data);
+            let indx=this.index ||0
+            this.personUser[idx].idType = data[0].value;
+          // console.log(this.personUser[index].idType)
+          // let x = JSON.stringify(this.personUser[idx])
+          if (data[0].value == '身份证') this.personUser[idx].idType = '0'
+          if (data[0].value == '护照') this.personUser[idx].idType = '3'
+          if (data[0].value == '回乡证') this.personUser[idx].idType = '2'
+          if (data[0].value == '台胞证') this.personUser[idx].idType = '1'
             
           }
         });
@@ -279,8 +289,8 @@ methods:{
           }],
           callback: (indexArr, data) => {
             // this.personUser[index].idType = data[0].id;
-            // console.log(this.personUser[index].idType)
-            // console.log(data);
+            // console.(this.personUser[index].idType)
+            // console.(data);
             
           }
         });
@@ -358,8 +368,8 @@ methods:{
           }],
           callback: (indexArr, data) => {
             // this.personUser[index].idType = data[0].id;
-            // console.log(this.personUser[index].idType)
-            //  console.log(data);
+            // console.(this.personUser[index].idType)
+            //  console.(data);
             
           }
         });
@@ -371,8 +381,13 @@ methods:{
       this.$http.get('wechat/commonVehicle/list').then(res=>{
         console.log(res);
       })
-    }
-
+    },
+    createId:function(index) {
+        console.log('click')
+        this.index = index
+        
+      }
+   
 }
 
 }  

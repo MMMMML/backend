@@ -9,6 +9,7 @@ import pay from '../components/home/pay.vue'
 import cpb from '../components/home/cpb.vue'
 import cpa from '../components/home/cpa.vue'
 import payd from '../components/home/payd.vue'
+import knight from '../components/home/knight.vue'
 // 测试实名登录页
 import Auth from '@/components/auth'
 // 马哥的
@@ -28,15 +29,17 @@ import attestation from '../components/attestation/attestation.vue'
 import bodyguard from '../components/bodyguard/bodyguard.vue'
 import guarantee from '../components/bodyguard/guarantee.vue'
 import protect from '../components/bodyguard/protect.vue'
+import payC from '../components/home/payC.vue'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  //mode: 'history',
   routes: [
     { path: '/', redirect: '/home' },
     { path: '/home', component: home, name: 'jack' },
     { path: '/mine', component: mine },
+    { path: '/product', components: product },
+    { path: '/id', components: id },
     { path: '/personal', component: personal },
     { path: '/commonpeople', component: commonpeople },
     { path: '/contact', component: contact },
@@ -46,17 +49,19 @@ const router = new VueRouter({
     { path: '/pay', component: pay },
     { path: '/cpb', component: cpb },
     { path: '/cpa', component: cpa },
-    { path: '/payd', component: payd }
+    { path: '/knight', component: knight },
+    { path: '/payC', component: payC },
+    { path: '/payd', component: payd },
     { path: '/familyhistory', component: familyhistory },
     { path: '/editfamilyhistory', component: editfamilyhistory },
     { path: '/otherinfo', component: otherinfo },
     { path: '/editotherinfo', component: editotherinfo },
     { path: '/editmobile', component: editmobile },
-    { path: '/editcommonpeople/:id',name:'editcommonpeople', component: editcommonpeople },
-    { path: '/attestation',name:'attestation', component: attestation },
-    { path: '/bodyguard',name:'bodyguard', component: bodyguard },
-    { path: '/guarantee',name:'guarantee', component: guarantee },
-    { path: '/protect',name:'protect', component: protect },
+    { path: '/editcommonpeople/:id', name: 'editcommonpeople', component: editcommonpeople },
+    { path: '/attestation', name: 'attestation', component: attestation },
+    { path: '/bodyguard', name: 'bodyguard', component: bodyguard },
+    { path: '/guarantee', name: 'guarantee', component: guarantee },
+    { path: '/protect', name: 'protect', component: protect }
   ]
 })
 // 导出路由对象

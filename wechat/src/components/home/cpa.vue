@@ -41,6 +41,7 @@
              <p >生效日期</p>
       <div class="picker">
         <div style="position: relative;">
+          
           <input class="datepicker" v-model="pickerStart" style="margin-left:0;width:90%;" @click="openPicker">
           <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate'
            :endDate='endDate' type="date" @confirm="handleConfirm" year-format="{value} 年"
@@ -255,11 +256,11 @@ import Check from '@/util/checkIDAuth'
         counter:0,
         endDate: new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 90),
         startDate:new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 1),
-        pickerStart: '',
         pickerEnd: '',
         price:'',
         resultdate: '',
-        main: ''
+        main: '',
+        pickerStart: '请选择日期',
       }
     },
     created(){
@@ -318,11 +319,17 @@ import Check from '@/util/checkIDAuth'
         }
       },
       buy:function(){
-          Check().then(res => {
-                console.log('success');
+        this.priceinfo = {}
+        this.priceinfo.pickerVisible = this.pickerVisible
+         if(this.pickerStart=='请选择日期'){
+          alert('请选择日期')
+          return  
+        }
+        Check().then(res => {
+            console.log('success');
 
-                this.$router.push(`/pay?packageId=A&counter=${this.counter}`)
-            })
+            this.$router.push(`/pay?packageId=A&counter=${this.counter}`)
+        })
       }
     },
     watch: {

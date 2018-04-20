@@ -81,8 +81,8 @@ computed:{
           { src :require('../../assets/image/home/banner4.png')},
           { src :require('../../assets/image/home/banner1.png')},
           { src :require('../../assets/image/home/banner2.png')},
-          { src :require('../../assets/image/home/banner.png')}
-
+          { src :require('../../assets/image/home/banner.png')},
+          { src :require('../../assets/image/product/banner-皇家护卫@3x.png')}
           ],
         swiperOption:{
           notNextTick: true,  
@@ -113,9 +113,18 @@ computed:{
            if( index==0){
             this.$router.push('/cpa')
            }
+           if(index==4){
+             this.$router.push('/protect')
+           }
           if(index==3){
             this.$router.push('/cpb')
-          } 
+          }
+          if(index==2){
+            this.$router.push('/bodyguard')
+          }
+          if(index==1){
+            this.$router.push('/knight')
+          }
 
 
 
