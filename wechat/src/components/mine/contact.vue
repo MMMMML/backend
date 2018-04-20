@@ -24,12 +24,6 @@
         <div class='deltext' slot="right" @click='delOne(item.id)'>删除</div>
       </van-cell-swipe>
     </div>
-    <!-- <van-cell-swipe id='mes' class='contact-mes' :right-width="65" v-for='(item, key) in contactlist' :key='key'>
-      <van-cell-group>
-        
-      </van-cell-group>
-      <div slot="right" class='deltext' >删除</div>
-    </van-cell-swipe> -->
   </div>
 </template>
 <style scoped lang='less'>
@@ -123,7 +117,7 @@
           })
         })
       },
-      delOne(id, clickPosition, instance) {
+      delOne(id) {
         console.log(id)
         var url = `wechat/commonContact/deleteById?id=${id}`
         this.$http.post(url).then(data => {
