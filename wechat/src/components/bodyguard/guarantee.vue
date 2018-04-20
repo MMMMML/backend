@@ -9,7 +9,7 @@
         <div style="display:flex;align-items: center;" v-show="index==0">
           <div class="btn" @click="select()">选择权益人</div>
         </div>
-        <div class="warning" v-show="isChinaName">
+        <div class="warning" v-show="!validateArr[index].isChinaName">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>姓名格式错误，请重新填写</span>
         </div>
@@ -32,7 +32,7 @@
       <div class="man">
         <p class="human-name">手机号码</p>
         <input type="text" class="human-input" v-model="item.mobile" placeholder="请输入手机号码">
-        <div class="warning" v-show="isPhoneNo">
+        <div class="warning" v-show="!validateArr[index].isPhoneNo">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>手机格式错误，请重新填写</span>
         </div>
@@ -150,6 +150,7 @@
         isIdNumber: false,
         personUser: [],
         list: '',
+        validateArr: []
       }
     },
     created() {
@@ -164,7 +165,13 @@
           idNumber: '',
           mobile: ''
         };
+        let obj = {
+          isChinaName: true,
+          isPhoneNo: true,
+          isIdNumber: true
+        }
         this.personUser.push(item);
+        this.validateArr.push(obj)
       }
     },
     mounted() {
@@ -241,7 +248,6 @@
         url: jsurl
       }
       this.$http.post(url, params).then(data => {
-        console.log(data)
         var wxconfig = data.data.payload
         wx.config({
           debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -256,6 +262,7 @@
     },
     methods: {
       _isChinaName(name) {
+        console.log(name)
         var pattern = /^([\u4e00-\u9fa5]+|[\sa-zA-z]+)$/;
         return pattern.test(name);
       },
@@ -264,22 +271,17 @@
         return pattern.test(phone);
       },
       confirm: function () {
-        this.isChinaName = false
-        this.isPhoneNo = false
-        this.isIdNumber = false
-        // this.isChinaName = this._isChinaName(this.personUser.realName)
-        // if (this._isChinaName(this.personUser.realName)) {
-        //   console.log(this._isChinaName(this.personUser.realName))
-        //   return;
-        // }
-        // if (this.personUser.idNumber === '请输入证件号码' || !this.personUser.idNumber) {
-        //   this.isIdNumber = true
-        //   return
-        // }
-        // this.isPhoneNo = !this._isPhoneNo(this.personUser.mobile)
-        // if (this.isPhoneNo) {
-        //   return;
-        // }
+        this.personUser.forEach((item, index) => {
+          Object.keys(item).forEach((key, idx) => {
+            if (key === 'realName') {
+              // console.log(this._isChinaName(item[key]))
+              this.validateArr[index].isChinaName = this._isChinaName(item[key])
+            } else if (key === 'mobile') {
+              this.validateArr[index].isPhoneNo = this._isPhoneNo(item[key])              
+            }
+          })
+        })
+       
         var url = 'wechat/order/addOrder'
         this.priceinfo = JSON.parse(window.sessionStorage.getItem('priceinfo'))
         console.log(this.priceinfo)

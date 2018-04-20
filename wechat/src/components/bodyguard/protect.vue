@@ -41,12 +41,10 @@
           <p>代步车</p>
         </div>
       </div>
-      <!-- 日期 -->
-        <mt-radio
-            v-model="value"
-            :options="['2大1小', '1大2小', '2大2小']">
-        </mt-radio>
-      
+
+      <mt-radio v-model="values" :options="options">
+      </mt-radio>
+
       <div>
 
       </div>
@@ -117,14 +115,14 @@
         <p class="title-icon">服务热线</p>
         <p> 400-111-9299</p>
       </div>
-      <div class="notice-part" @click="showToggle3">
+      <div class="notice-part" @click="showToggle4">
         <p>道路救援服务</p>
         <div>
           <img src="../../assets/image//product/arrow@3x.png" alt="">
         </div>
       </div>
 
-      <div v-show="isShow3" style="padding:0 20px;border-bottom:1px dashed #ccc">
+      <div v-show="isShow4" style="padding:0 20px;border-bottom:1px dashed #ccc">
         <p class="title-icon">权益人限定3</p>
         <p>中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
         <p class="title-icon">权益车辆要求</p>
@@ -138,14 +136,14 @@
         <p class="title-icon">服务热线</p>
         <p> 400-111-9299</p>
       </div>
-      <div class="notice-part" @click="showToggle3">
+      <div class="notice-part" @click="showToggle5">
         <p>代步车服务</p>
         <div>
           <img src="../../assets/image//product/arrow@3x.png" alt="">
         </div>
       </div>
 
-      <div v-show="isShow3" style="padding:0 20px;border-bottom:1px dashed #ccc">
+      <div v-show="isShow5" style="padding:0 20px;border-bottom:1px dashed #ccc">
         <p class="title-icon">权益人限定3</p>
         <p>中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
         <p class="title-icon">权益车辆要求</p>
@@ -159,13 +157,13 @@
         <p class="title-icon">服务热线</p>
         <p> 400-111-9299</p>
       </div>
-      <div @click="showToggle4" class="notice-part">
+      <div @click="showToggle6" class="notice-part">
         <p>免责申明</p>
         <div>
           <img src="../../assets/image//product/arrow@3x.png" alt="">
         </div>
       </div>
-      <div v-show="isShow4" style="padding:0 20px;border-bottom:1px dashed #ccc">
+      <div v-show="isShow6" style="padding:0 20px;border-bottom:1px dashed #ccc">
         <p class="title-icon">权益人限定4</p>
         <p>中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
         <p class="title-icon">权益车辆要求</p>
@@ -186,27 +184,28 @@
 
     <!-- 支付 -->
     <div class="payment">
-      <p>合计：￥{{price||10}}</p>
+      <p>合计：￥{{price}}</p>
       <p class="payment-buy" @click="buy()">立即购买</p>
     </div>
   </div>
 </template>
 <style scoped lang='less'>
-.mint-radiolist{
+  .mint-radiolist {
     display: flex;
-    width: 100vw;
-    .mint-cell-wrapper{
-        padding: 0 !important;
-        font-size: 12px !important;
+    .mint-cell-wrapper {
+      padding: 0 !important;
+      font-size: 12px !important;
     }
-}
- .mint-cell{
-        width: 33.33%;
-    }
- 
-.mint-radiolist-label{
-        padding: 0;
-    }
+  }
+
+  .mint-cell {
+    width: 33.33%;
+  }
+
+  .mint-radiolist-label {
+    padding: 0;
+  }
+
   .banner {
     width: 100%;
     img {
@@ -374,35 +373,60 @@
   export default {
     data() {
       return {
-          
-        pickerVisible: '',
-        Visible: '',
-        count: 1,
-        endDate: new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 90),
-        startDate: new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 1),
-        startDates: new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 2),
-        pickerStart: '请选择生效日期',
-        pickerEnd: '请选择失效日期',
-        price: '',
-        resultdate: '',
+        values: '1',
         isShow1: false,
         isShow2: false,
         isShow3: false,
         isShow4: false,
+        isShow5: false,
+        isShow6: false,
+        options: '',
+        one:'',
+        price:999,
+        addPrice:''
+
+
       }
     },
     created() {
-        
-      var id = 'B'
+       this.options = [{
+            label: '2大1小',
+            value: '1'
+          },
+          {
+            label: '1大2小',
+            value: '2'
+          },
+          {
+            label: '2大2小',
+            value: '3'
+          }
+        ];
+
+      var id = 'E'
       var url = `wechat/package/queryPackageById?id=${id}`
       this.$http.get(url).then(data => {
         console.log(data)
         this.specifics = JSON.parse(data.data.payload.specifics)
         console.log(this.specifics)
         this.one = this.specifics.main.price
-        this.discount = this.specifics.main.discount
+        this.addPrice = this.specifics.main.addPrice
+        // this.discount = this.specifics.main.discount
+       
 
       })
+    },
+    watch:{
+      values(newVal, oldVal){
+        if(newVal==3){
+        this.price = this.one +this.addPrice
+        console.log(newVal)
+      }else{
+        this.price = this.one
+      }
+      }
+      
+      
     },
     methods: {
       showToggle1: function () {
@@ -417,82 +441,36 @@
       showToggle4: function () {
         this.isShow4 = !this.isShow4
       },
-      openPicker() {
-        this.$refs.picker.open();
+      showToggle5: function () {
+        this.isShow5 = !this.isShow5
       },
-      twoPicker() {
-        this.$refs.pickers.open();
+      showToggle6: function () {
+        this.isShow6 = !this.isShow6
       },
-      formatDate(date) {
-        const y = date.getFullYear()
-        let m = date.getMonth() + 1
-        m = m < 10 ? '0' + m : m
-        let d = date.getDate()
-        d = d < 10 ? ('0' + d) : d
-        return y + '-' + m + '-' + d
+      // openPicker() {
+      //   this.$refs.picker.open();
+      // },
+      // twoPicker() {
+      //   this.$refs.pickers.open();
+      // },
+
+      // handleConfirm: function (v) {
+      //   this.$refs.picker.close();
+      //   this.pickerStart = this.pickerVisible = this.formatDate(v)
+      //   console.log(this.pickerVisible)
+      // },
+      confirm: function (c) {
+        // this.$refs.pickers.close();
+        // this.pickerEnd = this.Visible = this.formatDate(c)
+        // // 用户选择了几天
+        // // console.log(this.)
+        // this.resultdate = differenceInDays(this.Visible, this.pickerVisible) + 1
+        // this.price = this.resultdate * this.one
+        // console.log(this.resultdate)
       },
 
-      handleConfirm: function (v) {
-        this.$refs.picker.close();
-        this.pickerStart = this.pickerVisible = this.formatDate(v)
-        console.log(this.pickerVisible)
-      },
-      confirm: function (c) {
-        this.$refs.pickers.close();
-        this.pickerEnd = this.Visible = this.formatDate(c)
-        // 用户选择了几天
-        // console.log(this.)
-        this.resultdate = differenceInDays(this.Visible, this.pickerVisible) + 1
-        this.price = this.resultdate * this.one
-        console.log(this.resultdate)
-      },
-      minus() {
-        if (this.count === 1) {
-          return
-        }
-        this.count--
-      },
-      add() {
-        if (this.count < 10) {
-          this.count++
-        }
-      },
-      _changeNum() {
-        if (this.count < 1) {
-          this.count = 1
-        }
-      },
-      buy: function () {
-        this.priceinfo = {}
-        this.priceinfo.pickerVisible = this.pickerVisible
-        this.priceinfo.pickerEnd = this.pickerEnd
-        this.priceinfo.count = this.count
-        this.priceinfo.price = this.price
-        if(this.pickerEnd=='请选择失效日期'||this.pickerStart=='请选择生效日期'){
-          alert('请选择生效失效日期')
-          return  
-        }else{
-          window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))
-          this.$router.push('/guarantee')
-        }
-      }
     },
-    watch: {
-      count(newVal) {
-        if (this.resultdate >= 15) {
-          this.price = this.one * newVal * this.resultdate * this.discount
-        } else {
-          this.price = this.one * newVal * this.resultdate
-        }
-      },
-      resultdate(newVal) {
-        if (newVal >= 15) {
-          this.price = this.one * newVal * this.discount * this.count
-        } else {
-          this.price = this.one * newVal * this.count
-        }
-      }
-    }
+
   }
 
 </script>
