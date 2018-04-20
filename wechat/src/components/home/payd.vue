@@ -1,6 +1,12 @@
 <template>
-  <div>
-      付款单的d]
+  <div class='payd'>
+      <!-- 权益人 -->
+      <div class="qyr">
+                <p>权益人</p>
+      </div>
+
+
+
   </div>
 </template>
 

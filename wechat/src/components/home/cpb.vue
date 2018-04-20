@@ -39,10 +39,11 @@
                 <!-- 增值权益 -->
                 <div class="more">
                     <p>增值权益</p>
-                    <div class="mo">
-                                <i><img src="../../assets/image/product/icon-选中.png" alt=""></i>
-                                <span>￥69</span>
-                        </div>
+                        <ul class="mo">
+                               <li> <div v-bind:class="{bgc: active}" v-on:click="change"></div></li>
+                               <li>  ￥69</li>       
+                        </ul>
+                        
                     <div class="tg5">
                         <img src="../../assets/image/product/icon-car.png" alt="">
                         <p>代步车</p>
@@ -93,13 +94,16 @@
 <script>
 import Check from '@/util/checkIDAuth'
     export default{
-        dtat(){
+        data(){
             return{
-                
+                active:false
             }
         },
 
     methods:{
+        change:function () { 
+            this.active = true
+         },
         buy:function(){
             Check().then(res => {
                 console.log('success');
@@ -232,22 +236,38 @@ import Check from '@/util/checkIDAuth'
     color: #4B4B4B;
     width: 68px;
 }
-.tg5{
-    margin-left: 100px;
-    margin-top: -30px;
+.mo{
+    list-style: none;
+}
+.mo li{
+    float: left;
+}
+.mo li div{
+    margin-top: 4px;
+    border-radius: 10px;
+    background-color:#fff;
+    border: 1px solid #4B4B4B;
+    width:10px;
+    height:10px;
+}
+.mo li .bgc{
+    width:10px;
+    height:10px;
+     margin-top: 4px;
+    border-radius: 10px;  
+    background-color: #f00;
+}
+.tg5 img{
+margin-left: 20px;
+margin-top: -10px;
 }
 .tg5 p{
-    font-size: 12px;
-    color: #4B4B4B;
-    width: 68px;
+    margin-left: 106px;
 }
-.mo{
-    margin-left: 20px;
-    margin-top: 40px;
-}
-.mo span{
-    color:#FF0000;
-}
+
+
+
+
 .notice{
      background: #fff;
         width: 100%;

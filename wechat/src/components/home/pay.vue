@@ -15,7 +15,7 @@
     <div class="man">
         <p class="human-name">姓名</p>
         <input type="text" class="human-input"  placeholder="请输入姓名" v-model='item.realName'>
-        <div style="display:flex;align-items: center;" >
+        <div style="display:flex;align-items: center;"  >
           <div class="btn"  id='member' @click='member'>选择权益人</div>
         </div>
         <div class="warning" v-show="isChinaName">
@@ -288,17 +288,13 @@ methods:{
     //   付款验证
     payfor:function(){
       // 验证功能
-      this.isChinaName = false
-        this.isPhone = false
-        this.isIdNumber = false
+        this.isChinaName = false
         this.isChinaName = !this._isChinaName(this.meg.realName)
         if (this.isChinaName) {
+          console.log(this.isChinaName);
           return;
         }
-        this.isPhone = !this._isPhone(this.meg.personUserInfo.mobile)
-        if (this.isPhone) {
-          return;
-        }
+        
 // 支付
         console.log(1);
         let obj = JSON.stringify(this.meg)
