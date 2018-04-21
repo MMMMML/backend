@@ -9,6 +9,7 @@ import pay from '../components/home/pay.vue'
 import cpb from '../components/home/cpb.vue'
 import cpa from '../components/home/cpa.vue'
 import payd from '../components/home/payd.vue'
+import knight from '../components/home/knight.vue'
 // 测试实名登录页
 import Auth from '@/components/auth'
 // 马哥的
@@ -35,15 +36,18 @@ import member from '../components/mine/member.vue'
 import memcar from '../components/mine/memcar.vue'
 import bindcar from '../components/mine/bindcar.vue'
 import bindcardetail from '../components/mine/bindcardetail.vue'
+import payC from '../components/home/payC.vue'
+import payE from '../components/home/payE.vue'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  //mode: 'history',
   routes: [
     { path: '/', redirect: '/home' },
     { path: '/home', component: home, name: 'jack' },
     { path: '/mine', component: mine },
+    { path: '/product', components: product },
+    { path: '/id', components: id },
     { path: '/personal', component: personal },
     { path: '/commonpeople', component: commonpeople },
     { path: '/contact', component: contact },
@@ -53,6 +57,9 @@ const router = new VueRouter({
     { path: '/pay', component: pay },
     { path: '/cpb', component: cpb },
     { path: '/cpa', component: cpa },
+    { path: '/payE', component: payE },
+    { path: '/knight', component: knight },
+    { path: '/payC', component: payC },
     { path: '/payd', component: payd },
     { path: '/familyhistory', component: familyhistory },
     { path: '/editfamilyhistory', component: editfamilyhistory },
@@ -71,6 +78,11 @@ const router = new VueRouter({
     { path: '/memcar',name:'memcar', component: memcar },
     { path: '/bindcar',name:'bindcar', component: bindcar },
     { path: '/bindcardetail',name:'bindcardetail', component: bindcardetail },
+    { path: '/editcommonpeople/:id', name: 'editcommonpeople', component: editcommonpeople },
+    { path: '/attestation', name: 'attestation', component: attestation },
+    { path: '/bodyguard', name: 'bodyguard', component: bodyguard },
+    { path: '/guarantee', name: 'guarantee', component: guarantee },
+    { path: '/protect', name: 'protect', component: protect }
   ]
 })
 // 导出路由对象

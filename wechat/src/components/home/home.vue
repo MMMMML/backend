@@ -1,8 +1,9 @@
 <template>
   <div class="home">
     <div class="banner">
-      <button> 点击购买</button>
+      <img src="../../assets/image/home/banner3.jpg" alt="">
     </div>
+
     <div class="title">
       <i>空中服务</i>
       <span>
@@ -16,12 +17,8 @@
       <swiper-slide v-for="(banner,index) in banners" :key="index" @click.native='goproduct(index)'>
         <img v-if="banner.src" :src="banner.src">
       </swiper-slide>
-    <div class="swiper-pagination" slot="pagination"></div>
-  </swiper>
-    
-    
-
-
+      <div class="swiper-pagination" slot="pagination"></div>
+    </swiper>
   </div>
 
 
@@ -31,7 +28,7 @@
         <p class="two">都说我太过严肃，我只在意你是否需要保护</p>
       </div>
 
-<div class="mui-bars">
+    <div class="mui-bars">
 
       <router-link class="mui-tab-item" to='/home'>
         <div>
@@ -39,11 +36,11 @@
         </div>
         <span class="mui-tab-label">首页</span>
       </router-link>
-      <div class="mui-tab-item" @click="callphone()">
-        <div>
+      <div class="mui-tab-item">
+        <div >
           <img src="../../assets/image/home/button-help.png" alt="">
         </div>
-        <span class="mui-tab-label">一键呼救</span>
+        <span class="mui-tab-label"> <a href="tel:10086" >一键呼救</a></span>
       </div>
 
       <router-link class="mui-tab-item" to='/mine'>
@@ -81,8 +78,8 @@ computed:{
           { src :require('../../assets/image/home/banner4.png')},
           { src :require('../../assets/image/home/banner1.png')},
           { src :require('../../assets/image/home/banner2.png')},
-          { src :require('../../assets/image/home/banner.png')}
-
+          { src :require('../../assets/image/home/banner.png')},
+          { src :require('../../assets/image/product/banner-皇家护卫@3x.png')}
           ],
         swiperOption:{
           notNextTick: true,  
@@ -113,14 +110,22 @@ computed:{
            if( index==0){
             this.$router.push('/cpa')
            }
+           if(index==4){
+             this.$router.push('/protect')
+           }
           if(index==3){
             this.$router.push('/cpb')
-          } 
-
-
+          }
+          if(index==2){
+            this.$router.push('/bodyguard')
+          }
+          if(index==1){
+            this.$router.push('/knight')
+          }
 
           console.log(index)
         },
+      
     }
   }
 
@@ -132,21 +137,13 @@ computed:{
 
   .banner {
     width:100%;
-    height: 403px;
-    background-color: deepskyblue;
-   
+    height: 370px; 
   }
-
-  .banner button {
-    width: 13rem;
-    height: 1.6rem;
-    margin: 307px 70px auto;
-    border-radius: 25px;
-    font-size: 0.8rem;
-    color: #fff;
-    background-color: transparent;
+  .banner img{
+    width: 100%;
+    height: 370px;
   }
-
+  
   .mui-bars {
     display: flex;
     justify-content: space-around;
@@ -160,6 +157,7 @@ computed:{
    border-top: 1px solid #ccc; 
     box-shadow: 0px 0px 15px -2px #bbb;
     overflow: hidden;
+    z-index: 10;
   } 
 
   .mui-bars span {
@@ -183,15 +181,12 @@ computed:{
   height: 100%;
 }
 
-
-
 /* 轮播结束 */
   .title {
-    width: 10rem;
-    height: 2rem;
-    margin-left: 1rem;
-    margin-top: 0.5rem;
-    position: absolute;
+    width: 200px;
+    height: 28px;
+    margin-left: 20px;
+    margin-top: 10px;
   }
 
   .title i {
@@ -210,7 +205,7 @@ computed:{
     display: block;
   }
 .lb_t{
-  margin-top:40px;
+  margin-top:10px;
 }
 .lb_cp img{
   width: 335px;

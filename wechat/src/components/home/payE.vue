@@ -149,7 +149,6 @@
         isPhoneNo: false,
         isIdNumber: false,
         personUser: [],
-        count:1,
         list: '',
         validateArr: []
       }
@@ -236,13 +235,6 @@
           this.personUser[idx].idType = data[0].value;
           // console.log(this.personUser[index].idType)
           // let x = JSON.stringify(this.personUser[idx])
-          // let dict = {
-          //   '身份证': 0,
-          //   '台胞证': 1,
-          //   '回乡证': 2,
-          //   '护照': 3
-          // }
-          // this.personUser[idx].idType = dict[data[0].value]
           if (data[0].value == '身份证') this.personUser[idx].idType = '0'
           if (data[0].value == '护照') this.personUser[idx].idType = '3'
           if (data[0].value == '回乡证') this.personUser[idx].idType = '2'
