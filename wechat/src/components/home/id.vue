@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import wx from 'weixin-js-sdk'
+// import wx from 'weixin-js-sdk'
 export default {
   data() {
     return {

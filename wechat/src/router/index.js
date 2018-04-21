@@ -30,6 +30,7 @@ import bodyguard from '../components/bodyguard/bodyguard.vue'
 import guarantee from '../components/bodyguard/guarantee.vue'
 import protect from '../components/bodyguard/protect.vue'
 import payC from '../components/home/payC.vue'
+import payE from '../components/home/payE.vue'
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,7 @@ const router = new VueRouter({
     { path: '/pay', component: pay },
     { path: '/cpb', component: cpb },
     { path: '/cpa', component: cpa },
+    { path: '/payE', component: payE },
     { path: '/knight', component: knight },
     { path: '/payC', component: payC },
     { path: '/payd', component: payd },

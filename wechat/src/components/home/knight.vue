@@ -108,7 +108,7 @@ import Check from '@/util/checkIDAuth'
             Check().then(res => {
                 console.log('success');
 
-                this.$router.push(`/payC?packageId=C&`)
+                this.$router.push(`/payC?packageId=C`)
             })
         }
     }

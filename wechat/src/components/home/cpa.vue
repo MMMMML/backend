@@ -40,14 +40,12 @@
       <!-- 日期 -->
              <p >生效日期</p>
       <div class="picker">
-        <div style="position: relative;">
-          
-          <input class="datepicker" v-model="pickerStart" style="margin-left:0;width:90%;" @click="openPicker">
-          <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate'
-           :endDate='endDate' type="date" @confirm="handleConfirm" year-format="{value} 年"
-            month-format="{value} 月" date-format="{value} 日">
+        <div style="position: relative;width:100%">
+          <div class="datepicker" style="margin-left:0" @click="openPicker()">{{pickerStart}}</div>
+          <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
+            year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
           </mt-datetime-picker>
-          <img style="width:14px;position: absolute;right: 8vw;top: 50%;transform: translateY(-50%);" class="date-icon" src="../../assets/image/product/icon-calendar@3x.png"
+          <img style="width:14px;position: absolute;margin-left:100px;top: 50%;transform: translateY(-50%);" class="date-icon" src="../../assets/image/product/icon-calendar@3x.png"
             alt="">
         </div>
         
@@ -98,7 +96,7 @@
 
     <!-- 支付 -->
     <div class="payment">
-        <p style='font-size:20px;color:red;font-weight:bolder;'>合计：￥{{ main.price + counter*main.addPrice ||0}}</p>
+        <p style='font-size:20px;color:red;font-weight:bolder;'>合计：￥{{ main.price + counter*main.addPrice || 0}}</p>
         <p class="payment-buy" v-on:click='buy'>立即购买</p>
     </div>
   </div>
@@ -327,7 +325,6 @@ import Check from '@/util/checkIDAuth'
         }
         Check().then(res => {
             console.log('success');
-
             this.$router.push(`/pay?packageId=A&counter=${this.counter}`)
         })
       }
