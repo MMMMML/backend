@@ -28,6 +28,13 @@ import attestation from '../components/attestation/attestation.vue'
 import bodyguard from '../components/bodyguard/bodyguard.vue'
 import guarantee from '../components/bodyguard/guarantee.vue'
 import protect from '../components/bodyguard/protect.vue'
+import protectdetail from '../components/bodyguard/protectdetail.vue'
+import myindent from '../components/mine/myindent.vue'
+import myindentinfo from '../components/mine/myindentinfo.vue'
+import member from '../components/mine/member.vue'
+import memcar from '../components/mine/memcar.vue'
+import bindcar from '../components/mine/bindcar.vue'
+import bindcardetail from '../components/mine/bindcardetail.vue'
 
 Vue.use(VueRouter)
 
@@ -46,7 +53,7 @@ const router = new VueRouter({
     { path: '/pay', component: pay },
     { path: '/cpb', component: cpb },
     { path: '/cpa', component: cpa },
-    { path: '/payd', component: payd }
+    { path: '/payd', component: payd },
     { path: '/familyhistory', component: familyhistory },
     { path: '/editfamilyhistory', component: editfamilyhistory },
     { path: '/otherinfo', component: otherinfo },
@@ -57,6 +64,13 @@ const router = new VueRouter({
     { path: '/bodyguard',name:'bodyguard', component: bodyguard },
     { path: '/guarantee',name:'guarantee', component: guarantee },
     { path: '/protect',name:'protect', component: protect },
+    { path: '/protectdetail',name:'protectdetail', component: protectdetail },
+    { path: '/myindent',name:'myindent', component: myindent },
+    { path: '/myindentinfo',name:'myindentinfo', component: myindentinfo },
+    { path: '/member',name:'member', component: member },
+    { path: '/memcar',name:'memcar', component: memcar },
+    { path: '/bindcar',name:'bindcar', component: bindcar },
+    { path: '/bindcardetail',name:'bindcardetail', component: bindcardetail },
   ]
 })
 // 导出路由对象

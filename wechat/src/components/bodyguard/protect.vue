@@ -468,7 +468,10 @@
         // this.price = this.resultdate * this.one
         // console.log(this.resultdate)
       },
-
+      buy:function(){
+        window.sessionStorage.setItem('type',this.values)
+        this.$router.push('/protectdetail')
+      }
     },
 
   }

@@ -141,7 +141,7 @@
 </style>
 <script>
   import MobileSelect from 'mobile-select'
-  import index from '../../../node_modules/_vue@2.5.16@vue';
+  // import index from '../../../node_modules/_vue@2.5.16@vue';
   export default {
     data() {
       return {

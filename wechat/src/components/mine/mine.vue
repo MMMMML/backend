@@ -19,6 +19,7 @@
       </div>
     </div>
     <!-- 我的权益部分 -->
+     <router-link class="mui-tab-item" to="/member">
     <div class="equity">
       <p style="text-align:left;padding:2rem 0 1rem 1rem" class="weight">我的权益</p>
       <div class="equity-list">
@@ -49,8 +50,11 @@
         </div>
       </div>
     </div>
+    </router-link>
     <!-- 列表订单 -->
+
     <div class="catalog">
+      <router-link class="mui-tab-item" to='/myindent'>
       <div class="catalog-list">
         <div style="width:10%;padding-left:1rem">
           <img src="../../assets/image/mine/icon-star@3x.png" alt="">
@@ -60,7 +64,7 @@
           <img style="width:8px;" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
       </div>
-
+    </router-link>
       <div class="catalog-list">
         <div style="width:10%;padding-left:1rem">
           <img src="../../assets/image/mine/icon-star@3x.png" alt="">

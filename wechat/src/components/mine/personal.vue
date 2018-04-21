@@ -3,17 +3,17 @@
       <!-- 头像部分 -->
       <div class="portrait">
           <div class="portrait-img" style="width:25%">
-              <img src="../../assets/image/mine/头像@3x.png" alt="">
+              <img :src="user.avatarUrl" alt="">
           </div>
 
           <div class="portrait-name">
-              <p style="font-weight:700;margin-bottom:0.5rem">晴天</p>
-              <p >修改头像</p>
+              <p style="font-weight:700;margin-bottom:0.5rem">{{user.realName}}</p>
+              <!-- <p >修改头像</p> -->
           </div>
 
-          <div class="portrait-arr">
+          <!-- <div class="portrait-arr">
               <img src="../../assets/image/mine/Chevron@3x.png" alt="">
-          </div>
+          </div> -->
       </div>
 
       <!-- message -->
@@ -25,12 +25,6 @@
           </div>
       </div>
     <!-- 性别 -->
-      <div class="message">
-          <div class="msg">
-              <p style="width:20%;margin-left: 12%;">性别</p>
-              <p style="width:60%">男</p>
-          </div>
-      </div>
       <!-- 生日 -->
       <div class="message">
           <div class="msg">
@@ -64,6 +58,7 @@
           </div>
       </div>
       <!-- 常用车辆 -->
+      <router-link class="mui-tab-item" to='/bindcar'>
       <div class="message">
           <div class="msg">
               <p style="width:20%;margin-left: 12%;">绑定车辆</p>
@@ -71,6 +66,7 @@
                <img  src="../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
       </div>
+      </router-link>
       <!-- 邮箱 -->
       <div class="message">
           <div class="msg">
