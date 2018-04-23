@@ -66,9 +66,9 @@
         <p style="padding:10px 20px 0 ;margin-left:20px">权益人</p> 
     <div class="man">
         <p class="human-name">姓名</p>
-        <input type="text" class="human-input"  placeholder="请输入姓名" v-model='item.realName'>
+        <input type="text" class="human-input"  placeholder="请输入姓名" v-model='meg.user.realName'>
         <div style="display:flex;align-items: center;"  >
-          <div class="btn people" >选择权益人</div>
+          <div class="btn people"   @click="people1">选择权益人</div>
         </div>
         <div class="warning" v-show="isname">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
@@ -88,7 +88,7 @@
 <!-- 证件号码 -->
      <div class="man">
         <p class="human-name">证件号码</p>
-        <input type="text"  class="human-input" v-model='item.idNumber'>
+        <input type="text"  class="human-input" v-model='meg.user.idNumber'>
         <div class="warning" v-show="isnumber">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
@@ -97,7 +97,7 @@
        <!-- 手机号码 -->
        <div class="man">
         <p class="human-name">手机号码</p>
-        <input type="text" class="human-input"  placeholder="请输入手机号码" v-model="item.mobile">
+        <input type="text" class="human-input"  placeholder="请输入手机号码" v-model="meg.user.mobile">
         <div class="warning" v-show="ismobile">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>手机格式错误，请重新填写</span>
@@ -211,13 +211,17 @@ export default{
         meg:{
             plateNumber:'',
             owner:'',
-            benefitEffectTime:'2018-04-13 09:30:30',
             packageId: this.$route.query.packageId,
             peopleNum: this.$route.query.counter,
-            vehicleType: '小型汽车',
-            realName:'',
+            vehicleType: '',
+            vasVehicle:'true',
             personUserInfo:[
-            ]
+            ],
+            user:{
+              idNumber:'',
+              realName:'',
+              mobile:'',
+            }
         },
         counter: 1,
 
@@ -313,9 +317,7 @@ this.mobileSelect2 = new MobileSelect({
             ]
           }],
           callback: (indexArr, data) => {
-            // this.personUser[index].idType = data[0].id;
-            // console.(this.personUser[index].idType)
-            // console.(data);
+              this.meg.vehicleType=data[0].value;
             
           }
         });
@@ -350,7 +352,8 @@ this.mobileSelect2 = new MobileSelect({
             this.meg.plateNumber=data[0].value;
             this.meg.vehicletype=data[0].vehicletype;
             this.meg.vin=data[0].vin;
-        //    console.log(this.realName);
+            console.log(this.meg.vehicletype);
+      
           }
         });
         
@@ -397,6 +400,44 @@ this.mobileSelect2 = new MobileSelect({
 
 
 })
+// 渲染第二个人
+this.$http.get('wechat/commonContact/list').then(res=>{
+    console.log(res.data.payload);
+    console.log('~~~~');
+        let arr = res.data.payload
+        let newArr = []
+        arr.forEach(item => {
+            newArr.push({
+                id: item.id,
+                value: item.realName,
+                mobile: item.mobile,
+                idNumber:item.idNumber,
+                idType: item.idType
+            })
+        })
+        let obj = {
+            data: newArr
+        }
+         this.mobileSelect6 = new MobileSelect({
+          trigger: '.people' ,
+          title: '选择权益人',
+           wheels: [obj],
+          triggerDisplayData: false,
+          callback: (indexArr, data) => {
+            console.log(data);
+            //    console.log(data[0].value);
+            this.meg.user.realName=data[0].value;
+            this.meg.user.idType=data[0].idType;
+            this.meg.user.mobile=data[0].mobile;
+            this.meg.user.idNumber=data[0].idNumber;
+        //    console.log(this.realName);
+          }
+        });
+      console.log(this.mobileSelect3)
+
+})
+
+
 // 获取产品价格
 
 
@@ -465,6 +506,9 @@ methods:{
     member:function(){
        this.mobileSelect5.show();
      },
+     people1:function(){
+        this.mobileSelect6.show();
+     },
     //   付款验证
     payfor:function(){
       // 验证功能
@@ -488,17 +532,25 @@ methods:{
         console.log(1);
         let obj = JSON.stringify(this.meg)
          obj = JSON.parse(obj)
-
+         obj.personUserInfo.push(this.meg.user)
+        //  console.log(obj.personUserInfo)
+        console.log(obj)
+        delete obj['user'];
+          console.log(obj);
         obj.personUserInfo = JSON.stringify(obj.personUserInfo)
-        obj.peopleNum= ~~obj.peopleNum +1 
+        obj.peopleNum= ~~obj.peopleNum +1
+       console.log(obj.personUserInfo)
+        // console.log(this.meg.user)
+        // obj.push(this.meg.user)
          this.$http({
              method:'post',
              url:'wechat/order/addOrder',
-             params: obj        
+             params: obj 
          }).then(res =>{
              //JSON.stringify(this.meg.personUserInfo)
            console.log(res);
-        
+            // console.log(user);
+            console.log(obj);
             if(res.data.code==200){
                     const payload=res.data.payload
                     wx.chooseWXPay({

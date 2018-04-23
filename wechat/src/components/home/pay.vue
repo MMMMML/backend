@@ -15,7 +15,7 @@
     <div class="man">
         <p class="human-name">姓名</p>
         <input type="text" class="human-input"  placeholder="请输入姓名" v-model='item.realName'>
-        <div style="display:flex;align-items: center;"  >
+        <div style="display:flex;align-items: center;" v-show="index==0" >
           <div class="btn"   @click='member'>选择权益人</div>
         </div>
         <div class="warning" v-show="isname">
@@ -26,7 +26,7 @@
 <!-- 证件类型  -->
       <div class="man">
         <p style="width:25%;padding-left:5%">证件类型</p>
-        <p  class='createId' @click='createId(index)' style="width:62%;padding-left: 1rem;">{{item.idType && item.idType }} </p>
+        <p  class='createId' @click='createId(index)' style="width:62%;padding-left: 1rem;">{{item.idType && item.idType}} </p>
         <div>
           <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="" >
         </div>
@@ -79,7 +79,7 @@
 <!-- 证件类型  -->
       <div class="man">
         <p style="width:30%;padding-left:5%">车辆类型</p>
-        <p  style="width:62%;padding-left: 1rem;" id='createId1' @click='createId1' ></p>
+        <p  style="width:62%;padding-left: 1rem;" id='createId1' @click='createId1' >{{item.vehicleTyp && item.vehicleTyp}}</p>
         <div>
           <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
@@ -98,7 +98,7 @@
 
              <div class="man">
         <p class="human-name">使用性质</p>
-        <input type="text"  class="human-input" v-model="meg.usingNature">
+        <input type="text"  class="human-input" placeholder="非运营性质">
         <div class="warning" v-show="isusingNature">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>使用性质不能为空</span>
@@ -160,8 +160,9 @@ export default{
             benefitEffectTime:'2018-07-13 09:30:30',
             packageId: this.$route.query.packageId,
             peopleNum: this.$route.query.counter,
-            vehicleType: '小型汽车',
+            vehicleType: '',
             vin:'',
+            usingNature:'0',
             personUserInfo:[
             ]
         },
@@ -196,15 +197,21 @@ this.$http.get('wechat/commonContact/list').then(res =>{
            wheels: [obj],
           triggerDisplayData: false,
           callback: (indexArr, data) => {
-            console.log(1)
+            // console.log(data);
+            // console.log(1)
+              console.log(data[0].value)
             if(data[0].value){
                var obj = {};
                obj.realName = data[0].value;
                obj.idType = data[0].idType;
                obj.mobile = data[0].mobile;
                obj.idNumber = data[0].idNumber;
-              this.meg.personUserInfo = [obj]
+              this.meg.personUserInfo[0] = [obj]
             } 
+              console.log(obj);
+              // console.log(obj.realName);
+              // console.log(this.meg.personUserInfo[0]);
+
           }
         });
         
@@ -278,11 +285,7 @@ this.$http.get('wechat/commonContact/list').then(res =>{
           }],
           callback: (indexArr, data) => {
             console.log(data[0])
-            // this.meg.personUserInfo[1].idType = data[0].value;
-           if (data[0].value == '身份证') this.meg.personUserInfo[0].idType = '0'
-           if (data[0].value == '护照') this.meg.personUserInfo[0].idType = '3'
-           if (data[0].value == '回乡证') this.meg.personUserInfo[0].idType = '2'
-           if (data[0].value == '台胞证') this.meg.personUserInfo[0].idType = '1' 
+         this.meg.personUserInfo[0].idType=data[0].value; 
           }
         });
 
@@ -315,8 +318,8 @@ this.mobileSelect3 = new MobileSelect({
             ]
           }],
           callback: (indexArr, data) => {
-            
-            
+            if(data[0].value) this.meg.vehicleType=data[0].value
+              // console.log(this.meg.vehicleType)
           }
         });
 
@@ -342,7 +345,6 @@ this.mobileSelect3 = new MobileSelect({
 
         
 },
-
 created(){
          let { counter, pageckageId } = this.$route.query
       counter = ~~counter
@@ -358,10 +360,7 @@ created(){
       console.log(this.meg.personUserInfo[0])
       // console.log(wx)
 },
-
-
-methods:{
-   
+methods:{   
       toggle:function(){
             this.isShow = !this.isShow;
         },
@@ -369,10 +368,7 @@ methods:{
             this.show1=!this.show1;
         },
 // 支付接口
-
-// 点击下拉
-  
-     
+// 点击下拉    
     //   付款验证
     payfor:function(){
       // 验证功能
@@ -390,8 +386,7 @@ methods:{
             }
             if(this.meg.vin =='') {
                 this.isvin=true;
-            }
-        
+            }      
 // 支付
         console.log(1);
         let obj = JSON.stringify(this.meg)
@@ -424,11 +419,7 @@ methods:{
                   }else{
                   let message=res.data.message
                   alert(message)  
-                
                   }
-            
-
-
          })
     },
     car:function(){
@@ -436,15 +427,10 @@ methods:{
         console.log(res);
       })
     },
-    createId:function(index) {
-        // console.log('click')
-        // this.index = index
-        this.mobileSelect1.show()
-        
+      createId:function(index) {
+        this.mobileSelect1.show()   
       },
       createId1:function(index) {
-        // console.log('click')
-        // this.index = index
         this.mobileSelect3.show()
       },
       member:function(){

@@ -1,51 +1,417 @@
 <template>
   <div>
-    <div class="must" v-for="(item, index) of personUser" :key='index'>
-      <p style="padding:10px 20px 0">权益人{{index+1}}</p>
-      <div class="man">
-        <p class="human-name">姓名</p>
-        <!-- <p>马玲</p> -->
-        <input type="text" class="human-input" v-model="item.realName" placeholder="请输入姓名">
-        <div style="display:flex;align-items: center;" v-show="index==0">
-          <div class="btn" @click="select()">选择权益人</div>
+    <div class="qyr"  >
+                        <!-- 填写页面 -->
+        <div class="tianx" v-show="!ishow">
+                <p>权益人</p>
+                <span>未填写</span>
+                <button  @click="txr">填写</button>
         </div>
-        <div class="warning" v-show="!validateArr[index].isChinaName">
+        <!-- 车 -->
+<div v-show="ishow" >        
+        <div class="must">
+        <p style="padding:10px 20px 0;margin-left:20px">权益人</p> 
+    <div class="man">
+        <p class="human-name">姓名</p>
+        <input type="text" class="human-input"  placeholder="请输入姓名"  v-model='realName'>
+        <div style="display:flex;align-items: center;" >
+          <div class="btn" v-on:click='people'>选择权益人</div>
+        </div>
+        <div class="warning"  v-show='isname'>
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>姓名格式错误，请重新填写</span>
         </div>
-      </div>
+    </div>
+<!-- 证件类型  -->
       <div class="man">
-        <p style="width:25%;padding-left:5%">证件类型</p>
-        <p class="createId" @click="createId(index)" style="width:62%;padding-left: 1rem;">{{item.idType && item.idType | format}}</p>
+        <p style="width:30%;padding-left:5%">证件类型</p>
+        <p  style="width:62%;padding-left: 1rem;" class='choseid' v-on:click='chose'></p>
         <div>
           <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
-      </div>
-      <div class="man">
+       </div>
+
+      </div> 
+<!-- 证件号码 -->
+     <div class="man">
         <p class="human-name">证件号码</p>
-        <input type="text" v-model="item.idNumber" class="human-input" placeholder="请输入证件号码">
-        <div class="warning" v-show="isIdNumber">
+        <input type="text"  class="human-input"  v-model="idNumber">
+        <div class="warning" v-show="isnumber" >
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
         </div>
-      </div>
-      <div class="man">
+       </div>
+
+       <div class="man">
         <p class="human-name">手机号码</p>
-        <input type="text" class="human-input" v-model="item.mobile" placeholder="请输入手机号码">
-        <div class="warning" v-show="!validateArr[index].isPhoneNo">
+        <input type="text"  class="human-input" v-model="mobile">
+        <div class="warning" v-show='ismobile'>
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
-          <span>手机格式错误，请重新填写</span>
+          <span>手机号码不能为空</span>
         </div>
-      </div>
+       </div>
+
+    
+
+     </div>
+</div>
+
+<!-- 两个人 -->
+
+<div class="qyr" >
+                        <!-- 填写页面 -->
+        <div class="tianx" v-show="!ishow">
+                <p>权益人</p>
+                <span>未填写</span>
+                <button  @click="txr">填写</button>
+        </div>
+        <!-- 车 -->
+<div v-show="ishow" >        
+        <div class="must">
+        <p style="padding:10px 20px 0;margin-left:20px">权益人</p> 
+    <div class="man">
+        <p class="human-name">姓名</p>
+        <input type="text" class="human-input"  placeholder="请输入姓名"  v-model='user.realName'>
+        <div style="display:flex;align-items: center;" >
+          <div class="btn1" v-on:click='people1'>选择权益人</div>
+        </div>
+        <div class="warning"  v-show='isname'>
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>姓名格式错误，请重新填写</span>
+        </div>
     </div>
-    <div class="payment">
-      <p>合计：￥{{commonprice}}</p>
-      <p class="payment-buy" @click="confirm()">立即购买</p>
-    </div>
+<!-- 证件类型  -->
+      <div class="man">
+        <p style="width:30%;padding-left:5%">证件类型</p>
+        <p  style="width:62%;padding-left: 1rem;" class='choseid' v-on:click='chose'></p>
+        <div>
+          <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
+        </div>
+       </div>
+
+      </div> 
+<!-- 证件号码 -->
+     <div class="man">
+        <p class="human-name">证件号码</p>
+        <input type="text"  class="human-input"  v-model="user.idNumber">
+        <div class="warning" v-show="isnumber" >
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>证件号码不能为空</span>
+        </div>
+       </div>
+
+       <div class="man">
+        <p class="human-name">手机号码</p>
+        <input type="text"  class="human-input" v-model="user.mobile">
+        <div class="warning" v-show='ismobile'>
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>手机号码不能为空</span>
+        </div>
+       </div>
+
+    
+
+     </div>
+</div>
+        <!-- 付款 -->
+            <div class="payment">
+                    <p>合计：￥8</p>
+                    <p class="payment-buy" @click="payfor">立即购买</p>
+            </div>
+
+
+
   </div>
 </template>
+
+
+<script>
+import MobileSelect from 'mobile-select'
+export default{
+    data(){
+        return{
+             isshow:false,
+                ishow:false,
+                isname:false,
+                isnumber:false,
+                ismobile:false,
+                realName:'',
+                idNumber:'',
+                mobile:'',
+                packageId: this.$route.query.packageId,
+                user:{
+                  realName:'',
+                  idNumber:'',
+                   mobile:'',
+                }
+        }
+    },
+  
+created(){
+    console.log(this.user)
+
+},
+
+  mounted(){
+      // 进来加载数据
+this.$http.get('wechat/commonContact/list').then(res=>{
+    console.log(res.data.payload);
+    console.log('~~~~');
+        let arr = res.data.payload
+        let newArr = []
+        arr.forEach(item => {
+            newArr.push({
+                id: item.id,
+                value: item.realName,
+                mobile: item.mobile,
+                idNumber:item.idNumber,
+                idType: item.idType
+            })
+        })
+        let obj = {
+            data: newArr
+        }
+         this.mobileSelect2 = new MobileSelect({
+          trigger: '.btn' ,
+          title: '选择权益人',
+           wheels: [obj],
+          triggerDisplayData: false,
+          callback: (indexArr, data) => {
+            console.log(data);
+            //    console.log(data[0].value);
+            this.realName=data[0].value;
+            this.idType=data[0].idType;
+            this.mobile=data[0].mobile;
+            this.idNumber=data[0].idNumber;
+        //    console.log(this.realName);
+          }
+        });
+      console.log(this.mobileSelect2)
+
+})
+  
+// 第二个人
+this.$http.get('wechat/commonContact/list').then(res=>{
+    console.log(res.data.payload);
+    console.log('~~~~');
+        let arr = res.data.payload
+        let newArr = []
+        arr.forEach(item => {
+            newArr.push({
+                id: item.id,
+                value: item.realName,
+                mobile: item.mobile,
+                idNumber:item.idNumber,
+                idType: item.idType
+            })
+        })
+        let obj = {
+            data: newArr
+        }
+         this.mobileSelect3 = new MobileSelect({
+          trigger: '.btn1' ,
+          title: '选择权益人',
+           wheels: [obj],
+          triggerDisplayData: false,
+          callback: (indexArr, data) => {
+            console.log(data);
+            //    console.log(data[0].value);
+            this.user.realName=data[0].value;
+            this.user.idType=data[0].idType;
+            this.user.mobile=data[0].mobile;
+            this.user.idNumber=data[0].idNumber;
+        //    console.log(this.realName);
+          }
+        });
+      console.log(this.mobileSelect3)
+
+})
+
+        this.mobileSelect1 = new MobileSelect({
+          trigger: '.choseid' ,
+          title: '选择证件类型',
+          wheels: [{
+            data: [{
+                id: '0',
+                value: '身份证'
+              },
+              {
+                id: '3',
+                value: '护照'
+              },
+              {
+                id: '2',
+                value: '回乡证'
+              },
+              {
+                id: '1',
+                value: '台胞证'
+              }
+            ]
+          }],
+          callback: (indexArr, data) => {
+
+            
+          }
+        });
+       
+       
+//微信接口
+this.$http.post(`http://aj.kingwingaviation.com/alliance-java/wechat/getJSApiTicket?url=${encodeURIComponent(location.href.split('#')[0])}`).then(res => {
+            let js_sdk = res.data.payload
+             console.log('~~~')
+             console.log(js_sdk)
+            wx.config({
+                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: js_sdk.appId, // 必填，公众号的唯一标识
+                timestamp: js_sdk.timestamp, // 必填，生成签名的时间戳
+                nonceStr: js_sdk.nonceStr, // 必填，生成签名的随机串
+                signature: js_sdk.signature,// 必填，签名，见附录1
+                jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            })
+        })
+        wx.ready(() => {
+            console.log('jssdk ok!')
+        })
+
+  },
+
+    methods:{
+         tx:function(){
+            this.isshow=true
+        },
+        txr:function(){
+            this.ishow=true
+        },
+        chose:function(){
+          this.mobileSelect1.show();
+      },
+       people:function(){
+            console.log(1)
+    
+           this.mobileSelect2.show();
+        },
+        people1:function(){
+            console.log(1)
+           this.mobileSelect3.show();
+        },
+        payfor:function(){
+               // 登录验证功能
+            if(this.realName==''){
+                this.isname=true
+            }
+            if( this.idNumber==''){
+                this.isnumber=true;
+            }
+            if(this.mobile==''){
+                this.ismobile=true;
+            }
+            let realName=this.realName;  
+                    let mobile=this.mobile;
+                    let idType=0;
+                    let idNumber=this.idNumber;
+                    var array={realName:this.realName,mobile:this.mobile,idType:0,idNumber:this.idNumber };
+                    // var array1={realName:this.realName,mobile:this.mobile,idType:0,idNumber:this.idNumber };
+                    console.log(array);
+                    // console.log(array1);
+                    var personUserInfo=[];
+                    personUserInfo.push(array);
+                    console.log(personUserInfo);
+                    personUserInfo.push(this.user);
+
+            this.$http({
+                method:'post',
+                url:'wechat/order/addOrder',
+                params:{
+                    personUserInfo: JSON.stringify(personUserInfo),
+                    packageId:this.packageId,
+                    plateNumber:this.plateNumber,
+                    vehicleType:this.vehicleType,
+                    owner:this.owner,
+                    vin:this.vin,
+                    // user:this.user
+                }
+               
+            }).then(res=>{
+                console.log(res);
+                    //  console.log(personUserInfo);
+                if(res.data.code==200){
+                    const payload=res.data.payload
+                    wx.chooseWXPay({
+                    timestamp: payload.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                    nonceStr: payload.nonceStr, // 支付签名随机串，不长于 32 位
+                    package: payload.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+                    signType: payload.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                    paySign: payload.paySign, // 支付签名
+                    success: function (res) {
+                    // 支付成功后的回调函数 
+           
+                    console.log(1);
+                  }
+                });
+                  }else{
+                  let message=res.data.message
+                        alert(message)  
+                
+                  }
+
+            })
+                   
+            
+        
+                  
+
+           
+
+
+        }
+    }
+
+
+
+}
+
+    
+</script>
+
 <style scoped>
-  .warning {
+.qyr{
+    background-color: #fff;
+}
+.tianx{
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+}
+.tianx P{
+    font-size: 16px;
+    color:#A0A0A0; 
+    padding-top: 10px;
+    margin-left: 20px;
+}
+.tianx span{
+    display: block;
+    width: 50px;
+    height: 10px;
+    font-size: 14px;
+    color:#A0A0A0;
+    margin-left: 90px;
+   margin-top:-30px;
+}
+.tianx button{
+    float: right;
+    width: 22vw;
+    color: white;
+    background: #ccc;
+    font-size: 0.5rem;
+    text-align: center;
+    height: 25px;
+    line-height: 10px;
+    border-radius: 20px;
+    margin-top:-10px;
+}
+/* 真正的人 */
+.warning {
     position: absolute;
     bottom: 2.6rem;
     left: 24vw;
@@ -65,13 +431,23 @@
     width: 22vw;
     color: white;
     background: #ccc;
-    font-size: 3vw;
+    font-size: 0.5rem;
     text-align: center;
     height: 25px;
     line-height: 25px;
     border-radius: 20px;
   }
 
+.btn1 {
+    width: 22vw;
+    color: white;
+    background: #ccc;
+    font-size: 0.5rem;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 20px;
+  }
   .human-input {
     border: none !important;
     height: 59px !important;
@@ -101,8 +477,12 @@
   }
 
   .human-name {
-    width: 25%;
-    padding-left: 5%;
+    width: 28%;
+    padding-left: 2%;
+  }
+  .human-name1{
+      width: 40%;
+      padding-left: 2%;
   }
 
   .man {
@@ -118,7 +498,10 @@
     height: 13px;
   }
 
-  .payment {
+
+
+
+.payment {
     height: 50px;
     background: #fff;
     display: flex;
@@ -139,196 +522,5 @@
   }
 
 </style>
-<script>
-  import MobileSelect from 'mobile-select'
-  // import index from '../../../node_modules/_vue@2.5.16@vue';
-  export default {
-    data() {
-      return {
-        isChinaName: false,
-        isPhoneNo: false,
-        isIdNumber: false,
-        personUser: [],
-        list: '',
-        validateArr: []
-      }
-    },
-    created() {
-      this.count = JSON.parse(window.sessionStorage.getItem('priceinfo'))
-      this.counts = this.count.count
-      this.commonprice = this.count.price
-      console.log(this.count)
-      for (let i = 0; i < this.count.count; i++) {
-        let item = {
-          realName: '',
-          idType: '',
-          idNumber: '',
-          mobile: ''
-        };
-        let obj = {
-          isChinaName: true,
-          isPhoneNo: true,
-          isIdNumber: true
-        }
-        this.personUser.push(item);
-        this.validateArr.push(obj)
-      }
-    },
-    mounted() {
-      var urls = 'wechat/commonContact/list'
-      this.$http.get(urls).then(data => {
-        this.list = data.data.payload
-        console.log(this.list)
-        this.objlist = []
-        this.list.map(item => {
-          this.obj = {}
-          this.listid = item.id
-          this.listrealName = item.realName
-          this.obj.value = item.realName
-          this.obj.realName = item.realName
-          this.obj.idType = item.idType
-          this.obj.mobile = item.mobile
-          this.obj.idNumber = item.idNumber
-          this.objlist.push(this.obj)
-        })
 
-        let arr = [{
-          data: this.objlist
-        }]
-        console.log(arr)
-        var mobileSelect = new MobileSelect({
-          trigger: '.btn',
-          title: '选择证件类型',
-          wheels: arr,
-          triggerDisplayData: false,
-          callback: (indexArr, data) => {
-            console.log(data[0])
-            this.personUser.splice(0, 1, data[0])
-            this.item = data[0]
-          }
-        });
-      })
-      this.mobileSelect1 = new MobileSelect({
-        trigger: '.createId',
-        title: '选择证件类型',
-        wheels: [{
-          data: [{
-              id: '0',
-              value: '身份证'
-            },
-            {
-              id: '3',
-              value: '护照'
-            },
-            {
-              id: '2',
-              value: '回乡证'
-            },
-            {
-              id: '1',
-              value: '台胞证'
-            }
-          ]
-        }],
-        callback: (indexArr, data) => {
-          let idx = this.index || 0
-          this.personUser[idx].idType = data[0].value;
-          // console.log(this.personUser[index].idType)
-          // let x = JSON.stringify(this.personUser[idx])
-          if (data[0].value == '身份证') this.personUser[idx].idType = '0'
-          if (data[0].value == '护照') this.personUser[idx].idType = '3'
-          if (data[0].value == '回乡证') this.personUser[idx].idType = '2'
-          if (data[0].value == '台胞证') this.personUser[idx].idType = '1'
-        }
-      });
 
-      var url = 'wechat/getJSApiTicket'
-      var jsurl = location.href.split('#')[0]
-      var params = {
-        url: jsurl
-      }
-      this.$http.post(url, params).then(data => {
-        var wxconfig = data.data.payload
-        wx.config({
-          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-          appId: wxconfig.appId, // 必填，公众号的唯一标识
-          timestamp: wxconfig.timestamp, // 必填，生成签名的时间戳
-          nonceStr: wxconfig.nonceStr, // 必填，生成签名的随机串
-          signature: wxconfig.signature, // 必填，签名，见附录1
-          jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
-
-      })
-    },
-    methods: {
-      _isChinaName(name) {
-        console.log(name)
-        var pattern = /^([\u4e00-\u9fa5]+|[\sa-zA-z]+)$/;
-        return pattern.test(name);
-      },
-      _isPhoneNo(phone) {
-        var pattern = /^1[34578]\d{9}$/;
-        return pattern.test(phone);
-      },
-      confirm: function () {
-        this.personUser.forEach((item, index) => {
-          Object.keys(item).forEach((key, idx) => {
-            if (key === 'realName') {
-              // console.log(this._isChinaName(item[key]))
-              this.validateArr[index].isChinaName = this._isChinaName(item[key])
-            } else if (key === 'mobile') {
-              this.validateArr[index].isPhoneNo = this._isPhoneNo(item[key])              
-            }
-          })
-        })
-       
-        var url = 'wechat/order/addOrder'
-        this.priceinfo = JSON.parse(window.sessionStorage.getItem('priceinfo'))
-        console.log(this.priceinfo)
-        var params = {
-          packageId: 'B',
-          benefitEffectTime: this.priceinfo.pickerVisible,
-          benefitExpireTime: this.priceinfo.pickerEnd,
-          peopleNum: this.priceinfo.count,
-          personUserInfo: JSON.stringify(this.personUser)
-        }
-        this.$http.post(url, params).then(data => {
-          var result = data.data.payload
-          if (data.data.code == 200) {
-            wx.ready(function () {
-              wx.chooseWXPay({
-                timestamp: result.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                nonceStr: result.nonceStr, // 支付签名随机串，不长于 32 位
-                package: result.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                paySign: result.paySign, // 支付签名
-                success: function (res) {
-                  // 支付成功后的回调函数
-                  console.log(res)
-                },
-                fail: function (res) {
-                  console.log(res)
-                }
-              })
-            })
-
-          }
-
-        })
-      },
-
-      createId(index) {
-        console.log('click')
-        this.index = index
-        this.mobileSelect1.show()
-      }
-    },
-    filters: {
-      format(val) {
-        let enums = ['身份证', '台胞证', '回乡证', '护照', ]
-        return enums[val] || '请输入证件类型'
-      }
-    }
-  }
-
-</script>
