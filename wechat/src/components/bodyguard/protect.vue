@@ -470,6 +470,7 @@
       },
       buy:function(){
         window.sessionStorage.setItem('type',this.values)
+        window.sessionStorage.setItem('pirce',this.price)
         this.$router.push('/protectdetail')
       }
     },

@@ -1,21 +1,21 @@
 <template>
-  <div>
-    <div class="must" v-for='(item, index) of list' :key='index'>
-      <p style="padding:10px 20px 0">{{ item.type === 'big' ? '大人' : '小孩' }}</p>
+  <div class='container'>
+    <div @click.stop class="must" v-for='(item, index) of list' :key='index'>
+      <p style="padding:10px 20px 0">{{ item.type === '1' ? '大人' : '小孩' }}</p>
       <div class="man">
         <p class="human-name">姓名</p>
         <input type="text" class="human-input" v-model='item.realName'  placeholder="请输入姓名">
-        <div style="display:flex;align-items: center;">
+        <!-- <div style="display:flex;align-items: center;">
           <div class="btn">选择权益人</div>
-        </div>
+        </div> -->
         <!-- <div class="warning" >
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>姓名格式错误，请重新填写</span>
         </div> -->
       </div>
       <div class="man">
-        <p style="width:25%;padding-left:5%">证件类型</p>
-        <p class="createId" style="width:62%;padding-left: 1rem;">1</p>
+        <p style="width:32%;padding-left:5%">证件类型</p>
+        <p class='createId' @click='zhengjian(index)' style="width:62%;padding-left: 1rem;">{{ item.idType || '请输入证件类型'| format }}</p>
         <div>
           <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
@@ -37,9 +37,52 @@
         </div> -->
       </div>
     </div>
+    <div style="background:white" @click.stop>
+      <p style="padding:10px 20px 0">权益车辆</p>
+      <div class="man">
+        <p class="human-name">车牌号码</p>
+        <input type="text"  class="human-input" v-model="plateNumber" placeholder="请输入车牌号码">
+        <!-- <div class="warning" >
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>证件号码不能为空</span>
+        </div> -->
+      </div>
+      <div class="man">
+        <p class="human-name">车辆类型</p>
+       <p id="trigger"  @click.stop style="width:58%;margin-left: 1rem;">{{vehicleType ||'请选择车辆类型'}}</p>
+        <!-- <div class="warning" >
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>证件号码不能为空</span>
+        </div> -->
+      </div>
+      <div class="man">
+        <p class="human-name">所有人</p>
+        <input type="text"  class="human-input" v-model="owner" placeholder="请输入所有人">
+        <!-- <div class="warning" >
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>证件号码不能为空</span>
+        </div> -->
+      </div>
+      <div class="man">
+        <p class="human-name">使用性质</p>
+        <input type="text"  class="human-input" v-model="usingNature" placeholder="请输入使用性质">
+        <!-- <div class="warning" >
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>证件号码不能为空</span>
+        </div> -->
+      </div>
+      <div class="man">
+        <p class="human-name">车辆识别代号</p>
+        <input type="text"  class="human-input" v-model="vin" placeholder="请输入车辆识别代号">
+        <!-- <div class="warning" >
+          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+          <span>证件号码不能为空</span>
+        </div> -->
+      </div>
+    </div>
     <div class="payment">
-      <p>合计：￥10</p>
-      <p class="payment-buy">立即购买</p>
+      <p>合计：￥{{price}}</p>
+      <p class="payment-buy" @click.stop="payment()">立即购买</p>
     </div>
   </div>
 </template>
@@ -100,7 +143,7 @@
   }
 
   .human-name {
-    width: 25%;
+    width: 32%;
     padding-left: 5%;
   }
 
@@ -139,10 +182,19 @@
 
 </style>
 <script>
+import MobileSelect from 'mobile-select'
 export default {
   data(){
       return{
-          list: []
+          list: [],
+          vasVehicle:'',
+          vasRoadRescue:'',
+          plateNumber:'',
+          vin:'',
+          vehicleType:'',
+          owner:'',
+          usingNature:'',
+          price:''
       }
   },
   mounted(){
@@ -158,29 +210,30 @@ export default {
           realName: '',
           idType: '',
           mobile: '',
-          idNumber: ''
+          idNumber: '',
+          vehicleType:''
       }
 
       
       let type = window.sessionStorage.getItem('type') || 1
+      this.price = window.sessionStorage.getItem('pirce')
       if (~~type === 1) {
-        //   this.list = [big, big, small]
         this.list.push({
-          type: 'big',
+          type: '1',
           realName: '',
           idType: '',
           mobile: '',
           idNumber: ''
         })
         this.list.push({
-          type: 'big',
+          type: '1',
           realName: '',
           idType: '',
           mobile: '',
           idNumber: ''
         })
         this.list.push({
-          type: 'small',
+          type: '2',
           realName: '',
           idType: '',
           mobile: '',
@@ -189,21 +242,21 @@ export default {
       } else if (~~type === 2) {
         //   this.list = [big, small, small]
         this.list.push({
-          type: 'big',
+          type: '1',
           realName: '',
           idType: '',
           mobile: '',
           idNumber: ''
         })
         this.list.push({
-          type: 'small',
+          type: '2',
           realName: '',
           idType: '',
           mobile: '',
           idNumber: ''
         })
         this.list.push({
-          type: 'small',
+          type: '2',
           realName: '',
           idType: '',
           mobile: '',
@@ -211,35 +264,169 @@ export default {
         })
       } else if (~~type === 3) {
         this.list.push({
-          type: 'big',
+          type: '1',
           realName: '',
           idType: '',
           mobile: '',
           idNumber: ''
         })
         this.list.push({
-          type: 'big',
+          type: '1',
           realName: '',
           idType: '',
           mobile: '',
           idNumber: ''
         })
         this.list.push({
-          type: 'small',
+          type: '2',
           realName: '',
           idType: '',
           mobile: '',
           idNumber: ''
         })
         this.list.push({
-          type: 'small',
+          type: '2',
           realName: '',
           idType: '',
           mobile: '',
           idNumber: ''
         })
       }
-  }
+       this.mobileSelect1 = new MobileSelect({
+        trigger: '.container',
+        title: '选择证件类型',
+        triggerDisplayData: false,
+        wheels: [{
+          data: [{
+              id: '0',
+              value: '身份证'
+            },
+            {
+              id: '3',
+              value: '护照'
+            },
+            {
+              id: '2',
+              value: '回乡证'
+            },
+            {
+              id: '1',
+              value: '台胞证'
+            }
+          ]
+        }],
+        callback: (indexArr, data) => {
+          let idx = this.idx || 0
+          this.list[idx].idType = data[0].id;
+        }
+      })
+
+       var mobileSelect = new MobileSelect({
+        trigger: '#trigger',
+        title: '选择证件类型',
+        wheels: [{
+          data: [{
+              id: '轿车',
+              value: '轿车'
+            },
+            {
+              id: '越野车',
+              value: '越野车'
+            },
+            {
+              id: '商务车',
+              value: '商务车'
+            },
+            {
+              id: '皮卡',
+              value: '皮卡'
+            },
+            {
+              id: '微型客车',
+              value: '微型客车'
+            }
+          ]
+        }],
+        callback: (indexArr, data) => {
+          this.vehicleType = data[0].id; //返回选中的json数据
+          console.log(this.vehicleType)
+        }
+      });
+
+      var url = 'wechat/getJSApiTicket'
+      var jsurl = location.href.split('#')[0]
+      var params = {url: jsurl}
+      this.$http.post(url, params).then(data => {
+        var wxconfig = data.data.payload
+        wx.config({
+          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: wxconfig.appId, // 必填，公众号的唯一标识
+          timestamp: wxconfig.timestamp, // 必填，生成签名的时间戳
+          nonceStr: wxconfig.nonceStr, // 必填，生成签名的随机串
+          signature: wxconfig.signature, // 必填，签名，见附录1
+          jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+
+      })
+  },
+  methods: {
+    zhengjian(idx) {
+      this.idx = idx
+      this.mobileSelect1.show()
+    },
+    payment:function(){
+      let url = 'wechat/order/addOrder'
+      this.mealType = JSON.parse(window.sessionStorage.getItem('type'))
+      if(this.plateNumber!=''&&this.vehicleType!=''&&this.owner!=''&&this.vin!=0){
+        this.vasVehicle =true
+        this.vasRoadRescue=true
+      }else{
+        this.vasVehicle =false
+        this.vasRoadRescue =false
+      }
+      var params = {
+          packageId: 'E',
+          personUserInfo: JSON.stringify(this.list),
+          mealType:this.mealType,
+          plateNumber:this.plateNumber,
+          vehicleType:this.vehicleType,
+          owner:this.owner,
+          usingNature:this.usingNature,
+          vin:this.vin,
+          vasVehicle:this.vasVehicle,
+          vasRoadRescue:this.vasRoadRescue,
+        }
+         this.$http.post(url, params).then(data => {
+           console.log(data)
+           var result = data.data.payload
+          if (data.data.code == 200) {
+            wx.ready(function () {
+              wx.chooseWXPay({
+                timestamp: result.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                nonceStr: result.nonceStr, // 支付签名随机串，不长于 32 位
+                package: result.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                paySign: result.paySign, // 支付签名
+                success: function (res) {
+                  // 支付成功后的回调函数
+                  console.log(res)
+                },
+                fail: function (res) {
+                  console.log(res)
+                }
+              })
+            })
+
+          }
+         })
+    }
+  },
+   filters: {
+      format(val) {
+        let enums = ['身份证', '台胞证', '回乡证', '护照', ]
+        return enums[val] || '请输入证件类型'
+      }
+    }
 }
 </script>
 

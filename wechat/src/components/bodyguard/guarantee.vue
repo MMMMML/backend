@@ -141,7 +141,6 @@
 </style>
 <script>
   import MobileSelect from 'mobile-select'
-  // import index from '../../../node_modules/_vue@2.5.16@vue';
   export default {
     data() {
       return {
@@ -252,9 +251,7 @@
 
       var url = 'wechat/getJSApiTicket'
       var jsurl = location.href.split('#')[0]
-      var params = {
-        url: jsurl
-      }
+      var params = {url: jsurl}
       this.$http.post(url, params).then(data => {
         var wxconfig = data.data.payload
         wx.config({
