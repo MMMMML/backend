@@ -65,10 +65,17 @@
     </div>
     <!--文本  -->
     <div class="notice">
-        <div class="notice-part">
+        <div class="notice-part" @click="showpage1">
             <p>权益人须知</p>
-            <img src="../../assets/image/mine/Chevron@3x.png" alt="">
+            <img src="../../assets/image/mine/Chevron@3x.png" alt="" @click="showpage1" >
         </div>
+              <!-- 隐藏的文本内容 -->
+                <div v-show="show1">
+                      我隐藏起来了
+
+                </div>
+
+
          <div class="notice-part">
             <p>直升机救援服务</p>
             <img src="../../assets/image/mine/Chevron@3x.png" alt="">
@@ -248,6 +255,7 @@ import Check from '@/util/checkIDAuth'
   export default {
     data() {
       return {
+        show1:false,
         pickerVisible: '',
         Visible: '',
         count: 0,
@@ -282,6 +290,10 @@ import Check from '@/util/checkIDAuth'
                 this.counter = parseInt(this.counter) - 1;
             }
         },
+      showpage1:function(){
+
+          this.show1=true;
+      },
       openPicker:function() {
         this.$refs.picker.open();
       },

@@ -15,7 +15,7 @@
     <div class="man">
         <p class="human-name">姓名</p>
         <input type="text" class="human-input"  placeholder="请输入姓名" v-model='item.realName'>
-        <div style="display:flex;align-items: center;" v-show="index==0" >
+        <div style="display:flex;align-items: center;" >
           <div class="btn"   @click='member'>选择权益人</div>
         </div>
         <div class="warning" v-show="isname">
@@ -163,6 +163,10 @@ export default{
             vehicleType: '',
             vin:'',
             usingNature:'0',
+            // realName:'',
+            // mobile:'',
+            // idNumber:'',
+            // idType:'',
             personUserInfo:[
             ]
         },
@@ -206,12 +210,16 @@ this.$http.get('wechat/commonContact/list').then(res =>{
                obj.idType = data[0].idType;
                obj.mobile = data[0].mobile;
                obj.idNumber = data[0].idNumber;
-              this.meg.personUserInfo[0] = [obj]
+              this.meg.personUserInfo = [obj]
             } 
               console.log(obj);
+            // this.meg.realName=obj.realName;
+            // this.meg.idType=obj.idType;
+            // this.meg.mobile=obj.mobile;
+            // this.meg.idNumber=obj.idNumber
+          
               // console.log(obj.realName);
               // console.log(this.meg.personUserInfo[0]);
-
           }
         });
         
@@ -285,7 +293,7 @@ this.$http.get('wechat/commonContact/list').then(res =>{
           }],
           callback: (indexArr, data) => {
             console.log(data[0])
-         this.meg.personUserInfo[0].idType=data[0].value; 
+          this.meg.personUserInfo[0].idType=data[0].id; 
           }
         });
 
@@ -422,11 +430,6 @@ methods:{
                   }
          })
     },
-    car:function(){
-      this.$http.get('wechat/commonVehicle/list').then(res=>{
-        console.log(res);
-      })
-    },
       createId:function(index) {
         this.mobileSelect1.show()   
       },
@@ -434,6 +437,7 @@ methods:{
         this.mobileSelect3.show()
       },
       member:function(){
+        console.log(1);
         this.mobileSelect2.show()
       },
       car:function(){
