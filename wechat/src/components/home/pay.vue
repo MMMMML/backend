@@ -15,8 +15,8 @@
     <div class="man">
         <p class="human-name">姓名</p>
         <input type="text" class="human-input"  placeholder="请输入姓名" v-model='item.realName'>
-        <div style="display:flex;align-items: center;" >
-          <div class="btn"   @click='member'>选择权益人</div>
+        <div style="display:flex;align-items: center;" v-show="index==0" >
+          <div class="btn"   @click='member' >选择权益人</div>
         </div>
         <div class="warning" v-show="isname">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
@@ -141,6 +141,7 @@
 
 <script>
 import MobileSelect from 'mobile-select'
+import Check from '@/util/checkIDAuth'
 // import wx from 'weixin-js-sdk'
 export default{
     data(){
@@ -210,16 +211,9 @@ this.$http.get('wechat/commonContact/list').then(res =>{
                obj.idType = data[0].idType;
                obj.mobile = data[0].mobile;
                obj.idNumber = data[0].idNumber;
-              this.meg.personUserInfo = [obj]
+              this.meg.personUserInfo.splice(0, 1, obj);
             } 
               console.log(obj);
-            // this.meg.realName=obj.realName;
-            // this.meg.idType=obj.idType;
-            // this.meg.mobile=obj.mobile;
-            // this.meg.idNumber=obj.idNumber
-          
-              // console.log(obj.realName);
-              // console.log(this.meg.personUserInfo[0]);
           }
         });
         
@@ -230,8 +224,8 @@ this.$http.get('wechat/commonContact/list').then(res =>{
 // 加载车的数据
      this.$http.get('wechat/commonVehicle/list').then(res=>{
             console.log(res)
-    console.log(res.data.payload);
-    console.log('~~~~');
+            console.log(res.data.payload);
+            console.log('~~~~');
         let arr = res.data.payload
         let newArr = []
         arr.forEach(item => {
@@ -354,6 +348,8 @@ this.mobileSelect3 = new MobileSelect({
         
 },
 created(){
+  // 实名验证
+
          let { counter, pageckageId } = this.$route.query
       counter = ~~counter
       this.counter += counter || 0
@@ -368,7 +364,9 @@ created(){
       console.log(this.meg.personUserInfo[0])
       // console.log(wx)
 },
-methods:{   
+methods:{ 
+  
+  
       toggle:function(){
             this.isShow = !this.isShow;
         },
@@ -380,12 +378,10 @@ methods:{
     //   付款验证
     payfor:function(){
       // 验证功能
-        // if(this.meg.realName == ''){
-        //         this.isname=true
-        //     }
-            // if( this.meg.personUserInfo[0].idNumber==''){
-            //     this.isnumber=true;
-            // }
+              var url=window.location.href;
+
+
+
             if(this.meg.plateNumber==''){
                 this.isplateNumber=true;
             }
