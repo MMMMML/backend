@@ -233,15 +233,6 @@
         callback: (indexArr, data) => {
           let idx = this.index || 0
           this.personUser[idx].idType = data[0].value;
-          // console.log(this.personUser[index].idType)
-          // let x = JSON.stringify(this.personUser[idx])
-          // let dict = {
-          //   '身份证': 0,
-          //   '台胞证': 1,
-          //   '回乡证': 2,
-          //   '护照': 3
-          // }
-          // this.personUser[idx].idType = dict[data[0].value]
           if (data[0].value == '身份证') this.personUser[idx].idType = '0'
           if (data[0].value == '护照') this.personUser[idx].idType = '3'
           if (data[0].value == '回乡证') this.personUser[idx].idType = '2'
@@ -255,7 +246,7 @@
       this.$http.post(url, params).then(data => {
         var wxconfig = data.data.payload
         wx.config({
-          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
           appId: wxconfig.appId, // 必填，公众号的唯一标识
           timestamp: wxconfig.timestamp, // 必填，生成签名的时间戳
           nonceStr: wxconfig.nonceStr, // 必填，生成签名的随机串
@@ -323,7 +314,6 @@
       },
 
       createId(index) {
-        console.log('click')
         this.index = index
         this.mobileSelect1.show()
       }

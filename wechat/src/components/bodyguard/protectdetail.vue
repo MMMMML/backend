@@ -8,33 +8,31 @@
         <!-- <div style="display:flex;align-items: center;">
           <div class="btn">选择权益人</div>
         </div> -->
-        <!-- <div class="warning" >
+        <div class="warning" v-show="!validateArr[index].isChinaName">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>姓名格式错误，请重新填写</span>
-        </div> -->
+        </div>
       </div>
       <div class="man">
         <p style="width:32%;padding-left:5%">证件类型</p>
-        <p class='createId' @click='zhengjian(index)' style="width:62%;padding-left: 1rem;">{{ item.idType || '请输入证件类型'| format }}</p>
-        <div>
-          <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
-        </div>
+        <p class='createId'  style="width:62%;padding-left: 1rem;">身份证</p>
+       
       </div>
       <div class="man">
         <p class="human-name">证件号码</p>
         <input type="text" v-model='item.idNumber'  class="human-input" placeholder="请输入证件号码">
-        <!-- <div class="warning" >
+        <div class="warning" v-show="!validateArr[index].isIdNumber">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
-          <span>证件号码不能为空</span>
-        </div> -->
+          <span>证件号码格式错误，请重新填写</span>
+        </div>
       </div>
       <div class="man">
         <p class="human-name">手机号码</p>
         <input type="text" v-model='item.mobile' class="human-input" placeholder="请输入手机号码">
-        <!-- <div class="warning" >
+        <div class="warning" v-show="!validateArr[index].isPhoneNo">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>手机格式错误，请重新填写</span>
-        </div> -->
+        </div>
       </div>
     </div>
     <div style="background:white" @click.stop>
@@ -50,6 +48,9 @@
       <div class="man">
         <p class="human-name">车辆类型</p>
        <p id="trigger"  @click.stop style="width:58%;margin-left: 1rem;">{{vehicleType ||'请选择车辆类型'}}</p>
+         <div>
+          <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
+        </div>
         <!-- <div class="warning" >
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
@@ -90,7 +91,7 @@
   .warning {
     position: absolute;
     bottom: 2.6rem;
-    left: 24vw;
+    left: 30vw;
     height: 0;
   }
 
@@ -194,7 +195,11 @@ export default {
           vehicleType:'',
           owner:'',
           usingNature:'',
-          price:''
+          price:'',
+          isChinaName: false,
+        isPhoneNo: false,
+        isIdNumber: false,
+        validateArr:[]
       }
   },
   mounted(){
@@ -211,7 +216,8 @@ export default {
           idType: '',
           mobile: '',
           idNumber: '',
-          vehicleType:''
+          vehicleType:'',
+          
       }
 
       
@@ -221,21 +227,21 @@ export default {
         this.list.push({
           type: '1',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
         this.list.push({
           type: '1',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
         this.list.push({
           type: '2',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
       })
@@ -244,21 +250,21 @@ export default {
         this.list.push({
           type: '1',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
         this.list.push({
           type: '2',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
         this.list.push({
           type: '2',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
@@ -266,60 +272,33 @@ export default {
         this.list.push({
           type: '1',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
         this.list.push({
           type: '1',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
         this.list.push({
           type: '2',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
         this.list.push({
           type: '2',
           realName: '',
-          idType: '',
+          idType: 0,
           mobile: '',
           idNumber: ''
         })
       }
-       this.mobileSelect1 = new MobileSelect({
-        trigger: '.container',
-        title: '选择证件类型',
-        triggerDisplayData: false,
-        wheels: [{
-          data: [{
-              id: '0',
-              value: '身份证'
-            },
-            {
-              id: '3',
-              value: '护照'
-            },
-            {
-              id: '2',
-              value: '回乡证'
-            },
-            {
-              id: '1',
-              value: '台胞证'
-            }
-          ]
-        }],
-        callback: (indexArr, data) => {
-          let idx = this.idx || 0
-          this.list[idx].idType = data[0].id;
-        }
-      })
+      
 
        var mobileSelect = new MobileSelect({
         trigger: '#trigger',
@@ -352,6 +331,19 @@ export default {
           console.log(this.vehicleType)
         }
       });
+      let num
+       if (~~type === 1 || ~~type === 2) {
+         num = 3
+       } else if (~~type === 3) {
+         num = 4
+       }
+        for (let i = 0; i < num; i++) {
+            this.validateArr.push({
+              isChinaName: true,
+              isPhoneNo: true,
+              isIdNumber: true
+            })
+        }
 
       var url = 'wechat/getJSApiTicket'
       var jsurl = location.href.split('#')[0]
@@ -359,7 +351,7 @@ export default {
       this.$http.post(url, params).then(data => {
         var wxconfig = data.data.payload
         wx.config({
-          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
           appId: wxconfig.appId, // 必填，公众号的唯一标识
           timestamp: wxconfig.timestamp, // 必填，生成签名的时间戳
           nonceStr: wxconfig.nonceStr, // 必填，生成签名的随机串
@@ -370,11 +362,43 @@ export default {
       })
   },
   methods: {
-    zhengjian(idx) {
-      this.idx = idx
-      this.mobileSelect1.show()
-    },
+     _isChinaName(name) {
+        console.log(name)
+        var pattern = /^([\u4e00-\u9fa5]+|[\sa-zA-z]+)$/;
+        return pattern.test(name);
+      },
+      _isPhoneNo(phone) {
+        var pattern = /^1[34578]\d{9}$/;
+        return pattern.test(phone);
+      },
+      _isIdNumber(number) {
+        var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        return pattern.test(number);
+      },
+      
     payment:function(){
+        this.isChinaName = false
+        this.isPhoneNo = false
+        this.isIdNumber = false
+        console.log(this.list)
+         this.list.forEach((item, index) => {
+          Object.keys(item).forEach((key, idx) => {
+            if (key === 'realName') {
+              console.log(this._isChinaName(item[key]))
+              this.validateArr[index].isChinaName = this._isChinaName(item[key])
+              
+            } else if (key === 'mobile') {
+              this.validateArr[index].isPhoneNo = this._isPhoneNo(item[key])  
+            
+            } else if (key === 'idNumber') {
+              this.validateArr[index].isIdNumber = this._isIdNumber(item[key])
+            }
+          })
+          
+        })
+
+
+
       let url = 'wechat/order/addOrder'
       this.mealType = JSON.parse(window.sessionStorage.getItem('type'))
       if(this.plateNumber!=''&&this.vehicleType!=''&&this.owner!=''&&this.vin!=0){
@@ -396,9 +420,20 @@ export default {
           vasVehicle:this.vasVehicle,
           vasRoadRescue:this.vasRoadRescue,
         }
+        let flag = true
+        this.validateArr.map(item=>{
+          if(item.isChinaName==false || item.isPhoneNo==false || item.isIdNumber==false){
+            flag = false
+          }
+        })
+
+        if (!flag) return
          this.$http.post(url, params).then(data => {
            console.log(data)
            var result = data.data.payload
+           if(data.data.code==500){
+             alert(data.data.message)
+           }
           if (data.data.code == 200) {
             wx.ready(function () {
               wx.chooseWXPay({
