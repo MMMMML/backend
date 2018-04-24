@@ -146,6 +146,9 @@
         }
         this.$http.post(url, params).then(data => {
           this.list = data.data.payload
+          if(data.data.code ==500){
+            alert(data.data.message)
+          }
           if(data.data.code==200){
             this.$router.push('/vehicle')
           }

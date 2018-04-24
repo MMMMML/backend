@@ -24,29 +24,29 @@
       <p style="text-align:left;padding:2rem 0 1rem 1rem" class="weight">我的权益</p>
       <div class="equity-list">
         <div>
-          <img v-show="members.firstAid==false" src="../../assets/image/mine/icon-helicopter-不亮@3x.png" alt="">
-          <img v-show="members.firstAid==true" src="../../assets/image/mine/icon-helicopter@3x.png" alt="">
-          <p>直升机院前急救</p>
+          <img v-show="members.firstAid==false" src="../../assets/image/mine/icon-helicopter-不亮.png" alt="">
+          <img v-show="members.firstAid==true" src="../../assets/image/mine/icon-helicopter.png" alt="">
+          <p style="font-size:12px;">直升机院前急救</p>
         </div>
         <div>
-          <img v-show="members.ambulance==false" src="../../assets/image/mine/icon-call-不亮@3x.png" alt="">
-          <img v-show="members.ambulance==true" src="../../assets/image/mine/icon-call@3x.png" alt="">
-          <p>120协调</p>
+          <img v-show="members.ambulance==false" src="../../assets/image/mine/icon-call-不亮.png" alt="">
+          <img v-show="members.ambulance==true" src="../../assets/image/mine/icon-call.png" alt="">
+          <p style="font-size:12px;">120协调</p>
         </div>
         <div>
-          <img v-show="members.medicalTransfer==false" src="../../assets/image/mine/icon-stretcher-不良@3x.png" alt="">
-          <img v-show="members.medicalTransfer==true" src="../../assets/image/mine/icon-stretcher@3x.png" alt="">
-          <p>直升机医疗转运9折</p>
+          <img v-show="members.medicalTransfer==false" src="../../assets/image/mine/icon-stretcher-不良.png" alt="">
+          <img v-show="members.medicalTransfer==true" src="../../assets/image/mine/icon-stretcher.png" alt="">
+          <p style="font-size:12px;">直升机医疗转运9折</p>
         </div>
         <div>
-          <img v-show="members.roadRescue==false" src="../../assets/image/mine/icon-truck-不亮@3x.png" alt="">
-          <img v-show="members.roadRescue==true" src="../../assets/image/mine/icon-truck@3x.png" alt="">
-          <p>道路救援</p>
+          <img v-show="members.roadRescue==false" src="../../assets/image/mine/icon-truck-不亮.png" alt="">
+          <img v-show="members.roadRescue==true" src="../../assets/image/mine/icon-truck.png" alt="">
+          <p style="font-size:12px;">道路救援</p>
         </div>
         <div>
-          <img v-show="members.scooter==false" src="../../assets/image/mine/icon-car-不亮@3x.png" alt="">
-          <img v-show="members.scooter==true" src="../../assets/image/mine/icon-car@3x.png" alt="">
-          <p>代步车服务</p>
+          <img v-show="members.scooter==false" src="../../assets/image/mine/icon-car-不亮.png" alt="">
+          <img v-show="members.scooter==true" src="../../assets/image/mine/icon-car.png" alt="">
+          <p style="font-size:12px;">代步车服务</p>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
         </div>
       </div>
     </router-link>
-      <div class="catalog-list">
+      <!-- <div class="catalog-list">
         <div style="width:10%;padding-left:1rem">
           <img src="../../assets/image/mine/icon-star@3x.png" alt="">
         </div>
@@ -73,7 +73,7 @@
         <div>
           <img style="width:8px;" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
-      </div>
+      </div> -->
 
       <router-link class="mui-tab-item" to='/contact'>
         <div class="catalog-list">
@@ -100,7 +100,7 @@
         </div>
       </router-link>
 
-      <div class="catalog-list">
+      <!-- <div class="catalog-list">
         <div style="width:10%;padding-left:1rem">
           <img src="../../assets/image/mine/icon-star@3x.png" alt="">
         </div>
@@ -108,7 +108,7 @@
         <div>
           <img style="width:8px;" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="mui-bars">
@@ -232,8 +232,8 @@
   }
 
   .equity-list img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 28px;
   }
 
   a {

@@ -92,7 +92,7 @@
         })
       },
       confirm: function (id) {
-        window.sessionStorage.setItem('indentid', id)
+        window.sessionStorage.setItem('orderId', id)
         this.$router.push('/myindentinfo')
       },
       cancel: function (id) {

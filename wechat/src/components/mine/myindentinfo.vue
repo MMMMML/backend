@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="indent-box">
       <div class="indent-header">
         <p>{{benefitOrder.createTime}}</p>
@@ -24,23 +24,23 @@
     <div class="equity">
       <p style="text-align:left;padding:1rem 0 1rem 0" class="weight">享有权益</p>
       <div class="equity-list">
-        <div>
+        <div v-show="benefitPackageid=='B'&&benefitPackageid=='E'">
           <img src="../../assets/image/product/icon-helicopter.png" alt="">
           <p>直升机院前急救</p>
         </div>
-        <div>
+        <div v-show="benefitPackageid=='B'&&benefitPackageid=='E'">
           <img  src="../../assets/image/product/icon-call.png" alt="">
           <p>120协调</p>
         </div>
-        <div>
+        <div v-show="benefitPackageid!='B'"> 
           <img  src="../../assets/image/product/icon-stretcher.png" alt="">
           <p>直升机医疗转运9折</p>
         </div>
-        <div>
+        <div v-show="benefitPackageid!='B'">
           <img  src="../../assets/image/product/icon-truck.png" alt="">
           <p>道路救援</p>
         </div>
-        <div>
+        <div v-show="benefitPackageid!='B'">
           <img  src="../../assets/image/product/icon-car.png" alt="">
           <p>代步车服务</p>
         </div>
@@ -117,6 +117,9 @@
   </div>
 </template>
 <style scoped lang='less'>
+.container{
+  padding-bottom: 45px;
+}
   .indent-box {
     width: 100%;
     height: 100%;
@@ -177,12 +180,16 @@
 }
 .payment {
     height: 50px;
+    width: 100%;
     background: #fff;
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
     line-height: 50px;
     padding-left: 20px;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid #eee;
 
   }
 
@@ -197,6 +204,7 @@
 
 </style>
 <script>
+import { Indicator } from 'mint-ui';
 export default {
   data(){
       return{
@@ -204,16 +212,18 @@ export default {
           benefitPackage:'',
           personItems:'',
           vehicleItems:'',
+          benefitPackageid:''
       }
   },
   mounted(){
-      let url = `wechat/order/getOrderDetail?id=${window.sessionStorage.getItem('indentid')}`
+      let url = `wechat/order/getOrderDetail?id=${window.sessionStorage.getItem('orderId')}`
       this.$http.get(url).then(data => {
         const{ benefitOrder , benefitPackage , personItems, vehicleItems} = data.data.payload
         this.benefitOrder = benefitOrder
         this.benefitPackage = benefitPackage
         this.personItems = personItems
         this.vehicleItems = vehicleItems
+        this.benefitPackageid = benefitPackage.id
 
         // console.log(data)
         this.personItems.map(item=>{
@@ -229,7 +239,7 @@ export default {
       })
   },
   created(){
-        var url = 'wechat/getJSApiTicket'
+      var url = 'wechat/getJSApiTicket'
       var jsurl = location.href.split('#')[0]
       var params = {
         url: jsurl
@@ -245,23 +255,27 @@ export default {
           signature: wxconfig.signature, // 必填，签名，见附录1
           jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
-
-        
-
       })
   },
   methods:{
     payment:function(){
+      Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+      })
       var url = '/wechat/order/unionPay'
       var params = {
-          id:window.sessionStorage.getItem('indentid'),
+          id:window.sessionStorage.getItem('orderId'),
           payMethod:0
       }
        this.$http.post(url,params).then(data => {
-             var result = data.data.payload
-            console.log(data)
+            var result = data.data.payload
+            if(data.data.code == 500){
+              alert(data.data.message)
+            }
             if(data.data.code==200){
               wx.ready(function () {
+                Indicator.close();
               wx.chooseWXPay({
                 timestamp: result.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
                 nonceStr: result.nonceStr, // 支付签名随机串，不长于 32 位
@@ -269,8 +283,7 @@ export default {
                 signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                 paySign: result.paySign, // 支付签名
                 success: function (res) {
-                  // 支付成功后的回调函数
-                  console.log(res)
+                  window.location.href='http://aj.kingwingaviation.com/alliance-html/wechat/#/myindent'
                 },
                 fail: function (res) {
                   console.log(res)

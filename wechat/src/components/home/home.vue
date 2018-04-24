@@ -12,21 +12,21 @@
     </div>
 
     <!-- 轮播图 -->
-  <div class="lb_t">
-    <swiper :options="swiperOption" ref="mySwiper">
-      <swiper-slide v-for="(banner,index) in banners" :key="index" @click.native='goproduct(index)'>
-        <img v-if="banner.src" :src="banner.src">
-      </swiper-slide>
-      <div class="swiper-pagination" slot="pagination"></div>
-    </swiper>
-  </div>
+    <div class="lb_t">
+      <swiper :options="swiperOption" ref="mySwiper">
+        <swiper-slide v-for="(banner,index) in banners" :key="index" @click.native='goproduct(index)'>
+          <img v-if="banner.src" :src="banner.src">
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
+    </div>
 
 
-     <!-- 文字信息 -->
-      <div class="title_1">
-        <p>直升机院前急救+医疗转运9折</p>
-        <p class="two">都说我太过严肃，我只在意你是否需要保护</p>
-      </div>
+    <!-- 文字信息 -->
+    <div class="title_1">
+      <p>直升机院前急救+医疗转运9折</p>
+      <p class="two">都说我太过严肃，我只在意你是否需要保护</p>
+    </div>
 
     <div class="mui-bars">
 
@@ -37,20 +37,22 @@
         <span class="mui-tab-label">首页</span>
       </router-link>
       <div class="mui-tab-item">
-        <div >
+        <div>
           <img src="../../assets/image/home/button-help.png" alt="">
         </div>
-        <span class="mui-tab-label"> <a href="tel:10086" >一键呼救</a></span>
+        <span class="mui-tab-label">
+          <a href="tel:4001119299">一键呼救</a>
+        </span>
       </div>
 
-      <router-link class="mui-tab-item" to='/mine'>
+       <div class="mui-tab-item" @click="mine()">
         <div>
           <img src="../../assets/image/home/button-me.png" alt="">
         </div>
         <span class="mui-tab-label">我的</span>
-      </router-link>
+      </div>
     </div>
-     
+
   </div>
 
 </template>
@@ -58,74 +60,93 @@
 
 <script>
   import Cookies from 'js-cookie'
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import Check from '@/util/checkIDAuth'
+  import {
+    swiper,
+    swiperSlide
+  } from 'vue-awesome-swiper'
   export default {
-    components: {  
-            swiper,  
-            swiperSlide  
-        },
+    components: {
+      swiper,
+      swiperSlide
+    },
 
-computed:{
-  swiper() {  
-                return this.$refs.mySwiper.swiper  
-            }  
-},
-
-    data() {
-      
-      return {
-        banners:[
-          { src :require('../../assets/image/home/banner4.png')},
-          { src :require('../../assets/image/home/banner1.png')},
-          { src :require('../../assets/image/home/banner2.png')},
-          { src :require('../../assets/image/home/banner.png')},
-          { src :require('../../assets/image/product/banner-皇家护卫@3x.png')}
-          ],
-        swiperOption:{
-          notNextTick: true,  
-                pagination: '.swiper-pagination',  
-                slidesPerView: 'auto',  
-                centeredSlides: true,  
-                paginationClickable: true,  
-                spaceBetween: 30,
-                // preventClicks:false, 
-                    onSlideChangeEnd: swiper => {  
-                        //这个位置放swiper的回调方法    
-                        this.index = swiper.realIndex;  
-                    }  
-                }  
-        }
-
-      },
-    
-   
-    created() {
-      if (!Cookies.get('sessionId')) {
-          const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
-          window.location.href = redirect
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
       }
     },
-    methods:{
-        goproduct:function(index){
-           if( index==0){
-            this.$router.push('/cpa')
-           }
-           if(index==4){
-             this.$router.push('/protect')
-           }
-          if(index==3){
-            this.$router.push('/cpb')
-          }
-          if(index==2){
-            this.$router.push('/bodyguard')
-          }
-          if(index==1){
-            this.$router.push('/knight')
-          }
 
-          console.log(index)
-        },
-      
+    data() {
+
+      return {
+        banners: [{
+            src: require('../../assets/image/home/banner4.png')
+          },
+          {
+            src: require('../../assets/image/home/banner1.png')
+          },
+          {
+            src: require('../../assets/image/home/banner2.png')
+          },
+          {
+            src: require('../../assets/image/home/banner.png')
+          },
+          {
+            src: require('../../assets/image/product/banner-皇家护卫@3x.png')
+          }
+        ],
+        swiperOption: {
+          notNextTick: true,
+          pagination: '.swiper-pagination',
+          slidesPerView: 'auto',
+          centeredSlides: true,
+          paginationClickable: true,
+          spaceBetween: 30,
+          // preventClicks:false, 
+          onSlideChangeEnd: swiper => {
+            //这个位置放swiper的回调方法    
+            this.index = swiper.realIndex;
+          }
+        }
+      }
+
+    },
+
+
+    created() {
+      if (!Cookies.get('sessionId')) {
+        const redirect =
+          `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
+        window.location.href = redirect
+      }
+    },
+    methods: {
+      goproduct: function (index) {
+        if (index == 0) {
+          this.$router.push('/cpa')
+        }
+        if (index == 4) {
+          this.$router.push('/protect')
+        }
+        if (index == 3) {
+          this.$router.push('/cpb')
+        }
+        if (index == 2) {
+          this.$router.push('/bodyguard')
+        }
+        if (index == 1) {
+          this.$router.push('/knight')
+        }
+
+        console.log(index)
+      },
+      mine:function(){
+         Check('/mine').then(res => {
+            this.$router.push('/mine')
+         })
+      }
+
     }
   }
 
@@ -134,16 +155,16 @@ computed:{
 
 
 <style scoped>
-
   .banner {
-    width:100%;
-    height: 370px; 
-  }
-  .banner img{
     width: 100%;
     height: 370px;
   }
-  
+
+  .banner img {
+    width: 100%;
+    height: 370px;
+  }
+
   .mui-bars {
     display: flex;
     justify-content: space-around;
@@ -154,11 +175,11 @@ computed:{
     height: 48px;
     width: 100%;
     background: #fff;
-   border-top: 1px solid #ccc; 
+    border-top: 1px solid #ccc;
     box-shadow: 0px 0px 15px -2px #bbb;
     overflow: hidden;
     z-index: 10;
-  } 
+  }
 
   .mui-bars span {
     color: #4b4b4b;
@@ -170,18 +191,19 @@ computed:{
   }
 
   /* 轮播图区域 */
-   
-.swiper-wrapper {
-  margin-top: 10px;
-  height: 230px;
-}
 
-.lb_t img {
-  width: 100%;
-  height: 100%;
-}
+  .swiper-wrapper {
+    margin-top: 10px;
+    height: 230px;
+  }
 
-/* 轮播结束 */
+  .lb_t img {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* 轮播结束 */
+
   .title {
     width: 200px;
     height: 28px;
@@ -204,31 +226,34 @@ computed:{
     position: relative;
     display: block;
   }
-.lb_t{
-  margin-top:10px;
-}
-.lb_cp img{
-  width: 335px;
-  height: 170px;
-  margin-left: 15px;
-}
 
-  .title_1{
+  .lb_t {
+    margin-top: 10px;
+  }
+
+  .lb_cp img {
+    width: 335px;
+    height: 170px;
+    margin-left: 15px;
+  }
+
+  .title_1 {
     display: block;
     height: 100px;
     margin-left: 20px;
   }
-  
-  .title_1 p{
+
+  .title_1 p {
     font-weight: bolder;
     color: #000;
     font-size: 14px;
   }
-  .title_1 .two{
-    margin-top:-10px;
+
+  .title_1 .two {
+    margin-top: -10px;
     font-weight: normal;
-    color: #4b4b4b;;
+    color: #4b4b4b;
+    ;
   }
-   
 
 </style>

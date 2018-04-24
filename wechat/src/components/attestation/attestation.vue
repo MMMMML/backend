@@ -15,7 +15,7 @@
       </div>
       <div class="man">
         <p style="width:25%;padding-left:5%">证件类型</p>
-        <p id="trigger" style="width:62%;padding-left: 1rem;">{{user.idType && user.idType}}</p>
+        <p id="trigger" style="width:62%;padding-left: 1rem;">{{user.idType && user.idType | format}}</p>
         <div>
           <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
@@ -124,6 +124,7 @@
 
 </style>
 <script>
+  import Storage from 'good-storage'
   import MobileSelect from 'mobile-select'
   export default {
     data() {
@@ -166,7 +167,10 @@
           this.user.idType = data[0].id; //返回选中的json数据
           console.log(this.user.idType)
         }
-      });
+      })
+      let redirect = this.$route.query.redirect
+      this.url = redirect || '/'
+      console.log(this.url)
     },
     methods: {
       _isChinaName(name) {
@@ -182,10 +186,6 @@
         this.$http.get(url).then(data => {
           console.log(data)
           this.user = data.data.payload
-          if (this.user.idType == 0) this.user.idType = '身份证'
-          if (this.user.idType == 1) this.user.idType = '台胞证'
-          if (this.user.idType == 2) this.user.idType = '回乡证'
-          if (this.user.idType == 3) this.user.idType = '护照'
         })
       },
       gaincode: function () {
@@ -224,7 +224,6 @@
         // if (!isChinaName) return
         var url = 'wechat/auth/verifyUser'
         var params = {
-          id: window.sessionStorage.getItem('id'),
           realName: this.user.realName,
           idType: this.user.idType,
           idNumber: this.user.idNumber,
@@ -233,10 +232,32 @@
         }
         this.$http.post(url, params).then(data => {
           console.log(data)
+          if(data.data.code==500){
+            alert(data.data.message)
+          }
           if (data.data.code == 200) {
-            this.$router.go(-1)
+            let obj = JSON.parse(Storage.get('userInfo'))
+            obj = {
+              ...obj,
+              verified: true
+            }
+          // const userinfo = res.data.payload
+          Storage.set('userInfo', JSON.stringify(obj))
+            // this.$router.replace(this.url)
+            console.log('~~~~~')
+            console.log(this.url)
+            console.log('~~~~~')
+            
+            // window.location.href = this.url
+            this.$router.push(this.url)
           }
         })
+      }
+    },
+     filters: {
+      format(val) {
+        let enums = ['身份证', '台胞证', '回乡证', '护照']
+        return enums[val] || val
       }
     }
   }

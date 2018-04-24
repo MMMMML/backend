@@ -68,12 +68,12 @@
       </div>
       </router-link>
       <!-- 邮箱 -->
-      <div class="message">
+      <!-- <div class="message">
           <div class="msg">
               <p style="width:20%;margin-left: 12%;">邮箱</p>
               <p style="width:60%">未绑定</p>
           </div>
-      </div>
+      </div> -->
       </div>
       
   </div>

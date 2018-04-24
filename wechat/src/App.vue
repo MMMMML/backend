@@ -23,7 +23,7 @@ import Storage from 'good-storage'
     },
     methods: {
       callphone: function () {
-        window.location.href = "tel:10086";
+        window.location.href = "tel:4001119299";
       },
       _getUserInfo() {
         this.$http.get("http://aj.kingwingaviation.com/alliance-java/wechat/auth/getCurrentUser").then(res => {

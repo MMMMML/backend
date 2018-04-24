@@ -447,18 +447,7 @@
       showToggle6: function () {
         this.isShow6 = !this.isShow6
       },
-      // openPicker() {
-      //   this.$refs.picker.open();
-      // },
-      // twoPicker() {
-      //   this.$refs.pickers.open();
-      // },
-
-      // handleConfirm: function (v) {
-      //   this.$refs.picker.close();
-      //   this.pickerStart = this.pickerVisible = this.formatDate(v)
-      //   console.log(this.pickerVisible)
-      // },
+     
       confirm: function (c) {
         // this.$refs.pickers.close();
         // this.pickerEnd = this.Visible = this.formatDate(c)

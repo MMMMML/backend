@@ -325,6 +325,7 @@
   import {
     differenceInDays
   } from 'date-fns'
+  import Check from '@/util/checkIDAuth'
   export default {
     data() {
       return {
@@ -415,18 +416,22 @@
         }
       },
       buy: function () {
-        this.priceinfo = {}
-        this.priceinfo.pickerVisible = this.pickerVisible
-        this.priceinfo.pickerEnd = this.pickerEnd
-        this.priceinfo.count = this.count
-        this.priceinfo.price = this.price
-        if(this.pickerEnd=='请选择失效日期'||this.pickerStart=='请选择生效日期'){
-          alert('请选择生效失效日期')
-          return  
-        }else{
-          window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))
-          this.$router.push('/guarantee')
-        }
+        var url = location.hash.slice(1)
+        Check(url).then(res => {
+          this.priceinfo = {}
+          this.priceinfo.pickerVisible = this.pickerVisible
+          this.priceinfo.pickerEnd = this.pickerEnd
+          this.priceinfo.count = this.count
+          this.priceinfo.price = this.price
+          if (this.pickerEnd == '请选择失效日期' || this.pickerStart == '请选择生效日期') {
+            alert('请选择生效失效日期')
+            return
+          } else {
+            window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))
+            this.$router.push('/guarantee')
+          }
+        })
+
       }
     },
     watch: {
