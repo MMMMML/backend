@@ -31,7 +31,7 @@
       <div class="man">
         <p class="human-name">手机号码</p>
         <input type="text" class="human-input" v-model="user.mobile" placeholder="请输入手机号码">
-        <div class="warning" v-show="isPhoneNo">
+        <div class="warning" v-show="isIdNumber">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>手机格式错误，请重新填写</span>
         </div>

@@ -3,8 +3,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 导入自定义组件
 import home from '../components/home/home.vue'
-import product from '../components/home/product.vue'
-import id from '../components/home/id.vue'
 import pay from '../components/home/pay.vue'
 import cpb from '../components/home/cpb.vue'
 import cpa from '../components/home/cpa.vue'
@@ -47,8 +45,6 @@ const router = new VueRouter({
     { path: '/', redirect: '/home' },
     { path: '/home', component: home, name: 'jack' },
     { path: '/mine', component: mine },
-    { path: '/product', components: product },
-    { path: '/id', components: id },
     { path: '/personal', component: personal },
     { path: '/commonpeople', component: commonpeople },
     { path: '/contact', component: contact },

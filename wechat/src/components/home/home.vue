@@ -40,7 +40,7 @@
         <div >
           <img src="../../assets/image/home/button-help.png" alt="">
         </div>
-        <span class="mui-tab-label"> <a href="tel:10086" >一键呼救</a></span>
+        <span class="mui-tab-label"> <a href="tel: 4001119299" style="color:#4B4B4B;">一键呼救</a></span>
       </div>
 
       <router-link class="mui-tab-item" to='/mine'>
@@ -98,13 +98,13 @@ computed:{
 
       },
     
-  //  上线的时候解开
-    // created() {
-    //   if (!Cookies.get('sessionId')) {
-    //       const redirect = `wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
-    //       window.location.href = redirect
-    //   }
-    // },
+    created() {
+      if (!Cookies.get('sessionId')) {
+          const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
+          window.location.href = redirect
+      }
+    },
+
     methods:{
         goproduct:function(index){
            if( index==0){
