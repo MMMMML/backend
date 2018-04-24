@@ -98,7 +98,7 @@ computed:{
 
       },
     
-   
+  //  上线的时候解开
     // created() {
     //   if (!Cookies.get('sessionId')) {
     //       const redirect = `wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`

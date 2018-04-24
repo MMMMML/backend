@@ -29,6 +29,7 @@ import Storage from 'good-storage'
         this.$http.get("http://aj.kingwingaviation.com/alliance-java/wechat/auth/getCurrentUser").then(res => {
           const userinfo = res.data.payload
           Storage.set('userInfo', JSON.stringify(userinfo))
+          
         })
       }
     },

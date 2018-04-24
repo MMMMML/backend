@@ -67,23 +67,50 @@
     <div class="notice">
         <div class="notice-part" @click="showpage1">
             <p>权益人须知</p>
-            <img src="../../assets/image/mine/Chevron@3x.png" alt="" @click="showpage1" >
+            <img src="../../assets/image/mine/Chevron@3x.png" alt="" >
         </div>
               <!-- 隐藏的文本内容 -->
-                <div v-show="show1">
-                      我隐藏起来了
-
+                <div v-show="show1" style="padding:0 20px;border-bottom:1px dashed #ccc">
+                    <p class="title-icon">权益人限定</p>
+                    <p>中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
+                    <p class="title-icon">权益车辆要求</p>
+                    <p>9座（含）以下、重量不超过3.5吨、长度不超过6米的非营运性四轮机动车辆</p>
+                    <p class="title-icon">权益有效期</p>
+                    <p>有效期为所选起始日起的连续7天</p>
+                    <p class="title-icon"> 价格说明</p>
+                    <p>【基础99元】包含一位权益人、一辆权益车辆有效期内的直升机院前急救、道路救援和代步车服务费用</p>
+                    <p>【附加35元】每增加1位权益人需额外支付7天直升机院前急救服务费用</p>
+                    <p>【每次呼叫1元】实际发生直升机院前急救时，权益人在有效期内每呼叫一次需支付1元呼叫调度费</p>
+                    <p class="title-icon">服务热线</p>
+                    <p> 400-111-9299</p>
                 </div>
 
 
-         <div class="notice-part">
+         <div class="notice-part" @click="showpage2"> 
             <p>直升机救援服务</p>
             <img src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
-         <div class="notice-part">
+          <div v-show='show2'>
+                <img src="../../assets/image/product/biao1.png" alt="" style="width:100px;height:100px;">
+                <img src="../../assets/image/product/biao2.png" alt="" style="width:100px;height:100px;">
+                <img src="../../assets/image/product/biao3.png" alt=""  style="width:100px;height:100px;">
+          </div>
+
+         <div class="notice-part" @click="showpage3">
             <p>地面120服务</p>
             <img src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
+        <div v-show="show3">
+              <p class="title-icon">【权益说明】</p>
+              <p class="title-icon">空降联盟为权益人提供地面救护车协调服务</p>
+              <p class="title-icon">【服务内容】</p>
+              <p class="title-icon">1、在权益人符合院前救援服务范围的情况下，如因客观原因不适航而无法出动直升机，或必须联合120急救中心开展空地联运时，空降联盟将提供地面救护车协调服务，并承担相应的救护车费用
+2、在权益人不符合院前救援服务范围的情况下，空降联盟将提供地面救护车协调服务，但由此产生的救援费用由权益人自行承担
+</p>
+        </div>
+
+
+
          <div class="notice-part">
             <p>道路救援服务</p>
             <img src="../../assets/image/mine/Chevron@3x.png" alt="">
@@ -229,6 +256,13 @@
                 padding: 40px;
                 margin-top: 10px;
         }
+    .title-icon {
+      font-size: 14px;
+      color: #4B4B4B;
+      font-weight: 700;
+      margin-bottom: 0;
+      margin-top: 10px;
+       }
     }
 
     .payment{
@@ -256,6 +290,8 @@ import Check from '@/util/checkIDAuth'
     data() {
       return {
         show1:false,
+        show2:false,
+        show3:false,
         pickerVisible: '',
         Visible: '',
         count: 0,
@@ -291,8 +327,13 @@ import Check from '@/util/checkIDAuth'
             }
         },
       showpage1:function(){
-
-          this.show1=true;
+          this.show1 = !this.show1;
+      },
+      showpage2:function(){
+          this.show2=!this.show2;
+      },
+      showpage3:function(){
+          this.show3=!this.show3;
       },
       openPicker:function() {
         this.$refs.picker.open();
