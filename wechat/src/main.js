@@ -29,6 +29,7 @@ Vue.use(VueAwesomeSwiper)
 Vue.component(DatetimePicker.name, DatetimePicker)
 
 axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+// axios.defaults.baseURL = '172.28.2.59:8101/'
 axios.interceptors.request.use(
   config => {
     config.headers = {

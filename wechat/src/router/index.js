@@ -10,6 +10,7 @@ import cpb from '../components/home/cpb.vue'
 import cpa from '../components/home/cpa.vue'
 import payd from '../components/home/payd.vue'
 import knight from '../components/home/knight.vue'
+import payC2 from '../components/home/payC2.vue'
 // 测试实名登录页
 import Auth from '@/components/auth'
 // 马哥的
@@ -60,24 +61,25 @@ const router = new VueRouter({
     { path: '/payE', component: payE },
     { path: '/knight', component: knight },
     { path: '/payC', component: payC },
+    { path: '/payC2', component: payC2 },
     { path: '/payd', component: payd },
     { path: '/familyhistory', component: familyhistory },
     { path: '/editfamilyhistory', component: editfamilyhistory },
     { path: '/otherinfo', component: otherinfo },
     { path: '/editotherinfo', component: editotherinfo },
     { path: '/editmobile', component: editmobile },
-    { path: '/editcommonpeople/:id',name:'editcommonpeople', component: editcommonpeople },
-    { path: '/attestation',name:'attestation', component: attestation },
-    { path: '/bodyguard',name:'bodyguard', component: bodyguard },
-    { path: '/guarantee',name:'guarantee', component: guarantee },
-    { path: '/protect',name:'protect', component: protect },
-    { path: '/protectdetail',name:'protectdetail', component: protectdetail },
-    { path: '/myindent',name:'myindent', component: myindent },
-    { path: '/myindentinfo',name:'myindentinfo', component: myindentinfo },
-    { path: '/member',name:'member', component: member },
-    { path: '/memcar',name:'memcar', component: memcar },
-    { path: '/bindcar',name:'bindcar', component: bindcar },
-    { path: '/bindcardetail',name:'bindcardetail', component: bindcardetail },
+    { path: '/editcommonpeople/:id', name: 'editcommonpeople', component: editcommonpeople },
+    { path: '/attestation', name: 'attestation', component: attestation },
+    { path: '/bodyguard', name: 'bodyguard', component: bodyguard },
+    { path: '/guarantee', name: 'guarantee', component: guarantee },
+    { path: '/protect', name: 'protect', component: protect },
+    { path: '/protectdetail', name: 'protectdetail', component: protectdetail },
+    { path: '/myindent', name: 'myindent', component: myindent },
+    { path: '/myindentinfo', name: 'myindentinfo', component: myindentinfo },
+    { path: '/member', name: 'member', component: member },
+    { path: '/memcar', name: 'memcar', component: memcar },
+    { path: '/bindcar', name: 'bindcar', component: bindcar },
+    { path: '/bindcardetail', name: 'bindcardetail', component: bindcardetail },
     { path: '/editcommonpeople/:id', name: 'editcommonpeople', component: editcommonpeople },
     { path: '/attestation', name: 'attestation', component: attestation },
     { path: '/bodyguard', name: 'bodyguard', component: bodyguard },

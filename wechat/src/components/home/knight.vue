@@ -35,7 +35,7 @@
                 <div class="more">
                     <p>增值权益</p>
                         <ul class="mo">
-                               <li> <div v-bind:class="{bgc: active}" v-on:click="change"></div></li>
+                               <li><input type='checkbox' v-model="car"></li>
                                <li>  ￥69</li>       
                         </ul>
                         
@@ -96,19 +96,21 @@ import Check from '@/util/checkIDAuth'
     export default{
         data(){
             return{
-                active:false
+                active:false,
+                car:''
             }
         },
 
     methods:{
-        change:function () { 
-            this.active = true
-         },
         buy:function(){
             Check().then(res => {
                 console.log('success');
-
-                this.$router.push(`/payC?packageId=C`)
+                if(this.car==true){
+                     this.$router.push(`/payC?packageId=C`)
+                }else{
+                    this.$router.push('/payC2?packageId=C')
+                }
+               
             })
         }
     }

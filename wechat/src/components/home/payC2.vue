@@ -1,7 +1,6 @@
 <template>
   <div>
-      
-<div class="qyr" >
+      <div class="qyr" >
                         <!-- 填写页面 -->
         <div class="tianx" v-show="!ishow">
                 <p>权益人</p>
@@ -56,99 +55,20 @@
 
      </div>
 </div>
-
-      
-<div class="qyc" >
-                        <!-- 填写页面 -->
-        <div class="tianx" v-show="!isshow">
-                <p>权益车</p>
-                <span>未填写</span>
-                <button  @click="tx">填写</button>
-        </div>
-        <!-- 车 -->
-<div v-show="isshow" >        
-        <div class="must">
-        <p style="padding:10px 20px 0;margin-left:20px">权益车辆</p> 
-    <div class="man">
-        <p class="human-name">车牌号码</p>
-        <input type="text" class="human-input"  placeholder="请输入车牌号" v-model="plateNumber">
-        <div style="display:flex;align-items: center;" >
-          <div class="btn car"  >选择车辆</div>
-        </div>
-        <div class="warning" v-show='isplateNumber'>
-          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
-          <span>车牌号格式错误，请重新填写</span>
-        </div>
-    </div>
-<!-- 证件类型  -->
-      <div class="man">
-        <p style="width:30%;padding-left:5%">车辆类型</p>
-        <p  style="width:62%;padding-left: 1rem;" class="carid"  v-on:click='car'></p>
-        <div>
-          <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
-        </div>
-       </div>
-
-      </div> 
-<!-- 证件号码 -->
-     <div class="man">
-        <p class="human-name">所有人</p>
-        <input type="text"  class="human-input" v-model="owner">
-        <div class="warning" v-show="isowner">
-          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
-          <span>所有人不能为空</span>
-        </div>
-       </div>
-
-             <div class="man">
-        <p class="human-name">使用性质</p>
-                <p>非运营车辆</p>
-        <div class="warning" v-show="isusingNature">
-          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
-          <span>使用性质不能为空</span>
-        </div>
-       </div>
-
-       <!-- 手机号码 -->
-       <div class="man">
-        <p class="human-name1">车辆识别代号</p>
-        <input type="text" class="human-input"  placeholder="请输入代号" v-model='vin'>
-        <div class="warning" v-show='isvin'>
-          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
-          <span>车辆识别代号错误</span>
-        </div>
-       </div>
-
-
-
-
-     </div>
-</div>
-
-
-
-
-
-
-
-
-            <!-- 付款 -->
+        <!-- 付款 -->
             <div class="payment">
                     <p>合计：￥8</p>
                     <p class="payment-buy" @click="payfor">立即购买</p>
             </div>
   </div>
-
-
 </template>
 
 <script>
 import MobileSelect from 'mobile-select'
-
-  export default{
-      data(){
-          return{
-                isshow:false,
+export default{
+    data(){
+        return{
+             isshow:false,
                 ishow:false,
                 isname:false,
                 isnumber:false,
@@ -164,11 +84,11 @@ import MobileSelect from 'mobile-select'
                 owner:'',
                 vin:'',
                 packageId: this.$route.query.packageId,
-          }
-      },
-      mounted(){
-
-// 进来加载数据
+        }
+    },
+  
+  mounted(){
+      // 进来加载数据
 this.$http.get('wechat/commonContact/list').then(res=>{
     console.log(res.data.payload);
     console.log('~~~~');
@@ -205,45 +125,7 @@ this.$http.get('wechat/commonContact/list').then(res=>{
         console.log(this.mobileSelect2)
 
 })
-// 进来渲染车子的
-    this.$http.get('wechat/commonVehicle/list').then(res=>{
-        let arr = res.data.payload
-        let newArr = []
-        arr.forEach(item => {
-            newArr.push({
-                id: item.id,
-                value: item.plateNumber,
-                 owner: item.owner,
-                vehicletype:item.vehicletype,
-                vin: item.vin
-            })
-        })
-        let obj = {
-            data: newArr
-        }
-         this.mobileSelect4 = new MobileSelect({
-          trigger: '.car' ,
-          title: '选择权益车',
-           wheels: [obj],
-          triggerDisplayData: false,
-          callback: (indexArr, data) => {
-            console.log(data);
-            //    console.log(data[0].value);
-            this.owner=data[0].owner;
-            this.plateNumber=data[0].value;
-            this.vehicletype=data[0].vehicletype;
-            this.vin=data[0].vin;
-        //    console.log(this.realName);
-          }
-        });
-        
-        // console.log(this.mobileSelect2)
-
-})
-
-
-
-
+  
         this.mobileSelect1 = new MobileSelect({
           trigger: '.choseid' ,
           title: '选择证件类型',
@@ -273,38 +155,6 @@ this.$http.get('wechat/commonContact/list').then(res=>{
         });
        
        
-        this.mobileSelect3 = new MobileSelect({
-          trigger: '.carid' ,
-          title: '选择车辆类型',
-          wheels: [{
-            data: [{
-                id: '0',
-                value: '轿车'
-              },
-              {
-                id: '4',
-                value: '微型客车'
-              },
-              {
-                id: '3',
-                value: '越野车'
-              },
-              {
-                id: '2',
-                value: '商务车'
-              },
-              {
-                id: '1',
-                value: '皮卡'
-              }
-            ]
-          }],
-          callback: (indexArr, data) => {
-            
-            
-          }
-        });
-
 //微信接口
 this.$http.post(`http://aj.kingwingaviation.com/alliance-java/wechat/getJSApiTicket?url=${encodeURIComponent(location.href.split('#')[0])}`).then(res => {
             let js_sdk = res.data.payload
@@ -323,16 +173,24 @@ this.$http.post(`http://aj.kingwingaviation.com/alliance-java/wechat/getJSApiTic
             console.log('jssdk ok!')
         })
 
+  },
 
+    methods:{
+         tx:function(){
+            this.isshow=true
+        },
+        txr:function(){
+            this.ishow=true
+        },
+        chose:function(){
+          this.mobileSelect1.show();
       },
-methods:{
-        // 选择权益人的按钮
-        people:function(){
+       people:function(){
             console.log(1)
            this.mobileSelect2.show();
         },
         payfor:function(){
-            // 登录验证功能
+               // 登录验证功能
             if(this.realName==''){
                 this.isname=true
             }
@@ -406,34 +264,17 @@ methods:{
            
 
 
-        },
-        tx:function(){
-            this.isshow=true
-        },
-        txr:function(){
-            this.ishow=true
-        },
-      chose:function(){
-          this.mobileSelect1.show();
-      },
-      car:function(){
-          this.mobileSelect3.show();
-      },
+        }
+    }
 
 
 
 }
 
-  }  
-
+    
 </script>
 
-
-
 <style scoped>
-.qyc{
-    background-color: #fff;
-}
 .qyr{
     background-color: #fff;
 }
@@ -569,5 +410,5 @@ methods:{
     background: red;
     text-align: center;
   }
-</style>
 
+</style>
