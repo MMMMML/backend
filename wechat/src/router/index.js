@@ -38,6 +38,9 @@ import bindcardetail from '../components/mine/bindcardetail.vue'
 import payC from '../components/home/payC.vue'
 import payE from '../components/home/payE.vue'
 
+// SpawN
+const Product = () => import('@/components/product')
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -80,8 +83,16 @@ const router = new VueRouter({
     { path: '/attestation', name: 'attestation', component: attestation },
     { path: '/bodyguard', name: 'bodyguard', component: bodyguard },
     { path: '/guarantee', name: 'guarantee', component: guarantee },
-    { path: '/protect', name: 'protect', component: protect }
-  ]
+    { path: '/protect', name: 'protect', component: protect },
+    { path: '/product', component: Product }
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })
 // 导出路由对象
 export default router

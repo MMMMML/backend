@@ -1,259 +1,212 @@
 <template>
-  <div class="home">
-    <div class="banner">
-      <img src="../../assets/image/home/banner3.jpg" alt="">
-    </div>
-
-    <div class="title">
-      <i>空中服务</i>
-      <span>
-        <img src="../../assets/image/home/icon-logo-color.png" alt="">
-      </span>
-    </div>
-
-    <!-- 轮播图 -->
-    <div class="lb_t">
-      <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(banner,index) in banners" :key="index" @click.native='goproduct(index)'>
-          <img v-if="banner.src" :src="banner.src">
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
-    </div>
-
-
-    <!-- 文字信息 -->
-    <div class="title_1">
-      <p>直升机院前急救+医疗转运9折</p>
-      <p class="two">都说我太过严肃，我只在意你是否需要保护</p>
-    </div>
-
-    <div class="mui-bars">
-
-      <router-link class="mui-tab-item" to='/home'>
-        <div>
-          <img src="../../assets/image/home/button-homepage.png" alt="">
+  <div class="container">
+    <div class="mainlogo" @click="goProduct('/product')"></div>
+    <div class="swiper_list">
+      <div class="title">
+        <div class="content">
+          <span>空降服务</span><span><img src="../../assets/image/home/icon-logo-color.png"></span>
         </div>
-        <span class="mui-tab-label">首页</span>
+      </div>
+      <div class="swiper_wrapper">
+        <swiper :options="swiperOption" :not-next-tick="notNextTick" ref="mySwiper">
+          <swiper-slide v-for='(item, index) of banners' :key='index' @click.native='goProduct(item.path)'>
+            <img :src="item.src">
+          </swiper-slide>
+        </swiper>
+        <div class="content_wrapper">
+          <h3 class='small_title'>{{ banners[index].title }}</h3>
+          <p>{{ banners[index].content }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="tab_box vux-1px-t">
+      <router-link tag='div' class="tab-item" to='/home'>
+        <img src="../../assets/image/home/button-homepage.png" alt="">
+        <span class="tab-label">首页</span>
       </router-link>
-      <div class="mui-tab-item">
-        <div>
-          <img src="../../assets/image/home/button-help.png" alt="">
-        </div>
-        <span class="mui-tab-label">
-          <a href="tel:4001119299">一键呼救</a>
-        </span>
+      <div class="tab-item">
+        <img src="../../assets/image/home/button-help.png" alt="">
+        <span class="tab-label"> <a href="tel:10086" style='color: #4B4B4B;'>一键呼救</a></span>
       </div>
-
-       <div class="mui-tab-item" @click="mine()">
-        <div>
-          <img src="../../assets/image/home/button-me.png" alt="">
-        </div>
-        <span class="mui-tab-label">我的</span>
-      </div>
+      <router-link tag='div' class="tab-item" to='/mine'>
+        <img src="../../assets/image/home/button-me.png" alt="">
+        <span class="tab-label">我的</span>
+      </router-link>
     </div>
-
   </div>
-
 </template>
 
-
 <script>
-  import Cookies from 'js-cookie'
-  import Check from '@/util/checkIDAuth'
-  import {
+import Cookies from 'js-cookie'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+let index = 1
+export default {
+  data() {
+    return {
+      banners:[
+        {
+          src: require('../../assets/image/home/banner4.png'),
+          title: '世界真大，任性出发',
+          content: '自驾7日直升机院前救援+地面120协调+道路救援+出险代步车服务',
+          path: '/product'
+        }, {
+          src: require('../../assets/image/home/banner2.png'),
+          title: '都说我太过严肃，我只在意你是否需要保护',
+          content: '单人短期空中直升机院前救援+地面120协调服务',
+          path: '/bodyguard'
+        }, {
+          src: require('../../assets/image/home/banner1.png'),
+          title: '命运可以改变，我永远在你身边',
+          content: '单人全年空中直升机医疗救援+地面120协调服务',
+          path: '/knight'
+        }, {
+          src: require('../../assets/image/home/banner.png'),
+          title: '每天都要保护你，我比时间更爱你',
+          content: '双人全年空中直升机医疗救援+地面120协调+道路救援服务',
+          path: '/cpb'
+        }, {
+          src: require('../../assets/image/product/banner-皇家护卫@3x.png'),
+          title: '守护你们，是我一生最重要的决定',
+          content: '家庭全年直升机医疗救援+地面120协调+道路救援+出险代步车服务',
+          path: '/protect'
+        }
+      ],
+      index: 0,
+      notNextTick: true,
+      swiperOption: {
+        pagination: '.swiper-pagination',
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        spaceBetween: 10
+      }
+    }
+  },
+  created() {
+    // if (!Cookies.get('sessionId')) {
+    //   const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
+    //   window.location.href = redirect
+    // }
+  },
+  mounted() {
+    let that = this
+    this.swiper.on('slideChangeTransitionEnd', () => {
+      that.index = this.swiper.activeIndex
+    })
+  },
+  methods:{
+    goProduct(path) {
+      this.$router.push(path)
+    }
+  },
+  components: {
     swiper,
     swiperSlide
-  } from 'vue-awesome-swiper'
-  export default {
-    components: {
-      swiper,
-      swiperSlide
-    },
-
-    computed: {
-      swiper() {
-        return this.$refs.mySwiper.swiper
-      }
-    },
-
-    data() {
-
-      return {
-        banners: [{
-            src: require('../../assets/image/home/banner4.png')
-          },
-          {
-            src: require('../../assets/image/home/banner1.png')
-          },
-          {
-            src: require('../../assets/image/home/banner2.png')
-          },
-          {
-            src: require('../../assets/image/home/banner.png')
-          },
-          {
-            src: require('../../assets/image/product/banner-皇家护卫@3x.png')
-          }
-        ],
-        swiperOption: {
-          notNextTick: true,
-          pagination: '.swiper-pagination',
-          slidesPerView: 'auto',
-          centeredSlides: true,
-          paginationClickable: true,
-          spaceBetween: 30,
-          // preventClicks:false, 
-          onSlideChangeEnd: swiper => {
-            //这个位置放swiper的回调方法    
-            this.index = swiper.realIndex;
-          }
-        }
-      }
-
-    },
-
-
-    created() {
-      if (!Cookies.get('sessionId')) {
-        const redirect =
-          `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
-        window.location.href = redirect
-      }
-    },
-    methods: {
-      goproduct: function (index) {
-        if (index == 0) {
-          this.$router.push('/cpa')
-        }
-        if (index == 4) {
-          this.$router.push('/protect')
-        }
-        if (index == 3) {
-          this.$router.push('/cpb')
-        }
-        if (index == 2) {
-          this.$router.push('/bodyguard')
-        }
-        if (index == 1) {
-          this.$router.push('/knight')
-        }
-
-        console.log(index)
-      },
-      mine:function(){
-         Check('/mine').then(res => {
-            this.$router.push('/mine')
-         })
-      }
-
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
     }
   }
-
+}
 </script>
-
-
-
-<style scoped>
-  .banner {
-    width: 100%;
-    height: 370px;
+<style scoped lang='less'>
+@import '~vux/src/styles/1px.less';
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  background: #fff;
+  padding-bottom: 45px;
+  color: #4B4B4B;
+  .mainlogo {
+    width: 100vw;
+    height: 112vw;
+    background: url('../../assets/image/home/banner3.jpg') 0 0 ~'/' 100% 100%;
   }
-
-  .banner img {
-    width: 100%;
-    height: 370px;
+  .swiper_list {
+    height: 328px;
+    .title {
+      height: 60px;
+      padding: 20px 20px 12px 20px;
+      .content {
+        height: 28px;
+        display: flex;
+        align-items: center;
+        span:first-child {
+          line-height: 28px;
+          margin-right: 10px;
+        }
+        span:last-child {
+          height: 24px;
+          width: 24px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    .swiper_wrapper {
+      width: 100%;
+      .swiper-container {
+        .swiper-slide {
+          width: 89.333vw;
+          height: 169px;
+          border-radius: 5px;
+          overflow: hidden;
+          img{
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .content_wrapper {
+        padding: 10px 20px;
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          margin-top: 10px;
+          font-size: 12px;
+        }
+      }
+    }
   }
-
-  .mui-bars {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
+  .tab_box {
     position: fixed;
-    left: 0;
     bottom: 0;
-    height: 48px;
+    left: 0;
+    // height: 45px;
     width: 100%;
+    display: flex;
+    align-items: center;
     background: #fff;
-    border-top: 1px solid #ccc;
-    box-shadow: 0px 0px 15px -2px #bbb;
-    overflow: hidden;
-    z-index: 10;
+    z-index: 9;
+    .tab-item {
+      flex: 1;
+      text-align: center;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      padding: 4px 0;
+      img {
+        width: 17px;
+        height: 23px;
+        margin-bottom: 6px;
+      }
+      &:nth-of-type(1) {
+        img {
+          width: 24px;
+          height: 22px;
+        }
+      }
+      &:nth-of-type(3) {
+        img {
+          width: 14px;
+          height: 22px;
+        }
+      }
+    }
   }
-
-  .mui-bars span {
-    color: #4b4b4b;
-    font-size: 0.6rem;
-  }
-
-  .mui-tab-item {
-    padding-top: 0.1rem;
-  }
-
-  /* 轮播图区域 */
-
-  .swiper-wrapper {
-    margin-top: 10px;
-    height: 230px;
-  }
-
-  .lb_t img {
-    width: 100%;
-    height: 100%;
-  }
-
-  /* 轮播结束 */
-
-  .title {
-    width: 200px;
-    height: 28px;
-    margin-left: 20px;
-    margin-top: 10px;
-  }
-
-  .title i {
-    position: relative;
-    display: block;
-    margin-top: 0.3rem;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 1rem;
-  }
-
-  .title span {
-    margin-left: 4.5rem;
-    margin-top: -24px;
-    position: relative;
-    display: block;
-  }
-
-  .lb_t {
-    margin-top: 10px;
-  }
-
-  .lb_cp img {
-    width: 335px;
-    height: 170px;
-    margin-left: 15px;
-  }
-
-  .title_1 {
-    display: block;
-    height: 100px;
-    margin-left: 20px;
-  }
-
-  .title_1 p {
-    font-weight: bolder;
-    color: #000;
-    font-size: 14px;
-  }
-
-  .title_1 .two {
-    margin-top: -10px;
-    font-weight: normal;
-    color: #4b4b4b;
-    ;
-  }
-
+}
 </style>

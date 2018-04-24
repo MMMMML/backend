@@ -15,7 +15,6 @@ import Storage from 'good-storage'
   export default {
     data() {
       return {
-
       }
     },
     created() {
@@ -29,7 +28,6 @@ import Storage from 'good-storage'
         this.$http.get("http://aj.kingwingaviation.com/alliance-java/wechat/auth/getCurrentUser").then(res => {
           const userinfo = res.data.payload
           Storage.set('userInfo', JSON.stringify(userinfo))
-          
         })
       }
     },
@@ -40,7 +38,8 @@ import Storage from 'good-storage'
 
 </script>
 
-<style>
+<style lang='less' scoped>
+  @import '~vux/src/styles/1px.less';
   .mui-bar-tab div img {
     border: 1px dashed #939393;
     margin-top: 0.2rem;
