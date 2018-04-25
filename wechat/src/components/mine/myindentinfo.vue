@@ -24,11 +24,11 @@
     <div class="equity">
       <p style="text-align:left;padding:1rem 0 1rem 0" class="weight">享有权益</p>
       <div class="equity-list">
-        <div v-show="benefitPackageid=='B'&&benefitPackageid=='E'">
+        <div v-show="benefitPackageid=='B'||benefitPackageid=='E'">
           <img src="../../assets/image/product/icon-helicopter.png" alt="">
           <p>直升机院前急救</p>
         </div>
-        <div v-show="benefitPackageid=='B'&&benefitPackageid=='E'">
+        <div v-show="benefitPackageid=='B'||benefitPackageid=='E'">
           <img  src="../../assets/image/product/icon-call.png" alt="">
           <p>120协调</p>
         </div>

@@ -4,7 +4,7 @@
       <div class="man">
         <p class="human-name">车牌号码</p>
         <input type="text" class="inputs-name" style="font-size:14px" v-model="list.plateNumber" placeholder="请输入车牌号码">
-        <div style="height:30px;margin-top: 1vh">
+        <div style="height:30px;margin-top: 2vh">
             <button class="btn" >选择车辆</button>
         </div>
       </div>
@@ -23,7 +23,7 @@
       </div>
       <div class="man">
         <p class="human-name">使用性质</p>
-        <input type="text" readonly class="inputs-name" style="font-size:14px" v-model="text" placeholder="请输入所有人">
+        <input type="text" readonly class="inputs-name" style="font-size:14px" v-model="text">
       </div>
       <div class="man" style="border-bottom:none">
         <p class="human-name">车辆识别代号</p>
@@ -52,8 +52,7 @@
   .inputs-name {
     width: 45%;
     border: none;
-    height: 47px;
-    line-height: 50px;
+    height: 59px;
     margin-bottom: 0;
   }
 
@@ -78,8 +77,8 @@
 
   .man {
     display: flex;
-    height: 48px;
-    line-height: 48px;
+    height: 60px;
+    line-height: 60px;
     border-bottom: 1px solid #eee;
   }
 
@@ -95,7 +94,7 @@
     data() {
       return {
         list:{
-            vehicleType: '请选择保障车辆',
+            vehicleType: '请选择车辆类型',
         },
         lists: [],
         plateNumber: '',
@@ -110,7 +109,7 @@
     mounted() {
       var mobileSelect1 = new MobileSelect({
         trigger: '#trigger',
-        title: '选择证件类型',
+        title: '选择车辆类型',
         wheels: [{
           data: [{
               id: '轿车',
@@ -154,7 +153,7 @@
           this.owner = item.owner
           this.plateNumber = item.plateNumber
           this.obj.owner = item.owner
-          this.obj.value = item.owner
+          this.obj.value = item.plateNumber
            this.obj.vehicleType = item.vehicleType
           this.obj.plateNumber = item.plateNumber
           this.obj.vin = item.vin
