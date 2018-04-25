@@ -2,12 +2,13 @@
   <div class="container">
  
       <div class="member">
-          <div style="border-right:1px solid #ccc;">权益人</div>
+          <div style="border-right:1px solid #ccc;background:red;color:white">权益人</div>
         
-          <div @click="car()" style="background:red;color:white">权益车辆</div>
+          <div @click="car()">权益车辆</div>
         
       </div>
-      <div>
+       <p v-if="member.length==0" style="text-align:center;padding:20px 0">哎呀，你还没有专属权益哦！赶快去购买吧！</p>
+      <div v-else>
           <div class="member-human">
               <div class="member-car">
                   <div class="carpart">
@@ -23,14 +24,15 @@
                           <img src="../../assets/image/mine/icon-car-1.png" alt="">
                       </div>
                       <div >
-                            <p>{{member.idType}}</p>
+                            <p>{{member.idType | format}}</p>
                             <p>{{member.idNumber}}</p>
                       </div>
                   </div>
               </div>
               
               <div  v-for='(item, index) of memberlist' :key='index'>
-                  
+                  <p style="text-align:center;padding:20px 0" v-show="item.value=='' && index === 0">哎呀，你还没有专属权益哦！赶快去购买吧！</p>
+                  <div v-show="item.value!=''"> 
                   <div class="rides" v-show="item.key==101">
                   <div style="padding-right:10px;">
                         <img src="../../assets/image/product/icon-helicopter.png" alt="">
@@ -47,6 +49,7 @@
               </div>
 
               <div class="member-square" >
+                  
                   <div class="square" v-for='(list, index) of item.value' :key='index'>
                       <p class="square-title">{{list.main_name}}</p>
                       <p>{{list.effect_time}}</p>
@@ -54,6 +57,8 @@
                       <p>{{list.expire_time}}</p>
                   </div>
               </div>
+                  </div>
+                  
               </div>
           </div>
       </div>
@@ -150,7 +155,13 @@ export default {
       car:function(){
           this.$router.replace('/memcar')
       }
-  }
+  },
+    filters: {
+      format(val) {
+        let enums = ['身份证', '台胞证', '回乡证', '护照', ]
+        return enums[val]
+      }
+    }
 }
 </script>
 

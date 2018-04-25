@@ -17,8 +17,15 @@ import './assets/css/app.css'
 import axios from 'axios'
 // 导入路由
 import router from './router'
-import { Field, DatetimePicker, Radio } from 'mint-ui'
-import { getSessionId, getWxFrom } from '@/util'
+import {
+  Field,
+  DatetimePicker,
+  Radio
+} from 'mint-ui'
+import {
+  getSessionId,
+  getWxFrom
+} from '@/util'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
@@ -46,6 +53,15 @@ axios.interceptors.request.use(
     return config
   }
 )
+// axios.interceptors.response.use(
+//   error => {
+//     if (error.toString().includes('401')) {
+//       router.replace({
+//         path: '/home'
+//       })
+//     }
+//   }
+// )
 // 将 axios 添加到 Vue 的原型对象中
 Vue.prototype.$http = axios
 Vue.component(DatetimePicker.name, DatetimePicker)

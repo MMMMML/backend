@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div class="mainlogo" @click="goProduct('/product')"></div>
+    <div class="mainlogo" @click="goProduct('/product')">
+      <img src="../../assets/image/home/banner3.jpg" alt="">
+    </div>
     <div class="swiper_list">
       <div class="title">
         <div class="content">
@@ -121,7 +123,11 @@ export default {
   .mainlogo {
     width: 100vw;
     height: 112vw;
-    background: url('../../assets/image/home/banner3.jpg') 0 0 ~'/' 100% 100%;
+    // background: url('') 0 0 ~'/' 100% 100%;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
   .swiper_list {
     height: 328px;

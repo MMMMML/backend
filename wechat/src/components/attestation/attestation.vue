@@ -199,6 +199,9 @@
           if (data.data.code == 200) {
             alert('验证码已发送，请注意查收')
           }
+          if (data.data.code == 500) {
+            alert(data.data.message)
+          }
           if (data.data.code == 20005) {
             alert('验证码错误，请重新输入')
           }

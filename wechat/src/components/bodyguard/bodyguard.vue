@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <!-- picture -->
     <div class="banner">
       <img src="../../assets/image/product/banner-空降骑士@3x.png" alt="">
@@ -182,6 +182,9 @@
   </div>
 </template>
 <style scoped lang='less'>
+.container{
+  padding-bottom: 50px;
+}
   .banner {
     width: 100%;
     img {
@@ -327,6 +330,10 @@
     margin-top: 10px;
     line-height: 50px;
     padding-left: 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 1px solid #eee;
     .payment-buy {
       height: 100%;
       width: 100px;

@@ -14,7 +14,7 @@
             <el-col :span="6">
               <el-form-item label="商品分类：">
                 <el-select style="width:100%" v-model='categoryId'>
-                  <el-option v-for="item in catelist" :label='item.name' :value="item.id"></el-option>
+                  <el-option v-for="(item,index) in catelist" :key='index' :label='item.name' :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -70,12 +70,12 @@
         <el-form ref="form" label-width="100px" v-model="warehouseId">
           <el-form-item label="仓库：">
             <el-select style="width:80%" v-model="warehouseId">
-              <el-option v-for="item in whlist" :label='item.name' :value="item.id"></el-option>
+              <el-option v-for="(item,index) in whlist" :key='index' :label='item.name' :value="item.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="商品：">
             <el-select style="width:80%" v-model="productid">
-              <el-option v-for="item in pdlist" :label='item.name' :value="item.id"></el-option>
+              <el-option v-for="(item,index) in pdlist" :key='index'  :label='item.name' :value="item.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="数量：">

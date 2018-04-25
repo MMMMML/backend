@@ -6,8 +6,10 @@
           <div style="background:red;color:white">权益车辆</div>
         
       </div>
-      <div>
+      <p v-if="member.length==0" style="text-align:center;padding:20px 0">哎呀，你的爱车还没有专属权益哦！赶快去挑选吧！</p>
+      <div v-else>
           <div class="member-human" v-for='(item, index) of member' :key='index'  >
+              
               <div class="member-car" >
                   <div class="carpart">
                       <div style="padding-right: 15px;">
@@ -29,6 +31,8 @@
                   </div>
               </div>
               <div  v-for='(res, index) of item.list' :key='index' v-if="res.value.length">
+               <p style="text-align:center;padding:20px 0" v-show="res.value=='' && index === 0">哎呀，你的爱车还没有专属权益哦！赶快去挑选吧！</p>
+              <div v-show="res.value!=''">
                   <div class="ride" v-show="res.key==106" >
                   <img src="../../assets/image/product/icon-car.png" alt="">
                   <p>代步车</p>
@@ -46,6 +50,7 @@
                       <p>{{resp.expire_time}}</p>
                   </div>
                   
+              </div>
               </div>
               </div>
           </div>
