@@ -46,14 +46,18 @@ import payE from '../components/home/payE.vue'
 const Product = () => import('@/components/product')
 
 Vue.use(VueRouter)
-
+Vue.use(require('vue-wechat-title'))
 /* eslint-disable */
 const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/home' },
-    { path: '/home', component: home, name: 'jack' },
-    { path: '/mine', component: mine },
-    { path: '/personal', component: personal },
+    { path: '/home', component: home, name: 'jack', meta: {
+      title: '空降联盟'
+    }},
+    { path: '/mine', component: mine, meta: {
+      title: '我的'
+    }},
+    { path: '/personal', component: personal, meta: { title : '个人信息'} },
     // { path: '/commonpeople', component: commonpeople },
     { path: '/commonpeople', name: 'commonpeople', component: commonpeople,
       children: [
@@ -61,9 +65,9 @@ const router = new VueRouter({
         { path: 'otherinfo', component: otherinfo }
       ]
     },
-    { path: '/contact', component: contact },
-    { path: '/vehicle', component: vehicle },
-    { path: '/vehicledetail', component: vehicledetail },
+    { path: '/contact', component: contact, meta:{title : '权益人管理'} },
+    { path: '/vehicle', component: vehicle ,meta:{title : '车辆管理'}},
+    { path: '/vehicledetail', component: vehicledetail,meta:{title : '添加车辆'}},
     { path: '/auth', component: Auth },
     { path: '/pay', component: pay },
     { path: '/cpb', component: cpb },
@@ -75,15 +79,15 @@ const router = new VueRouter({
     { path: '/payd', component: payd },
     { path: '/editotherinfo', component: editotherinfo },
     { path: '/editmobile', component: editmobile },
-    { path: '/attestation', name: 'attestation', component: attestation },
-    { path: '/bodyguard', name: 'bodyguard', component: bodyguard },
-    { path: '/guarantee', name: 'guarantee', component: guarantee },
-    { path: '/protect', name: 'protect', component: protect },
-    { path: '/protectdetail', name: 'protectdetail', component: protectdetail },
-    { path: '/myindent', name: 'myindent', component: myindent },
-    { path: '/myindentinfo', name: 'myindentinfo', component: myindentinfo },
-    { path: '/member', name: 'member', component: member },
-    { path: '/memcar', name: 'memcar', component: memcar },
+    { path: '/attestation', name: 'attestation', component: attestation, meta:{title : '身份认证'} },
+    { path: '/bodyguard', name: 'bodyguard', component: bodyguard,meta:{title : '飞行保镖'} },
+    { path: '/guarantee', name: 'guarantee', component: guarantee,meta:{title : '飞行保镖'} },
+    { path: '/protect', name: 'protect', component: protect,meta:{title : '皇家护卫队'} },
+    { path: '/protectdetail', name: 'protectdetail', component: protectdetail,meta:{title : '皇家护卫队'} },
+    { path: '/myindent', name: 'myindent', component: myindent,meta:{title : '我的订单'} },
+    { path: '/myindentinfo', name: 'myindentinfo', component: myindentinfo, meta:{title : '订单详情'}},
+    { path: '/member', name: 'member', component: member, meta:{title : '我的权益'} },
+    { path: '/memcar', name: 'memcar', component: memcar, meta:{title : '我的权益'} },
     { path: '/bindcar', name: 'bindcar', component: bindcar },
     { path: '/bindcardetail', name: 'bindcardetail', component: bindcardetail },
     { path: '/product', component: Product }

@@ -162,8 +162,6 @@ export default {
     this._initPeople()
     // 初始化权益车
     this._initCar()
-    // 初始化wechat配置
-    this._wechat()
   },
   methods: {
     _initPickerCarNature() {
@@ -310,22 +308,6 @@ export default {
         })
       })
     },
-    _wechat() {
-      var url = 'wechat/getJSApiTicket'
-      var jsurl = location.href.split('#')[0]
-      var params = {url: jsurl}
-      this.$http.post(url, params).then(data => {
-        this.wxconfig = data.data.payload
-        wx.config({
-          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-          appId: wxconfig.appId, // 必填，公众号的唯一标识
-          timestamp: wxconfig.timestamp, // 必填，生成签名的时间戳
-          nonceStr: wxconfig.nonceStr, // 必填，生成签名的随机串
-          signature: wxconfig.signature, // 必填，签名，见附录1
-          jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        })
-      })
-    },
     handleCheckCarType() {
       this.CarType.show()
     },
@@ -410,10 +392,14 @@ export default {
             vasRoadRescue: this.activePro
           })
         }
-        this.$http.post('wechat/order/addOrder', params).then(data => {
-          var { orderId } = data.data.payload
-          Storage.set('orderId', orderId)
-          this.$router.push('/myindentinfo')
+        this.$http.post('wechat/order/addOrder', params).then(res => {
+          if (res.data.code === 200) {
+            let data = res.data.payload
+            window.sessionStorage.setItem('orderId', data.orderId)
+            this.$router.push('/myindentinfo')
+          } else {
+            alert(res.data.message)
+          }
         })
       })
     },

@@ -216,6 +216,7 @@ export default {
       }
   },
   mounted(){
+      console.log(window.sessionStorage.getItem('orderId'))
       let url = `wechat/order/getOrderDetail?id=${window.sessionStorage.getItem('orderId')}`
       this.$http.get(url).then(data => {
         const{ benefitOrder , benefitPackage , personItems, vehicleItems} = data.data.payload

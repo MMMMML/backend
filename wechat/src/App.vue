@@ -2,7 +2,7 @@
   <div class="my_container">
 
     <!-- 路由出口 -->
-    <router-view class="content"></router-view>
+    <router-view class="content" v-wechat-title="$route.meta.title"></router-view>
     <!-- 页脚 -->
   </div>
 </template>

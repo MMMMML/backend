@@ -144,7 +144,12 @@ export default {
   },
   created() {
     this.form.id = this.$route.query.id
-    this.form.id && this._getPeopleInfo()
+    if (this.form.id) {
+      this._getPeopleInfo()
+      document.title = '编辑权益人'
+    } else {
+      document.title = '添加权益人'
+    }
   },
   mounted() {
     this.IDType = new MobileSelect({

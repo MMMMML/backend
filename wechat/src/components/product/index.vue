@@ -269,6 +269,11 @@ import axios from 'axios'
     },
     created() {
       this.id = this.$route.query.id || 'A'
+      let x = {
+        'A': '急速全明星',
+        'C': '空降骑士'
+      }
+      document.title = x[this.id]
       this._getProductData()
     },
     methods: {

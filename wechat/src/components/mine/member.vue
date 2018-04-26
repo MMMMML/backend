@@ -135,6 +135,7 @@
 }
 </style>
 <script>
+import Storage from 'good-storage'
 export default {
   data(){
       return{
@@ -143,13 +144,23 @@ export default {
       }
   },
   mounted(){
+    let member = Storage.get('memberCar')
+    if (member) {
+      let info = JSON.parse(member)
+      this.member = info.member
+      this.memberlist = info.memberlist
+    } else {
       var url = 'wechat/member/getMemberUser'
-         this.$http.get(url).then(data => {
-          this.member = data.data.payload
-          this.memberlist = data.data.payload.memberList
-          console.log(data)
-
-        })
+      this.$http.get(url).then(data => {
+        this.member = data.data.payload
+        this.memberlist = data.data.payload.memberList
+        let memberCar = {
+          member: this.member,
+          memberlist: this.memberlist
+        }
+        Storage.set('memberCar', JSON.stringify(memberCar))
+      })
+    }
   },
   methods:{
       car:function(){
