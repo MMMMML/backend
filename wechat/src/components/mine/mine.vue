@@ -158,7 +158,8 @@
         window.sessionStorage.setItem('id', this.userId)
         console.log(data)
       }).catch(err => {
-        alert('服务器错误，请稍后再试')
+        alert('登录过期，请重新登陆')
+        window.location.href='http://aj.kingwingaviation.com/alliance-html/wechat/#/home'
       });
     }
   }

@@ -389,6 +389,10 @@
     margin-top: 10px;
     line-height: 50px;
     padding-left: 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 1px solid #eee;
     .payment-buy {
       height: 100%;
       width: 100px;

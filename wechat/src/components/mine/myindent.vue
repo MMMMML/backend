@@ -87,6 +87,7 @@
             if (item.paidStatus == 1) item.Status = '已支付'
             if (item.paidStatus == -2) item.Status = '用户取消'
             if (item.paidStatus == -1) item.Status = '未支付'
+            if (item.paidStatus == -3) item.Status = '订单支付超时'
 
           })
         })
