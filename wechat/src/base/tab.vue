@@ -8,15 +8,29 @@
       <img src="../assets/image/home/button-help.png" alt="">
       <span class="tab-label"> <a href="tel:10086" style='color: #4B4B4B;'>一键呼救</a></span>
     </div>
-    <router-link tag='div' class="tab-item" to='/mine'>
+    <div @click='toMine' class="tab-item">
       <img src="../assets/image/home/button-me.png" alt="">
       <span class="tab-label">我的</span>
-    </router-link>
+    </div>
   </div>
 </template>
 <script>
+import Check from '@/util/checkIDAuth'
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    toMine() {
+      Check('/mine').then(res => {
+        this.$router.push('/mine')
+      })
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
+  @import '~vux/src/styles/1px.less';  
   .tab_box {
     position: fixed;
     bottom: 0;

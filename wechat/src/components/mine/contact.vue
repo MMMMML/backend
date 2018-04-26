@@ -16,7 +16,7 @@
               <p>{{item.realName}}</p>
               <p>{{item.idType}}：{{item.idNumber}}</p>
             </div>
-            <router-link tag='div' class="mui-tab-item images"  :to="{ name:'editcommonpeople', params: {id: item.id} }">
+            <router-link tag='div' class="mui-tab-item images"  :to="`/commonpeople?id=${item.id}`">
               <img src="../../assets/image/mine/icon-edit@3x.png" alt="">
             </router-link>
           </div>

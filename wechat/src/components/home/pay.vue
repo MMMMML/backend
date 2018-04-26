@@ -4,9 +4,10 @@
 
     <div class="must" v-for='(item, index) of personUserInfo' :key='index'>
       <div class='info_wrapper' v-if='item.active'>
-        <h4>权益人{{ index + 1 }}</h4>
+        <h4>主权益人</h4>
         <div class="item vux-1px-b">
           <p class="item_label">姓名</p>
+          <button @click='selectPerson(index)' class='select'>选择权益人</button>
           <input type="text" class="item_value" v-model='item.realName' placeholder="请输入姓名">
           <div class="warning" v-show="validateArr[index].isChinaName">
             <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
@@ -47,6 +48,7 @@
         <h4>权益车辆</h4>
         <div class="item vux-1px-b">
           <p class='item_label'>车牌号码</p>
+          <button @click='selectCar' class='select'>选择车辆</button>
           <input type="text" class="item_value" v-model="carInfo.plateNumber" placeholder="请输入车牌号码">
           <div class="warning" v-show='validateArr[validateArr.length - 1].isCarNo'>
             <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
@@ -95,6 +97,7 @@
 import MobileSelect from 'mobile-select'
 import PayBtn from '@/base/pay_bottom_btn'
 import Check from '@/util/checkIDAuth'
+import Storage from 'good-storage'
 export default {
   data() {
     return {
@@ -155,6 +158,10 @@ export default {
     this._initPickerIDType()
     // 初始化车辆类型
     this._initPickerCarNature()
+    // 初始化权益人
+    this._initPeople()
+    // 初始化权益车
+    this._initCar()
     // 初始化wechat配置
     this._wechat()
   },
@@ -239,12 +246,76 @@ export default {
         }
       })
     },
+    _initPeople() {
+      var urls = 'wechat/commonContact/list'
+      this.$http.get(urls).then(data => {
+        this.list = data.data.payload
+        this.objlist = []
+        this.list.map(item => {
+          this.obj = {}
+          this.obj.value = item.realName
+          this.obj.realName = item.realName
+          this.obj.idType = item.idType
+          this.obj.mobile = item.mobile
+          this.obj.idNumber = item.idNumber
+          this.obj.active = true
+          this.objlist.push(this.obj)
+        })
+        let arr = [{
+          data: this.objlist
+        }]
+        this.peopleSelect = new MobileSelect({
+          trigger: '.init',
+          title: '选择权益人',
+          wheels: arr,
+          triggerDisplayData: false,
+          callback: (indexArr, data) => {
+            this.personUserInfo.splice(this.index, 1, data[0])
+            // this.item = data[0]
+          }
+        });
+      })
+    },
+    _initCar() {
+      this.$http.get('wechat/commonVehicle/list').then(res => {
+        let arr = res.data.payload
+        let newArr = []
+        arr.forEach(item => {
+          newArr.push({
+            id: item.id,
+            value: item.plateNumber,
+            owner: item.owner,
+            vehicletype:item.vehicletype,
+            vin: item.vin
+          })
+        })
+        let obj = {
+          data: newArr
+        }
+        this.carSelect = new MobileSelect({
+          trigger: '.init' ,
+          title: '选择权益车',
+          wheels: [obj],
+          triggerDisplayData: false,
+          callback: (indexArr, data) => {
+            let res = data[0]
+            Object.keys(this.carInfo).forEach(item => {
+              if (item === 'plateNumber') {
+                this.carInfo[item] = res['value']
+              } else {
+                this.carInfo[item] = res[item]
+              }
+            })
+          }
+        })
+      })
+    },
     _wechat() {
       var url = 'wechat/getJSApiTicket'
       var jsurl = location.href.split('#')[0]
       var params = {url: jsurl}
       this.$http.post(url, params).then(data => {
-        var wxconfig = data.data.payload
+        this.wxconfig = data.data.payload
         wx.config({
           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
           appId: wxconfig.appId, // 必填，公众号的唯一标识
@@ -340,30 +411,18 @@ export default {
           })
         }
         this.$http.post('wechat/order/addOrder', params).then(data => {
-          console.log(data)
-          var result = data.data.payload
-          if(data.data.code == 500){
-            alert(data.data.message)
-          }
-          if (data.data.code == 200) {
-            wx.ready(function () {
-              wx.chooseWXPay({
-                timestamp: result.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                nonceStr: result.nonceStr, // 支付签名随机串，不长于 32 位
-                package: result.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                paySign: result.paySign, // 支付签名
-                success: function (res) {
-                  console.log(res)
-                },
-                fail: function (res) {
-                  console.log(res)
-                }
-              })
-            })
-          }
+          var { orderId } = data.data.payload
+          Storage.set('orderId', orderId)
+          this.$router.push('/myindentinfo')
         })
       })
+    },
+    selectPerson(index) {
+      this.index = index
+      this.peopleSelect.show()
+    },
+    selectCar() {
+      this.carSelect.show()
     }
   },
   filters: {
@@ -374,7 +433,7 @@ export default {
     formatCarNature(val) {
       let enums = ['非营运车辆', '营运车辆']
       return enums[val] || '请选择车辆使用性质'
-    } 
+    }
   },
   components: {
     PayBtn
@@ -524,6 +583,22 @@ export default {
           height: 25px;
           line-height: 25px;
           border-radius: 20px;
+        }
+        .select {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          width: 80px;
+          height: 24px;
+          border-radius: 10px;
+          background: #A0A0A0;
+          text-align: center;
+          line-height: 24px;
+          padding: 0;
+          font-size: 12px;
+          color: #333;
+          transform: translate3d(0, -50%, 0);
+          z-index: 99;
         }
       }
     }
