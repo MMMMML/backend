@@ -13,24 +13,14 @@ import './lib/mui/css/icons-extra.css'
 // 导入自定义样式
 import './assets/css/app.css'
 /* eslint-disable */
-// 导入 axois 发送ajax请求
 import axios from 'axios'
-// 导入路由
 import router from './router'
-import {
-  Field,
-  DatetimePicker,
-  Radio
-} from 'mint-ui'
-import {
-  getSessionId,
-  getWxFrom
-} from '@/util'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(ElementUI)
+import { getSessionId, getWxFrom } from '@/util'
+
+import { Field, DatetimePicker, Radio } from 'mint-ui'
 Vue.component(Field.name, Field)
 Vue.component(DatetimePicker.name, DatetimePicker)
+// Vue.use(VeeValidate)
 
 FastClick.attach(document.body)
 
@@ -41,7 +31,7 @@ axios.interceptors.request.use(
     config.headers = {
       ['X-WxFrom']: getWxFrom(),
       ['X-SessionId']: getSessionId()
-      // ['X-SessionId']: '8d45169ffb154d53adc2b518e0171cc2'
+      // ['X-SessionId']: 'c1dee60279b946bcb6a46dc5168409f5'
     }
     if (config.method === 'post') {
       config.data = qs.stringify(config.data)
@@ -69,7 +59,6 @@ Vue.component(Radio.name, Radio)
 
 const vm = new Vue({
   el: '#app',
-  // 将路由与vue实例关联到一起
   router,
   render: c => c(App)
 })

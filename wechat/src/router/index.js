@@ -94,5 +94,4 @@ const router = new VueRouter({
     }
   }
 })
-// 导出路由对象
 export default router

@@ -22,11 +22,12 @@ import Storage from 'good-storage'
     },
     methods: {
       callphone: function () {
-        window.location.href = "tel:4001119299";
+        window.location.href = "tel:4001119299"
       },
       _getUserInfo() {
-        this.$http.get("http://aj.kingwingaviation.com/alliance-java/wechat/auth/getCurrentUser").then(res => {
+        this.$http.get("wechat/auth/getCurrentUser").then(res => {
           const userinfo = res.data.payload
+          console.log(res.data.payload)
           Storage.set('userInfo', JSON.stringify(userinfo))
         })
       }
