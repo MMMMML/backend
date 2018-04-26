@@ -1,93 +1,57 @@
 <template>
-  <div>
-    <tab class='tab vux-1px-t' :animate='true' :line-width='0' ref='tab' active-color='#5eb29e'>
-      <tab-item :selected="index === 0" @on-item-click='go(0)'>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shouye1"></use>
-        </svg>
-      </tab-item>
-      <tab-item :selected="index === 1" class='shopcart' @on-item-click='go(1)'>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-fenleisousuo2"></use>
-        </svg>
-      </tab-item>
-      <tab-item :selected="index === 2" class='shopcart' @on-item-click='go(2)'>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shopping-cart"></use>
-        </svg>
-        <div class='num' ref='num' v-show='num > 0'>{{num}}</div>
-      </tab-item>
-      <tab-item :selected="index === 3" @on-item-click='go(3)'>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-wode"></use>
-        </svg>
-      </tab-item>
-    </tab>
+  <div class="tab_box vux-1px-t">
+    <router-link tag='div' class="tab-item" to='/home'>
+      <img src="../assets/image/home/button-homepage.png" alt="">
+      <span class="tab-label">首页</span>
+    </router-link>
+    <div class="tab-item">
+      <img src="../assets/image/home/button-help.png" alt="">
+      <span class="tab-label"> <a href="tel:10086" style='color: #4B4B4B;'>一键呼救</a></span>
+    </div>
+    <router-link tag='div' class="tab-item" to='/mine'>
+      <img src="../assets/image/home/button-me.png" alt="">
+      <span class="tab-label">我的</span>
+    </router-link>
   </div>
 </template>
 <script>
-  import { Tab, TabItem } from 'vux'
-  export default {
-    data () {
-      return {
-        index: 0
-      }
-    },
-    created () {
-      this.arr = ['/home', '/category', '/shopcart', '/my']
-    },
-    methods: {
-      go (idx) {
-        this.$router.push(this.arr[idx])
-      }
-    },
-    watch: {
-      $route () {
-        let idx = this.arr.indexOf(this.$route.path)
-        if (idx > -1) {
-          this.$refs.tab.$el.style.display = 'flex'
-          this.index = idx
-        } else {
-          this.$refs.tab.$el.style.display = 'none'
-        }
-        if (idx === 1) {
-          this.$refs.tab.$el.style.background = 'rgba(255, 255, 255, .4)'
-        } else {
-          this.$refs.tab.$el.style.background = 'rgb(255, 255, 255)'
-        }
-      },
-      num () {
-        this.$nextTick(() => {
-          this.$refs.num.classList.add('change')
-          setTimeout(() => {
-            this.$refs.num.classList.remove('change')
-          }, 1000)
-        })
-      }
-    },
-    components: {
-      Tab,
-      TabItem
-    }
-  }
 </script>
 <style lang="less" scoped>
-  @import '~common/less/variable.less';
-  .tab {
+  .tab_box {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100vw;
-    height: 49px;
-    z-index: 1;
-    .icon {
-      width: 30px; height: 30px;
-      vertical-align: middle;
-      fill: currentColor;
-      overflow: hidden;
-    }
-    .active{
-      color: @color;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    z-index: 9;
+    .tab-item {
+      flex: 1;
+      text-align: center;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      padding: 4px 0;
+      img {
+        width: 17px;
+        height: 23px;
+        margin-bottom: 6px;
+      }
+      &:nth-of-type(1) {
+        img {
+          width: 24px;
+          height: 22px;
+        }
+      }
+      &:nth-of-type(3) {
+        img {
+          width: 14px;
+          height: 22px;
+        }
+      }
     }
   }
 </style>

@@ -264,7 +264,7 @@
         flex-flow: row nowrap;
         margin-top: 5px;
         .box {
-             width: 40px;
+              width: 40px;
               height: 40px;
               line-height: 40px;
               text-align: center;

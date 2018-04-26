@@ -7,48 +7,72 @@
       <div class="nav-word">
         <h3>{{ productInfo.title }}</h3>
         <div class="tips">
-          <div class="tips-item" v-for='(tip, index) of productInfo.tips' :key='index'>{{ tip }}</div>
+          <div class="tips-item" v-for='tip of productInfo.tips' :key='tip'>{{ tip }}</div>
         </div>
-        <div class="nav-text"> 一个人看风景，一群人去狂欢，自驾旅途的无限美好怎能因一点“意外”就戛然而止？！爱车突发状况需要帮助？急需代步车继续旅程？赶快带上你的急速全明星，帮你解决各种小意外，更有直升机紧急医疗救援全程为你保驾护航！还犹豫什么？记得给同行伙伴也送上一份贴心直升机救援守护哦！</div>
+        <div class="nav-text">{{ productInfo.explain }}</div>
       </div>
     </div>
 
     <!-- privilege  -->
     <div class="privilege">
-      <h3>专属特权</h3>
-      <div class="privilege-icon">
-        <div class="privilege-spuare" v-for='(item, index) of productInfo.privilege.base' :key='index'>
-          <img :src='item.url'>
-          <p>{{ item.tip }}</p>
+      <div class="exclusive">
+        <h3>专属特权</h3>
+        <div class="privilege-icon">
+          <div class="privilege-spuare" v-for='item of productInfo.privilege.base' :key='item.url'>
+            <img :src='item.url'>
+            <p>{{ item.tip }}</p>
+          </div>
         </div>
       </div>
       <!-- 日期 -->
-      <h3>生效日期</h3>
-      <div class="picker">
-        <div style="position: relative;width:100%">
-          <div class="datepicker" style="margin-left:0" @click="openPicker()">{{pickerStart}}</div>
-          <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
-            year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
-          </mt-datetime-picker>
-          <img style="width:14px;position: absolute;margin-left:100px;top: 50%;transform: translateY(-50%);" class="date-icon" src="../../assets/image/product/icon-calendar@3x.png"
-            alt="">
+      <div class="date" v-if='id === "A"'>
+        <h3>生效日期</h3>
+        <div class="picker">
+          <div style="position: relative;width:100%">
+            <div class="datepicker" style="margin-left:0" @click="openPicker()">{{pickerStart}}</div>
+            <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
+              year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
+            </mt-datetime-picker>
+            <img style="width:14px;position: absolute;margin-left:100px;top: 50%;transform: translateY(-50%);" class="date-icon" src="../../assets/image/product/icon-calendar@3x.png"
+              alt="">
+          </div>
         </div>
       </div>
-      <h3>权益人数<span style='color: red;margin-left: 10px;'>￥{{main.addPrice || 0 }} / 人</span></h3>
-      <div class='wrapper'>
-        <div class='box minus' @click='min'>-</div>
-        <span class='count'>{{ counter }}</span>
-        <div class='box add' @click='add'>+</div>
+      <div class="nums" v-if='id === "A"'>
+        <h3>权益人数<span style='color: red;margin-left: 10px;'>￥{{main.addPrice || 0 }} / 人</span></h3>
+        <div class='wrapper'>
+          <div class='box minus' @click='min'>-</div>
+          <span class='count'>{{ counter }}</span>
+          <div class='box add' @click='add'>+</div>
+        </div>
+      </div>
+      <div class="incre" v-if='id === "C"'>
+        <h3>增值权益</h3>
+        <div class="incre_content">
+          <div class="price" @click='activePro = !activePro'>
+            <p class='radio' v-show='!activePro'></p>
+            <img class='radio' v-show='activePro' src="../../assets/image/product/icon-选中.png" alt="">
+            <span>￥79</span>
+          </div>
+          <div class="icon_box" v-show='!activePro' v-for='item of productInfo.privilege.pro.init' :key='item.url'>
+            <img :src='item.url'>
+            <p>{{ item.tip }}</p>
+          </div>
+          <div class="icon_box" v-show='activePro' v-for='item of productInfo.privilege.pro.active' :key='item.url'>
+            <img :src='item.url'>
+            <p>{{ item.tip }}</p>
+          </div>
+        </div>
       </div>
     </div>
     <!--文本  -->
     <div class="notice">
-      <div class="notice-part" @click="showpage1">
+      <div class="notice-part" @click="showItem(0)">
         <p>权益人须知</p>
         <img src="../../assets/image/mine/Chevron@3x.png">
       </div>
         <!-- 隐藏的文本内容 -->
-      <div v-show="show1" style="padding:0 20px;border-bottom:1px dashed #ccc">
+      <div v-show="show[0]" style="padding:0 20px;border-bottom:1px dashed #ccc">
         <p class="title-icon">权益人限定</p>
         <p>中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
         <p class="title-icon">权益车辆要求</p>
@@ -62,20 +86,20 @@
         <p class="title-icon">服务热线</p>
         <p> 400-111-9299</p>
       </div>
-      <div class="notice-part" @click="showpage2"> 
+      <div class="notice-part" @click="showItem(1)"> 
         <p>直升机救援服务</p>
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">
       </div>
-      <div v-show='show2'>
+      <div v-show='show[1]'>
         <img src="../../assets/image/product/biao1.png" alt="" style="width:100px;height:100px;">
         <img src="../../assets/image/product/biao2.png" alt="" style="width:100px;height:100px;">
         <img src="../../assets/image/product/biao3.png" alt=""  style="width:100px;height:100px;">
       </div>
-      <div class="notice-part" @click="showpage3">
+      <div class="notice-part" @click="showItem(2)">
         <p>地面120服务</p>
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">
       </div>
-      <div v-show="show3" style="padding:0 20px;border-bottom:1px dashed #ccc">
+      <div v-show="show[2]" style="padding:0 20px;border-bottom:1px dashed #ccc">
         <p class="title-icon">【权益说明】</p>
         <p >空降联盟为权益人提供地面救护车协调服务</p>
         <p class="title-icon">【服务内容】</p>
@@ -83,26 +107,26 @@
             2、在权益人不符合院前救援服务范围的情况下，空降联盟将提供地面救护车协调服务，但由此产生的救援费用由权益人自行承担
         </p>
       </div>
-      <div class="notice-part" @click="showpage4">
+      <div class="notice-part" @click="showItem(3)">
         <p>道路救援服务</p>
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">
       </div>
-      <div v-show="show4" style="padding:0 20px;border-bottom:1px dashed #ccc">
+      <div v-show="show[3]" style="padding:0 20px;border-bottom:1px dashed #ccc">
         <p class="title-icon">【权益说明】</p>
         <p>成为空降联盟道路救援权益人后，您所绑定的车辆可获得以下权益：</p>
         <p>1、“道路救援服务”包括搭电、换胎、送水、救援拖车（非事故及高速）、困境救援（一般救援及吊装救援）等全国范围内的道路救援服务（港澳台地区除外）；不包括交通管制路段，主干道中、城市高架路桥、地下车库（限高）或禁止实施汽车道路救援服务的路段。</p>
         <p>2、被服务车辆限9座(含)以下、重量不超过3.5吨、长度不超过6米的非营运性四轮机动车辆。摩托车、客车、公共车辆、出租车、货车、卡车、重型运输车以及用于出租和营运的车辆、改装车、竞技车等不在本服务范围内。</p>
         <p style="color:red">3、非事故车辆故障定义：“非单方或双方事故，未涉及保险理赔之一般机动车辆故障”</p>
       </div>
-      <div class="notice-part" >
+      <div class="notice-part">
         <p>代步车服务</p>
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">
       </div>
-      <div class="notice-part" @click="showpage5">
+      <div class="notice-part" @click="showItem(4)">
         <p>免责申明</p>
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">
       </div>
-      <div v-show="show5" style="padding:0 20px;border-bottom:1px dashed #ccc">
+      <div v-show="show[4]" style="padding:0 20px;border-bottom:1px dashed #ccc">
         <p class="title-icon">一、产品有效期</p>
         <p>1、短期权益用户：用户可自行选择权益生效日期，确定权益生效日期后，根据用户的购买服务周期确认权益资格的有效期时间范围</p>
         <p>2、年度权益用户：用户购买服务产品后次日零时正式生效，有效期为生效之日起一年</p>
@@ -155,44 +179,40 @@
         <img src='../../assets/image/product/icon_logo_color.png' alt="">
       </div>
     </div>
-    <!-- 支付 -->
-    <div class="payment vux-1px-t">
-      <p class='price'><span>合计：</span>￥{{ main.price + counter*main.addPrice || 0}}</p>
-      <p class="payment-buy" v-on:click='buy'>立即购买</p>
-    </div>
+    <pay-btn :total='price' @buy='handleBuy'></pay-btn>
   </div>
 </template>
 <script>
-import { differenceInDays } from 'date-fns'
+import { differenceInDays, format } from 'date-fns'
+import PayBtn from '@/base/pay_bottom_btn'
 import Check from '@/util/checkIDAuth'
 import banner4 from '@/assets/image/product/banner4.png'
+import banner1 from '@/assets/image/product/banner-空降骑士.png'
 import helicopter from '@/assets/image/product/icon-helicopter.png'
 import call from '@/assets/image/product/icon-call.png'
 import truck from '@/assets/image/product/icon-truck.png'
+import trans from '@/assets/image/product/icon-stretcher.png'
 import car from '@/assets/image/product/icon-car.png'
+import carNo from '@/assets/image/product/icon-car-no.png'
+import truckNo from '@/assets/image/product/icon-truck-no.png'
+import axios from 'axios'
   export default {
     data() {
       return {
-        show1:false,
-        show2:false,
-        show3:false,
-        show4:false,
-        show5:false,
+        show: [false, false, false, false, false],
         pickerVisible: '',
-        Visible: '',
-        count: 0,
         counter: 1,
-        endDate: new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 90),
-        startDate:new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 1),
-        pickerEnd: '',
-        price:'',
+        startDate: new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 1),
+        endDate: new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 83),
         resultdate: '',
         main: '',
         pickerStart: '请选择日期',
-        productInfo: {
+        pickerEnd: '',
+        allInfo: [{
           url: banner4,
           title: '7天自驾综合救援权益',
           tips: ['一人一车', '日期自定义', '私家车专享', '可增加同行人'],
+          explain: '一个人看风景，一群人去狂欢，自驾旅途的无限美好怎能因一点“意外”就戛然而止？！爱车突发状况需要帮助？急需代步车继续旅程？赶快带上你的急速全明星，帮你解决各种小意外，更有直升机紧急医疗救援全程为你保驾护航！还犹豫什么？记得给同行伙伴也送上一份贴心直升机救援守护哦！',
           privilege: {
             base: [{
               tip: '直升机院前急救',
@@ -208,102 +228,127 @@ import car from '@/assets/image/product/icon-car.png'
               url: car
             }]
           }
-        }
+        }, {
+          url: banner1,
+          title: '单人全年直升机救援权益',
+          tips: ['全年守护', '多项特权', '可享增值服务'],
+          explain: '愿生活温柔以待却也难免发生意外？空降骑士驾到，每分每秒如影随形，时刻为你紧急待命！即日起，召唤空降骑士还可私享全年道路救援和出险代步车服务，尽显绅士风度，陪你纵情旅途！',
+          privilege: {
+            base: [{
+              tip: '直升机院前急救',
+              url: helicopter
+            }, {
+              tip: '120协调',
+              url: call
+            }, {
+              tip: '医疗转运9折',
+              url: trans
+            }],
+            pro: {
+              init: [{
+                tip: '道路救援',
+                url: truckNo
+              }, {
+                tip: '代步车',
+                url: carNo
+              }],
+              active: [{
+                tip: '道路救援',
+                url: truck
+              }, {
+                tip: '代步车',
+                url: car
+              }]
+            }  
+          }
+        }],
+        id: '',
+        car: '',
+        activePro: false
       }
     },
     created() {
-      this.$http.get('wechat/package/queryPackageById?id=A').then(response => {
-        var content = response.data.payload.specifics
-        const x = JSON.parse(content)
-        this.main = x.main
-      })
+      this.id = this.$route.query.id || 'A'
+      this._getProductData()
     },
     methods: {
+      _getProductData() {
+        this.$http.get(`wechat/package/queryPackageById?id=${this.id}`).then(response => {
+          let data = response.data.payload
+          this.main = JSON.parse(data.specifics).main
+        }).catch(e => {
+          console.log(e)
+        })
+      },
       add() {
         this.counter < 8 && (this.counter += 1)
       },
       min() {
         this.counter > 1 && (this.counter -= 1)
       },
-      showpage1:function(){
-          this.show1 = !this.show1;
+      showItem(idx) {
+        this.show.splice(idx, 1, !this.show[idx])
       },
-      showpage2:function(){
-          this.show2=!this.show2;
+      openPicker() {
+        this.$refs.picker.open()
       },
-      showpage3:function(){
-          this.show3=!this.show3;
+      handleConfirm(v) {
+        this.$refs.picker.close()
+        this.pickerStart = this.pickerVisible = format(v, 'YYYY-MM-DD')
       },
-      showpage4:function(){
-          this.show4=!this.show4;
-      },
-      showpage5:function(){
-          this.show5=!this.show5;
-      },
-      openPicker:function() {
-        this.$refs.picker.open();
-      },
-      twoPicker() {
-        this.$refs.pickers.open();
-      },
-      formatDate(date) {
-        const y = date.getFullYear()
-        let m = date.getMonth() + 1
-        m = m < 10 ? '0' + m : m
-        let d = date.getDate()
-        d = d < 10 ? ('0' + d) : d
-        return y + '-' + m + '-' + d
-      },
-      handleConfirm: function (v) {
-        this.$refs.picker.close();
-        this.pickerStart = this.pickerVisible = this.formatDate(v)
-      },
-      confirm: function (c) {
-        this.$refs.pickers.close();
-        this.pickerEnd = this.Visible = this.formatDate(c)
-        // 用户选择了几天
-        // console.log(this.)
-        this.resultdate  = differenceInDays(this.Visible ,this.pickerVisible) + 1
-        this.price = this.resultdate * this.one 
-        console.log(this.resultdate)
-      },
-      _changeNum() {
-        if (this.count < 1) {
-          this.count = 1
-        }
-      },
-      buy:function(){
-        this.priceinfo = {}
-        this.priceinfo.pickerVisible = this.pickerVisible
-         if(this.pickerStart=='请选择日期'){
-          alert('请选择日期')
-          return
+      handleBuy() {
+        if (this.id === 'A') {
+          this.priceinfo = {}
+          this.priceinfo.pickerVisible = this.pickerVisible
+          if (this.pickerStart=='请选择日期') {
+            alert('请选择日期')
+            return
+          }
         }
         Check().then(res => {
-            this.$router.push(`/pay?packageId=A&counter=${this.counter}`)
+          if (this.id === 'A') {
+            this.$router.push(`/pay?packageId=A&counter=${this.counter}&price=${this.price}&benefitEffectTime=${this.pickerStart}`)
+          } else if (this.id === 'C') {
+            this.$router.push(`/pay?packageId=C&activePro=${this.activePro}&price=${this.price}`)
+          }
         })
       }
     },
-    watch: {
-        count(newVal) {
-            if(this.resultdate >= 15){
-               this.price = this.one * newVal * this.resultdate *this.discount
-            } else {
-                this.price = this.one * newVal * this.resultdate
-            }
-        },
-        resultdate(newVal) {
-            if(newVal >= 15){
-               this.price = this.one * newVal *this.discount * this.count 
-            } else {
-                this.price = this.one * newVal * this.count
-            }
+    computed: {
+      price() {
+        if (!this.main.price) {
+          return 0
+        } else {
+          if (this.id === 'A') {
+            return (100 * this.main.price + (this.counter - 1) * this.main.addPrice * 100) / 100
+          } else if (this.id === 'C') {
+            return this.activePro ? (this.main.price * 100 + 79 * 100) / 100 : this.main.price
+          }
         }
+      },
+      productInfo() {
+        let enums = {
+          'A': 0,
+          'C': 1
+        }
+        return this.allInfo[enums[this.id]]
+      }
+    },
+    watch: {
+      // counter: {
+      //   immediate: true,
+      //   handler(newVal) {
+      //     console.log(this.main.price)
+      //     this.price = 
+      //   }
+      // }
+    },
+    components: {
+      PayBtn
     }
   }
 </script>
 <style scoped lang='less'>
-  @import '~vux/src/styles/1px.less';  
   .container {
     width: 100vw;
     min-height: 100vh;
@@ -351,135 +396,134 @@ import car from '@/assets/image/product/icon-car.png'
         }
       }
     }
-  }
-
-  .privilege {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    margin-top: 10px;
-    padding: 8px 14px;
-    h3 {
-      line-height: 22px;
-      font-size: 16px;
-      color: #4B4B4B;
-      margin-left: 4px;
-      &~h3 {
-        margin-top: 10px;
-      }
-    }
-    .privilege-icon {
+    .privilege {
       width: 100%;
-      display: flex;
-      align-items: center;
-      .privilege-spuare {
-        text-align: center;
-        width: 25%;
-        p {
-          margin-top: 2px;
+      height: 100%;
+      background: #fff;
+      margin-top: 10px;
+      padding: 8px 14px;
+      h3 {
+        line-height: 22px;
+        font-size: 16px;
+        color: #4B4B4B;
+        margin-left: 4px;
+        &~h3 {
+          margin-top: 10px;
+        }
+      }
+      .privilege-icon {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        .privilege-spuare {
+          text-align: center;
+          width: 25%;
+          p {
+            margin-top: 2px;
+            font-size: 12px;
+          }
+        }
+      }
+      .picker {
+        display: flex;
+        .datepicker {
+          width: 40%;
+          border: 1px solid #ccc;
+          height: 30px;
+          margin-left: 5%;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          padding-left: 5px;
           font-size: 12px;
         }
       }
-    }
-    .picker {
-      display: flex;
-      .datepicker {
-        width: 40%;
-        border: 1px solid #ccc;
-        height: 30px;
-        margin-left: 5%;
-        border-radius: 10px;
+      .wrapper {
         display: flex;
+        flex-flow: row nowrap;
+        margin-top: 15px;
+        margin-left: 5px;
+        .box {
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          font-size: 16px;
+          background: #eee;
+        }
+        .count {
+          height: 40px;
+          width: 48px;
+          line-height: 40px;
+          text-align: center;
+          font-size: 14px;
+          border: 0;
+          background: #eee;
+          margin: 0 5px;
+        }
+        .cue {
+          color: black;
+          line-height: 30px;
+          margin-left: 20px;
+          letter-spacing: 1px;
+        }
+      }
+      .incre_content {
+        display: flex;
+        flex-flow: row nowrap;
         align-items: center;
-        padding-left: 5px;
-        font-size: 12px;
+        .price {
+          display: flex;
+          flex-flow: row nowrap;
+          width: 46px;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 14px;
+          margin-top: -20px;
+          margin-right: 10px;
+          p {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            margin: 0;
+          }
+          span {
+            color: red;
+          }
+        }
+        .icon_box {
+          width: 20%;
+          text-align: center;
+        }
       }
     }
-    .wrapper {
-      display: flex;
-      flex-flow: row nowrap;
-      margin-top: 15px;
-      margin-left: 5px;
-      .box {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #999;
-        line-height: 30px;
-        text-align: center;
-        font-size: 16px;
-      }
-      .count {
-        height: 30px;
-        width: 48px;
-        line-height: 30px;
-        text-align: center;
-        font-size: 14px;
-        border: 0;
-      }
-      .cue {
-        color: black;
-        line-height: 30px;
-        margin-left: 20px;
-        letter-spacing: 1px;
-      }
-    }
-  }
-  .notice{
-    background: #fff;
-    width: 100%;
-    height: 100%;
-    .notice-part{
-      height: 40px;
-      border-bottom: 1px solid #ccc;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 20px;
-      img{
-        width: 12px;
-      }
-    }
-    .notice-logo{
-      text-align: center;
-      padding: 40px;
-      margin-top: 10px;
-    }
-    .title-icon {
-      font-size: 14px;
-      color: #4B4B4B;
-      font-weight: 700;
-      margin-bottom: 0;
-      margin-top: 10px;
-    }
-  }
-  .payment {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 45px;
-    background: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    p {
-      margin: 0;
-    }
-    .price {
-      height: 24px;
-      line-height: 24px;
-      padding-left: 20px;
-      color: red;
-      span {
-        color: #4B4B4B;
-      }
-    }
-    .payment-buy{
+    .notice{
+      background: #fff;
+      width: 100%;
       height: 100%;
-      width: 120px;
-      color: #fff;
-      line-height: 45px;
-      background: red;
-      text-align: center;
+      .notice-part{
+        height: 40px;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        img{
+          width: 12px;
+        }
+      }
+      .notice-logo{
+        text-align: center;
+        padding: 40px;
+        margin-top: 10px;
+      }
+      .title-icon {
+        font-size: 14px;
+        color: #4B4B4B;
+        font-weight: 700;
+        margin-bottom: 0;
+        margin-top: 10px;
+      }
     }
   }
 </style>
