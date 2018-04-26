@@ -5,9 +5,9 @@
         <p class="human-name">姓名</p>
         <!-- <p>马玲</p> -->
         <input type="text" class="human-input" v-model="user.realName" placeholder="请输入姓名">
-        <div style="display:flex;align-items: center;">
+        <!-- <div style="display:flex;align-items: center;">
           <div class="btn" @click="select()">选择权益人</div>
-        </div>
+        </div> -->
         <div class="warning" v-show="isChinaName">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>姓名格式错误，请重新填写</span>
@@ -46,6 +46,7 @@
 
       </div>
     </div>
+    <p style="text-align:center;padding-top:20px;">身份认证成功后即可购买权益，参与优惠活动呦！</p>
     <div class="button" @click="confirm()">确认</div>
   </div>
 </template>

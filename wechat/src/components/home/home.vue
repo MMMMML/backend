@@ -45,17 +45,19 @@ export default {
           title: '命运可以改变，我永远在你身边',
           content: '单人全年空中直升机医疗救援+地面120协调服务',
           path: '/product?id=C'
-        }, {
-          src: require('../../assets/image/home/banner.png'),
-          title: '每天都要保护你，我比时间更爱你',
-          content: '双人全年空中直升机医疗救援+地面120协调+道路救援服务',
-          path: '/cpb'
-        }, {
-          src: require('../../assets/image/product/banner-皇家护卫@3x.png'),
-          title: '守护你们，是我一生最重要的决定',
-          content: '家庭全年直升机医疗救援+地面120协调+道路救援+出险代步车服务',
-          path: '/protect'
-        }, {
+         },// {
+        //   src: require('../../assets/image/home/banner.png'),
+        //   title: '每天都要保护你，我比时间更爱你',
+        //   content: '双人全年空中直升机医疗救援+地面120协调+道路救援服务',
+        //   path: '/cpb'
+        // },
+        //  {
+        //   src: require('../../assets/image/product/banner-皇家护卫@3x.png'),
+        //   title: '守护你们，是我一生最重要的决定',
+        //   content: '家庭全年直升机医疗救援+地面120协调+道路救援+出险代步车服务',
+        //   path: '/protect'
+        // },
+         {
           src: require('../../assets/image/home/banner4.png'),
           title: '世界真大，任性出发',
           content: '自驾7日直升机院前救援+地面120协调+道路救援+出险代步车服务',

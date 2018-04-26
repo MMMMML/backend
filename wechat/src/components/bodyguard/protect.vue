@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <!-- picture -->
     <div class="banner">
       <img src="../../assets/image/product/banner-皇家护卫@3x.png" alt="">
@@ -224,6 +224,9 @@
   </div>
 </template>
 <style scoped lang='less'>
+.container{
+  padding-bottom: 50px;
+}
   .mint-radiolist {
     display: flex;
     .mint-cell-wrapper {
@@ -408,6 +411,7 @@
   import {
     differenceInDays
   } from 'date-fns'
+  import Check from '@/util/checkIDAuth'
   export default {
     data() {
       return {
@@ -496,9 +500,13 @@
         // console.log(this.resultdate)
       },
       buy:function(){
-        window.sessionStorage.setItem('type',this.values)
-        window.sessionStorage.setItem('pirce',this.price)
-        this.$router.push('/protectdetail')
+        var url = location.hash.slice(1)
+        Check(url).then(res => {
+          window.sessionStorage.setItem('type',this.values)
+          window.sessionStorage.setItem('pirce',this.price)
+          this.$router.push('/protectdetail')
+        })
+        
       }
     },
 

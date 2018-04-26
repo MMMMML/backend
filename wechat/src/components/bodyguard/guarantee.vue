@@ -141,6 +141,7 @@
 </style>
 <script>
   import MobileSelect from 'mobile-select'
+  import { Indicator } from 'mint-ui';
   export default {
     data() {
       return {
@@ -251,6 +252,10 @@
         return pattern.test(phone);
       },
       confirm: function () {
+        Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+      })
         this.personUser.forEach((item, index) => {
           Object.keys(item).forEach((key, idx) => {
             if (key === 'realName') {
@@ -275,9 +280,11 @@
         this.$http.post(url, params).then(data => {
           var result = data.data.payload
           if(data.data.code==500){
+            Indicator.close();
             alert(data.data.message)
           }
           if (data.data.code == 200) {
+            Indicator.close();
             window.sessionStorage.setItem('orderId',data.data.payload.orderId)
            this.$router.push('/myindentinfo')
           }

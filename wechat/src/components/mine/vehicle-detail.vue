@@ -49,7 +49,7 @@
   .inputs-name {
     width: 45%;
     border: none;
-    height: 47px;
+    height: 59px;
     line-height: 50px;
     margin-bottom: 0;
   }
@@ -75,8 +75,8 @@
 
   .man {
     display: flex;
-    height: 48px;
-    line-height: 48px;
+    height: 60px;
+    line-height: 60px;
     border-bottom: 1px solid #eee;
   }
 
