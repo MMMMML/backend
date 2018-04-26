@@ -6,6 +6,7 @@ import Vue from 'vue'
 import App from './App'
 import qs from 'qs'
 import FastClick from 'fastclick'
+import store from './store'
 // 导入mui的样式
 import './lib/mui/css/mui.css'
 // 导入 购物车的小图标（注意：引入样式顺序的问题，先引入mui，再引入extra）
@@ -16,6 +17,7 @@ import './assets/css/app.css'
 import axios from 'axios'
 import router from './router'
 import { getSessionId, getWxFrom } from '@/util'
+import Storage from 'good-storage'
 
 import { Field, DatetimePicker, Radio } from 'mint-ui'
 Vue.component(Field.name, Field)
@@ -30,8 +32,8 @@ axios.interceptors.request.use(
   config => {
     config.headers = {
       ['X-WxFrom']: getWxFrom(),
-      ['X-SessionId']: getSessionId()
-      // ['X-SessionId']: 'c1dee60279b946bcb6a46dc5168409f5'
+      ['X-SessionId']: getSessionId(),
+      ['X-SessionId']: '6c104e24502b4f5a81acb5fb785d053e'
     }
     if (config.method === 'post') {
       config.data = qs.stringify(config.data)
@@ -60,5 +62,6 @@ Vue.component(Radio.name, Radio)
 const vm = new Vue({
   el: '#app',
   router,
+  store,
   render: c => c(App)
 })
