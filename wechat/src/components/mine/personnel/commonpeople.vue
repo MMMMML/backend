@@ -194,7 +194,12 @@ export default {
       let proUrl = this.form.id ? 'editContact' : 'add'
       let url = `wechat/commonContact/${proUrl}`
       this.$http.post(url, this.form).then(data => {
-        this.$router.go(-1)
+        if(data.data.code==200){
+          this.$router.go(-1)
+        }
+        if(data.data.code == 500){
+          alert(data.data.message)
+        }
       })
     },
     ...mapMutations(['SET_COMMON_PEOPLE'])
