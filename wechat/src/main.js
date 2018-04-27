@@ -31,8 +31,8 @@ Vue.component(DatetimePicker.name, DatetimePicker)
 
 FastClick.attach(document.body)
 
-// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
-axios.defaults.baseURL = '/apis'
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+// axios.defaults.baseURL = '/apis'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {
