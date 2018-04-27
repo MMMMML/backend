@@ -40,6 +40,7 @@
     height: 49px;
     line-height: 50px;
     margin-bottom: 0;
+    font-size: 12px;
   }
 
   .code {
