@@ -471,6 +471,9 @@
     differenceInDays
   } from 'date-fns'
   import Check from '@/util/checkIDAuth'
+   import {
+    MessageBox
+  } from 'mint-ui';
   export default {
     data() {
       return {
@@ -551,6 +554,7 @@
       buy: function () {
         var url = location.hash.slice(1)
         Check(url).then(res => {
+
           this.priceinfo = {}
           this.priceinfo.pickerVisible = this.pickerVisible
           this.priceinfo.pickerEnd = this.pickerEnd

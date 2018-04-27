@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p v-show="isshow" style="text-align: center;padding: 20px;">您还没有订单记录哦，赶紧获取您的守护权益吧！</p>
     <div v-for="(item,index) in indent" :key='index'>
       <div class="indent-box" @click="confirm(item.id)">
         <div class="indent-header">
@@ -68,7 +69,8 @@
   export default {
     data() {
       return {
-        indent: ''
+        indent: '',
+        isshow:false,
       }
     },
     mounted() {
@@ -81,7 +83,9 @@
         this.$http.get(url).then(data => {
           this.indent = data.data.payload
           console.log(data)
-
+          if(data.data.payload ==''){
+            this.isshow = true
+          }
           this.indent.map(item => {
             if (item.paidStatus == 0) item.Status = '待买家支付'
             if (item.paidStatus == 1) item.Status = '已支付'
