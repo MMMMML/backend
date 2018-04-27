@@ -270,7 +270,7 @@
     },
 
     mounted() {
-      let member = Storage.get('member')
+      let member = Storage.session.get('member')
       if (member) {
         this.member = JSON.parse(member)
       } else {
@@ -278,18 +278,9 @@
 
         this.$http.get(url).then(data => {
           this.member = data.data.payload
-          Storage.set('member', JSON.stringify(this.member))
+          Storage.session.set('member', JSON.stringify(this.member))
         })
       }
-    var _mtac = {};
-      (function () {
-        var mta = document.createElement("script");
-        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
-        mta.setAttribute("name", "MTAH5");
-        mta.setAttribute("sid", "500608350");
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(mta, s);
-      })();
     },
 
     methods: {

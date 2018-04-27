@@ -6,6 +6,7 @@ import Vue from 'vue'
 import App from './App'
 import qs from 'qs'
 import FastClick from 'fastclick'
+import Vuelazyload from 'vue-lazyload'
 import store from './store'
 // 导入mui的样式
 import './lib/mui/css/mui.css'
@@ -18,16 +19,19 @@ import axios from 'axios'
 import router from './router'
 import { getSessionId, getWxFrom } from '@/util'
 import Storage from 'good-storage'
+import { Indicator } from 'mint-ui'
+
+import VConsole from 'vconsole'
 
 import { Field, DatetimePicker, Radio } from 'mint-ui'
 Vue.component(Field.name, Field)
 Vue.component(DatetimePicker.name, DatetimePicker)
-// Vue.use(VeeValidate)
+
+let vConsole = new VConsole()
 
 FastClick.attach(document.body)
 
 axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
-// axios.defaults.baseURL = '172.28.2.59:8101/'
 axios.interceptors.request.use(
   config => {
     config.headers = {
@@ -45,19 +49,12 @@ axios.interceptors.request.use(
     return config
   }
 )
-// axios.interceptors.response.use(
-//   error => {
-//     if (error.toString().includes('401')) {
-//       router.replace({
-//         path: '/home'
-//       })
-//     }
-//   }
-// )
-// 将 axios 添加到 Vue 的原型对象中
 Vue.prototype.$http = axios
 Vue.component(DatetimePicker.name, DatetimePicker)
 Vue.component(Radio.name, Radio)
+Vue.use(Vuelazyload, {
+  loading: require('./assets/image/loading.png')
+})
 
 const vm = new Vue({
   el: '#app',

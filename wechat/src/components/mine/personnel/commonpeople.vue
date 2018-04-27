@@ -178,15 +178,6 @@ export default {
         this.form.idType = data[0].id
       }
     })
-    var _mtac = {};
-      (function () {
-        var mta = document.createElement("script");
-        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
-        mta.setAttribute("name", "MTAH5");
-        mta.setAttribute("sid", "500608350");
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(mta, s);
-      })();
   },
   methods: {
     _getPeopleInfo() {
@@ -216,7 +207,7 @@ export default {
   filters: {
     format(val) {
       let enums = ['身份证', '台胞证', '回乡证', '护照']
-      return enums[val] || '请输入证件类型'
+      return enums[val] || '请选择证件类型'
     }
   },
   computed: {

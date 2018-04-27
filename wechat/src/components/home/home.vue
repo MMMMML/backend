@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="mainlogo" @click="goProduct('/product?id=A')">
-      <img src="../../assets/image/home/banner3.jpg">
+      <img v-lazy="logo">
     </div>
     <div class="swiper_list">
       <div class="title">
@@ -36,12 +36,12 @@ export default {
     return {
       banners:[
         {
-          src: require('../../assets/image/home/banner2.png'),
+          src: require('../../assets/image/home/banner_2.jpeg'),
           title: '都说我太过严肃，我只在意你是否需要保护',
           content: '单人短期空中直升机院前救援+地面120协调服务',
           path: '/bodyguard'
         }, {
-          src: require('../../assets/image/home/banner1.png'),
+          src: require('../../assets/image/home/banner_1.jpeg'),
           title: '命运可以改变，我永远在你身边',
           content: '单人全年空中直升机医疗救援+地面120协调服务',
           path: '/product?id=C'
@@ -58,7 +58,7 @@ export default {
         //   path: '/protect'
         // },
          {
-          src: require('../../assets/image/home/banner4.png'),
+          src: require('../../assets/image/home/banner_4.jpeg'),
           title: '世界真大，任性出发',
           content: '自驾7日直升机院前救援+地面120协调+道路救援+出险代步车服务',
           path: '/product?id=A'
@@ -66,6 +66,7 @@ export default {
       ],
       index: 0,
       notNextTick: true,
+      logo: require('../../assets/image/home/banner3.jpg'),
       swiperOption: {
         pagination: '.swiper-pagination',
         slidesPerView: 'auto',
@@ -85,15 +86,6 @@ export default {
     this.swiper.on('slideChangeTransitionEnd', () => {
       that.index = this.swiper.activeIndex
     })
-    var _mtac = {};
-      (function () {
-        var mta = document.createElement("script");
-        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
-        mta.setAttribute("name", "MTAH5");
-        mta.setAttribute("sid", "500608350");
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(mta, s);
-      })();
   },
   methods:{
     goProduct(path) {
