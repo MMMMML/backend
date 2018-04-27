@@ -101,17 +101,17 @@
         <p>2、服务内容：（1）直升机空中运输（2）空中医疗救护（3）地面救护车协调</p>
         <p>3、权益说明：权益期内，无限次呼叫直升机救援且每次需支付1元呼叫调度费</p>
         <p class="title-icon">二、服务前提</p>
-        <p>1、权益人病症符合本手册第四项约定的院前救援适应症  </p>
-        <p>2、若地面救援无法及时到达或需要较长等待时间且危及生命安全，经120急救医生或我司授权医生确认后可提供空中紧急救援服务   </p>
+        <p>1、权益人病症符合本手册第四项约定的院前救援适应症 </p>
+        <p>2、若地面救援无法及时到达或需要较长等待时间且危及生命安全，经120急救医生或我司授权医生确认后可提供空中紧急救援服务 </p>
         <p>3、气象条件、法律法规、空中管制等客观原因满足直升机适航条件</p>
         <p style="color:red">4、根据国际惯例及民航总局关于目视飞行的规定，救援直升机运行时间为每天 8：00 至日落前半小时。日落时间以各地气象局官网当天数据为判定</p>
         <p>备注：当地面救援可以及时到达并实施医疗救护时，将优先选择地面救援</p>
         <p class="title-icon">三、服务内容及标准</p>
-        <div> 
+        <div>
           <img style="width:100%" src="../../assets/image/product/biao3.png" alt="">
         </div>
         <p class="title-icon">四、院前救援适应症</p>
-        <div> 
+        <div>
           <img style="width:100%" src="../../assets/image/product/biao2.png" alt="">
         </div>
         <p class="title-icon">五、除外责任及限制责任</p>
@@ -142,12 +142,11 @@
       </div>
 
       <div v-show="isShow3" style="padding:0 20px;border-bottom:1px dashed #ccc">
-              <p class="title-icon">一、权益说明</p>
-              <p >空降联盟为权益人提供地面救护车协调服务</p>
-              <p class="title-icon">二、服务内容</p>
-              <p >1、在权益人符合院前救援服务范围的情况下，如因客观原因不适航而无法出动直升机，或必须联合120急救中心开展空地联运时，空降联盟将提供地面救护车协调服务，并承担相应的救护车费用
-                  2、在权益人不符合院前救援服务范围的情况下，空降联盟将提供地面救护车协调服务，但由此产生的救援费用由权益人自行承担
-              </p>
+        <p class="title-icon">一、权益说明</p>
+        <p>空降联盟为权益人提供地面救护车协调服务</p>
+        <p class="title-icon">二、服务内容</p>
+        <p>1、在权益人符合院前救援服务范围的情况下，如因客观原因不适航而无法出动直升机，或必须联合120急救中心开展空地联运时，空降联盟将提供地面救护车协调服务，并承担相应的救护车费用 2、在权益人不符合院前救援服务范围的情况下，空降联盟将提供地面救护车协调服务，但由此产生的救援费用由权益人自行承担
+        </p>
       </div>
       <div @click="showToggle4" class="notice-part">
         <p>免责申明</p>
@@ -182,9 +181,10 @@
   </div>
 </template>
 <style scoped lang='less'>
-.container{
-  padding-bottom: 50px;
-}
+  .container {
+    padding-bottom: 50px;
+  }
+
   .banner {
     width: 100%;
     img {
@@ -264,12 +264,12 @@
         flex-flow: row nowrap;
         margin-top: 5px;
         .box {
-              width: 40px;
-              height: 40px;
-              line-height: 40px;
-              text-align: center;
-              font-size: 16px;
-              background: #eee;
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          font-size: 16px;
+          background: #eee;
         }
         .count {
           height: 40px;
@@ -380,6 +380,17 @@
         this.discount = this.specifics.main.discount
 
       })
+    },
+    mounted() {
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
     },
     methods: {
       showToggle1: function () {

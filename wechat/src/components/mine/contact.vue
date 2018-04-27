@@ -103,7 +103,18 @@
     },
     created() {
       this._reload()
-    }, 
+    },
+    mounted(){
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
+    } ,
     methods: {
       _reload() {
         var url = `wechat/commonContact/list?userId=${window.sessionStorage.getItem('id')}`

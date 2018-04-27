@@ -22,7 +22,7 @@
       </div>
       <div class="man">
         <p class="human-name">证件号码</p>
-        <input type="text" v-model="user.idNumber" class="human-input">
+        <input type="text" v-model="user.idNumber" @focus="aaa()" @blur="bbb()" class="human-input">
         <div class="warning" v-show="isIdNumber">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
@@ -71,7 +71,7 @@
     width: 22vw;
     color: white;
     background: #ccc;
-    font-size:0.5rem;
+    font-size: 0.5rem;
     text-align: center;
     height: 25px;
     line-height: 25px;
@@ -133,6 +133,7 @@
         isChinaName: false,
         isPhoneNo: false,
         isIdNumber: false,
+        focusState: false,
         vcode: '',
         user: {
           idType: '请选择证件类型',
@@ -142,6 +143,15 @@
       }
     },
     mounted() {
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
       var mobileSelect1 = new MobileSelect({
         trigger: '#trigger',
         title: '选择证件类型',
@@ -188,6 +198,12 @@
           console.log(data)
           this.user = data.data.payload
         })
+      },
+      aaa: function (event) {
+        this.user.idNumber = ''
+      },
+      bbb: function (event) {
+        this.user.idNumber = this.user.idNumber || '请输入证件号码'
       },
       gaincode: function () {
         var url = '/common/sendVCode'
@@ -236,7 +252,7 @@
         }
         this.$http.post(url, params).then(data => {
           console.log(data)
-          if(data.data.code==500){
+          if (data.data.code == 500) {
             alert(data.data.message)
           }
           if (data.data.code == 200) {
@@ -245,23 +261,35 @@
               ...obj,
               verified: true
             }
-          // const userinfo = res.data.payload
-          Storage.set('userInfo', JSON.stringify(obj))
+            // const userinfo = res.data.payload
+            Storage.set('userInfo', JSON.stringify(obj))
             // this.$router.replace(this.url)
             console.log('~~~~~')
             console.log(this.url)
             console.log('~~~~~')
-            
+
             // window.location.href = this.url
             this.$router.push(this.url)
           }
         })
       }
     },
-     filters: {
+    filters: {
       format(val) {
         let enums = ['身份证', '台胞证', '回乡证', '护照']
         return enums[val] || val
+      }
+    },
+    directives: {
+      focus: {
+        update: function (el, {
+          value
+        }) {
+          if (value) {
+            el.focus()
+            console.log(value)
+          }
+        }
       }
     }
   }

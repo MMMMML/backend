@@ -1,6 +1,6 @@
 <template>
   <div class="homepage">
-    <h1>欢迎使用金汇销控管理系统</h1>
+    <h1>欢迎使用空降联盟服务平台</h1>
   </div>
 </template>
 

@@ -102,9 +102,20 @@
       }
     },
     created() {
-        this._reload()
-        window.sessionStorage.setItem('mobile', this.contactlist.mobile)
+      this._reload()
+      window.sessionStorage.setItem('mobile', this.contactlist.mobile)
       //   var id = JSON.parse(window.sessionStorage.getItem('id'))
+    },
+    mounted() {
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
     },
     methods: {
       _reload() {
@@ -112,19 +123,30 @@
         this.$http.get(url).then(data => {
           this.contactlist = data.data.payload
           console.log(data)
-        //   if (this.contactlist.gender == 0) this.contactlist.gender = '未知'
-        //   if (this.contactlist.gender == 1) this.contactlist.gender = '男'
-        //   if (this.contactlist.gender == 2) this.contactlist.gender = '女'
+          //   if (this.contactlist.gender == 0) this.contactlist.gender = '未知'
+          //   if (this.contactlist.gender == 1) this.contactlist.gender = '男'
+          //   if (this.contactlist.gender == 2) this.contactlist.gender = '女'
         })
+      },
+      mounted(){
+        var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
       },
       delOne(id) {
         console.log(id)
         var url = `/wechat/auth/unbindVehicle`
         var params = {
-           vehicleId:id, 
-           userId:window.sessionStorage.getItem('id')
+          vehicleId: id,
+          userId: window.sessionStorage.getItem('id')
         }
-        this.$http.post(url,params).then(data => {
+        this.$http.post(url, params).then(data => {
           console.log(data)
           if (data.data.code == 200) {
             this._reload()

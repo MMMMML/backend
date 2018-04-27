@@ -24,23 +24,23 @@
     <div class="equity">
       <p style="text-align:left;padding:1rem 0 1rem 0" class="weight">享有权益</p>
       <div class="equity-list">
-        <div v-show="benefitPackageid=='B'||benefitPackageid=='E'">
+        <div v-show="benefitPackageid=='B'||benefitPackageid=='E'||benefitPackageid=='A'">
           <img src="../../assets/image/product/icon-helicopter.png" alt="">
-          <p>直升机院前急救</p>
+          <p>直升机院前救援</p>
         </div>
-        <div v-show="benefitPackageid=='B'||benefitPackageid=='E'">
+        <div v-show="benefitPackageid=='B'||benefitPackageid=='E'||benefitPackageid=='A'">
           <img  src="../../assets/image/product/icon-call.png" alt="">
           <p>120协调</p>
         </div>
-        <div v-show="benefitPackageid!='B'"> 
+        <div v-show="benefitPackageid!='B'&&benefitPackageid!='A'"> 
           <img  src="../../assets/image/product/icon-stretcher.png" alt="">
           <p>直升机医疗转运9折</p>
         </div>
-        <div v-show="benefitPackageid!='B'">
+        <div v-show="benefitPackageid!='B'||benefitPackageid=='A'">
           <img  src="../../assets/image/product/icon-truck.png" alt="">
           <p>道路救援</p>
         </div>
-        <div v-show="benefitPackageid!='B'">
+        <div v-show="benefitPackageid!='B'||benefitPackageid=='A'">
           <img  src="../../assets/image/product/icon-car.png" alt="">
           <p>代步车服务</p>
         </div>
@@ -110,7 +110,7 @@
     </div>
     <div class="payment" v-show="benefitOrder.paidStatus==0">
       <p>合计：￥{{benefitOrder.totalPrice}}</p>
-      <p class="payment-buy" @click="payment()">支付</p>
+      <p class="payment-buy"  @click="payment()" >支付</p>
     </div>
     
     
@@ -238,6 +238,15 @@ export default {
             item.usingNatures = item.usingNature==0?'非运营车辆':'运营车辆'
         })
       })
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
   },
   created(){
       var url = 'wechat/getJSApiTicket'

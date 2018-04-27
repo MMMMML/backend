@@ -1,6 +1,6 @@
 <template>
   <div class='container'>
-    <div >
+    <div>
       <div @click.stop class="must" v-for='(item, index) of list' :key='index' v-show="showcase">
         <p style="padding: 10px 20px 0px;font-size: 16px;font-weight: 700;">{{ item.type === '1' ? '大人' : '小孩' }}</p>
 
@@ -36,80 +36,80 @@
             <span>手机格式错误，请重新填写</span>
           </div> -->
         </div>
-        
+
       </div>
-      
-        <div class="must" v-show="ishow">
-          <div class="man">
-            <p class="human-name" style="width: 90%;">权益人</p>
-            <div style="display: flex; align-items: center;"  >
+
+      <div class="must" v-show="ishow">
+        <div class="man">
+          <p class="human-name" style="width: 90%;">权益人</p>
+          <div style="display: flex; align-items: center;">
             <button class="btn" @click="write()" style="line-height:0">填写</button>
           </div>
         </div>
       </div>
     </div>
 
-<div @click.stop>
-<div style="background:white"  v-show="carshow">
-      <p style="padding: 10px 20px 0px;font-size: 16px;font-weight: 700;">权益车辆</p>
-      <div class="man">
-        <p class="human-name">车牌号码</p>
-        <input type="text" class="human-input" v-model="plateNumber" placeholder="请输入车牌号码">
-        <div style="display:flex;align-items: center;">
+    <div @click.stop>
+      <div style="background:white" v-show="carshow">
+        <p style="padding: 10px 20px 0px;font-size: 16px;font-weight: 700;">权益车辆</p>
+        <div class="man">
+          <p class="human-name">车牌号码</p>
+          <input type="text" class="human-input" v-model="plateNumber" placeholder="请输入车牌号码">
+          <div style="display:flex;align-items: center;">
             <div class="btns" @click.stop="selectcar(idx)">选择权益车辆</div>
           </div>
-        <!-- <div class="warning" >
+          <!-- <div class="warning" >
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
         </div> -->
-      </div>
-      <div class="man">
-        <p class="human-name">车辆类型</p>
-        <p id="trigger" @click.stop style="width:58%;margin-left: 1rem;">{{vehicleType ||'请选择车辆类型'}}</p>
-        <div>
-          <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
-        <!-- <div class="warning" >
+        <div class="man">
+          <p class="human-name">车辆类型</p>
+          <p id="trigger" @click.stop style="width:58%;margin-left: 1rem;">{{vehicleType ||'请选择车辆类型'}}</p>
+          <div>
+            <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
+          </div>
+          <!-- <div class="warning" >
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
         </div> -->
-      </div>
-      <div class="man">
-        <p class="human-name">所有人</p>
-        <input type="text" class="human-input" v-model="owner" placeholder="请输入所有人">
-        <!-- <div class="warning" >
+        </div>
+        <div class="man">
+          <p class="human-name">所有人</p>
+          <input type="text" class="human-input" v-model="owner" placeholder="请输入所有人">
+          <!-- <div class="warning" >
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
         </div> -->
-      </div>
-      <div class="man">
-        <p class="human-name">使用性质</p>
-        <input readonly type="text" class="human-input" v-model="usingNature" >
-        <!-- <div class="warning" >
+        </div>
+        <div class="man">
+          <p class="human-name">使用性质</p>
+          <input readonly type="text" class="human-input" v-model="usingNature">
+          <!-- <div class="warning" >
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
         </div> -->
-      </div>
-      <div class="man">
-        <p class="human-name">车辆识别代号</p>
-        <input type="text" class="human-input" v-model="vin" placeholder="请输入车辆识别代号">
-        <!-- <div class="warning" >
+        </div>
+        <div class="man">
+          <p class="human-name">车辆识别代号</p>
+          <input type="text" class="human-input" v-model="vin" placeholder="请输入车辆识别代号">
+          <!-- <div class="warning" >
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
         </div> -->
+        </div>
       </div>
-    </div>
-  <div class="must" v-show="iscarshow">
-          <div class="man">
-            <p class="human-name" style="width: 90%;">权益车辆</p>
-            <div style="display: flex; align-items: center;"  >
+      <div class="must" v-show="iscarshow">
+        <div class="man">
+          <p class="human-name" style="width: 90%;">权益车辆</p>
+          <div style="display: flex; align-items: center;">
             <button class="btn" @click="car()" style="line-height:0">填写</button>
           </div>
         </div>
       </div>
-</div>
+    </div>
 
-    
+
     <div class="payment">
       <p>合计：￥{{price}}</p>
       <p class="payment-buy" @click.stop="payment()">立即购买</p>
@@ -133,7 +133,8 @@
     height: 14px;
   }
 
-  .btn,.btns {
+  .btn,
+  .btns {
     width: 22vw;
     color: white;
     background: #ccc;
@@ -232,13 +233,14 @@
         validateArr: [],
         human: '',
         showcase: false,
-        ishow:true,
-        carshow:false,
-        iscarshow:true,
-        cars:''
+        ishow: true,
+        carshow: false,
+        iscarshow: true,
+        cars: ''
       }
     },
     mounted() {
+      
       let big = {
         type: '1',
         realName: '',
@@ -452,6 +454,15 @@
           }
         });
       })
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
     },
     methods: {
       _isChinaName(name) {
@@ -459,7 +470,7 @@
         var pattern = /^([\u4e00-\u9fa5]+|[\sa-zA-z]+)$/;
         return pattern.test(name);
       },
-      
+
       _isIdNumber(number) {
         var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
         return pattern.test(number);
@@ -538,7 +549,7 @@
         this.showcase = !this.showcase
         this.ishow = false;
       },
-      car:function(){
+      car: function () {
         this.carshow = true
         this.iscarshow = false
       }

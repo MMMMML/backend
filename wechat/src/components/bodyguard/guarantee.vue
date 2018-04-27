@@ -6,7 +6,7 @@
         <p class="human-name">姓名</p>
         <!-- <p>马玲</p> -->
         <input type="text" class="human-input" v-model="item.realName" placeholder="请输入姓名">
-        <div style="display:flex;align-items: center;" >
+        <div style="display:flex;align-items: center;">
           <div class="btn" @click="select(index)">选择权益人</div>
         </div>
         <div class="warning" v-show="!validateArr[index].isChinaName">
@@ -141,7 +141,9 @@
 </style>
 <script>
   import MobileSelect from 'mobile-select'
-  import { Indicator } from 'mint-ui';
+  import {
+    Indicator
+  } from 'mint-ui';
   export default {
     data() {
       return {
@@ -149,7 +151,7 @@
         isPhoneNo: false,
         isIdNumber: false,
         personUser: [],
-        count:1,
+        count: 1,
         list: '',
         validateArr: []
       }
@@ -176,6 +178,15 @@
       }
     },
     mounted() {
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
       var urls = 'wechat/commonContact/list'
       this.$http.get(urls).then(data => {
         this.list = data.data.payload
@@ -204,7 +215,9 @@
           triggerDisplayData: false,
           callback: (indexArr, data) => {
             console.log(data[0])
-            this.personUser.splice(this.idx, 1, data[0])
+            let obj = JSON.stringify(data[0])
+                obj = JSON.parse(obj)
+            this.personUser.splice(this.idx, 1, obj)
             this.item = data[0]
           }
         });
@@ -253,20 +266,20 @@
       },
       confirm: function () {
         Indicator.open({
-        text: '加载中...',
-        spinnerType: 'fading-circle'
-      })
+          text: '加载中...',
+          spinnerType: 'fading-circle'
+        })
         this.personUser.forEach((item, index) => {
           Object.keys(item).forEach((key, idx) => {
             if (key === 'realName') {
               // console.log(this._isChinaName(item[key]))
               this.validateArr[index].isChinaName = this._isChinaName(item[key])
             } else if (key === 'mobile') {
-              this.validateArr[index].isPhoneNo = this._isPhoneNo(item[key])              
+              this.validateArr[index].isPhoneNo = this._isPhoneNo(item[key])
             }
           })
         })
-       
+
         var url = 'wechat/order/addOrder'
         this.priceinfo = JSON.parse(window.sessionStorage.getItem('priceinfo'))
         console.log(this.priceinfo)
@@ -279,14 +292,14 @@
         }
         this.$http.post(url, params).then(data => {
           var result = data.data.payload
-          if(data.data.code==500){
+          if (data.data.code == 500) {
             Indicator.close();
             alert(data.data.message)
           }
           if (data.data.code == 200) {
             Indicator.close();
-            window.sessionStorage.setItem('orderId',data.data.payload.orderId)
-           this.$router.push('/myindentinfo')
+            window.sessionStorage.setItem('orderId', data.data.payload.orderId)
+            this.$router.push('/myindentinfo')
           }
 
         })
