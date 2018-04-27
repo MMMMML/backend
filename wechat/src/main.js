@@ -21,23 +21,25 @@ import { getSessionId, getWxFrom } from '@/util'
 import Storage from 'good-storage'
 import { Indicator } from 'mint-ui'
 
-import VConsole from 'vconsole'
+// import VConsole from 'vconsole'
 
 import { Field, DatetimePicker, Radio } from 'mint-ui'
 Vue.component(Field.name, Field)
 Vue.component(DatetimePicker.name, DatetimePicker)
 
-let vConsole = new VConsole()
+// let vConsole = new VConsole()
 
 FastClick.attach(document.body)
 
-axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+axios.defaults.baseURL = '/apis'
+axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {
     config.headers = {
       ['X-WxFrom']: getWxFrom(),
-      ['X-SessionId']: getSessionId()
-      // ['X-SessionId']: 'dd9c9a77bc324382b7bbd7b8af1c3c86'
+      ['X-SessionId']: getSessionId(),
+      ['X-SessionId']: '791fde8993e247599763b21d9b491459'
     }
     if (config.method === 'post') {
       config.data = qs.stringify(config.data)
