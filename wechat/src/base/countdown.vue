@@ -9,7 +9,7 @@
   export default {
     data () {
       return {
-        time: '获取'
+        time: '获取验证码'
       }
     },
     props: {
@@ -31,7 +31,7 @@
           this.time--
           if (this.time === 0) {
             this.$emit('countDown')
-            this.time = '获取'
+            this.time = '重新获取'
             flag = true
             clearInterval(time)
           }
@@ -58,7 +58,6 @@
     background: #ccc;
     height: 1.5rem;
     border: 0;
-    font-size: 0.4266666666666667rem;
     padding: 0 0.1rem;
     color: #fff;
     border-radius: 10px;

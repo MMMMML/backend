@@ -4,10 +4,7 @@
       <div class="msg">
         <p style="width:20%;margin-left: 12%;">手机号码</p>
         <!-- <p style="width:60%">{{mobile}}</p> -->
-        <input type="text" class="inputs" v-model="mobile">
-        <div>
-          <img src="../../assets/image/mine/Chevron@3x.png" alt="">
-        </div>
+        <input type="text" class="inputs" v-model="mobile" placeholder="请输入新手机号">
       </div>
     </div>
     <!-- 邮箱 -->
@@ -79,11 +76,11 @@
   export default {
     data() {
       return {
-          vcode:''
+          vcode:'',
       }
     },
     created() {
-      this.mobile = window.sessionStorage.getItem('mobile')
+      // this.mobile = window.sessionStorage.getItem('mobile')
     },
     methods: {
       gain: function () {
