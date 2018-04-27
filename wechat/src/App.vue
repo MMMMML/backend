@@ -22,7 +22,7 @@ import Storage from 'good-storage'
     },
     methods: {
       callphone: function () {
-        window.location.href = "tel:4001119299"
+        window.location.href = "tel:021-60554929"
       },
       _getUserInfo() {
         this.$http.get("wechat/auth/getCurrentUser").then(res => {
