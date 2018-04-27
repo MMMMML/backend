@@ -10,9 +10,6 @@
 
 <script>
 import Storage from 'good-storage'
-  import {
-    Header
-  } from 'mint-ui'
   export default {
     data() {
       return {
@@ -22,19 +19,12 @@ import Storage from 'good-storage'
       this._getUserInfo()
     },
     methods: {
-      callphone: function () {
-        window.location.href = "tel:021-60554929"
-      },
       _getUserInfo() {
         this.$http.get("wechat/auth/getCurrentUser").then(res => {
           const userinfo = res.data.payload
-          console.log(res.data.payload)
           Storage.set('userInfo', JSON.stringify(userinfo))
         })
       }
-    },
-    components: {
-      MintHeader: Header
     }
   }
 
@@ -55,10 +45,4 @@ import Storage from 'good-storage'
 
 <style lang='less' scoped>
   @import '~vux/src/styles/1px.less';
-  .mui-bar-tab div img {
-    border: 1px dashed #939393;
-    margin-top: 0.2rem;
-  }
-	
-
 </style>

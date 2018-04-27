@@ -270,7 +270,7 @@
     },
 
     mounted() {
-      let member = Storage.get('member')
+      let member = Storage.session.get('member')
       if (member) {
         this.member = JSON.parse(member)
       } else {
@@ -278,7 +278,7 @@
 
         this.$http.get(url).then(data => {
           this.member = data.data.payload
-          Storage.set('member', JSON.stringify(this.member))
+          Storage.session.set('member', JSON.stringify(this.member))
         })
       }
     },

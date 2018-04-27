@@ -4,10 +4,10 @@
       <img src="../assets/image/home/button-homepage.png" alt="">
       <span class="tab-label">首页</span>
     </router-link>
-    <div class="tab-item">
+    <a class="tab-item" href="tel:4001119299">
       <img src="../assets/image/home/button-help.png" alt="">
-      <span class="tab-label"> <a href="tel:10086" style='color: #4B4B4B;'>一键呼救</a></span>
-    </div>
+      <span style='color: #4B4B4B;' class="tab-label">一键呼救</span>
+    </a>
     <div @click='toMine' class="tab-item">
       <img src="../assets/image/home/button-me.png" alt="">
       <span class="tab-label">我的</span>

@@ -207,7 +207,7 @@ export default {
   filters: {
     format(val) {
       let enums = ['身份证', '台胞证', '回乡证', '护照']
-      return enums[val] || '请输入证件类型'
+      return enums[val] || '请选择证件类型'
     }
   },
   computed: {
