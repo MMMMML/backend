@@ -41,7 +41,9 @@
         <!-- <p>马玲</p> -->
         <input type="text" class="human-input" v-model="user.vcode" placeholder="请输入验证码">
         <div style="display:flex;align-items: center;">
-          <div class="btn" @click="gaincode()">获取验证码</div>
+          <!-- <div class="btn" @click="gaincode()">time </div> -->
+          <!-- <time class="btn" @countDown='gaincode'></time> -->
+          <count class='btn' :start='start' @countDown ='start = false' @click.native = 'gaincode'></count>
         </div>
 
       </div>
@@ -127,6 +129,10 @@
 <script>
   import Storage from 'good-storage'
   import MobileSelect from 'mobile-select'
+  import Count from '@/base/countdown'
+  import {
+    MessageBox
+  } from 'mint-ui';
   export default {
     data() {
       return {
@@ -135,6 +141,7 @@
         isIdNumber: false,
         focusState: false,
         vcode: '',
+        start: false,
         user: {
           idType: '请选择证件类型',
           idNumber: '请输入证件号码',
@@ -179,9 +186,11 @@
           console.log(this.user.idType)
         }
       })
-      let redirect = this.$route.query.redirect
-      this.url = redirect || '/'
-      console.log(this.url)
+       
+          let redirect = this.$route.query.redirect
+          this.url = redirect || '/'
+          console.log(this.url)
+     
     },
     methods: {
       _isChinaName(name) {
@@ -206,14 +215,18 @@
         this.user.idNumber = this.user.idNumber || '请输入证件号码'
       },
       gaincode: function () {
+        if (this.start) {
+          return
+        }
+        console.log(111)
         var url = '/common/sendVCode'
         var params = {
           mobile: this.user.mobile,
           type: 'verifyUser'
         }
         this.$http.post(url, params).then(data => {
-          console.log(data)
           if (data.data.code == 200) {
+            this.start = true
             alert('验证码已发送，请注意查收')
           }
           if (data.data.code == 500) {
@@ -280,17 +293,8 @@
         return enums[val] || val
       }
     },
-    directives: {
-      focus: {
-        update: function (el, {
-          value
-        }) {
-          if (value) {
-            el.focus()
-            console.log(value)
-          }
-        }
-      }
+    components:{
+      Count
     }
   }
 

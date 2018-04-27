@@ -22,27 +22,27 @@
       </div>
     </div>
     <div class="equity">
-      <p style="text-align:left;padding:1rem 0 1rem 0" class="weight">享有权益</p>
+      <p style="text-align:left;padding:1rem 20px" class="weight">享有权益</p>
       <div class="equity-list">
-        <div v-show="benefitPackageid=='B'||benefitPackageid=='E'||benefitPackageid=='A'">
+        <div v-show="fly1">
           <img src="../../assets/image/product/icon-helicopter.png" alt="">
-          <p>直升机院前救援</p>
+          <p style="font-size:12px;padding-top:10px">直升机院前救援</p>
         </div>
-        <div v-show="benefitPackageid=='B'||benefitPackageid=='E'||benefitPackageid=='A'">
+        <div v-show="fly2">
           <img  src="../../assets/image/product/icon-call.png" alt="">
-          <p>120协调</p>
+          <p style="font-size:12px;padding-top:10px">120协调</p>
         </div>
-        <div v-show="benefitPackageid!='B'&&benefitPackageid!='A'"> 
+        <div v-show="fly3"> 
           <img  src="../../assets/image/product/icon-stretcher.png" alt="">
-          <p>直升机医疗转运9折</p>
+          <p style="font-size:12px;padding-top:10px">直升机医疗转运9折</p>
         </div>
-        <div v-show="benefitPackageid!='B'||benefitPackageid=='A'">
+        <div v-show="fly4">
           <img  src="../../assets/image/product/icon-truck.png" alt="">
-          <p>道路救援</p>
+          <p style="font-size:12px;padding-top:10px">道路救援</p>
         </div>
-        <div v-show="benefitPackageid!='B'||benefitPackageid=='A'">
+        <div v-show="fly5">
           <img  src="../../assets/image/product/icon-car.png" alt="">
-          <p>代步车服务</p>
+          <p style="font-size:12px;padding-top:10px">代步车服务</p>
         </div>
       </div>
     </div>
@@ -151,7 +151,6 @@
     background: #fff;
     margin: 10px 0;
     text-align: center;
-    padding: 0 20px;
   }
 
   .equity-list {
@@ -212,20 +211,31 @@ export default {
           benefitPackage:'',
           personItems:'',
           vehicleItems:'',
-          benefitPackageid:''
+          benefitPackageid:'',
+          fly1:'',
+          fly2:'',
+          fly3:'',
+          fly4:'',
+          fly5:'',
       }
   },
   mounted(){
       console.log(window.sessionStorage.getItem('orderId'))
       let url = `wechat/order/getOrderDetail?id=${window.sessionStorage.getItem('orderId')}`
       this.$http.get(url).then(data => {
-        const{ benefitOrder , benefitPackage , personItems, vehicleItems} = data.data.payload
+        const{ benefitOrder , benefitPackage , personItems, vehicleItems,myBenefits} = data.data.payload
         this.benefitOrder = benefitOrder
         this.benefitPackage = benefitPackage
         this.personItems = personItems
         this.vehicleItems = vehicleItems
+        this.myBenefits = myBenefits
         this.benefitPackageid = benefitPackage.id
 
+        if(this.myBenefits.ambulance) this.fly2 = true
+        if(this.myBenefits.firstAid) this.fly1 = true
+        if(this.myBenefits.medicalTransfer) this.fly3 = true
+        if(this.myBenefits.roadRescue) this.fly4 = true
+        if(this.myBenefits.scooter) this.fly5 = true
         // console.log(data)
         this.personItems.map(item=>{
             if(item.idType==0) item.idTypes = '身份证'

@@ -33,7 +33,7 @@ axios.interceptors.request.use(
     config.headers = {
       ['X-WxFrom']: getWxFrom(),
       // ['X-SessionId']: getSessionId(),
-      ['X-SessionId']: '0976b8430cb3490bbdcdf102b9e08018'
+      ['X-SessionId']: '6be7bc426946444bb4c11b2bcd4404c5'
     }
     if (config.method === 'post') {
       config.data = qs.stringify(config.data)
