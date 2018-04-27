@@ -21,13 +21,13 @@ import { getSessionId, getWxFrom } from '@/util'
 import Storage from 'good-storage'
 import { Indicator } from 'mint-ui'
 
-// import VConsole from 'vconsole'
+import VConsole from 'vconsole'
 
 import { Field, DatetimePicker, Radio } from 'mint-ui'
 Vue.component(Field.name, Field)
 Vue.component(DatetimePicker.name, DatetimePicker)
 
-// let vConsole = new VConsole()
+let vConsole = new VConsole()
 
 FastClick.attach(document.body)
 
