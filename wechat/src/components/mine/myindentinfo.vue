@@ -5,7 +5,7 @@
         <p>{{benefitOrder.createTime}}</p>
       </div>
       <div class="indent-pay">
-        <p>订单编号:{{benefitOrder.id}}</p>
+        <p>订单编号 {{benefitOrder.id}}</p>
         <p >合计：￥{{benefitOrder.totalPrice}}</p>
       </div>
 
@@ -49,7 +49,7 @@
     <div  style="margin-bottom:5px" v-for="(item ,index) in personItems" :key='index'>
         
       <div class="message">
-          <p style="padding:10px 0 10px 20px">权益人</p>
+          <p style="padding:10px 0 10px 20px" class="weight">权益人</p>
           <div class="msg">
               <p style="width:20%;margin-left:20px;">姓名</p>
               <p style="width:60%">{{item.realName}}</p>
@@ -77,7 +77,7 @@
     <div style="margin-top:10px" v-for="(car,key) in vehicleItems" :key='key'>
        
         <div class="message">
-          <p style="padding:10px 0 10px 20px">权益车辆</p>
+          <p style="padding:10px 0 10px 20px"  class="weight">权益车辆</p>
           <div class="msg">
               <p style="width:20%;margin-left:20px;">车牌号码</p>
               <p style="width:60%">{{car.plateNumber}}</p>
@@ -119,6 +119,12 @@
 <style scoped lang='less'>
 .container{
   padding-bottom: 45px;
+}
+.weight{
+  font-size: 16px;
+  font-weight:700;
+  color: black;
+
 }
   .indent-box {
     width: 100%;

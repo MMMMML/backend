@@ -7,7 +7,7 @@
           <p>{{item.createTime}}</p>
         </div>
         <div class="indent-pay">
-          <p>订单编号:{{item.id}}</p>
+          <p>订单编号$nbsp;  {{item.id}}</p>
           <p style="color:red">{{item.Status}}</p>
         </div>
 
