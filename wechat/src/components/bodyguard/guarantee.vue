@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="must" v-for="(item, index) of personUser" :key='index'>
-      <p style="padding:10px 20px 0">权益人{{index+1}}</p>
+      <p style="padding:10px 20px 0;color:balck;font-size:16px">权益人{{index+1}}</p>
       <div class="man">
         <p class="human-name">姓名</p>
         <!-- <p>马玲</p> -->
