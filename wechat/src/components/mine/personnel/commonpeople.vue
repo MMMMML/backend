@@ -4,15 +4,15 @@
       <h3>权益人</h3>
       <div class="man vux-1px-b">
         <p class="human-name">姓名</p>
-        <input type="text"  class="human-input" v-model='form.realName' placeholder="请输入姓名">
+        <input type="text" :disabled='readonly' class="human-input" v-model='form.realName' placeholder="请输入姓名">
       </div>
       <div class="man vux-1px-b">
         <p class="human-name">证件类型</p>
-        <p id="trigger" class="human-input">{{ form.idType | format }}</p>  
+        <p id="trigger" class="human-input">{{ form.idType | format }}</p>
       </div>
       <div class="man vux-1px-b">
         <p class="human-name">证件号码</p>
-        <input type="text"  class="human-input" v-model='form.idNumber' placeholder="请输入证件号码">        
+        <input type="text" :disabled='readonly' class="human-input" v-model='form.idNumber' placeholder="请输入证件号码">        
       </div>
       <div class="man">
         <p class="human-name">手机号码</p>
@@ -120,6 +120,19 @@
     font-size: 16px;
     letter-spacing: 4px;
   }
+  #trigger {
+    position: relative;
+    .placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: red;
+      z-index: 9;
+    }
+  }
 }
 </style>
 <script>
@@ -138,7 +151,8 @@ export default {
         emergencyPhone: '',
         familyHistory: '',
         otherInfo: '',
-        id: ''
+        id: '',
+        readonly: false
       }
     }
   },
@@ -147,7 +161,7 @@ export default {
     if (this.form.id) {
       this._getPeopleInfo()
       document.title = '编辑权益人'
-      
+      this.readonly = true
     } else {
       document.title = '添加权益人'
     }
@@ -187,7 +201,7 @@ export default {
         let data = res.data.payload
         this.SET_COMMON_PEOPLE(data)
         Object.keys(this.form).forEach(item => {
-          this.form[item] = this.commonPeople[item] || ''
+          this.form[item] = this.commonPeople[item] !== '' ? this.commonPeople[item] : ''
         })
       })
     },
