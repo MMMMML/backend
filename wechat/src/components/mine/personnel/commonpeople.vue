@@ -4,7 +4,7 @@
       <h3>权益人</h3>
       <div class="man vux-1px-b">
         <p class="human-name">姓名</p>
-        <input type="text" class="human-input" v-model='form.realName' placeholder="请输入姓名">
+        <input type="text"  class="human-input" v-model='form.realName' placeholder="请输入姓名">
       </div>
       <div class="man vux-1px-b">
         <p class="human-name">证件类型</p>
@@ -12,7 +12,7 @@
       </div>
       <div class="man vux-1px-b">
         <p class="human-name">证件号码</p>
-        <input type="text" class="human-input" v-model='form.idNumber' placeholder="请输入证件号码">        
+        <input type="text"  class="human-input" v-model='form.idNumber' placeholder="请输入证件号码">        
       </div>
       <div class="man">
         <p class="human-name">手机号码</p>
@@ -147,6 +147,7 @@ export default {
     if (this.form.id) {
       this._getPeopleInfo()
       document.title = '编辑权益人'
+      
     } else {
       document.title = '添加权益人'
     }
