@@ -31,6 +31,7 @@ export default {
           this.$router.push('/mine')
         })
       }).catch(e => {
+        Cookies.remove('sessionId')
         const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
         window.location.href = redirect
       })

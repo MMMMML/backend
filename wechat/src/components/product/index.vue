@@ -12,7 +12,7 @@
         <div class="nav-text">{{ productInfo.explain }}</div>
       </div>
     </div>
-
+    <van-dialog v-model='dialog'>21321321</van-dialog>
     <!-- privilege  -->
     <div class="privilege">
       <div class="exclusive">
@@ -357,6 +357,7 @@
 </template>
 <script>
 import { differenceInDays, format } from 'date-fns'
+import Storage from 'good-storage'
 import PayBtn from '@/base/pay_bottom_btn'
 import Check from '@/util/checkIDAuth'
 import banner4 from '@/assets/image/product/banner4.png'
@@ -448,7 +449,8 @@ import axios from 'axios'
         offcial: [],
         id: '',
         car: '',
-        activePro: false
+        activePro: false,
+        dialog: false
       }
     },
     created() {
@@ -545,6 +547,7 @@ import axios from 'axios'
         this.pickerStart = this.pickerVisible = format(v, 'YYYY-MM-DD')
       },
       handleBuy() {
+        // this.dialog = true
         if (this.id === 'A') {
           this.priceinfo = {}
           this.priceinfo.pickerVisible = this.pickerVisible
@@ -553,13 +556,23 @@ import axios from 'axios'
             return
           }
         }
-        Check().then(res => {
+        let userInfo = Storage.session.get('userInfo')
+        console.log(JSON.parse(Storage.session.get('userInfo')))
+        if (!userInfo || JSON.parse(Storage.session.get('userInfo')).verified === false || JSON.parse(Storage.session.get('userInfo')).verified === 'false') {
+          this.$dialog.confirm({
+            title: '提示',
+            message: '欢迎进入空降联盟，请先进行身份认证'
+          }).then(res => {
+            this.$router.push('/attestation')
+          }).catch(e => {
+          })
+        } else {
           if (this.id === 'A') {
             this.$router.push(`/pay?packageId=A&counter=${this.counter}&price=${this.price}&benefitEffectTime=${this.pickerStart}`)
           } else if (this.id === 'C') {
             this.$router.push(`/pay?packageId=C&activePro=${this.activePro}&price=${this.price}`)
           }
-        })
+        }
       }
     },
     computed: {

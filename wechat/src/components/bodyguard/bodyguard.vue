@@ -467,9 +467,9 @@
 
 </style>
 <script>
-  import { Dialog } from 'vant'
   import { differenceInDays } from 'date-fns'
   import Check from '@/util/checkIDAuth'
+  import Storage from 'good-storage'
    import {
     MessageBox
   } from 'mint-ui';
@@ -498,7 +498,6 @@
         console.log(this.specifics)
         this.one = this.specifics.main.price
         this.discount = this.specifics.main.discount
-
       })
     },
     methods: {
@@ -519,7 +518,6 @@
         d = d < 10 ? ('0' + d) : d
         return y + '-' + m + '-' + d
       },
-
       handleConfirm: function (v) {
         this.$refs.picker.close();
         this.pickerStart = this.pickerVisible = this.formatDate(v)
@@ -552,8 +550,15 @@
       },
       buy: function () {
         var url = location.hash.slice(1)
-        Check(url).then(res => {
-
+        let userInfo = Storage.session.get('userInfo')
+        if (!userInfo || JSON.parse(Storage.session.get('userInfo')).verified === false || JSON.parse(Storage.session.get('userInfo')).verified === 'false') {
+          this.$dialog.confirm({
+            title: '提示',
+            message: '欢迎进入空降联盟，请先进行身份认证'
+          }).then(res => {
+            this.$router.push('/attestation')
+          })
+        } else {
           this.priceinfo = {}
           this.priceinfo.pickerVisible = this.pickerVisible
           this.priceinfo.pickerEnd = this.pickerEnd
@@ -566,8 +571,7 @@
             window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))
             this.$router.push('/guarantee')
           }
-        })
-
+        }
       }
     },
     watch: {
