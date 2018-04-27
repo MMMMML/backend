@@ -16,14 +16,23 @@
 </template>
 <script>
 import Check from '@/util/checkIDAuth'
+import Storage from 'good-storage'
+import Cookies from 'js-cookie'
 export default {
   data() {
     return {}
   },
   methods: {
     toMine() {
-      Check('/mine').then(res => {
-        this.$router.push('/mine')
+      this.$http.get("wechat/auth/getCurrentUser").then(res => {
+        const userinfo = res.data.payload
+        Storage.session.set('userInfo', JSON.stringify(userinfo))
+        Check('/mine').then(res => {
+          this.$router.push('/mine')
+        })
+      }).catch(e => {
+        const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
+        window.location.href = redirect
       })
     }
   }

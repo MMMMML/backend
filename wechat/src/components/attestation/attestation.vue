@@ -22,7 +22,7 @@
       </div>
       <div class="man">
         <p class="human-name">证件号码</p>
-        <input type="text" v-model="user.idNumber" @focus="aaa()" @blur="bbb()" class="human-input">
+        <input style='color: #888;' type="text" v-model="user.idNumber" @focus="aaa()" @blur="bbb()" class="human-input">
         <div class="warning" v-show="isIdNumber">
           <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
           <span>证件号码不能为空</span>
@@ -260,17 +260,20 @@
             alert(data.data.message)
           }
           if (data.data.code == 200) {
-            let obj = JSON.parse(Storage.get('userInfo'))
+            const userInfo = Storage.session.get('userInfo')
+            let obj
+            if (userInfo) {
+              obj = JSON.parse(Storage.session.get('userInfo'))
+            } else {
+              obj = {}
+            }
             obj = {
               ...obj,
               verified: true
             }
             // const userinfo = res.data.payload
-            Storage.set('userInfo', JSON.stringify(obj))
-            // this.$router.replace(this.url)
-            console.log('~~~~~')
+            Storage.session.set('userInfo', JSON.stringify(obj))
             console.log(this.url)
-            console.log('~~~~~')
 
             // window.location.href = this.url
             this.$router.push(this.url)

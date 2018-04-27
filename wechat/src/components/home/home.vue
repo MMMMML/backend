@@ -121,7 +121,7 @@ export default {
     }
   }
   .swiper_list {
-    height: 328px;
+    // height: 328px;
     .title {
       height: 60px;
       padding: 20px 20px 12px 20px;
@@ -146,12 +146,11 @@ export default {
       .swiper-container {
         .swiper-slide {
           width: 89.333vw;
-          height: 169px;
-          border-radius: 5px;
+          // height: 169px;
+          border-radius: 5px 5px 10px 10px;
           overflow: hidden;
           img{
             width: 100%;
-            height: 100%;
           }
         }
       }

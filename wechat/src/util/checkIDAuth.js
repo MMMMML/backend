@@ -1,16 +1,14 @@
 import Storage from 'good-storage'
-function Check (url) {
+function Check (url = '/') {
   return new Promise((resolve, reject) => {
-    const result = JSON.parse(Storage.get('userInfo'))
-    if (result.verified) {
-      resolve(result)
+    if (Storage.session.get('userInfo')) {
+      const result = JSON.parse(Storage.session.get('userInfo'))
+      if (result.verified) {
+        resolve(result)
+      } else {
+        window.location.href = `/alliance-html/wechat/#/attestation?redirect=${url}`
+      }
     } else {
-      // let result = confirm('欢迎进入空降联盟，确定要进行身份认证？')
-      // if (result) {
-      //   console.log(1)
-      // } else {
-      //   console.log(2)
-      // }
       window.location.href = `/alliance-html/wechat/#/attestation?redirect=${url}`
     }
   })

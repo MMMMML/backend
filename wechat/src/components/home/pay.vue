@@ -4,7 +4,8 @@
 
     <div class="must" v-for='(item, index) of personUserInfo' :key='index'>
       <div class='info_wrapper' v-if='item.active'>
-        <h4>主权益人</h4>
+        <h4 v-if='index === 0'>主权益人</h4>
+        <h4 v-else>权益人{{ index + 1 }}</h4>
         <div class="item vux-1px-b">
           <p class="item_label">姓名</p>
           <button @click='selectPerson(index)' class='select'>选择权益人</button>

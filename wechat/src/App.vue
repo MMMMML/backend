@@ -9,40 +9,26 @@
 
 
 <script>
-import Storage from 'good-storage'
   export default {
     data() {
       return {
       }
     },
-    created() {
-      this._getUserInfo()
-    },
-    methods: {
-      _getUserInfo() {
-        this.$http.get("wechat/auth/getCurrentUser").then(res => {
-          const userinfo = res.data.payload
-          Storage.set('userInfo', JSON.stringify(userinfo))
-        })
-      }
+    mounted () {
+      var _mtac = {};
+      (function() {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        mta.setAttribute("cid", "500608352");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })()
     }
   }
 
 </script>
 
-<script>
-  	var _mtac = {};
-  	(function() {
-  		var mta = document.createElement("script");
-  		mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
-  		mta.setAttribute("name", "MTAH5");
-  		mta.setAttribute("sid", "500608350");
-  		mta.setAttribute("cid", "500608352");
-  		var s = document.getElementsByTagName("script")[0];
-  		s.parentNode.insertBefore(mta, s);
-  	})();
-</script>
-
 <style lang='less' scoped>
-  @import '~vux/src/styles/1px.less';
 </style>
