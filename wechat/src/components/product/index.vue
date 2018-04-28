@@ -191,7 +191,7 @@
           服务标准：当权益人因意外正在接受救援服务而无法联络家属时，空降联盟将权益人的救援医院、病情状态等必要信息告知权益人所登记的紧急联络人
         </p>
         <p class="title-icon">八、院前救援适应症</p>
-        <img src="../../assets/image/new_product/lang_3.png" alt="">
+        <img src="../../assets/image/new_product/small_2.png" alt="">
         <p class="title-icon">九、医疗转运适应症</p>
         <img src="../../assets/image/new_product/lang_4.png" alt="">
         <p class="title-icon">十、除外责任及限制责任</p>        
@@ -221,11 +221,11 @@
         <img src="../../assets/image/product/arrow@3x.png" alt="">
       </div>
       <div v-show="show[2]" class='showText'>
-        <p class="title-icon">【权益说明】</p>
+        <p class="title-icon">一、权益说明</p>
         <p class='title_normal'>空降联盟为权益人提供地面救护车协调服务</p>
-        <p class="title-icon">【院前救援适应症】</p>
+        <p class="title-icon">二、院前救援适应症</p>
         <img src="../../assets/image/new_product/small_2.png" alt="">
-        <p class="title-icon">【服务内容】</p>
+        <p class="title-icon">三、服务内容</p>
         <p class='title_normal'>
           1、在权益人符合院前救援服务范围的情况下，如因客观原因不适航而无法出动直升机，或必须联合120急救中心开展空地联运时，空降联盟将提供地面救护车协调服务，并承担相应的救护车费用<br>
           2、在权益人不符合院前救援服务范围的情况下，空降联盟将提供地面救护车协调服务，但由此产生的救援费用由权益人自行承担
@@ -281,8 +281,9 @@
         <p class='title_normal'>
           ● 权益人如需使用出险代步车服务，请携带本人驾驶证正副本、二代身份证、可用额度5000元以上国内信用卡(自驾押金预授权及交通违章押金)<br />
           ● 益人上述所有证件有效期的剩余期限均须在一个月以上<br />
-          ● 相关费用须由权益人本人国内信用卡及国内借记卡支付，不接受现金付款<br />
-          ● 年度救援权益的用户，在符合服务标准的情况下可免费使用3次出险代步车服务，超过3次之后可享受空降联盟提供的租赁车尊享折扣礼券<br />
+          ● 相关费用须由权益人本人国内信用卡及国内借记卡支付，不接受现金付款<br/>
+          <span v-if='id === "C"'>● 年度救援权益的用户，在符合服务标准的情况下可免费使用3次出险代步车服务，超过3次之后可享受空降联盟提供的租赁车尊享折扣礼券<br /></span>
+          <span v-if='id === "A"'>● 7天综合救援权益有效期内的用户，在符合服务标准的情况下可以免费使用1次代步车<br /></span>
           ● 因服务点营业时间限定，故出险代步车服务受理时间范围为9点至18点，非本时间段，用户可以选择乘坐出租车，空降联盟将会依据权益人的出租车发票承担相应出租车费用，费用上限为100元
         </p>
         <p class="title-icon">四、除外责任</p>
