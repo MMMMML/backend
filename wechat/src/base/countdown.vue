@@ -55,13 +55,14 @@
 </script>
 <style lang="less" scoped>
   .btn{
-    background: red;
+    background: #f44336;
     height: 1.5rem;
     border: 0;
     padding: 0 0.1rem;
     color: #fff;
     font-size: 14px;
     border-radius: 10px;
+    width: 22vw;
     &.active {
         background: #ccc;
     }

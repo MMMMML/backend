@@ -366,8 +366,8 @@ import { differenceInDays, format } from 'date-fns'
 import Storage from 'good-storage'
 import PayBtn from '@/base/pay_bottom_btn'
 import Check from '@/util/checkIDAuth'
-import banner4 from '@/assets/image/product/banner4.png'
-import banner1 from '@/assets/image/product/banner-空降骑士.png'
+import banner4 from '@/assets/image/home/急速全明星.jpeg'
+import banner1 from '@/assets/image/home/banner1.png'
 import helicopter from '@/assets/image/product/icon-helicopter.png'
 import call from '@/assets/image/product/icon-call.png'
 import truck from '@/assets/image/product/icon-truck.png'
@@ -843,6 +843,9 @@ import axios from 'axios'
         text-align: center;
         padding: 40px;
         margin-top: 10px;
+        img {
+          width: 70%;
+        }
       }
       .title-icon {
         font-size: 14px;

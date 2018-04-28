@@ -2,7 +2,7 @@
   <div class="container">
     <!-- picture -->
     <div class="banner">
-      <img src="../../assets/image/product/banner-空降骑士@3x.png" alt="">
+      <img src="../../assets/image/home/banner2.png" alt="">
     </div>
     <!-- nav -->
     <div class="nav-word">
@@ -272,7 +272,7 @@
         </p>
       </div>
       <div class="notice-logo">
-        <img src='../../assets/image/product/icon_logo_color.png' alt="">
+        <img style="width: 70%;" src='../../assets/image/product/icon_logo_color.png' alt="">
       </div>
     </div>
 
