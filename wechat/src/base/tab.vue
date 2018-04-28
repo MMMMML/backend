@@ -1,19 +1,15 @@
 <template>
   <div class="tab_box vux-1px-t">
-    <router-link tag='div' class="tab-item" to='/home'>
-      <picture>
-        <source srcset='../assets/image/home/banner1.png' media='(min-device-pixel-ratio: 2)'/>
-        <source srcset='../assets/image/home/banner2.png' media='(min-device-pixel-ratio: 3)'/>
-        <img src="../assets/image/home/button-homepage.png"/>
-      </picture>
+    <router-link tag='div' class="tab-item item1" to='/home'>
+      <img class='img1' src="../assets/image/home/button-homepage@2x.png"/>
       <span class="tab-label">首页</span>
     </router-link>
-    <a class="tab-item" href="tel:02160554929">
-      <img src="../assets/image/home/button-help.png" alt="">
+    <div class="tab-item item2" href="tel:02160554929">
+      <img class='img2' src="../assets/image/home/button-help@2x.png" alt="">
       <span style='color: #4B4B4B;' class="tab-label">一键呼救</span>
-    </a>
-    <div @click='toMine' class="tab-item">
-      <img src="../assets/image/home/button-me.png" alt="">
+    </div>
+    <div @click='toMine' class="tab-item item3">
+      <img class='img3' src="../assets/image/home/button-me@2x.png" alt="">
       <span class="tab-label">我的</span>
     </div>
   </div>
@@ -55,31 +51,42 @@ export default {
     background: #fff;
     z-index: 9;
     .tab-item {
+      height: 100%;  
       flex: 1;
-      text-align: center;
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       font-size: 12px;
       padding: 4px 0;
-      img {
-        width: 17px;
-        height: 23px;
-        margin-bottom: 6px;
-      }
-      &:nth-of-type(1) {
+      &.item1 {
         img {
           width: 24px;
           height: 22px;
         }
+        span {
+          margin-top: 4px;
+        }
       }
-      &:nth-of-type(3) {
+      &.item2 {
+        img {
+          width: 17px;
+          height: 23px;
+        }
+        span {
+          margin-top: 3px;
+        }
+      }
+      &.item3 {
         img {
           width: 14px;
           height: 22px;
         }
+        span {
+          margin-top: 4px;
+        }
       }
+     
     }
   }
 </style>

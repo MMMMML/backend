@@ -287,7 +287,7 @@
 </template>
 <style scoped lang='less'>
   .container {
-    padding-bottom: 50px;
+    padding-bottom: 55px;
   }
 
   .banner {
@@ -323,6 +323,7 @@
     .nav-text {
       font-size: 14px;
       margin-top: 10px;
+      line-height: 20px;
       color: #4B4B4B;
     }
   }
@@ -342,10 +343,11 @@
       display: flex;
       .privilege-spuare {
         text-align: center;
+        width: 25%;
         p {
           font-size: 12px;
           font-weight: 100;
-
+          white-space: nowrap;
         }
       }
     }
@@ -401,6 +403,7 @@
     background: #fff;
     width: 100%;
     height: 100%;
+    margin-top: 10px;
     .notice-part {
       height: 50px;
       line-height: 35px;
@@ -433,12 +436,11 @@
   }
 
   .payment {
-    height: 50px;
+    height: 45px;
     background: #fff;
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
-    line-height: 50px;
+    line-height: 45px;
     padding-left: 20px;
     position: fixed;
     width: 100%;
@@ -448,7 +450,7 @@
       height: 100%;
       width: 100px;
       color: white;
-      line-height: 50px;
+      line-height: 45px;
       background: red;
       text-align: center;
     }

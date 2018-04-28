@@ -39,10 +39,10 @@
         </div>
       </div>
       <div class="nums" v-if='id === "A"'>
-        <h3>权益人数<span style='color: red;margin-left: 10px;'>￥{{main.addPrice || 0 }} / 人</span></h3>
+        <h3>增加权益人<span style='color: red;margin-left: 10px;'>￥{{main.addPrice || 0 }} / 人</span></h3>
         <div class='wrapper'>
           <div class='box minus' @click='min'>-</div>
-          <span class='count'>{{ counter }}</span>
+          <span class='count'>{{ counter - 1 }}</span>
           <div class='box add' @click='add'>+</div>
         </div>
       </div>
@@ -213,7 +213,7 @@
       </div>
       <div class="notice-part" @click="showItem(2)">
         <p>地面120服务</p>
-        <img src="../../assets/image/product/biao2.png" alt="">
+        <img src="../../assets/image/product/arrow@3x.png" alt="">
       </div>
       <div v-show="show[2]" class='showText'>
         <p class="title-icon">【权益说明】</p>
@@ -611,7 +611,7 @@ import axios from 'axios'
     width: 100vw;
     min-height: 100vh;
     color: #4B4B4B;
-    padding-bottom: 60px;
+    padding-bottom: 55px;
     .top {
       width: 100%;
       .banner {
@@ -680,8 +680,12 @@ import axios from 'axios'
             margin-top: 2px;
             font-size: 12px;
             white-space: nowrap;
+            margin-bottom: 0;
           }
         }
+      }
+      .date {
+        margin: 16px 0;
       }
       .picker {
         display: flex;
@@ -754,6 +758,9 @@ import axios from 'axios'
         .icon_box {
           width: 20%;
           text-align: center;
+          p {
+            font-size: 12px;
+          }
         }
       }
     }
@@ -761,8 +768,9 @@ import axios from 'axios'
       background: #fff;
       width: 100%;
       height: 100%;
+      margin-top: 10px;
       .notice-part{
-        height: 40px;
+        height: 50px;
         border-bottom: 1px solid #ccc;
         display: flex;
         justify-content: space-between;
