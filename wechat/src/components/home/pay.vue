@@ -9,7 +9,7 @@
         <div class="item vux-1px-b">
           <p class="item_label">姓名</p>
           <button @click='selectPerson(index)' class='select'>选择权益人</button>
-          <input type="text" class="item_value" v-model='item.realName' placeholder="请输入姓名">
+          <input type="text" class="item_value" v-model='item.realName' placeholder="请输入真实姓名">
           <div class="warning" v-show="validateArr[index].isChinaName">
             <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
             <span>姓名格式错误，请重新填写</span>

@@ -14,7 +14,7 @@
           <p style="padding:10px 20px 0 ;margin-left:20px">权益人</p>
           <div class="man">
             <p class="human-name">姓名</p>
-            <input type="text" class="human-input" placeholder="请输入姓名" v-model='item.realName'>
+            <input type="text" class="human-input" placeholder="请输入真实姓名" v-model='item.realName'>
             <div style="display:flex;align-items: center;">
               <div class="btn" @click='member'>选择权益人</div>
             </div>
@@ -66,7 +66,7 @@
             <p style="padding:10px 20px 0 ;margin-left:20px">权益人</p>
             <div class="man">
               <p class="human-name">姓名</p>
-              <input type="text" class="human-input" placeholder="请输入姓名" v-model='meg.user.realName'>
+              <input type="text" class="human-input" placeholder="请输入真实姓名" v-model='meg.user.realName'>
               <div style="display:flex;align-items: center;">
                 <div class="btn people" @click="people1">选择权益人</div>
               </div>

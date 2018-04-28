@@ -4,7 +4,7 @@
       <div class="man">
         <p class="human-name">姓名</p>
         <!-- <p>马玲</p> -->
-        <input type="text" class="human-input" v-model="user.realName" placeholder="请输入姓名">
+        <input type="text" class="human-input" v-model="user.realName" placeholder="请输入真实姓名">
         <!-- <div style="display:flex;align-items: center;">
           <div class="btn" @click="select()">选择权益人</div>
         </div> -->
