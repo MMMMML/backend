@@ -1,6 +1,6 @@
 <template>
 
-  <el-container style="height: 100%;">
+  <el-container style="height: 100%;flex-basis: 0;">
     <div class="outer-container">
       <el-aside width="200px">
         <h2 class="mess" style="text-align:center">空降联盟平台</h2>
