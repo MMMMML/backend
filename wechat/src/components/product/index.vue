@@ -367,18 +367,7 @@ import { differenceInDays, format } from 'date-fns'
 import Storage from 'good-storage'
 import PayBtn from '@/base/pay_bottom_btn'
 import Check from '@/util/checkIDAuth'
-<<<<<<< HEAD
 import banner4 from '@/assets/image/product/banner4.jpeg'
-import banner1 from '@/assets/image/product/banner-空降骑士.png'
-import helicopter from '@/assets/image/product/icon-helicopter@2x.png'
-import call from '@/assets/image/product/icon-call@2x.png'
-import truck from '@/assets/image/product/icon-truck@2x.png'
-import trans from '@/assets/image/product/icon-stretcher@2x.png'
-import car from '@/assets/image/product/icon-car@2x.png'
-import carNo from '@/assets/image/product/icon-car-no@2x.png'
-import truckNo from '@/assets/image/product/icon-truck-no@2x.png'
-=======
-import banner4 from '@/assets/image/home/急速全明星.jpeg'
 import banner1 from '@/assets/image/home/banner1.png'
 import helicopter from '@/assets/image/product/icon-helicopter.png'
 import call from '@/assets/image/product/icon-call.png'
@@ -387,7 +376,6 @@ import trans from '@/assets/image/product/icon-stretcher.png'
 import car from '@/assets/image/product/icon-car.png'
 import carNo from '@/assets/image/product/icon-car-no.png'
 import truckNo from '@/assets/image/product/icon-truck-no.png'
->>>>>>> 0fa29a9f0e905ffebd9b5a1bf90bf7f24d6c5cba
 
 // import duan1 from '@/assets/image/new_product/small_1.png'
 // import duan2 from '@/assets/image/new_product/small_2.png'
@@ -801,10 +789,14 @@ import axios from 'axios'
           letter-spacing: 1px;
         }
       }
+      .incre {
+        margin-top: 18px;
+      }
       .incre_content {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
+        // margin-top: 10px;
         .price {
           display: flex;
           flex-flow: row nowrap;
@@ -881,6 +873,11 @@ import axios from 'axios'
         .title_normal {
           line-height: 24px;
         }
+      }
+    }
+    .exclusive {
+      h3 {
+        margin-bottom: 8px;
       }
     }
   }

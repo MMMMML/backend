@@ -20,7 +20,7 @@ import router from './router'
 import { getSessionId, getWxFrom } from '@/util'
 import Storage from 'good-storage'
 
-import VConsole from 'vconsole'
+// import VConsole from 'vconsole'
 import Vant from 'vant'
 import 'vant/lib/vant-css/index.css'
 // import './common/mixin.less'
@@ -29,12 +29,12 @@ Vue.component(Field.name, Field)
 Vue.component(DatetimePicker.name, DatetimePicker)
 Vue.use(Vant)
 
-let vConsole = new VConsole()
+// let vConsole = new VConsole()
 
 FastClick.attach(document.body)
 
-// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
-axios.defaults.baseURL = '/apis'
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+// axios.defaults.baseURL = '/apis'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {

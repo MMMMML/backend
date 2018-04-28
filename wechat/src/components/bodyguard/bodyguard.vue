@@ -665,7 +665,7 @@
             day = 1
           }
         }
-        let date = `${year}-${month}-${day}`
+        let date = `${year}/${month}/${day}`
         let x = Date.parse(date)
         this.startDates = new Date(x)
       }
