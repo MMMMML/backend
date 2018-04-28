@@ -15,18 +15,26 @@
       }
     },
     mounted () {
-      // var _mtac = {};
-      // (function() {
-      //   var mta = document.createElement("script");
-      //   mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
-      //   mta.setAttribute("name", "MTAH5");
-      //   mta.setAttribute("sid", "500608350");
-      //   mta.setAttribute("cid", "500608352");
-      //   var s = document.getElementsByTagName("script")[0];
-      //   s.parentNode.insertBefore(mta, s);
-      // })()
+      var _mtac = {};
+      (function() {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500608350");
+        mta.setAttribute("cid", "500608352");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })()
 
-      console.log(MtaH5)
+      // MtaH5.init({
+      //   "sid": '500608350', //必填，统计用的appid
+      //   "cid": '500608352', //如果开启自定义事件，此项目为必填，否则不填
+      //   "autoReport": 0,//是否开启自动上报(1:init完成则上报一次,0:使用pgv方法才上报)
+      //   "senseHash": 0, //hash锚点是否进入url统计
+      //   "senseQuery": 0, //url参数是否进入url统计
+      //   "performanceMonitor": 0,//是否开启性能监控
+      //   "ignoreParams": [] //开启url参数上报时，可忽略部分参数拼接上报
+      // });
       
       var url = 'wechat/getJSApiTicket'
       var jsurl = location.href.split('#')[0]

@@ -20,11 +20,11 @@
       <p>专属特权</p>
       <div class="privilege-icon">
         <div class="privilege-spuare">
-          <img src="../../assets/image/product/icon-helicopter.png" alt="">
+          <img src="../../assets/image/product/icon-helicopter@2x.png" alt="">
           <p>直升机院前救援</p>
         </div>
         <div class="privilege-spuare" style="margin-left:10px">
-          <img src="../../assets/image/product/icon-call.png" alt="">
+          <img src="../../assets/image/product/icon-call@2x.png" alt="">
           <p>120协调</p>
         </div>
       </div>
@@ -198,7 +198,7 @@
         <p class="title-icon">【权益人须知】</p>
         <p class='title_normal'>
           ● 权益人如需使用出险代步车服务，请携带本人驾驶证正副本、二代身份证、可用额度5000元以上国内信用卡(自驾押金预授权及交通违章押金)<br />
-          ● 益人上述所有证件有效期的剩余期限均须在一个月以上<br />
+          ● 权益人上述所有证件有效期的剩余期限均须在一个月以上<br />
           ● 相关费用须由权益人本人国内信用卡及国内借记卡支付，不接受现金付款<br />
           ● 年度救援权益的用户，在符合服务标准的情况下可免费使用3次出险代步车服务，超过3次之后可享受空降联盟提供的租赁车尊享折扣礼券<br />
           ● 因服务点营业时间限定，故出险代步车服务受理时间范围为9点至18点，非本时间段，用户可以选择乘坐出租车，空降联盟将会依据权益人的出租车发票承担相应出租车费用，费用上限为100元
@@ -342,6 +342,9 @@
       .privilege-spuare {
         text-align: center;
         width: 25%;
+        img {
+          width: 40px;
+        }
         p {
           font-size: 12px;
           font-weight: 100;

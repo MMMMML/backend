@@ -52,7 +52,7 @@
           <div class="price" @click='activePro = !activePro'>
             <p class='radio' v-show='!activePro'></p>
             <img class='radio' v-show='activePro' src="../../assets/image/product/icon-选中.png" alt="">
-            <span>￥79</span>
+            <span>￥85</span>
           </div>
           <div class="icon_box" v-show='!activePro' v-for='item of productInfo.privilege.pro.init' :key='item.url'>
             <img :src='item.url'>
@@ -99,7 +99,7 @@
           包含一位权益人在有效期内的直升机院前救援、地面120协调和直升机医疗转运9折权益服务费用
         </p>
         <p class='title_normal' v-if='id === "C"'>
-          【附加79元】<br>
+          【附加85元】<br>
           包含权益人在有效期内的非营运性四轮机动车辆道路救援和出险代步车服务费用
         </p>
         <p class='title_normal'>
@@ -280,7 +280,7 @@
         <p class="title-icon" >三、权益人须知</p>
         <p class='title_normal'>
           ● 权益人如需使用出险代步车服务，请携带本人驾驶证正副本、二代身份证、可用额度5000元以上国内信用卡(自驾押金预授权及交通违章押金)<br />
-          ● 益人上述所有证件有效期的剩余期限均须在一个月以上<br />
+          ● 权益人上述所有证件有效期的剩余期限均须在一个月以上<br />
           ● 相关费用须由权益人本人国内信用卡及国内借记卡支付，不接受现金付款<br/>
           <span v-if='id === "C"'>● 年度救援权益的用户，在符合服务标准的情况下可免费使用3次出险代步车服务，超过3次之后可享受空降联盟提供的租赁车尊享折扣礼券<br /></span>
           <span v-if='id === "A"'>● 7天综合救援权益有效期内的用户，在符合服务标准的情况下可以免费使用1次代步车<br /></span>
@@ -367,15 +367,15 @@ import { differenceInDays, format } from 'date-fns'
 import Storage from 'good-storage'
 import PayBtn from '@/base/pay_bottom_btn'
 import Check from '@/util/checkIDAuth'
-import banner4 from '@/assets/image/product/banner4.png'
+import banner4 from '@/assets/image/product/banner4.jpeg'
 import banner1 from '@/assets/image/product/banner-空降骑士.png'
-import helicopter from '@/assets/image/product/icon-helicopter.png'
-import call from '@/assets/image/product/icon-call.png'
-import truck from '@/assets/image/product/icon-truck.png'
-import trans from '@/assets/image/product/icon-stretcher.png'
-import car from '@/assets/image/product/icon-car.png'
-import carNo from '@/assets/image/product/icon-car-no.png'
-import truckNo from '@/assets/image/product/icon-truck-no.png'
+import helicopter from '@/assets/image/product/icon-helicopter@2x.png'
+import call from '@/assets/image/product/icon-call@2x.png'
+import truck from '@/assets/image/product/icon-truck@2x.png'
+import trans from '@/assets/image/product/icon-stretcher@2x.png'
+import car from '@/assets/image/product/icon-car@2x.png'
+import carNo from '@/assets/image/product/icon-car-no@2x.png'
+import truckNo from '@/assets/image/product/icon-truck-no@2x.png'
 
 // import duan1 from '@/assets/image/new_product/small_1.png'
 // import duan2 from '@/assets/image/new_product/small_2.png'
@@ -565,7 +565,7 @@ import axios from 'axios'
       //         content: '辽宁、北京、天津、河北、河南、山东、山西、江苏、上海、陕西、安徽、浙江、江西、福建、广东、海南、湖北、四川、重庆、贵州、广西、云南、湖南共23个省市'
       //       }, {
       //         small_title: '价格说明',
-      //         content: '<h6>【基础365元】</h6>包含一位权益人在有效期内的直升机院前救援、地面120协调和直升机医疗转运9折权益服务费用<h6>【附加79元】</h6>包含权益人在有效期内的非营运性四轮机动车辆道路救援和出险代步车服务费用<h6>【每次呼叫1元】</h6>实际发生直升机院前救援时，权益人在有效期内每呼叫一次需支付1元呼叫调度费'
+      //         content: '<h6>【基础365元】</h6>包含一位权益人在有效期内的直升机院前救援、地面120协调和直升机医疗转运9折权益服务费用<h6>【附加85元】</h6>包含权益人在有效期内的非营运性四轮机动车辆道路救援和出险代步车服务费用<h6>【每次呼叫1元】</h6>实际发生直升机院前救援时，权益人在有效期内每呼叫一次需支付1元呼叫调度费'
       //       }, {
       //         small_title: '服务热线',
       //         content: '021-60554929 &nbsp; 021-60554929'
@@ -635,7 +635,7 @@ import axios from 'axios'
           if (this.id === 'A') {
             return (100 * this.main.price + (this.counter - 1) * this.main.addPrice * 100) / 100
           } else if (this.id === 'C') {
-            return this.activePro ? (this.main.price * 100 + 79 * 100) / 100 : this.main.price
+            return this.activePro ? (this.main.price * 100 + 85 * 100) / 100 : this.main.price
           }
         }
       },
@@ -731,6 +731,9 @@ import axios from 'axios'
         .privilege-spuare {
           text-align: center;
           width: 25%;
+          img {
+            width: 40px;
+          }
           p {
             margin-top: 2px;
             font-size: 12px;
@@ -813,6 +816,9 @@ import axios from 'axios'
         .icon_box {
           width: 20%;
           text-align: center;
+          img {
+            width: 40px;
+          }
           p {
             font-size: 12px;
           }
