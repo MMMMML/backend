@@ -219,7 +219,7 @@
         <p class="title-icon">【权益说明】</p>
         <p class='title_normal'>空降联盟为权益人提供地面救护车协调服务</p>
         <p class="title-icon">【院前救援适应症】</p>
-        <img src="../../assets/image/new_product/small_3.png" alt="">
+        <img src="../../assets/image/new_product/small_2.png" alt="">
         <p class="title-icon">【服务内容】</p>
         <p class='title_normal'>
           1、在权益人符合院前救援服务范围的情况下，如因客观原因不适航而无法出动直升机，或必须联合120急救中心开展空地联运时，空降联盟将提供地面救护车协调服务，并承担相应的救护车费用<br>
