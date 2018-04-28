@@ -15,22 +15,25 @@
       }
     },
     mounted () {
-      var _mtac = {};
-      (function() {
-        var mta = document.createElement("script");
-        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
-        mta.setAttribute("name", "MTAH5");
-        mta.setAttribute("sid", "500608350");
-        mta.setAttribute("cid", "500608352");
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(mta, s);
-      })()
+      // var _mtac = {};
+      // (function() {
+      //   var mta = document.createElement("script");
+      //   mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
+      //   mta.setAttribute("name", "MTAH5");
+      //   mta.setAttribute("sid", "500608350");
+      //   mta.setAttribute("cid", "500608352");
+      //   var s = document.getElementsByTagName("script")[0];
+      //   s.parentNode.insertBefore(mta, s);
+      // })()
 
+      console.log(MtaH5)
+      
       var url = 'wechat/getJSApiTicket'
       var jsurl = location.href.split('#')[0]
       var params = {
         url: jsurl
       }
+
       this.$http.post(url, params).then(data => {
         var wxconfig = data.data.payload
         wx.config({
