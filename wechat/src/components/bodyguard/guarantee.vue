@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="must" v-for="(item, index) of personUser" :key='index'>
       <p style="padding:10px 20px 0; font-size: 16px; color: #222;font-weight: bold;">权益人{{index+1}}</p>
       <div class="man">
@@ -45,6 +45,9 @@
   </div>
 </template>
 <style scoped>
+.container{
+  padding-bottom: 45px;
+}
   .warning {
     position: absolute;
     bottom: 2.6rem;
@@ -122,12 +125,12 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 50px;
+    height: 45px;
     background: #fff;
     display: flex;
     justify-content: space-between;
     /* margin-top: 10px; */
-    line-height: 50px;
+    line-height: 45px;
     padding-left: 20px;
 
   }
@@ -136,7 +139,7 @@
     height: 100%;
     width: 100px;
     color: white;
-    line-height: 50px;
+    line-height: 45px;
     background: red;
     text-align: center;
   }

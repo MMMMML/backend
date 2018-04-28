@@ -67,7 +67,7 @@
 export default {
   data(){
       return{
-          user:[],
+          user: '',
           members:[]
       }
   },
@@ -77,6 +77,11 @@ export default {
           console.log(data)
         this.members = data.data.payload.members
         this.user = data.data.payload.user
+        console.log(this.user.gender === 0)
+        if(this.user.gender == 0) this.user.gender ='未知'
+        if(this.user.gender == 1) this.user.gender ='男'
+        if(this.user.gender == 2) this.user.gender ='女'
+        console.log(this.user)
         this.members.map(item=>{
             // item.periodUnit = item.periodUnit =
             if(item.periodUnit==1){
