@@ -278,7 +278,7 @@
 
     <!-- 支付 -->
     <div class="payment">
-      <p>合计：￥{{price||10}}</p>
+      <p>合计：<span style='color: red;'>￥{{price||10}}</span></p>
       <p class="payment-buy" @click="buy()">立即购买</p>
     </div>
   </div>
