@@ -48,7 +48,7 @@
 
       </div>
     </div>
-    <p style="text-align:center;padding-top:20px;">会员注册成功后即可购买权益！</p>
+    <p style="text-align:center;padding-top:20px;">救援类权益需核实身份信息，注册成功后即刻购买权益哦！</p>
     <div class="button" @click="confirm()">确认</div>
   </div>
 </template>

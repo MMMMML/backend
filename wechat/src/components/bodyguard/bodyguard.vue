@@ -346,6 +346,7 @@
           font-size: 12px;
           font-weight: 100;
           white-space: nowrap;
+          margin-top: 5px;
         }
       }
     }
@@ -595,7 +596,7 @@
         if (!userInfo || JSON.parse(userInfo).verified === false || JSON.parse(userInfo).verified === 'false') {
           this.$dialog.confirm({
             title: '提示',
-            message: '欢迎进入空降联盟，请先进行身份认证'
+            message: '欢迎进入空降联盟，请先进行会员注册'
           }).then(res => {
             this.$router.push('/attestation')
           })

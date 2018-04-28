@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="incre" v-if='id === "C"'>
-        <h3>增值权益</h3>
+        <h3 style="margin-top:20px;">增值权益</h3>
         <div class="incre_content">
           <div class="price" @click='activePro = !activePro'>
             <p class='radio' v-show='!activePro'></p>
@@ -614,7 +614,7 @@ import axios from 'axios'
         if (!userInfo || JSON.parse(userInfo).verified === false || JSON.parse(userInfo).verified === 'false') {
           this.$dialog.confirm({
             title: '提示',
-            message: '欢迎进入空降联盟，请先进行身份认证'
+            message: '欢迎进入空降联盟，请先进行会员注册'
           }).then(res => {
             this.$router.push('/attestation')
           })
@@ -720,9 +720,10 @@ import axios from 'axios'
         font-size: 16px;
         color: #4B4B4B;
         margin-left: 4px;
-        &~h3 {
-          margin-top: 10px;
-        }
+        margin-top: 10px;
+        // &~h3 {
+        //   // margin-top: 10px;
+        // }
       }
       .privilege-icon {
         width: 100%;
