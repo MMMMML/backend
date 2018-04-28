@@ -43,7 +43,7 @@
         <div style="display:flex;align-items: center;">
           <!-- <div class="btn" @click="gaincode()">time </div> -->
           <!-- <time class="btn" @countDown='gaincode'></time> -->
-          <count class='btn' :start='start' @countDown ='start = false' @click.native = 'gaincode'></count>
+          <count class='btn' :start='start' @countDown ='start = false' @click.native = 'gaincode' :class='{"active": start}'></count>
         </div>
 
       </div>
@@ -52,7 +52,7 @@
     <div class="button" @click="confirm()">确认</div>
   </div>
 </template>
-<style scoped>
+<style scoped lang='less'>
   .warning {
     position: absolute;
     bottom: 2.6rem;
@@ -72,12 +72,16 @@
   .btn {
     width: 22vw;
     color: white;
-    background: #ccc;
-    font-size: 0.5rem;
+    background: red;
+    /* font-size: 0.5rem; */
     text-align: center;
     height: 25px;
+    font-size: 14px;
     line-height: 25px;
     border-radius: 20px;
+    &.active {
+      background: #ccc;
+    }
   }
 
   .human-input {
@@ -101,7 +105,6 @@
     bottom: 0;
     width: 100%;
   }
-
   .must {
     background: #fff;
     width: 100%;

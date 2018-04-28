@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class='btn'>{{time | change}}</button>
+    <button class='btn' :class='{"active": start}'>{{time | change}}</button>
   </div>
 </template>
 
@@ -55,12 +55,16 @@
 </script>
 <style lang="less" scoped>
   .btn{
-    background: #ccc;
+    background: red;
     height: 1.5rem;
     border: 0;
     padding: 0 0.1rem;
     color: #fff;
+    font-size: 14px;
     border-radius: 10px;
+    &.active {
+        background: #ccc;
+    }
   }
     
 </style>
