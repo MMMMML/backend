@@ -12,13 +12,13 @@
 
       <div class="ident-img">
         <img style="width:30%;height:15%" :src="benefitPackage.url" alt="">
-        <div style="margin-left:8vw">
-          <p>{{benefitPackage.name}}</p>
+        <div style="margin-left: 10px; margin-top: 10px;">
+          <p style='font-weight: bold;'>{{benefitPackage.name}}</p>
           <p>{{benefitPackage.mainName}}</p>
         </div>
       </div>
       <div class="indent-price">
-          <p>有效期:{{benefitOrder.benefitEffectTime}}至{{benefitOrder.benefitExpireTime}}</p>
+          <p style='margin: 0; font-size: 12px;'><span style='margin-right: 30px;'>有效期</span>{{benefitOrder.benefitEffectTime}} 至 {{benefitOrder.benefitExpireTime}}</p>
       </div>
     </div>
     <div class="equity">
@@ -26,23 +26,23 @@
       <div class="equity-list">
         <div v-show="fly1">
           <img src="../../assets/image/product/icon-helicopter.png" alt="">
-          <p style="font-size:12px;padding-top:10px">直升机院前救援</p>
+          <p>直升机院前救援</p>
         </div>
         <div v-show="fly2">
           <img  src="../../assets/image/product/icon-call.png" alt="">
-          <p style="font-size:12px;padding-top:10px">120协调</p>
+          <p>120协调</p>
         </div>
         <div v-show="fly3"> 
           <img  src="../../assets/image/product/icon-stretcher.png" alt="">
-          <p style="font-size:12px;padding-top:10px">直升机医疗转运9折</p>
+          <p>直升机医疗转运9折</p>
         </div>
         <div v-show="fly4">
           <img  src="../../assets/image/product/icon-truck.png" alt="">
-          <p style="font-size:12px;padding-top:10px">道路救援</p>
+          <p>道路救援</p>
         </div>
         <div v-show="fly5">
           <img  src="../../assets/image/product/icon-car.png" alt="">
-          <p style="font-size:12px;padding-top:10px">代步车服务</p>
+          <p>代步车服务</p>
         </div>
       </div>
     </div>
@@ -119,12 +119,21 @@
 <style scoped lang='less'>
 .container{
   padding-bottom: 45px;
+  color: #4b4b4b;
+}
+p {
+  color: #4b4b4b;
 }
 .weight{
   font-size: 16px;
   font-weight:700;
   color: black;
 
+}
+.equity-list p{
+  font-size: 12px;
+  padding-top: 10px;
+  white-space: nowrap;
 }
   .indent-box {
     width: 100%;

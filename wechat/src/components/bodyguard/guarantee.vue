@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="must" v-for="(item, index) of personUser" :key='index'>
-      <p style="padding:10px 20px 0;color:balck;font-size:16px">权益人{{index+1}}</p>
+      <p style="padding:10px 20px 0; font-size: 16px; color: #222;font-weight: bold;">权益人{{index+1}}</p>
       <div class="man">
         <p class="human-name">姓名</p>
         <!-- <p>马玲</p> -->
@@ -119,11 +119,14 @@
   }
 
   .payment {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     height: 50px;
     background: #fff;
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     line-height: 50px;
     padding-left: 20px;
 

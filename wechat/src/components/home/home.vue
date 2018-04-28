@@ -27,6 +27,7 @@
 
 <script>
 import Cookies from 'js-cookie'
+import Storage from 'good-storage'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Tab from '@/base/tab'
 import 'swiper/dist/css/swiper.css'
@@ -97,6 +98,12 @@ export default {
     swiperSlide,
     Tab
   },
+  beforeDestroy() {
+    this.$http.get("wechat/auth/getCurrentUser").then(res => {
+      const userinfo = res.data.payload
+      Storage.session.set('userInfo', JSON.stringify(userinfo))
+    })
+  },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper
@@ -121,7 +128,7 @@ export default {
     }
   }
   .swiper_list {
-    // height: 328px;
+    // background: red;
     .title {
       height: 60px;
       padding: 20px 20px 12px 20px;
@@ -144,13 +151,15 @@ export default {
     .swiper_wrapper {
       width: 100%;
       .swiper-container {
+        height: 45.066667vw;
         .swiper-slide {
           width: 89.333vw;
-          // height: 169px;
-          border-radius: 5px 5px 10px 10px;
+          height: 100%;
+          border-radius: 5px;
           overflow: hidden;
           img{
             width: 100%;
+            height: 100%;
           }
         }
       }

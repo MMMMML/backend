@@ -4,7 +4,7 @@
       <img src="../assets/image/home/button-homepage.png" alt="">
       <span class="tab-label">首页</span>
     </router-link>
-    <a class="tab-item" href="tel:4001119299">
+    <a class="tab-item" href="tel:02160554929">
       <img src="../assets/image/home/button-help.png" alt="">
       <span style='color: #4B4B4B;' class="tab-label">一键呼救</span>
     </a>

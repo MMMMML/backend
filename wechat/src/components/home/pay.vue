@@ -329,7 +329,7 @@
           Object.keys(item).forEach((key, idx) => {
             if (key === 'realName') {
               this.validateArr[index].isChinaName = !this._isChinaName(item[key])
-            } else if (key === 'idNumber') {
+            } else if (key === 'idNumber' && item['idType'] === '0') {
               this.validateArr[index].isIdNumber = !this._isIdNumber(item[key])
             }
           })

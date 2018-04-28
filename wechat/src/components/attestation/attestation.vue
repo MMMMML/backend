@@ -177,11 +177,9 @@
           console.log(this.user.idType)
         }
       })
-       
-          let redirect = this.$route.query.redirect
-          this.url = redirect || '/'
-          console.log(this.url)
-     
+      let redirect = this.$route.query.redirect
+      this.url = redirect || '/'
+      console.log(this.url)
     },
     methods: {
       _isChinaName(name) {
@@ -289,6 +287,12 @@
     },
     components:{
       Count
+    },
+    beforeDestroy() {
+      this.$http.get("wechat/auth/getCurrentUser").then(res => {
+        const userinfo = res.data.payload
+        Storage.session.set('userInfo', JSON.stringify(userinfo))
+      })
     }
   }
 

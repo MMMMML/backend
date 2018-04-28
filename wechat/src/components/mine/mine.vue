@@ -25,27 +25,27 @@
           <div>
             <img v-show="members.firstAid==false" src="../../assets/image/mine/icon-helicopter-不亮.png" alt="">
             <img v-show="members.firstAid==true" src="../../assets/image/mine/icon-helicopter.png" alt="">
-            <p style="font-size: 12px;height: 30px;margin-top: 10px;">直升机院前急救</p>
+            <p>直升机院前急救</p>
           </div>
           <div>
             <img v-show="members.ambulance==false" src="../../assets/image/mine/icon-call-不亮.png" alt="">
             <img v-show="members.ambulance==true" src="../../assets/image/mine/icon-call.png" alt="">
-            <p style="font-size: 12px;height: 30px;margin-top: 10px;">120协调</p>
+            <p>120协调</p>
           </div>
           <div>
             <img v-show="members.medicalTransfer==false" src="../../assets/image/mine/icon-stretcher-不良.png" alt="">
             <img v-show="members.medicalTransfer==true" src="../../assets/image/mine/icon-stretcher.png" alt="">
-            <p style="font-size: 12px;height: 30px;margin-top: 10px;">直升机医疗转运9折</p>
+            <p>直升机医疗转运9折</p>
           </div>
           <div>
             <img v-show="members.roadRescue==false" src="../../assets/image/mine/icon-truck-不亮.png" alt="">
             <img v-show="members.roadRescue==true" src="../../assets/image/mine/icon-truck.png" alt="">
-            <p style="font-size: 12px;height: 30px;margin-top: 10px;">道路救援</p>
+            <p>道路救援</p>
           </div>
           <div>
             <img v-show="members.scooter==false" src="../../assets/image/mine/icon-car-不亮.png" alt="">
             <img v-show="members.scooter==true" src="../../assets/image/mine/icon-car.png" alt="">
-            <p style="font-size: 12px;height: 30px;margin-top: 10px;">代步车服务</p>
+            <p>代步车服务</p>
           </div>
         </div>
       </div>
@@ -163,10 +163,7 @@ export default {
     Tab
   }
 }
-
 </script>
-
-
 
 <style scoped>
   .header {
@@ -235,6 +232,13 @@ export default {
   .equity-list img {
     width: 30px;
     height: 28px;
+  }
+
+  .equity-list p {
+    font-size: 12px;
+    height: 30px;
+    margin-top: 10px;
+    white-space: nowrap;
   }
 
   a {
