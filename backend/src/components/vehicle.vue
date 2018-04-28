@@ -78,7 +78,7 @@
           this.listnum = total
           console.log(data)
           this.list.map(item=>{
-              item.state = item.state ==true?'有效':'过期'
+              item.state = item.state =='true'?'有效':'过期'
           })
         });
       },

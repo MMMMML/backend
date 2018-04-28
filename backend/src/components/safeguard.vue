@@ -128,6 +128,7 @@
        this.getPageData(1)
       },
       check:function(row){
+        console.log(row)
           window.sessionStorage.setItem('memberid',row.id)
           window.sessionStorage.setItem('id',row.uid)
           window.location.hash='/layout/safe'
