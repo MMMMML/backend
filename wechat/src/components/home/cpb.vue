@@ -75,7 +75,7 @@
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">
       </div>
       <div class="notice-part">
-        <p>免责申明</p>
+        <p>免责声明</p>
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">
       </div>
       <div class="notice-logo">

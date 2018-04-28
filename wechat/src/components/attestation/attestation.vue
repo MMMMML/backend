@@ -210,7 +210,6 @@
         if (this.start) {
           return
         }
-        console.log(111)
         var url = '/common/sendVCode'
         var params = {
           mobile: this.user.mobile,

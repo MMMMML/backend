@@ -220,7 +220,7 @@
         </p>
       </div> -->
       <div class="notice-part" @click="showItem(5)">
-        <p>免责申明</p>
+        <p>免责声明</p>
         <img src="../../assets/image/product/arrow@3x.png" alt="">
       </div>
       <div v-show="show[5]" class="showText">
@@ -469,6 +469,7 @@
 </style>
 <script>
   import { differenceInDays } from 'date-fns'
+  import moment from 'moment'
   import Check from '@/util/checkIDAuth'
   import Storage from 'good-storage'
    import {
@@ -494,9 +495,7 @@
       var id = 'B'
       var url = `wechat/package/queryPackageById?id=${id}`
       this.$http.get(url).then(data => {
-        console.log(data)
         this.specifics = JSON.parse(data.data.payload.specifics)
-        console.log(this.specifics)
         this.one = this.specifics.main.price
         this.discount = this.specifics.main.discount
       })
@@ -631,6 +630,41 @@
         } else {
           this.price = this.one * newVal * this.count
         }
+      },
+      pickerStart(newVal) {
+        this.pickerEnd = '请选择失效日期'
+        let arr = newVal.split('-')
+        let year = Number(arr[0])
+        let month = Number(arr[1])
+        let day = Number(arr[2])
+        let is31 = [1, 3, 5, 7, 8, 10, 12]
+        let is28 = [2]
+        let is30 = [4, 6, 9, 11]
+        if (is31.includes(month)) {
+          if (day <= 30) {
+            day += 1
+          } else {
+            month +=1
+            day = 1
+          }
+        } else if(is30.includes(month)) {
+          if (day <= 29) {
+            day += 1
+          } else if (day == 30) {
+            month += 1
+            day = 1
+          }
+        } else {
+          if (day <= 27) {
+            day += 1
+          } else {
+            month += 1
+            day = 1
+          }
+        }
+        let date = `${year}-${month}-${day}`
+        let x = Date.parse(date)
+        this.startDates = new Date(x)
       }
     }
   }

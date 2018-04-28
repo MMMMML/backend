@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="incre" v-if='id === "C"'>
-        <h3 style="margin-top:20px;">增值权益</h3>
+        <h3>增值权益</h3>
         <div class="incre_content">
           <div class="price" @click='activePro = !activePro'>
             <p class='radio' v-show='!activePro'></p>
@@ -303,7 +303,7 @@
         </p>
       </div>
       <div class="notice-part" @click="showItem(5)">
-        <p>免责申明</p>
+        <p>免责声明</p>
         <img src="../../assets/image/product/arrow@3x.png" alt="">
       </div>
       <div v-show="show[5]" class="showText">
@@ -342,7 +342,8 @@
           2、产品服务标准费用<br>
           &nbsp;&nbsp;（1）直升机院前救援费用：综合费用人民币20万—30万/每次，根据机型不同费用有所不同<br>
           &nbsp;&nbsp;（2）直升机转运费用：人民币7万/每小时，飞行小时数是指直升机实际飞行时间，自旋翼转动起至旋翼停止转动止。起步计费1小时，超出部分以0.5小时为单位计费，具体计费细则以转运前签署的《直升机医疗转运服务合同》为准<br>
-          &nbsp;&nbsp;（3）道路救援服务费用：搭电、换胎、送水等轻救援单项价格人民币200元起， 一般困境救援人民币500元起，如需吊车人民币1800元起；拖车起步价人民币200-500元（包含15Km），地库拖车人民币400-700元，如需架小轮服务，每小轮人民币80元；道路救援费用根据事发地点及救援难度会进行调整 （4）出险代步车服务费用：以车辆提供服务商的门店/官网公示价为准，因地域限制，如需更多资讯，请致电空降联盟服务热线（021-60554929）
+          &nbsp;&nbsp;（3）道路救援服务费用：搭电、换胎、送水等轻救援单项价格人民币200元起， 一般困境救援人民币500元起，如需吊车人民币1800元起；拖车起步价人民币200-500元（包含15Km），地库拖车人民币400-700元，如需架小轮服务，每小轮人民币80元；道路救援费用根据事发地点及救援难度会进行调整<br> 
+          &nbsp;&nbsp;（4）出险代步车服务费用：以车辆提供服务商的门店/官网公示价为准，因地域限制，如需更多资讯，请致电空降联盟服务热线（021-60554929）
         </p>
         <p class="title-icon">七、免责条款</p>
         <p class='title_normal'>
@@ -613,7 +614,7 @@ import axios from 'axios'
         if (!userInfo || JSON.parse(userInfo).verified === false || JSON.parse(userInfo).verified === 'false') {
           this.$dialog.confirm({
             title: '提示',
-            message: '欢迎进入空降联盟，请先进行会员注册'
+            message: '欢迎进入空降联盟，请先进行身份认证'
           }).then(res => {
             this.$router.push('/attestation')
           })
@@ -719,10 +720,9 @@ import axios from 'axios'
         font-size: 16px;
         color: #4B4B4B;
         margin-left: 4px;
-        margin-top: 10px;
-        // &~h3 {
-        //   // margin-top: 10px;
-        // }
+        &~h3 {
+          margin-top: 10px;
+        }
       }
       .privilege-icon {
         width: 100%;
