@@ -29,9 +29,11 @@
     font-size: 18px;
     font-weight: 700;
     text-align: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
+    padding: 0;
+    letter-spacing: 4px;
   }
 
   .inputs {
@@ -41,6 +43,7 @@
     line-height: 50px;
     margin-bottom: 0;
     font-size: 12px;
+    padding: 0;
   }
 
   .code {
@@ -63,8 +66,8 @@
   .msg {
     display: flex;
     width: 100%;
-    height: 60px;
-    line-height: 60px;
+    height: 50px;
+    line-height: 50px;
     border-bottom: 1px solid #eee;
   }
 

@@ -9,6 +9,7 @@
 
 
 <script>
+  import '@/util/alert'
   export default {
     data() {
       return {

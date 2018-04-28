@@ -6,7 +6,7 @@
     <div class="swiper_list">
       <div class="title">
         <div class="content">
-          <span>空降服务</span><span><img src="../../assets/image/home/icon-logo-color.png"></span>
+          <span>空降服务</span><span><img src="../../assets/image/home/icon-logo-color@2x.png"></span>
         </div>
       </div>
       <div class="swiper_wrapper">
@@ -75,10 +75,10 @@ export default {
     }
   },
   created() {
-    // if (!Cookies.get('sessionId')) {
-    //   const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
-    //   window.location.href = redirect
-    // }
+    if (!Cookies.get('sessionId')) {
+      const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
+      window.location.href = redirect
+    }
   },
   mounted() {
     let that = this
@@ -142,10 +142,15 @@ export default {
           margin-right: 10px;
         }
         span:last-child {
-          height: 24px;
-          width: 24px;
+          display: inline-block;
+          height: 23px;
+          width: 25px;
           display: flex;
           align-items: center;
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }

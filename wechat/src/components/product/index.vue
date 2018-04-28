@@ -788,10 +788,14 @@ import axios from 'axios'
           letter-spacing: 1px;
         }
       }
+      .incre {
+        margin-top: 18px;
+      }
       .incre_content {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
+        // margin-top: 10px;
         .price {
           display: flex;
           flex-flow: row nowrap;
@@ -868,6 +872,11 @@ import axios from 'axios'
         .title_normal {
           line-height: 24px;
         }
+      }
+    }
+    .exclusive {
+      h3 {
+        margin-bottom: 8px;
       }
     }
   }
