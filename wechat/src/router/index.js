@@ -79,7 +79,7 @@ const router = new VueRouter({
     { path: '/payd', component: payd },
     { path: '/editotherinfo', component: editotherinfo },
     { path: '/editmobile', component: editmobile },
-    { path: '/attestation', name: 'attestation', component: attestation, meta:{title : '身份认证'} },
+    { path: '/attestation', name: 'attestation', component: attestation, meta:{title : '会员注册'} },
     { path: '/bodyguard', name: 'bodyguard', component: bodyguard,meta:{title : '飞行保镖'} },
     { path: '/guarantee', name: 'guarantee', component: guarantee,meta:{title : '飞行保镖'} },
     { path: '/protect', name: 'protect', component: protect,meta:{title : '皇家护卫队'} },

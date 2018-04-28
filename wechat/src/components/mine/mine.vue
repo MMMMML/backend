@@ -35,7 +35,7 @@
           <div>
             <img v-show="members.medicalTransfer==false" src="../../assets/image/mine/icon-stretcher-不良.png" alt="">
             <img v-show="members.medicalTransfer==true" src="../../assets/image/mine/icon-stretcher.png" alt="">
-            <p>直升机医疗转运9折</p>
+            <p>医疗转运9折</p>
           </div>
           <div>
             <img v-show="members.roadRescue==false" src="../../assets/image/mine/icon-truck-不亮.png" alt="">

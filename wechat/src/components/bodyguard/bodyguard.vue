@@ -6,13 +6,13 @@
     </div>
     <!-- nav -->
     <div class="nav-word">
-      <p>单人短期直升机院前急救权益</p>
+      <p>单人短期直升机院前救援权益</p>
       <div class="tips">
         <div class="tips-bor" style="margin-left:0">两天起购</div>
         <div class="tips-bor">日期自定义</div>
         <div class="tips-bor">连续购买满15天享8折优惠</div>
       </div>
-      <div class="nav-text">户外徒步，独自旅行，商务出差…随心所欲却不小心遭遇突发意外？？？ 别担心！你的飞行保镖已上线！第一时间为你出动直升机紧急医疗救援，争分夺秒赶来你身边！同时还有地面救护车随时待命，双重应急方案上天入地守护你！即日起，还可为你的小伙伴雇佣飞行保镖哦！</div>
+      <div class="nav-text">户外徒步，独自旅行，商务出差…随心所欲却不小心突发意外？别担心！你的飞行保镖已上线！第一时间为你出动直升机，争分夺秒赶来你身边！同时还有地面救护车随时待命，双重应急方案上天入地守护你！即日起，还可为你的同行伙伴雇佣飞行保镖哦！</div>
     </div>
 
     <!-- privilege  -->
@@ -86,7 +86,7 @@
         </p>
         <p class='title_normal'>
           【每次呼叫1元】<br>
-          实际发生直升机院前急救时，权益人在有效期内每呼叫一次需支付1元呼叫调度费
+          实际发生直升机院前救援时，权益人在有效期内每呼叫一次需支付1元呼叫调度费
         </p>
         <p class="title-icon">服务热线</p>
         <p class='title_normal'>021-60554929</p>
@@ -144,7 +144,7 @@
         <p class="title-icon">【权益说明】</p>
         <p class='title_normal'>空降联盟为权益人提供地面救护车协调服务</p>
         <p class="title-icon">【院前救援适应症】</p>
-        <img src="../../assets/image/new_product/small_3.png" alt="">
+        <img src="../../assets/image/product/biao2.png" alt="">
         <p class="title-icon">【服务内容】</p>
         <p class='title_normal'>
           1、在权益人符合院前救援服务范围的情况下，如因客观原因不适航而无法出动直升机，或必须联合120急救中心开展空地联运时，空降联盟将提供地面救护车协调服务，并承担相应的救护车费用<br>

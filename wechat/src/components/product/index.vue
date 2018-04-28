@@ -83,7 +83,7 @@
         <p class="title-icon">价格说明</p>
         <p class='title_normal' v-if='id === "A"'>
           【基础99元】<br>
-          包含一位权益人、一辆权益车辆有效期内的直升机院前急救、道路救援和代步车服务费用
+          包含一位权益人、一辆权益车辆有效期内的直升机院前救援、道路救援和代步车服务费用
         </p>
         <p class='title_normal' v-if='id === "A"'>
           【附加35元】<br>
@@ -99,7 +99,7 @@
         </p>
         <p class='title_normal'>
           【每次呼叫1元】<br>
-          实际发生直升机院前急救时，权益人在有效期内每呼叫一次需支付1元呼叫调度费
+          实际发生直升机院前救援时，权益人在有效期内每呼叫一次需支付1元呼叫调度费
         </p>
         <p class="title-icon">服务热线</p>
         <p class='title_normal'>021-60554929</p>
@@ -213,7 +213,7 @@
       </div>
       <div class="notice-part" @click="showItem(2)">
         <p>地面120服务</p>
-        <img src="../../assets/image/product/arrow@3x.png" alt="">
+        <img src="../../assets/image/product/biao2.png" alt="">
       </div>
       <div v-show="show[2]" class='showText'>
         <p class="title-icon">【权益说明】</p>
@@ -396,7 +396,7 @@ import axios from 'axios'
           url: banner4,
           title: '7天自驾综合救援权益',
           tips: ['一人一车', '日期自定义', '私家车专享', '可增加同行人'],
-          explain: '一个人看风景，一群人去狂欢，自驾旅途的无限美好怎能因一点“意外”就戛然而止？！爱车突发状况需要帮助？急需代步车继续旅程？赶快带上你的急速全明星，帮你解决各种小意外，更有直升机紧急医疗救援全程为你保驾护航！还犹豫什么？记得给同行伙伴也送上一份贴心直升机救援守护哦！',
+          explain: '一个人看风景，一群人去狂欢，自驾旅途的无限美好怎能因一点“意外”戛然而止？！爱车突发状况需要帮助？急需代步车继续旅程？赶快带上你的急速全明星，解决沿途小意外，还有直升机院前救援全程为你保驾护航！还犹豫什么？记得给同行伙伴也送上一份贴心守护哦！',
           privilege: {
             base: [{
               tip: '直升机院前救援',

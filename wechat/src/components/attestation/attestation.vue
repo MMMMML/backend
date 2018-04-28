@@ -48,7 +48,7 @@
 
       </div>
     </div>
-    <p style="text-align:center;padding-top:20px;">身份认证成功后即可购买权益，参与优惠活动呦！</p>
+    <p style="text-align:center;padding-top:20px;">会员注册成功后即可购买权益！</p>
     <div class="button" @click="confirm()">确认</div>
   </div>
 </template>
