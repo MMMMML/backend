@@ -84,7 +84,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .login{
     width:350px;
     margin:200px auto;
@@ -93,6 +93,9 @@
     display:block;
     width:100%;
   }
+.el-form-item{
+display: inherit !important;
+}
   
   
 </style>

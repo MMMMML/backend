@@ -21,7 +21,7 @@
       <el-table :data="list" border style="width: 100%">
         <el-table-column fixed prop="realName" label="姓名">
         </el-table-column>
-        <el-table-column prop="mobile" label="性别">
+        <el-table-column prop="sex" label="性别" :formatter='gender'>
         </el-table-column>
         <el-table-column prop="mobile" label="手机号">
         </el-table-column>
@@ -108,6 +108,21 @@
             break
         }
         return idtype
+      },
+      gender(row, column) {
+        var sex = ''
+        switch (row.gender) {
+          case 0:
+            sex = '未知'
+            break
+          case 1:
+            sex = "男"
+            break
+          case 2:
+            sex = "女"
+            break
+        }
+        return sex
       },
       search: function () {
        this.getPageData(1)

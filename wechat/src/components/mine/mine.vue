@@ -45,7 +45,7 @@
           <div>
             <img v-show="members.scooter==false" src="../../assets/image/mine/icon-car-不亮.png" alt="">
             <img v-show="members.scooter==true" src="../../assets/image/mine/icon-car.png" alt="">
-            <p>代步车服务</p>
+            <p>出险代步车</p>
           </div>
         </div>
       </div>

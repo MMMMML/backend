@@ -73,11 +73,16 @@
       </div>
       <div v-show="show[0]" class='showText'>
         <p class="title-icon">权益人限定</p>
-        <p class='title_normal'>中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
-        <p class="title-icon">权益车辆要求</p>
+        <p class='title_normal'>中国公民（含港澳台地区）或在中国持合法证件的外籍人士</p>
+        <p class="title-icon">增值权益车辆要求</p>
         <p class='title_normal'>9座（含）以下、重量不超过3.5吨、长度不超过6米的非营运性四轮机动车辆</p>
         <p class="title-icon">权益有效期</p>
-        <p class='title_normal'>有效期为所选起始日起的连续7天</p>
+        <p class='title_normal' v-if='id === "A"'>有效期为所选起始日起的连续7天<br>
+        备注：车辆相关权益生效时间详见服务说明
+        </p>
+        <p class='title_normal' v-if='id === "C"'>购买后次日零时生效，有效期为生效之日起一年<br>
+        备注：车辆相关权益生效时间详见服务说明
+        </p>        
         <p class="title-icon">权益覆盖城市</p>
         <p class='title_normal'>辽宁、北京、天津、河北、河南、山东、山西、江苏、上海、陕西、安徽、浙江、江西、福建、广东、海南、湖北、四川、重庆、贵州、广西、云南、湖南共23个省市</p>
         <p class="title-icon">价格说明</p>
@@ -433,14 +438,14 @@ import axios from 'axios'
                 tip: '道路救援',
                 url: truckNo
               }, {
-                tip: '代步车',
+                tip: '出险代步车',
                 url: carNo
               }],
               active: [{
                 tip: '道路救援',
                 url: truck
               }, {
-                tip: '代步车',
+                tip: '出险代步车',
                 url: car
               }]
             }  

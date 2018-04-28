@@ -14,7 +14,7 @@
         <p style="padding:10px 20px 0;margin-left:20px">权益人</p> 
     <div class="man">
         <p class="human-name">姓名</p>
-        <input type="text" class="human-input"  placeholder="请输入姓名"  v-model='realName'>
+        <input type="text" class="human-input"  placeholder="请输入真实姓名"  v-model='realName'>
         <div style="display:flex;align-items: center;" >
           <div class="btn" v-on:click='people'>选择权益人</div>
         </div>
