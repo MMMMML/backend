@@ -52,6 +52,7 @@
     height: 59px;
     line-height: 50px;
     margin-bottom: 0;
+    color: gray;
   }
 
   .title {

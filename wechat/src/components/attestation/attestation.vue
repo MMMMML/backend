@@ -70,7 +70,7 @@
   }
 
   .btn {
-    width: 22vw;
+    // width: 22vw;
     color: white;
     background: red;
     /* font-size: 0.5rem; */
