@@ -632,6 +632,7 @@
         }
       },
       pickerStart(newVal) {
+        this.pickerEnd = '请选择失效日期'
         let arr = newVal.split('-')
         let year = Number(arr[0])
         let month = Number(arr[1])
@@ -640,36 +641,25 @@
         let is28 = [2]
         let is30 = [4, 6, 9, 11]
         if (is31.includes(month)) {
-          if (day <= 29) {
-            day += 2
+          if (day <= 30) {
+            day += 1
           } else {
-            if (day == 30) {
-              month +=1
-              day = 1
-            } else {
-              month +=1
-              day = 2
-            }
+            month +=1
+            day = 1
           }
         } else if(is30.includes(month)) {
-          if (day <= 28) {
-            day += 2
-          } else if (day == 29) {
+          if (day <= 29) {
+            day += 1
+          } else if (day == 30) {
             month += 1
             day = 1
-          } else {
-            month += 1
-            day = 2
           }
         } else {
-          if (day <= 26) {
-            day += 2
-          } else if (day == 27) {
-            day = 1
-            month += 1
+          if (day <= 27) {
+            day += 1
           } else {
             month += 1
-            day = 2
+            day = 1
           }
         }
         let date = `${year}-${month}-${day}`

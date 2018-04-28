@@ -191,7 +191,7 @@
         <p> 021-60554929</p>
       </div>
       <div @click="showToggle6" class="notice-part">
-        <p>免责申明</p>
+        <p>免责声明</p>
         <div>
           <img src="../../assets/image//product/arrow@3x.png" alt="">
         </div>
