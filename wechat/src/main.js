@@ -23,6 +23,7 @@ import Storage from 'good-storage'
 import VConsole from 'vconsole'
 import Vant from 'vant'
 import 'vant/lib/vant-css/index.css'
+// import './common/mixin.less'
 import { Field, DatetimePicker, Radio, Indicator } from 'mint-ui'
 Vue.component(Field.name, Field)
 Vue.component(DatetimePicker.name, DatetimePicker)

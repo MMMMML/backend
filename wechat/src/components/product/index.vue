@@ -552,7 +552,6 @@ import axios from 'axios'
         this.pickerStart = this.pickerVisible = format(v, 'YYYY-MM-DD')
       },
       handleBuy() {
-        // this.dialog = true
         if (this.id === 'A') {
           this.priceinfo = {}
           this.priceinfo.pickerVisible = this.pickerVisible

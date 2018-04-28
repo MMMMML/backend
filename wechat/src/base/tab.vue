@@ -1,7 +1,11 @@
 <template>
   <div class="tab_box vux-1px-t">
     <router-link tag='div' class="tab-item" to='/home'>
-      <img src="../assets/image/home/button-homepage.png" alt="">
+      <picture>
+        <source srcset='../assets/image/home/banner1.png' media='(min-device-pixel-ratio: 2)'/>
+        <source srcset='../assets/image/home/banner2.png' media='(min-device-pixel-ratio: 3)'/>
+        <img src="../assets/image/home/button-homepage.png"/>
+      </picture>
       <span class="tab-label">首页</span>
     </router-link>
     <a class="tab-item" href="tel:02160554929">
@@ -40,7 +44,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  @import '~vux/src/styles/1px.less';  
+  @import '~vux/src/styles/1px.less';
   .tab_box {
     position: fixed;
     bottom: 0;
