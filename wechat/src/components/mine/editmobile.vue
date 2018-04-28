@@ -63,8 +63,8 @@
   .msg {
     display: flex;
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    height: 60px;
+    line-height: 60px;
     border-bottom: 1px solid #eee;
   }
 
