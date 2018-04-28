@@ -376,7 +376,10 @@ import trans from '@/assets/image/product/icon-stretcher.png'
 import car from '@/assets/image/product/icon-car.png'
 import carNo from '@/assets/image/product/icon-car-no.png'
 import truckNo from '@/assets/image/product/icon-truck-no.png'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9ca9447d1e6dac6f0433d069981f834fa30fb5cf
 // import duan1 from '@/assets/image/new_product/small_1.png'
 // import duan2 from '@/assets/image/new_product/small_2.png'
 // import duan3 from '@/assets/image/new_product/small_3.png'
