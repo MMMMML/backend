@@ -99,13 +99,13 @@
         owner: '',
         vin: '',
         text: '非运营车辆',
-        idType: '请选择证件类型',
+        idType: '请选择车辆类型',
       }
     },
     mounted() {
       var mobileSelect1 = new MobileSelect({
         trigger: '#trigger',
-        title: '选择证件类型',
+        title: '选择车辆类型',
         wheels: [{
           data: [{
               id: '轿车',
