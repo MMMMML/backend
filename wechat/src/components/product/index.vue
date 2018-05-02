@@ -368,14 +368,15 @@ import Storage from 'good-storage'
 import PayBtn from '@/base/pay_bottom_btn'
 import Check from '@/util/checkIDAuth'
 import banner4 from '@/assets/image/product/banner4.jpeg'
-import banner1 from '@/assets/image/home/banner1.png'
-import helicopter from '@/assets/image/product/icon-helicopter.png'
-import call from '@/assets/image/product/icon-call.png'
-import truck from '@/assets/image/product/icon-truck.png'
-import trans from '@/assets/image/product/icon-stretcher.png'
-import car from '@/assets/image/product/icon-car.png'
-import carNo from '@/assets/image/product/icon-car-no.png'
-import truckNo from '@/assets/image/product/icon-truck-no.png'
+import banner1 from '@/assets/image/home/banner_1.png'
+import helicopter from '@/assets/image/product/icon-helicopter@2x.png'
+import call from '@/assets/image/product/icon-call@2x.png'
+import truck from '@/assets/image/product/icon-truck@2x.png'
+import trans from '@/assets/image/product/icon-stretcher@2x.png'
+import car from '@/assets/image/product/icon-car@2x.png'
+import carNo from '@/assets/image/product/icon-car-no@2x.png'
+import truckNo from '@/assets/image/product/icon-truck-no@2x.png'
+import Cookies from 'js-cookie'
 // import duan1 from '@/assets/image/new_product/small_1.png'
 // import duan2 from '@/assets/image/new_product/small_2.png'
 // import duan3 from '@/assets/image/new_product/small_3.png'
@@ -609,21 +610,13 @@ import axios from 'axios'
             return
           }
         }
-        let userInfo = Storage.session.get('userInfo')
-        if (!userInfo || JSON.parse(userInfo).verified === false || JSON.parse(userInfo).verified === 'false') {
-          this.$dialog.confirm({
-            title: '提示',
-            message: '欢迎进入空降联盟，请先进行身份认证'
-          }).then(res => {
-            this.$router.push('/attestation')
-          })
-        } else {
-          if (this.id === 'A') {
-            this.$router.push(`/pay?packageId=A&counter=${this.counter}&price=${this.price}&benefitEffectTime=${this.pickerStart}`)
-          } else if (this.id === 'C') {
-            this.$router.push(`/pay?packageId=C&activePro=${this.activePro}&price=${this.price}`)
-          }
+        let url = {
+          'A': `/pay?packageId=A&counter=${this.counter}&price=${this.price}&benefitEffectTime=${this.pickerStart}`,
+          'C': `/pay?packageId=C&activePro=${this.activePro}&price=${this.price}`
         }
+        Check(url[this.id], this).then(res => {
+          this.$router.push(url[this.id])
+        })
       }
     },
     computed: {
@@ -645,15 +638,6 @@ import axios from 'axios'
         }
         return this.allInfo[enums[this.id]]
       }
-    },
-    watch: {
-      // counter: {
-      //   immediate: true,
-      //   handler(newVal) {
-      //     console.log(this.main.price)
-      //     this.price = 
-      //   }
-      // }
     },
     components: {
       PayBtn
@@ -820,7 +804,7 @@ import axios from 'axios'
           width: 20%;
           text-align: center;
           img {
-            width: 40px;
+            width: 42px;
           }
           p {
             font-size: 12px;

@@ -2,7 +2,7 @@
   <div class="container">
     <!-- picture -->
     <div class="banner">
-      <img src="../../assets/image/home/banner2.png" alt="">
+      <img src="../../assets/image/home/banner_2@2x.jpg" alt="">
     </div>
     <!-- nav -->
     <div class="nav-word">
@@ -278,7 +278,7 @@
 
     <!-- 支付 -->
     <div class="payment">
-      <p>合计：<span style='color: red;'>￥{{price||10}}</span></p>
+      <p>合计：<span style='color: red;'>￥{{price || 10}}</span></p>
       <p class="payment-buy" @click="buy()">立即购买</p>
     </div>
   </div>
@@ -475,6 +475,7 @@
   import moment from 'moment'
   import Check from '@/util/checkIDAuth'
   import Storage from 'good-storage'
+  import Cookies from 'js-cookie'  
    import {
     MessageBox
   } from 'mint-ui';
@@ -566,16 +567,12 @@
       handleConfirm: function (v) {
         this.$refs.picker.close();
         this.pickerStart = this.pickerVisible = this.formatDate(v)
-        console.log(this.pickerVisible)
       },
       confirm: function (c) {
         this.$refs.pickers.close();
         this.pickerEnd = this.Visible = this.formatDate(c)
-        // 用户选择了几天
-        // console.log(this.)
         this.resultdate = differenceInDays(this.Visible, this.pickerVisible) + 1
         this.price = this.resultdate * this.one
-        console.log(this.resultdate)
       },
       minus() {
         if (this.count === 1) {
@@ -593,29 +590,20 @@
           this.count = 1
         }
       },
-      buy: function () {
-        var url = location.hash.slice(1)
-        let userInfo = Storage.session.get('userInfo')
-        if (!userInfo || JSON.parse(userInfo).verified === false || JSON.parse(userInfo).verified === 'false') {
-          this.$dialog.confirm({
-            title: '提示',
-            message: '欢迎进入空降联盟，请先进行会员注册'
-          }).then(res => {
-            this.$router.push('/attestation')
-          })
+      buy() {
+        this.priceinfo = {}
+        this.priceinfo.pickerVisible = this.pickerVisible
+        this.priceinfo.pickerEnd = this.pickerEnd
+        this.priceinfo.count = this.count
+        this.priceinfo.price = this.price
+        if (this.pickerEnd == '请选择失效日期' || this.pickerStart == '请选择生效日期') {
+          alert('请选择生效失效日期')
+          return
         } else {
-          this.priceinfo = {}
-          this.priceinfo.pickerVisible = this.pickerVisible
-          this.priceinfo.pickerEnd = this.pickerEnd
-          this.priceinfo.count = this.count
-          this.priceinfo.price = this.price
-          if (this.pickerEnd == '请选择失效日期' || this.pickerStart == '请选择生效日期') {
-            alert('请选择生效失效日期')
-            return
-          } else {
-            window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))
-            this.$router.push('/guarantee')
-          }
+          window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))              
+          Check('/guarantee', this).then(res => {
+            this.$router.push('/guarantee')       
+          })
         }
       }
     },
@@ -667,7 +655,9 @@
         }
         let date = `${year}/${month}/${day}`
         let x = Date.parse(date)
+        let y = x + 60 * 24 * 60 * 60 * 1000
         this.startDates = new Date(x)
+        this.endDate = new Date(y)
       }
     }
   }

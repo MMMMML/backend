@@ -41,6 +41,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 99;
   p {
     margin: 0;
   }

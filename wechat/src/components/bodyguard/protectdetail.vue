@@ -334,7 +334,6 @@
         })
       }
 
-
       var mobileSelect = new MobileSelect({
         trigger: '#trigger',
         title: '选择证件类型',

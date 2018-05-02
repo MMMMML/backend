@@ -38,7 +38,7 @@
         </div>
       </div>
       <!-- 日期 -->
-             <p style="padding-top:20px;">生效日期</p>
+      <p style="padding-top:20px;">生效日期</p>
       <div class="picker">
         <div style="position: relative;width:100%">
           <div class="datepicker" style="    margin-left: 0px;font-size: 12px;line-height: 30px;padding-left: 5px;" @click="openPicker()">{{pickerStart}}</div>
@@ -93,7 +93,7 @@
             <img src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
         <div class="notice-part">
-            <p>免责申明</p>
+            <p>免责声明</p>
             <img src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
         <div class="notice-logo">

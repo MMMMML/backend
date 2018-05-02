@@ -156,7 +156,7 @@ this.$http.get('wechat/commonContact/list').then(res=>{
        
        
 //微信接口
-this.$http.post(`http://aj.kingwingaviation.com/alliance-java/wechat/getJSApiTicket?url=${encodeURIComponent(location.href.split('#')[0])}`).then(res => {
+this.$http.post(`http://aj.kingwingaviation.com/alliance/api/wechat/getJSApiTicket?url=${encodeURIComponent(location.href.split('#')[0])}`).then(res => {
             let js_sdk = res.data.payload
              console.log('~~~')
              console.log(js_sdk)

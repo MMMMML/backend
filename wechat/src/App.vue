@@ -9,33 +9,30 @@
 
 
 <script>
+  import Storage from 'good-storage'
   import '@/util/alert'
   export default {
     data() {
       return {
       }
     },
+    created() {
+      this.$http.get("wechat/auth/getCurrentUser").then(res => {
+        const userinfo = res.data.payload
+        Storage.session.set('userInfo', JSON.stringify(userinfo))
+      })
+    },
     mounted () {
-      var _mtac = {};
+      var _mtac = {}
       (function() {
-        var mta = document.createElement("script");
-        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
-        mta.setAttribute("name", "MTAH5");
-        mta.setAttribute("sid", "500608350");
-        mta.setAttribute("cid", "500608352");
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(mta, s);
+        var mta = document.createElement("script")
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4"
+        mta.setAttribute("name", "MTAH5")
+        mta.setAttribute("sid", "500608350")
+        mta.setAttribute("cid", "500608352")
+        var s = document.getElementsByTagName("script")[0]
+        s.parentNode.insertBefore(mta, s)
       })()
-
-      // MtaH5.init({
-      //   "sid": '500608350', //必填，统计用的appid
-      //   "cid": '500608352', //如果开启自定义事件，此项目为必填，否则不填
-      //   "autoReport": 0,//是否开启自动上报(1:init完成则上报一次,0:使用pgv方法才上报)
-      //   "senseHash": 0, //hash锚点是否进入url统计
-      //   "senseQuery": 0, //url参数是否进入url统计
-      //   "performanceMonitor": 0,//是否开启性能监控
-      //   "ignoreParams": [] //开启url参数上报时，可忽略部分参数拼接上报
-      // });
       
       var url = 'wechat/getJSApiTicket'
       var jsurl = location.href.split('#')[0]
@@ -61,7 +58,7 @@
             imgUrl: 'http://' + `${window.location.host}${window.location.pathname}` + 'static/logo.jpg', // 分享图标
             success: function () {
             }
-          });
+          })
           //  分享给好友
           wx.onMenuShareAppMessage({
             title: '空降救援战队，守护你是我的使命！',

@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="payment">
-      <p>合计：￥{{commonprice}}</p>
+      <p>合计：<span style='color: red;'>￥{{commonprice}}</span></p>
       <p class="payment-buy" @click="confirm()">立即购买</p>
     </div>
   </div>
@@ -166,7 +166,6 @@
       this.count = JSON.parse(window.sessionStorage.getItem('priceinfo'))
       this.counts = this.count.count
       this.commonprice = this.count.price
-      console.log(this.count)
       for (let i = 0; i < this.count.count; i++) {
         let item = {
           realName: '',
@@ -187,7 +186,6 @@
       var urls = 'wechat/commonContact/list'
       this.$http.get(urls).then(data => {
         this.list = data.data.payload
-        console.log(this.list)
         this.objlist = []
         this.list.map(item => {
           this.obj = {}
@@ -262,21 +260,26 @@
         return pattern.test(phone);
       },
       confirm: function () {
-        Indicator.open({
-          text: '加载中...',
-          spinnerType: 'fading-circle'
-        })
         this.personUser.forEach((item, index) => {
           Object.keys(item).forEach((key, idx) => {
             if (key === 'realName') {
               // console.log(this._isChinaName(item[key]))
               this.validateArr[index].isChinaName = this._isChinaName(item[key])
-            } else if (key === 'mobile') {
-              this.validateArr[index].isPhoneNo = this._isPhoneNo(item[key])
             }
           })
         })
 
+        let flag = true
+        this.validateArr.forEach(item => {
+          if (item.isChinaName === false) {
+            flag = false
+          }
+        })
+        if (!flag) return
+        Indicator.open({
+          text: '加载中...',
+          spinnerType: 'fading-circle'
+        })
         var url = 'wechat/order/addOrder'
         this.priceinfo = JSON.parse(window.sessionStorage.getItem('priceinfo'))
         console.log(this.priceinfo)

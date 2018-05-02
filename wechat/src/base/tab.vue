@@ -24,16 +24,8 @@ export default {
   },
   methods: {
     toMine() {
-      this.$http.get("wechat/auth/getCurrentUser").then(res => {
-        const userinfo = res.data.payload
-        Storage.session.set('userInfo', JSON.stringify(userinfo))
-        Check('/mine').then(res => {
-          this.$router.push('/mine')
-        })
-      }).catch(e => {
-        Cookies.remove('sessionId')
-        const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance-html/wechat/#/home')}`
-        window.location.href = redirect
+      Check('/mine', this).then(res => {
+        this.$router.push('/mine')
       })
     }
   }

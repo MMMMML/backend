@@ -89,6 +89,9 @@
     margin-bottom: 5px;
     /* line-height: 100px; */
 }
+p {
+  margin: 0;
+}
 .portrait-img img{
     width: 60px;
 }

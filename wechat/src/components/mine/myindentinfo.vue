@@ -109,7 +109,7 @@
       </div>
     </div>
     <div class="payment" v-show="benefitOrder.paidStatus==0">
-      <p>合计：￥{{benefitOrder.totalPrice}}</p>
+      <p>合计：<span style='color: red;'>￥{{benefitOrder.totalPrice}}</span></p>
       <p class="payment-buy"  @click="payment()" >支付</p>
     </div>
     
@@ -289,7 +289,7 @@ export default {
         text: '加载中...',
         spinnerType: 'fading-circle'
       })
-      var url = '/wechat/order/unionPay'
+      var url = 'wechat/order/unionPay'
       var params = {
           id:window.sessionStorage.getItem('orderId'),
           payMethod:0
@@ -309,15 +309,13 @@ export default {
                 signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                 paySign: result.paySign, // 支付签名
                 success: function (res) {
-                  window.location.href='http://aj.kingwingaviation.com/alliance-html/wechat/#/myindent'
+                  window.location.href='http://aj.kingwingaviation.com/alliance/wechat/#/myindent'
                 },
                 fail: function (res) {
                   console.log(res)
                 }
               })
             })
-            }else{
-                alert(data)
             }
             
 

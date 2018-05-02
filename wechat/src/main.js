@@ -33,8 +33,8 @@ Vue.use(Vant)
 
 FastClick.attach(document.body)
 
-axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
-// axios.defaults.baseURL = '/apis'
+// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance/api/'
+axios.defaults.baseURL = '/apis'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {
@@ -52,6 +52,18 @@ axios.interceptors.request.use(
     return config
   }
 )
+
+axios.interceptors.response.use(
+  config => {},
+  error => {
+    if (error.toString().includes('401')) {
+      const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance/wechat/#/home')}`
+      window.location.href = redirect
+    }
+    return Promise.reject(error)
+  }
+)
+
 Vue.prototype.$http = axios
 Vue.component(DatetimePicker.name, DatetimePicker)
 Vue.component(Radio.name, Radio)

@@ -442,7 +442,7 @@
 
 
       this.$http.post(
-        `http://aj.kingwingaviation.com/alliance-java/wechat/getJSApiTicket?url=${encodeURIComponent(location.href.split('#')[0])}`
+        `http://aj.kingwingaviation.com/alliance/api/wechat/getJSApiTicket?url=${encodeURIComponent(location.href.split('#')[0])}`
       ).then(res => {
         let js_sdk = res.data.payload
         console.log('~~~')

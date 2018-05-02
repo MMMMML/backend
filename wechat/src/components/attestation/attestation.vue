@@ -101,8 +101,9 @@
     font-size: 18px;
     font-weight: 700;
     text-align: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
   }
   .must {
@@ -135,7 +136,7 @@
   import Count from '@/base/countdown'
   import {
     MessageBox
-  } from 'mint-ui';
+  } from 'mint-ui'
   export default {
     data() {
       return {

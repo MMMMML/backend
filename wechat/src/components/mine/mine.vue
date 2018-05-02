@@ -156,7 +156,7 @@ export default {
       console.log(data)
     }).catch(err => {
       alert('登录过期，请重新登陆')
-      window.location.href='http://aj.kingwingaviation.com/alliance-html/wechat/#/home'
+      window.location.href='http://aj.kingwingaviation.com/alliance/wechat/#/home'
     })
   },
   components: {
