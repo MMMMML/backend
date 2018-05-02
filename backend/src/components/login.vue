@@ -68,9 +68,9 @@
                console.log(data.data.payload.sessionId)
                window.sessionStorage.setItem('sesstionid',data.data.payload.sessionId)
               this.$router.push('/layout')
-            }else if(data.data.code==506){
+            }else if(data.data.code==1002){
               alert('密码输入错误，请重新输入')
-            }else if(data.data.code==505){
+            }else if(data.data.code==1001){
               alert("用户不存在")
             }
             })

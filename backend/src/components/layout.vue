@@ -19,6 +19,9 @@
             <router-link to="/layout/vehicle/">
               <el-menu-item index="1-3">保障车辆会员记录</el-menu-item>
             </router-link>
+            <router-link to="/layout/conversion/">
+              <el-menu-item index="1-3">权益码管理</el-menu-item>
+            </router-link>
 
           </el-submenu>
           <!-- <el-submenu index="2">

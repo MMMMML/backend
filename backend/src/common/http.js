@@ -1,11 +1,16 @@
 import axios from 'axios'
 import appConfig from '../appconfig'
 import auth from './auth'
-axios.defaultsURL = 'http://172.28.2.59:8101/backend/'
+import qs from 'qs'
+// axios.defaultsURL = '/apis'
 axios.interceptors.request.use(
     config => {
       if (window.sessionStorage.getItem('sesstionid')) {
         config.headers['X-SessionId']  = `${window.sessionStorage.getItem('sesstionid')}`
+      }
+      if (config.method === 'post') {
+        config.data = qs.stringify(config.data)
+        config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
       }
       return config
     },

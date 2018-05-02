@@ -22,6 +22,7 @@ import safeguard from "@/components/safeguard";
 import vehicle from "@/components/vehicle";
 import safe from "@/components/safeguard-account";
 import vehiclecar from "@/components/vehicle-account";
+import conversion from "@/components/conversion";
 
 Vue.use(Router);
 
@@ -96,6 +97,13 @@ export default new Router({
           component: safe,
           props: {
             name: "保障人员记录"
+          }
+        },
+        {
+          path: "conversion", //测试面包屑导航加上的路由,没啥用
+          component: conversion,
+          props: {
+            name: "权益码管理"
           }
         },
         {
