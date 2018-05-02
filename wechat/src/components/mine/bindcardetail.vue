@@ -48,7 +48,12 @@
     width: 100%;
     font-size: 14px !important;
   }
-
+  .btn{
+    cursor: pointer;
+    height: 30px;
+    line-height: 19px;
+    font-size: 14px;
+  }
   .inputs-name {
     width: 45%;
     border: none;
