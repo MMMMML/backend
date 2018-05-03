@@ -17,10 +17,10 @@
       }
     },
     created() {
-      this.$http.get("wechat/auth/getCurrentUser").then(res => {
-        const userinfo = res.data.payload
-        Storage.session.set('userInfo', JSON.stringify(userinfo))
-      })
+      // this.$http.get("wechat/auth/getCurrentUser").then(res => {
+      //   const userinfo = res.data.payload
+      //   Storage.session.set('userInfo', JSON.stringify(userinfo))
+      // })
     },
     mounted () {
       var _mtac = {}

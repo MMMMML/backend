@@ -2,23 +2,28 @@
   <div>
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item label="批次编号">
-        <el-input placeholder="请输入保障人"></el-input>
+        <el-input v-model="batchNo" placeholder="请输入批次编号"></el-input>
       </el-form-item>
       <el-form-item label="批次名称">
-        <el-input placeholder="请输入手机号"></el-input>
+        <el-input v-model='name' placeholder="请输入批次名称"></el-input>
       </el-form-item>
       <el-form-item label="兑换商品">
-        <el-select placeholder="请选择">
-          <el-option>
+        <el-select v-model="packageId" placeholder="请选择">
+          <el-option
+          v-for="item in product"
+          :key="item.mainName"
+          :label="item.mainName"
+          :value="item.id"
+          >
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="注册时间">
-        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期">
+      <el-form-item label="生成时间">
+        <el-date-picker type="date" v-model="generateTimeStart" value-format="yyyy-MM-dd" placeholder="选择日期">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="结束时间">
-        <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期">
+      <el-form-item label="到">
+        <el-date-picker type="date" v-model="generateTimeEnd" value-format="yyyy-MM-dd" placeholder="选择日期">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -67,9 +72,19 @@
     data() {
       return {
         list: [],
+        batchNo:'',
+        name:'',
+        generateTimeStart:'',
+        generateTimeEnd:'',
+        packageId:''
       }
     },
     mounted() {
+        let url = '/apis/common/packageList'
+        this.$http.get(url).then(data => {
+            this.product = data.data.payload
+            console.log(data)
+        });
       this._reload()
     },
     methods: {
@@ -79,6 +94,8 @@
             this.list = data.data.payload.list
         });
         },
+
+
       check: function (id) {
         let url = `redeemCode/exportCodeCsv.csv?batchId=${id.id}`
         const base = 'http://aj.kingwingaviation.com/alliance-java/backend/'
@@ -86,7 +103,7 @@
         
       },
       grow:function(id){
-          let url = `redeemCode/generateCodes?batchId=${id.id}`
+          let url = `backend/redeemCode/generateCodes?batchId=${id.id}`
           this.http.post(url).then(data => {
             // this.list = data.data.payload.list
             console.log(data)
@@ -97,7 +114,28 @@
                 alert(data.data.message)
             }
         });
+      },
+      search:function(){
+          let url = 'redeemCode/pagedList'
+          let params = {
+            batchNo:this.batchNo,		
+            name:this.name,			
+            packageId:this.packageId,		
+            generateTimeStart:this.generateTimeStart,	
+            generateTimeEnd:this.generateTimeEnd		 
+          }
+           this.http.post(url,params).then(data => {
+            this.list = data.data.payload.list
+            console.log(data)
+            // if(data.data.code==200){
+            //     this._reload()
+            // }
+            // if(data.data.code==500){
+            //     alert(data.data.message)
+            // }
+        });
       }
+
 
     }
   }
