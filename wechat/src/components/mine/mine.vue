@@ -52,7 +52,7 @@
         <span>常用车辆</span>
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">
       </router-link>
-      <router-link tag='div' class="catalog-list" to='tijiao'>
+      <router-link tag='div' class="catalog-list" to='/tijiao'>
         <img src="../../assets/image/mine/icon-suggestion@2x.png" alt="">
         <span>提交建议</span>
         <img src="../../assets/image/mine/Chevron@3x.png" alt="">

@@ -27,8 +27,8 @@ Vue.use(Vant)
 
 FastClick.attach(document.body)
 
-// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance/api/'
-axios.defaults.baseURL = '/apis'
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance/api/'
+// axios.defaults.baseURL = '/apis'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {
