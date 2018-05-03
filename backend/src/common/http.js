@@ -24,7 +24,7 @@ class Http{
     }
     getRequestUrl(url){
         return appConfig.serverRootUrl+url
-    }
+    } 
     get(url,params){
         var $this = this
         var header = {}

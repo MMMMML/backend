@@ -25,6 +25,7 @@ Vue.use(ElementUI)
 Vue.prototype.appConfig = appConfig
 Vue.prototype.http = http
 Vue.prototype.auth = auth
+Vue.prototype.$http = axios
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
