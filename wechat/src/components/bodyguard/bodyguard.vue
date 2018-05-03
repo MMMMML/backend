@@ -281,6 +281,7 @@
       <p>合计：<span style='color: red;'>￥{{price || 10}}</span></p>
       <p class="payment-buy" @click="buy()">立即购买</p>
     </div>
+    <auth ref='AuthModal' @sure='handleAuth'></auth>    
   </div>
 </template>
 <style scoped lang='less'>
@@ -398,9 +399,7 @@
         }
       }
     }
-
   }
-
   .notice {
     background: #fff;
     width: 100%;
@@ -472,14 +471,15 @@
 </style>
 <script>
   import { differenceInDays } from 'date-fns'
-  import moment from 'moment'
-  import Check from '@/util/checkIDAuth'
   import Storage from 'good-storage'
   import Cookies from 'js-cookie'  
+  import Auth from '@/base/auth'
+  import { AuthModal } from '@/util/mixin'
    import {
     MessageBox
   } from 'mint-ui';
   export default {
+    mixins: [AuthModal],
     data() {
       return {
         pickerVisible: '',
@@ -600,9 +600,10 @@
           alert('请选择生效失效日期')
           return
         } else {
-          window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))              
-          Check('/guarantee', this).then(res => {
-            this.$router.push('/guarantee')       
+          window.sessionStorage.setItem('priceinfo', JSON.stringify(this.priceinfo))
+          this.redirect = '/guarantee'
+          this._check().then(res => {
+            this.$router.push('/guarantee')
           })
         }
       }
@@ -659,6 +660,9 @@
         this.startDates = new Date(x)
         this.endDate = new Date(y)
       }
+    },
+    components: {
+      Auth
     }
   }
 

@@ -1,6 +1,7 @@
 import Storage from 'good-storage'
 function Check (url = '/', Vue) {
   return new Promise((resolve, reject) => {
+    // Vue.test()
     if (Storage.session.get('userInfo')) {
       const result = JSON.parse(Storage.session.get('userInfo'))
       if (result.verified) {

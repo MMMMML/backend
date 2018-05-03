@@ -1,18 +1,12 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-// 导入vue
+
 import Vue from 'vue'
-// 导入APP.vue
-import App from './App'
+import App from './App.vue'
 import qs from 'qs'
 import FastClick from 'fastclick'
 import Vuelazyload from 'vue-lazyload'
 import store from './store'
-// 导入mui的样式
 import './lib/mui/css/mui.css'
-// 导入 购物车的小图标（注意：引入样式顺序的问题，先引入mui，再引入extra）
 import './lib/mui/css/icons-extra.css'
-// 导入自定义样式
 import './assets/css/app.css'
 /* eslint-disable */
 import axios from 'axios'
@@ -54,7 +48,9 @@ axios.interceptors.request.use(
 )
 
 axios.interceptors.response.use(
-  config => {},
+  res => {
+    return res
+  },
   error => {
     if (error.toString().includes('401')) {
       const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance/wechat/#/home')}`

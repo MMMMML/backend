@@ -1,9 +1,6 @@
 <template>
   <div class="my_container">
-
-    <!-- 路由出口 -->
     <router-view class="content" v-wechat-title="$route.meta.title"></router-view>
-    <!-- 页脚 -->
   </div>
 </template>
 
@@ -22,8 +19,7 @@
         Storage.session.set('userInfo', JSON.stringify(userinfo))
       })
     },
-    mounted () {
-      var _mtac = {}
+    mounted() {
       (function() {
         var mta = document.createElement("script")
         mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4"

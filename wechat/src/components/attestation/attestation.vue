@@ -274,10 +274,8 @@
             }
             // const userinfo = res.data.payload
             Storage.session.set('userInfo', JSON.stringify(obj))
-            console.log(this.url)
-
             // window.location.href = this.url
-            this.$router.push(this.url)
+            this.$router.replace(this.url)
           }
         })
       }

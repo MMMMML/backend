@@ -360,13 +360,13 @@
       </div>
     </div>
     <pay-btn :total='price' @buy='handleBuy'></pay-btn>
+    <auth ref='AuthModal' @sure='handleAuth'></auth>
   </div>
 </template>
 <script>
 import { differenceInDays, format } from 'date-fns'
 import Storage from 'good-storage'
 import PayBtn from '@/base/pay_bottom_btn'
-import Check from '@/util/checkIDAuth'
 import banner4 from '@/assets/image/product/banner4.jpeg'
 import banner1 from '@/assets/image/home/banner_1.png'
 import helicopter from '@/assets/image/product/icon-helicopter@2x.png'
@@ -376,6 +376,8 @@ import trans from '@/assets/image/product/icon-stretcher@2x.png'
 import car from '@/assets/image/product/icon-car@2x.png'
 import carNo from '@/assets/image/product/icon-car-no@2x.png'
 import truckNo from '@/assets/image/product/icon-truck-no@2x.png'
+import Auth from '@/base/auth'
+import { AuthModal } from '@/util/mixin'
 // import duan1 from '@/assets/image/new_product/small_1.png'
 // import duan2 from '@/assets/image/new_product/small_2.png'
 // import duan3 from '@/assets/image/new_product/small_3.png'
@@ -387,6 +389,7 @@ import truckNo from '@/assets/image/product/icon-truck-no@2x.png'
 // import chang6 from '@/assets/image/new_product/lang_6.png'
 import axios from 'axios'
   export default {
+    mixins: [AuthModal],
     data() {
       return {
         show: [false, false, false, false, false],
@@ -613,7 +616,8 @@ import axios from 'axios'
           'A': `/pay?packageId=A&counter=${this.counter}&price=${this.price}&benefitEffectTime=${this.pickerStart}`,
           'C': `/pay?packageId=C&activePro=${this.activePro}&price=${this.price}`
         }
-        Check(url[this.id], this).then(res => {
+        this.redirect = url[this.id]
+        this._check().then(res => {
           this.$router.push(url[this.id])
         })
       }
@@ -639,7 +643,8 @@ import axios from 'axios'
       }
     },
     components: {
-      PayBtn
+      PayBtn,
+      Auth
     }
   }
 </script>
