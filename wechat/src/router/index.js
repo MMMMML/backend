@@ -72,9 +72,7 @@ const router = new VueRouter({
     { path: '/bindcar', name: 'bindcar', component: bindcar },
     { path: '/bindcardetail', name: 'bindcardetail', component: bindcardetail },
     { path: '/product', component: Product },
-    { path: '/result', component: ExchangeResult, meta: { 
-      title: '权益兑换'
-    }}
+    { path: '/result', component: ExchangeResult }
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

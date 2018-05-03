@@ -46,7 +46,10 @@
         <div class="item vux-1px-b">
           <p class='item_label'>车牌号码</p>
           <button @click='selectCar' class='select'>选择车辆</button>
-          <input type="text" class="item_value" v-model="carInfo.plateNumber" placeholder="请输入车牌号码">
+          <div class="carInput">
+            <select-province :propProvince='carInfo.pre'></select-province>
+            <input type="text" v-model="carInfo.end" placeholder="请输入车牌号码">
+          </div>
           <div class="warning" v-show='validateArr[validateArr.length - 1].isCarNo'>
             <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
             <span>车牌号码格式错误，请重新填写</span>
@@ -95,6 +98,7 @@
   import PayBtn from '@/base/pay_bottom_btn'
   import Check from '@/util/checkIDAuth'
   import Storage from 'good-storage'
+  import SelectProvince from '@/base/selectProvince'
   export default {
     data() {
       return {
@@ -284,7 +288,9 @@
               let res = data[0]
               Object.keys(this.carInfo).forEach(item => {
                 if (item === 'plateNumber') {
-                  this.carInfo[item] = res['value']
+                  this.carInfo['pre'] = res['value'].substr(0, 1)
+                  this.carInfo['end'] = res['value'].substr(1)
+                  // this.carInfo[item] = res['value']
                 } else {
                   this.carInfo[item] = res[item]
                 }
@@ -335,6 +341,8 @@
           })
         })
 
+        // 对carInfo做处理
+        this.carInfo.plateNumber = this.carInfo.pre + this.carInfo.end
         Object.keys(this.carInfo).forEach(item => {
           if (item === 'owner') {
             this.validateArr[this.validateArr.length - 1].isCarUser = !this._isChinaName(this.carInfo[item])
@@ -401,7 +409,8 @@
       }
     },
     components: {
-      PayBtn
+      PayBtn,
+      SelectProvince
     }
   }
 
@@ -458,6 +467,19 @@
               padding: 0;
               top: 50%;
               transform: translate3d(0, -50%, 0);
+            }
+          }
+          .carInput {
+            flex: 1;
+            height: 100%;
+            padding-right: 25vw;
+            font-size: 14px;
+            border: 0;
+            display: flex;
+            align-items: center;
+            input {
+              margin: 0;
+              border: 0;
             }
           }
           img {

@@ -4,6 +4,7 @@
       <div class="content">
         <div class="title">{{ title }}</div>
         <input type="text" v-model='code'>
+        <p class='errorText'>123123</p>
       </div>
       <div class="btn_box vux-1px-t">
         <div class="left" @click='close'>{{ left }}</div>
@@ -70,7 +71,6 @@ export default {
       left: 50%;
       transform: translate3d(-50%, -50%, 0);
       width: 280px;
-      height: 170px;
       border-radius: 8px;
       background: #fff;
       text-align: center;
@@ -89,6 +89,10 @@ export default {
           text-align: center;
           font-size: 14px;
         }
+        .errorText {
+          line-height: 20px;
+          color: #D24232;
+        }
       }
       .btn_box {
         width: 100%;
@@ -97,6 +101,7 @@ export default {
         display: flex;
         flex-flow: row nowrap;
         font-size: 14px;
+        margin-top: 10px;
         .left {
           width: 50%;
         }
