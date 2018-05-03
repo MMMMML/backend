@@ -12,22 +12,29 @@
       <img class='img3' src="../assets/image/home/button-me@2x.png" alt="">
       <span class="tab-label">我的</span>
     </div>
+    <auth ref='AuthModal' @sure='handleAuth'></auth>
   </div>
 </template>
 <script>
-import Check from '@/util/checkIDAuth'
+import Auth from '@/base/auth'
+import { AuthModal } from '@/util/mixin'
 import Storage from 'good-storage'
 import Cookies from 'js-cookie'
 export default {
+  mixins: [AuthModal],
   data() {
     return {}
   },
   methods: {
     toMine() {
-      Check('/mine', this).then(res => {
+      this.redirect = '/mine'
+      this._check().then(res => {
         this.$router.push('/mine')
       })
     }
+  },
+  components: {
+    Auth
   }
 }
 </script>
