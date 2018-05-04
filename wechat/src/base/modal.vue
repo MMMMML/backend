@@ -4,7 +4,7 @@
       <div class="content">
         <div class="title">{{ title }}</div>
         <input type="text" v-model='code'>
-        <p class='errorText'>123123</p>
+        <p class='errorText' v-if='error'>{{ error }}</p>
       </div>
       <div class="btn_box vux-1px-t">
         <div class="left" @click='close'>{{ left }}</div>
@@ -28,6 +28,10 @@ export default {
     right: {
       type: String,
       default: '立刻兑换'
+    },
+    error: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -44,6 +48,7 @@ export default {
       this.modalFlag = true
     },
     close() {
+      this.$emit('cancel')
       this.modalFlag = false
     },
     sure() {

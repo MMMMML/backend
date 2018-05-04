@@ -47,7 +47,7 @@
           <p class='item_label'>车牌号码</p>
           <button @click='selectCar' class='select'>选择车辆</button>
           <div class="carInput">
-            <select-province :propProvince='carInfo.pre'></select-province>
+            <select-province :propProvince='carInfo.pre' @province='handleProvince'></select-province>
             <input type="text" v-model="carInfo.end" placeholder="请输入车牌号码">
           </div>
           <div class="warning" v-show='validateArr[validateArr.length - 1].isCarNo'>
@@ -286,15 +286,18 @@
             triggerDisplayData: false,
             callback: (indexArr, data) => {
               let res = data[0]
+              this.$set(this.carInfo, 'pre', '')
+              this.$set(this.carInfo, 'end', '')
               Object.keys(this.carInfo).forEach(item => {
                 if (item === 'plateNumber') {
                   this.carInfo['pre'] = res['value'].substr(0, 1)
                   this.carInfo['end'] = res['value'].substr(1)
-                  // this.carInfo[item] = res['value']
+                } if (item === 'pre' || item === 'end') {
                 } else {
                   this.carInfo[item] = res[item]
                 }
               })
+              console.log(this.carInfo)
             }
           })
         })
@@ -305,6 +308,9 @@
       handleCheckID(index) {
         this.index = index
         this.IDType.show()
+      },
+      handleProvince(province) {
+        this.carInfo.pre = province
       },
       write(index) {
         let oldObj = this.personUserInfo[index]

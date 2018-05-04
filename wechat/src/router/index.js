@@ -30,8 +30,11 @@ const Product = () => import('@/components/product')
 const Pay = () => import('@/components/pay')
 
 const ExchangeResult = () => import('@/components/mine/exchange/result')
+const ExchangeAdd = () => import('@/components/mine/exchange/add')
 const Member = () => import('@/components/mine/member')
 const tijiao = () => import('@/components/mine/tijiao')
+
+const Test = () => import('@/components/test')
 
 Vue.use(VueRouter)
 Vue.use(require('vue-wechat-title'))
@@ -57,7 +60,7 @@ const router = new VueRouter({
     }},
     { path: '/myindentinfo', name: 'myindentinfo', component: MyOrderDetail, meta:{
       title : '订单详情'
-    }},    
+    }},
     { path: '/contact', component: contact, meta:{title : '权益人管理'} },
     { path: '/vehicle', component: vehicle ,meta:{title : '车辆管理'}},
     { path: '/vehicledetail', component: vehicledetail,meta:{title : '添加车辆'}},
@@ -74,7 +77,9 @@ const router = new VueRouter({
     { path: '/bindcardetail', name: 'bindcardetail', component: bindcardetail },
     { path: '/product', component: Product },
     { path: '/result', component: ExchangeResult },
-    { path: '/tijiao', component: tijiao, meta: { title: '提交建议'}}
+    { path: '/add', component: ExchangeAdd, meta: { title: '权益兑换' }},
+    { path: '/tijiao', component: tijiao, meta: { title: '提交建议'}},
+    { path: '/test', component: Test }
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

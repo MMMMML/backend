@@ -27,8 +27,12 @@ Vue.use(Vant)
 
 FastClick.attach(document.body)
 
+// 正式
 // axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance/api/'
+// 调试
 axios.defaults.baseURL = '/apis'
+// 测试
+// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {
@@ -40,9 +44,6 @@ axios.interceptors.request.use(
       config.data = qs.stringify(config.data)
       config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     }
-    // let whiteWord = ['/abc', '/132']
-    // if (!whiteWord.includes(config.url)) {  //如果不是这些url 就加入x-wxform
-    // }
     return config
   }
 )
@@ -53,7 +54,8 @@ axios.interceptors.response.use(
   },
   error => {
     if (error.toString().includes('401')) {
-      const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent('http://aj.kingwingaviation.com/alliance/wechat/#/home')}`
+      // const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
+      const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
       window.location.href = redirect
     }
     return Promise.reject(error)

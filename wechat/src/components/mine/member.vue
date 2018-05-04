@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="car" v-show='currentPath === "car"'>
-      <p v-if="memberCars.length==0" style="text-align:center;padding:20px 0">哎呀，你的爱车还没有专属权益哦！赶快去挑选吧！</p>
+      <p v-if="memberCars.length == 0" style="text-align:center;padding:20px 0">哎呀，你的爱车还没有专属权益哦！赶快去挑选吧！</p>
       <div v-else>
         <div class="member-human" v-for='(item, index) of memberCars' :key='index'>
           <div class="member-car">
@@ -64,16 +64,16 @@
               <div style="padding-right: 15px;">
                 <img src="../../assets/image/mine/icon-insurance.png" alt="">
               </div>
-              <div>
+              <div class='top'>
                 <p>所有人</p>
                 <p>{{item.owner}}</p>
               </div>
             </div>
             <div class="carpart">
               <div style="padding-right: 15px;">
-                <img src="../../assets/image/mine/icon-car-1.png" alt="">
+                <img src="../../assets/image/mine/icon-car-1.png">
               </div>
-              <div>
+              <div class='top'>
                 <p>车牌号码</p>
                 <p>{{item.plateNumber}}</p>
               </div>
@@ -170,6 +170,11 @@
     padding: 10px 0;
     justify-content: center;
   }
+  .top {
+    p:last-child {
+      line-height: 22px;
+    }
+  }
   .member-square{
     display: flex;
     flex-flow: row wrap;
@@ -185,8 +190,7 @@
       margin-bottom: 10px;
       .square-title{
         border-bottom: 1px solid #ccc;
-        margin: 0 5px;
-        padding: 5px;
+        line-height: 40px;
       }
       &~.square {
         margin-left: 20px;
@@ -195,14 +199,22 @@
   }
   .member-person {
     padding-bottom: 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    padding-left: 15px;    
+    .swiper-wrapper {
+      display: flex;
+      flex-flow: row nowrap;
+    }
   }
   .member-person-slide {
-    width: 110px;
+    width: 110px !important;
     height: 120px;
     padding: 0 5px;
     text-align: center;
     border: 1px solid #eee;
     border-radius: 5px;
+    display: inline-block;
     .member-person-slide-title {
       line-height: 40px;
       border-bottom: 1px solid #eee;
@@ -223,9 +235,10 @@ export default {
       notNextTick: true,
       swiperOption: {
         pagination: '.swiper-pagination',
-        slidesPerView: 'auto',
+        spaceBetween: 10,
+        slidesPerView: 3.2,
         centeredSlides: true,
-        spaceBetween: 10
+        freeMode: true
       }
     }
   },

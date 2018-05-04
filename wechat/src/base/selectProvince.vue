@@ -39,10 +39,14 @@ export default {
     },
     hnadleSelect(province) {
       this.province = province
+      this.$emit('province', this.province)
       this.selectFlag = false
     },
     deleteProvince() {
       this.province = ''
+    },
+    polyfill() {
+      this.province = this.propProvince
     }
   },
   watch: {

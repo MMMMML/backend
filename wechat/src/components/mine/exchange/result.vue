@@ -1,22 +1,22 @@
 <template>
   <div class="container">
     <div class="content">
-      <img src="../../../assets/image/mine/error@2x.png" alt="">
-      <!-- <img src="../../../assets/image/mine/complete@2x.png" alt=""> -->
-      <!-- <div class='text'>
-        <span>恭喜您获得</span>
-        <p>3天短期</p>
-        <span>20180501 至 20180605</span>
-      </div> -->
-      <div class="fail">
+      <img v-if='msg' src="../../../assets/image/mine/error@2x.png" alt="">
+      <img v-else src="../../../assets/image/mine/complete@2x.png" alt="">
+      <div v-if='msg' class="fail">
         <h3>兑换失败</h3>
-        <p>您输入的权益码已经过期啦</p>
-        <p>下次再来吧</p>
+        <p>{{ msg }}</p>
+        <p>下次再来哦！</p>
+      </div>
+      <div v-else class='text'>
+        <span>恭喜您获得</span>
+        <p>{{ name }}</p>
+        <span>{{ effectTime }} 至 {{ expireTime }}</span>
       </div>
     </div>
     <div class="btn">
       <div class="left" @click='goHome'>返回首页</div>
-      <div class="right" @click='goMine'>我的权益</div>
+      <div class="right" v-if='!msg' @click='goMine'>我的权益</div>
     </div>
   </div>
 </template>
@@ -25,14 +25,24 @@
 export default {
   data() {
     return {
+      msg: '',
+      name: '',
+      effectTime: '',
+      expireTime: ''
     }
   },
   mounted() {
-    if (1 > 0) {
+    const { effectTime, expireTime, name, msg } = this.$route.query
+    if (effectTime || expireTime || name || msg) {
       document.title = '权益兑换'
     } else {
       document.title = '购买成功'
     }
+
+    this.msg = msg
+    this.effectTime = effectTime
+    this.expireTime = expireTime
+    this.name = name
   },
   methods: {
     view() {

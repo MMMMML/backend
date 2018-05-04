@@ -59,7 +59,7 @@
       </router-link>
     </div>
     <tab></tab>
-    <modal ref='modal' @sure='handleExchange'></modal>
+    <modal ref='modal' :error='error' @sure='handleExchange' @cancel='handleExchangeCancel'></modal>
   </div>
 </template>
 
@@ -81,6 +81,7 @@ export default {
   data() {
     return {
       user: '',
+      error: '',      
       members: []
     }
   },
@@ -130,9 +131,29 @@ export default {
     exchange() {
       this.$refs.modal.show()
     },
-    handleExchange(code) {
-      this.$refs.modal.close()
-      console.log(code)
+    handleExchange(codePwd) {
+      this.$http.post('wechat/redeemCode/preRedeem', {
+        codePwd
+      }).then(res => {
+        if (res.data.code === 200) {
+          this.error = ''
+          this.$refs.modal.close()
+          let obj = JSON.parse(res.data.payload.benefitPackage.redeemStrategy)
+          let query = ''
+          let arr = ['personNum', 'vehicleNum', 'initialTimeLimit']
+          for (let k in obj) {
+            if (arr.includes(k)) {
+              query += `${k}=${obj[k]}&`
+            }
+          }
+          this.$router.push(`/add?${query}codepwd=${codePwd}`)
+        } else {
+          this.error = res.data.message
+        }
+      })
+    },
+    handleExchangeCancel() {
+      this.error = ''
     }
   },
   components: {

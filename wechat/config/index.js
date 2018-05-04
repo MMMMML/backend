@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/apis': {
-        target: 'http://aj.kingwingaviation.com/alliance/api/',
+        // target: 'http://aj.kingwingaviation.com/alliance/api/',
+        target: 'http://aj.kingwingaviation.com/alliance-java/',
         change: true,
         pathRewrite: {
           '^/apis': ''
