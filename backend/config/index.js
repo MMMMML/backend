@@ -58,7 +58,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'http://aj.kingwingaviation.com/alliance/backend/',
+    assetsPublicPath: 'http://aj.kingwingaviation.com/alliance-html/backend/',
 
     /**
      * Source Maps

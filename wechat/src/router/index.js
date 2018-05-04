@@ -32,6 +32,7 @@ const Pay = () => import('@/components/pay')
 const ExchangeResult = () => import('@/components/mine/exchange/result')
 const Member = () => import('@/components/mine/member')
 const tijiao = () => import('@/components/mine/tijiao')
+const success = () => import('@/components/pay/success')
 
 Vue.use(VueRouter)
 Vue.use(require('vue-wechat-title'))
@@ -74,7 +75,8 @@ const router = new VueRouter({
     { path: '/bindcardetail', name: 'bindcardetail', component: bindcardetail },
     { path: '/product', component: Product },
     { path: '/result', component: ExchangeResult },
-    { path: '/tijiao', component: tijiao, meta: { title: '提交建议'}}
+    { path: '/tijiao', component: tijiao, meta: { title: '提交建议'}},
+    { path: '/success', component: success, meta: { title: '购买成功'}}
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

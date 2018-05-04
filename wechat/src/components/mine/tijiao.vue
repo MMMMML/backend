@@ -35,7 +35,7 @@ export default {
             console.log(data)
             if(data.data.code==200){
                 alert('提交成功')
-                this.$route.push('/mine')
+                this.$router.push('/mine')
             }
         })
       }

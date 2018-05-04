@@ -238,6 +238,7 @@ export default {
       console.log(window.sessionStorage.getItem('orderId'))
       let url = `wechat/order/getOrderDetail?id=${window.sessionStorage.getItem('orderId')}`
       this.$http.get(url).then(data => {
+        console.log(data)
         const{ benefitOrder , benefitPackage , personItems, vehicleItems,myBenefits} = data.data.payload
         this.benefitOrder = benefitOrder
         this.benefitPackage = benefitPackage
@@ -296,6 +297,9 @@ export default {
       }
        this.$http.post(url,params).then(data => {
             var result = data.data.payload
+            let res = data.data.payload.businessInfo
+            window.sessionStorage.setItem('businessInfo',JSON.stringify(res))
+            let that = this
             if(data.data.code == 500){
               alert(data.data.message)
             }
@@ -309,13 +313,15 @@ export default {
                 signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                 paySign: result.paySign, // 支付签名
                 success: function (res) {
-                  window.location.href='http://aj.kingwingaviation.com/alliance/wechat/#/myindent'
+                  // window.location.href='http://aj.kingwingaviation.com/alliance/wechat/#/myindent'
+                  that.$router.push('/success')
                 },
                 fail: function (res) {
                   console.log(res)
                 }
               })
             })
+            
             }
             
 
