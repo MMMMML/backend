@@ -52,8 +52,9 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作"  width="100"  >
           <template slot-scope="scope">
-                  <el-button type="text" @click="check(scope.row)" size="small" >导出</el-button>
-                  <el-button type="text" @click="grow(scope.row)" size="small">生成</el-button>
+                  <el-button type="text" @click="check(scope.row)" size="small" v-show='scope.row.state > 2'>导出</el-button>
+                  <el-button type="text" @click="grow(scope.row)" size="small" v-show='scope.row.state === 1'>生成</el-button>
+                  <el-button type="text" readonly size="small" v-show='scope.row.state === 2'>生成中</el-button>
             <!-- <el-button type="text" @click="redact(scope.row)" size="small">编辑</el-button>
             <el-button type="text" @click="delate(scope.row)" size="small">删除</el-button> -->
           </template>
@@ -103,7 +104,7 @@
         
       },
       grow:function(id){
-          let url = `backend/redeemCode/generateCodes?batchId=${id.id}`
+          let url = `redeemCode/generateCodes?batchId=${id.id}`
           this.http.post(url).then(data => {
             // this.list = data.data.payload.list
             console.log(data)

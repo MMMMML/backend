@@ -33,6 +33,7 @@ const ExchangeResult = () => import('@/components/mine/exchange/result')
 const ExchangeAdd = () => import('@/components/mine/exchange/add')
 const Member = () => import('@/components/mine/member')
 const tijiao = () => import('@/components/mine/tijiao')
+const success = () => import('@/components/pay/success')
 
 const Test = () => import('@/components/test')
 
@@ -79,7 +80,7 @@ const router = new VueRouter({
     { path: '/result', component: ExchangeResult },
     { path: '/add', component: ExchangeAdd, meta: { title: '权益兑换' }},
     { path: '/tijiao', component: tijiao, meta: { title: '提交建议'}},
-    { path: '/test', component: Test }
+    { path: '/success', component: success, meta: { title: '购买成功'}}
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
