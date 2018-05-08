@@ -9,11 +9,10 @@
       </router-link>
     </div>
 
-
     <div class='goods_wrapper'>
       <van-cell-swipe :right-width="65" v-for='(item, index) of contactlist' :key='index'>
         <van-cell-group style="background:#fff;margin-top:5px">
-          <div class='contace-mes_content'>
+          <div class='contace-mes_content' @click='handleDetail(item.id)'>
             <div class='contace_text'>
               <p>所有人：{{item.owner}}</p>
               <p>车牌号码：{{item.plateNumber}}</p>
@@ -71,6 +70,10 @@
             height: 16px;
             line-height: 16px;
             font-size: 14px;
+            margin: 0;
+            &:last-child{
+              margin-top: 10px;
+            }
           }
         }
       }
@@ -126,6 +129,9 @@
             this._reload()
           }
         })
+      },
+      handleDetail(id) {
+        this.$router.push(`/vehicledetail?id=${id}`)
       }
     },
     components: {

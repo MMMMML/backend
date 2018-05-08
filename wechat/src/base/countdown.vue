@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <button class='btn' :class='{"active": start}'>{{time | change}}</button>
+  <div class='down_box' :class='{"active": start}'>
+    <span>{{time | change}}</span>
   </div>
 </template>
 
@@ -54,18 +54,20 @@
   }
 </script>
 <style lang="less" scoped>
-  .btn{
-    background: #f44336;
-    height: 1.5rem;
-    border: 0;
-    padding: 0 0.1rem;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 10px;
-    width: 22vw;
-    &.active {
-        background: #ccc;
-    }
+.down_box {
+  text-align: center;
+  height: 25px;
+  font-size: 14px;
+  line-height: 25px;
+  border-radius: 20px;
+  background: #f44336;
+  height: 1.5rem;
+  width: 22vw;
+  font-size: 12px;
+  color: #fff;
+  &.active {
+    background: #ccc;
   }
+}
     
 </style>

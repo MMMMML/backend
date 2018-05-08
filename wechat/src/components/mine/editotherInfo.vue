@@ -6,17 +6,17 @@
 </template>
 <style scoped>
 .button {
-    color: #fff;
-    background: red;
-    height: 40px;
-    line-height: 40px;
-    font-size: 18px;
-    font-weight: 700;
-    text-align: center;
-    width: 90%;
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
+  color: #fff;
+  background: red;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  width: 90%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
 </style>
 <script>
 export default {

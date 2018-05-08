@@ -19,11 +19,10 @@
         </div>
         <div class="indent-price">
           <p>合计：￥{{item.totalPrice}}</p>
-          <div>
-            <button v-show="item.paidStatus==0" @click.stop="cancel(item.id)">取消</button>
-            <button v-show="item.paidStatus==0" @click="payment()">支付</button>
+          <div v-show="item.paidStatus==0">
+            <button @click.stop="cancel(item.id)">取消</button>
+            <button @click="payment()">支付</button>
           </div>
-
         </div>
       </div>
     </div>
@@ -70,13 +69,17 @@
       display: flex;
       padding: 10px 20px;
       justify-content: space-between;
+      align-items: center;
+      height: 46px;
+      p {
+        margin: 0;
+      }
     }
     p {
       color: #4B4B4B;
     }
     .content {
       margin-left:10px;
-      // margin-top: 5px;
       p {
         margin: 0;
         line-height: 25px;

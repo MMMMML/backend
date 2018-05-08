@@ -15,13 +15,9 @@ import { getSessionId, getWxFrom } from '@/util'
 import Storage from 'good-storage'
 
 // import VConsole from 'vconsole'
-import Vant from 'vant'
-import 'vant/lib/vant-css/index.css'
-// import './common/mixin.less'
 import { Field, DatetimePicker, Radio, Indicator } from 'mint-ui'
 Vue.component(Field.name, Field)
 Vue.component(DatetimePicker.name, DatetimePicker)
-Vue.use(Vant)
 
 // let vConsole = new VConsole()
 
@@ -30,9 +26,9 @@ FastClick.attach(document.body)
 // 正式
 // axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance/api/'
 // 调试
-// axios.defaults.baseURL = '/apis'
+axios.defaults.baseURL = '/apis'
 // 测试
-axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {

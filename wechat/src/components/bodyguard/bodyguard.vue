@@ -352,9 +352,10 @@
         }
         p {
           font-size: 12px;
-          font-weight: 100;
+          font-weight: normal;
           white-space: nowrap;
           margin-top: 5px;
+          color: #8f8f94;
         }
       }
     }

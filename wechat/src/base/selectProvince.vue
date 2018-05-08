@@ -4,7 +4,7 @@
     <div class="mask" v-show='selectFlag' @click='selectFlag = !selectFlag'></div>
     <transition name='fade'>
       <div class="select" v-show='selectFlag'>
-        <p v-for='item of provinces' :key='item' @click='hnadleSelect(item)'>{{ item }}</p>
+        <p v-for='item of provinces' :key='item' @click='handleSelect(item)'>{{ item }}</p>
         <div class="close" @click='deleteProvince'>
           <img src="../assets/image/product/button-Back@2x.png" alt="">
         </div>
@@ -33,11 +33,14 @@ export default {
       ]
     }
   },
+  mounted() {
+    this.handleSelect('沪')
+  },
   methods: {
     select() {
       this.selectFlag = true
     },
-    hnadleSelect(province) {
+    handleSelect(province) {
       this.province = province
       this.$emit('province', this.province)
       this.selectFlag = false
@@ -94,7 +97,6 @@ export default {
     z-index: 101;
     display: flex;
     flex-flow: row wrap;
-    // justify-content: space-between;
     justify-content: center;
     padding-top: 7px;
     p {

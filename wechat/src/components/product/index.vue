@@ -12,7 +12,7 @@
         <div class="nav-text">{{ productInfo.explain }}</div>
       </div>
     </div>
-    <van-dialog v-model='dialog'>21321321</van-dialog>
+    <!-- <van-dialog v-model='dialog'></van-dialog> -->
     <!-- privilege  -->
     <div class="privilege">
       <div class="exclusive">
@@ -46,13 +46,13 @@
           <div class='box add' @click='add'>+</div>
         </div>
       </div>
-      <div class="incre" v-if='id === "C"'>
+      <div class="incre" v-if='id === "C" || id === "D"'>
         <h3>增值权益</h3>
         <div class="incre_content">
           <div class="price" @click='activePro = !activePro'>
             <p class='radio' v-show='!activePro'></p>
             <img class='radio' v-show='activePro' src="../../assets/image/product/icon-选中.png" alt="">
-            <span>￥85</span>
+            <span>￥{{ id === 'C' ? 85 : 39 }}</span>
           </div>
           <div class="icon_box" v-show='!activePro' v-for='item of productInfo.privilege.pro.init' :key='item.url'>
             <img :src='item.url'>
@@ -82,7 +82,10 @@
         </p>
         <p class='title_normal' v-if='id === "C"'>购买后次日零时生效，有效期为生效之日起一年<br>
         备注：车辆相关权益生效时间详见服务说明
-        </p>        
+        </p>
+        <p class="title_normal" v-if='id === "D"'>
+          购买后次日零时生效，有效期为生效之日起一年
+        </p>
         <p class="title-icon">权益覆盖城市</p>
         <p class='title_normal'>辽宁、北京、天津、河北、河南、山东、山西、江苏、上海、陕西、安徽、浙江、江西、福建、广东、海南、湖北、四川、重庆、贵州、广西、云南、湖南共23个省市</p>
         <p class="title-icon">价格说明</p>
@@ -101,6 +104,14 @@
         <p class='title_normal' v-if='id === "C"'>
           【附加85元】<br>
           包含权益人在有效期内的非营运性四轮机动车辆道路救援和出险代步车服务费用
+        </p>
+        <p class='title_normal' v-if='id === "D"'>
+          【基础730元】<br>
+          包含2位权益人在有效期内的直升机院前救援、地面120协调,、直升机医疗转运9折权益和道路救援服务费用
+        </p>
+        <p class='title_normal' v-if='id === "D"'>
+          【附加39元】<br>
+          包含权益人在有效期内的出险代步车服务费用
         </p>
         <p class='title_normal'>
           【每次呼叫1元】<br>
@@ -154,7 +165,7 @@
             5、权益人酒后驾驶、无合法有效驾驶证驾驶，或驾驶无有效行驶证的机动车而发生的后果
         </p>
       </div>
-      <div v-show='show[1] && id === "C"' class='showText'>
+      <div v-show='show[1] && (id === "C" || id === "D")' class='showText'>
         <p class="title-icon">一、权益说明</p>
         <p class='title_normal'>
           成为空降联盟直升机救援服务权益人后，您可获得以下权益：<br>
@@ -282,7 +293,7 @@
           ● 权益人如需使用出险代步车服务，请携带本人驾驶证正副本、二代身份证、可用额度5000元以上国内信用卡(自驾押金预授权及交通违章押金)<br />
           ● 权益人上述所有证件有效期的剩余期限均须在一个月以上<br />
           ● 相关费用须由权益人本人国内信用卡及国内借记卡支付，不接受现金付款<br/>
-          <span v-if='id === "C"'>● 年度救援权益的用户，在符合服务标准的情况下可免费使用3次出险代步车服务，超过3次之后可享受空降联盟提供的租赁车尊享折扣礼券<br /></span>
+          <span v-if='id === "C" || id === "D"'>● 年度救援权益的用户，在符合服务标准的情况下可免费使用3次出险代步车服务，超过3次之后可享受空降联盟提供的租赁车尊享折扣礼券<br /></span>
           <span v-if='id === "A"'>● 7天综合救援权益有效期内的用户，在符合服务标准的情况下可以免费使用1次代步车<br /></span>
           ● 因服务点营业时间限定，故出险代步车服务受理时间范围为9点至18点，非本时间段，用户可以选择乘坐出租车，空降联盟将会依据权益人的出租车发票承担相应出租车费用，费用上限为100元
         </p>
@@ -372,6 +383,7 @@ import Storage from 'good-storage'
 import PayBtn from '@/base/pay_bottom_btn'
 import banner4 from '@/assets/image/product/banner4.jpeg'
 import banner1 from '@/assets/image/home/banner_1.png'
+import bannerD from '@/assets/image/home/productD.jpg'
 import helicopter from '@/assets/image/product/icon-helicopter@2x.png'
 import call from '@/assets/image/product/icon-call@2x.png'
 import truck from '@/assets/image/product/icon-truck@2x.png'
@@ -402,6 +414,7 @@ import axios from 'axios'
         endDate: new Date(Date.parse(new Date) + 1000 * 60 * 60 * 24 * 83),
         resultdate: '',
         main: '',
+        vas: '',
         pickerStart: '请选择日期',
         pickerEnd: '',
         allInfo: [{
@@ -457,6 +470,36 @@ import axios from 'axios'
               }]
             }  
           }
+        }, {
+          url: bannerD,
+          title: '双人全年综合救援权益',
+          tips: ['双人专享', '全年守护', '赠道路救援', '可享增值服务'],
+          explain: '上辈子一百次的回眸才换来这辈子的一个TA。别再偷偷爱着她！即刻传递你的丘比特之心，意外来临再也不怕！爱神丘比特穿越时空，为你和你最爱的人带来一整年的生命守护！即刻购买还可获赠双人专享的道路救援服务，潇洒出行，一起浪迹天涯为爱出发！',
+          privilege: {
+            base: [{
+              tip: '直升机院前救援',
+              url: helicopter
+            }, {
+              tip: '120协调',
+              url: call
+            }, {
+              tip: '医疗转运9折',
+              url: trans
+            }, {
+              tip: '道路救援',
+              url: truck
+            }],
+            pro: {
+              init: [{
+                tip: '出险代步车',
+                url: carNo
+              }],
+              active: [{
+                tip: '出险代步车',
+                url: car
+              }]
+            }
+          }
         }],
         offcial: [],
         id: '',
@@ -469,11 +512,11 @@ import axios from 'axios'
       this.id = this.$route.query.id || 'A'
       let x = {
         'A': '急速全明星',
-        'C': '空降骑士'
+        'C': '空降骑士',
+        'D': '丘比特之心'
       }
       document.title = x[this.id]
       this._getProductData()
-      // this._createOffical()
     },
     mounted() {
       var url = 'wechat/getJSApiTicket'
@@ -489,6 +532,10 @@ import axios from 'axios'
       } else if (this.id === 'C') {
         share.title = '空降骑士驾到，即刻召唤私享你的全年守护！',
         share.desc = '命运可以改变，我永远在你身边'
+        share.url = 'productC.jpg'
+      } else if (this.id === 'D') {
+        share.title = 'D产品',
+        share.desc = 'D产品'
         share.url = 'productC.jpg'
       }
 
@@ -528,68 +575,11 @@ import axios from 'axios'
         this.$http.get(`/wechat/package/queryPackageById?id=${this.id}`).then(response => {
           let data = response.data.payload
           this.main = JSON.parse(data.specifics).main
+          this.vas = JSON.parse(data.specifics).vas
         }).catch(e => {
           console.log(e)
         })
       },
-      // _createOffical() {
-      //   if (this.id === 'A') {
-      //     this.offcial.push({
-      //       title: '权益人须知',
-      //       desc: [{
-      //         small_title: '权益人限定',
-      //         content: '中国公民（含港澳台地区）或在中国持合法证件的外籍人士'
-      //       }, {
-      //         small_title: '权益车辆要求',
-      //         content: '9座（含）以下、重量不超过3.5吨、长度不超过6米的非营运性四轮机动车辆'
-      //       }, {
-      //         small_title: '权益有效期',
-      //         content: '有效期为所选起始日起的连续7天'
-      //       }, {
-      //         small_title: '权益覆盖城市',
-      //         content: '辽宁、北京、天津、河北、河南、山东、山西、江苏、上海、陕西、安徽、浙江、江西、福建、广东、海南、湖北、四川、重庆、贵州、广西、云南、湖南共23个省市'
-      //       }, {
-      //         small_title: '价格说明',
-      //         content: '【基础99元】<br />包含一位权益人、一辆权益车辆有效期内的直升机院前救援、地面120协调、道路救援和出险代步车服务费用<br />【附加35元】<br />每增加1位权益人需额外支付7天直升机院前救援和地面120协调服务费用</br />【每次呼叫1元】<br />实际发生直升机院前救援时，权益人在有效期内每呼叫一次需支付1元呼叫调度费'
-      //       }, {
-      //         small_title: '服务热线',
-      //         content: '021-60554929 &nbsp; 021-60554929'
-      //       }]
-      //     })
-      //   } else if (this.id === 'C') {
-      //     this.offcial.push({
-      //       title: '权益人须知',
-      //       desc: [{
-      //         small_title: '权益人限定',
-      //         content: '中国公民（含港澳台地区）或在中国持合法证件的外籍人士'
-      //       }, {
-      //         small_title: '权益车辆要求',
-      //         content: '9座（含）以下、重量不超过3.5吨、长度不超过6米的非营运性四轮机动车辆'
-      //       }, {
-      //         small_title: '权益覆盖城市',
-      //         content: '辽宁、北京、天津、河北、河南、山东、山西、江苏、上海、陕西、安徽、浙江、江西、福建、广东、海南、湖北、四川、重庆、贵州、广西、云南、湖南共23个省市'
-      //       }, {
-      //         small_title: '价格说明',
-      //         content: '<h6>【基础365元】</h6>包含一位权益人在有效期内的直升机院前救援、地面120协调和直升机医疗转运9折权益服务费用<h6>【附加85元】</h6>包含权益人在有效期内的非营运性四轮机动车辆道路救援和出险代步车服务费用<h6>【每次呼叫1元】</h6>实际发生直升机院前救援时，权益人在有效期内每呼叫一次需支付1元呼叫调度费'
-      //       }, {
-      //         small_title: '服务热线',
-      //         content: '021-60554929 &nbsp; 021-60554929'
-      //       }]
-      //     })
-      //   }
-      //   // 短期 or 长期
-      //   if (this.id === 'A') {
-      //     this.offcial.push({
-      //       title: '直升机救援服务',
-      //       desc: [duan1, duan2, duan3]
-      //     })
-      //   } else {
-      //     this.offcial.push({
-      //       title: '直升机救援服务',
-      //       desc: [chang1, chang2, chang3, chang4, chang5, chang6]
-      //     })
-      //   }
-      // },
       add() {
         this.counter < 9 && (this.counter += 1)
       },
@@ -617,7 +607,8 @@ import axios from 'axios'
         }
         let url = {
           'A': `/pay?packageId=A&counter=${this.counter}&price=${this.price}&benefitEffectTime=${this.pickerStart}`,
-          'C': `/pay?packageId=C&activePro=${this.activePro}&price=${this.price}`
+          'C': `/pay?packageId=C&activePro=${this.activePro}&price=${this.price}`,
+          'D': `/pay?packageId=D&activePro=${this.activePro}&price=${this.price}&counter=2`
         }
         this.redirect = url[this.id]
         this._check().then(res => {
@@ -634,13 +625,16 @@ import axios from 'axios'
             return (100 * this.main.price + (this.counter - 1) * this.main.addPrice * 100) / 100
           } else if (this.id === 'C') {
             return this.activePro ? (this.main.price * 100 + 85 * 100) / 100 : this.main.price
+          } else if (this.id === 'D') {
+            return this.activePro ? (this.main.price * 100 + this.vas[0].price * 100) / 100 : this.main.price
           }
         }
       },
       productInfo() {
         let enums = {
           'A': 0,
-          'C': 1
+          'C': 1,
+          'D': 2
         }
         return this.allInfo[enums[this.id]]
       }

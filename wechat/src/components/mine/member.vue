@@ -7,7 +7,7 @@
           <div class="member-car">
             <div class="carpart">
               <div style="padding-right: 15px;">
-                <img src="../../assets/image/mine/icon-insurance.png" alt="">
+                <img style='width: 17px; height: 20px;' src="../../assets/image/mine/new_icon-insurance@2x.png" alt="">
               </div>
               <div>
                 <p>{{member.realName}}</p>
@@ -15,7 +15,7 @@
             </div>
             <div class="carpart">
               <div style="padding-right: 15px;">
-                <img src="../../assets/image/mine/icon-car-1.png" alt="">
+                <img style='width: 20px; height: 18px;' src="../../assets/image/mine/new_car@2x.png" alt="">
               </div>
               <div class='right'>
                 <p>{{member.idType | format}}</p>
@@ -27,27 +27,33 @@
             <p style="text-align:center;padding:20px 0" v-show="item.value=='' && index === 0">哎呀，你还没有专属权益哦！赶快去购买吧！</p>
             <div v-show="item.value != ''">
               <div class="rides" v-show="item.key==101">
-                <div style="padding-right:10px;">
-                  <img src="../../assets/image/product/icon-helicopter.png" alt="">
+                <div class='ride' style="padding-right:10px;">
+                  <img src="../../assets/image/product/icon-helicopter@2x.png" alt="">
                   <p>直升机院前急救</p>
                 </div>
-                <div>
-                  <img src="../../assets/image/product/icon-call.png" alt="">
+                <div class='ride'>
+                  <img src="../../assets/image/product/icon-call@2x.png" alt="">
                   <p>120协调</p>
                 </div>
               </div>
               <div class="ride" v-show="item.key==103">
-                <img src="../../assets/image/product/icon-helicopter.png" alt="">
+                <img src="../../assets/image/product/icon-helicopter@2x.png" alt="">
                 <p>医疗转运9折</p>
               </div>
               <div class="member-person">
-                <swiper :options="swiperOption" :not-next-tick="notNextTick" ref="mySwiper">
+                <swiper :options="swiperOption" ref="mySwiper">
                   <swiper-slide class="member-person-slide" v-for='(list, index) of item.value' :key='index'>
                     <p class="member-person-slide-title">{{list.main_name}}</p>
                     <p>{{list.effect_time}}</p>
                     <p>至</p>
                     <p>{{list.expire_time}}</p>
                   </swiper-slide>
+                  <!-- <swiper-slide class="member-person-slide" v-for='(list, index) of 4' :key='index'>
+                    <p class="member-person-slide-title">1</p>
+                    <p>2</p>
+                    <p>至</p>
+                    <p>3</p>
+                  </swiper-slide> -->
                 </swiper>
               </div>
             </div>
@@ -62,7 +68,7 @@
           <div class="member-car">
             <div class="carpart">
               <div style="padding-right: 15px;">
-                <img src="../../assets/image/mine/icon-insurance.png" alt="">
+                <img style='width: 17px; height: 20px;' src="../../assets/image/mine/new_icon-insurance@2x.png" alt="">
               </div>
               <div class='top'>
                 <p>所有人</p>
@@ -71,7 +77,7 @@
             </div>
             <div class="carpart">
               <div style="padding-right: 15px;">
-                <img src="../../assets/image/mine/icon-car-1.png">
+                <img style='width: 20px; height: 18px;' src="../../assets/image/mine/new_car@2x.png" alt="">
               </div>
               <div class='top'>
                 <p>车牌号码</p>
@@ -86,11 +92,11 @@
             <div v-else>
               <div v-show="res.value!=''">
                 <div class="ride" v-show="res.key==106">
-                  <img src="../../assets/image/product/icon-car.png" alt="">
+                  <img src="../../assets/image/product/icon-car@2x.png" alt="">
                   <p>代步车</p>
                 </div>
                 <div class="ride" v-show="res.key==104">
-                  <img src="../../assets/image/product/icon-truck.png" alt="">
+                  <img src="../../assets/image/product/icon-truck@2x.png" alt="">
                   <p>道路救援</p>
                 </div>
                 <div class="member-square">
@@ -128,6 +134,8 @@
   line-height: 50px;
   background: #fff;
   border-top: 1px solid #ccc;
+  margin-top: 10px;
+  z-index: 99;
   div{
     width: 50%;
     text-align: center;
@@ -146,12 +154,13 @@
     border-bottom: 1px dashed #ccc;
     .carpart{
       display: flex;
-      width: 45%;
+      flex: 1;
       align-items: center;
-      padding:10px 20px;
+      padding: 0 20px;
       height: 70px;
       p {
         margin: 0;
+        white-space: nowrap;
       }
       .right {
         p:last-child {
@@ -163,6 +172,10 @@
   .ride{
     text-align: center;
     padding: 10px 0;
+    img {
+      width: 42px;
+      height: 42px;
+    }
   }
   .rides{
     display: flex;
@@ -201,23 +214,19 @@
     padding-bottom: 20px;
     display: flex;
     flex-flow: row nowrap;
-    padding-left: 15px;    
-    .swiper-wrapper {
-      display: flex;
-      flex-flow: row nowrap;
-    }
-  }
-  .member-person-slide {
-    width: 110px !important;
-    height: 120px;
-    padding: 0 5px;
-    text-align: center;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    display: inline-block;
-    .member-person-slide-title {
-      line-height: 40px;
-      border-bottom: 1px solid #eee;
+    padding-left: 15px;
+    .member-person-slide {
+      width: 110px !important;
+      height: 120px;
+      padding: 0 5px;
+      text-align: center;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      display: inline-block;
+      .member-person-slide-title {
+        line-height: 40px;
+        border-bottom: 1px solid #eee;
+      }
     }
   }
 }
@@ -235,9 +244,7 @@ export default {
       notNextTick: true,
       swiperOption: {
         pagination: '.swiper-pagination',
-        spaceBetween: 10,
-        slidesPerView: 3.2,
-        centeredSlides: true,
+        spaceBetween: 5,
         freeMode: true
       }
     }
@@ -256,6 +263,12 @@ export default {
     this.$http.get(urlCar).then(data => {
       this.memberCars = data.data.payload
     })
+  },
+  updated() {
+    let swiperList = document.getElementsByClassName('swiper-wrapper')
+    for (let i = 0;i < swiperList.length;i++) {
+      swiperList[i].style.display = 'flex'
+    }
   },
   methods:{
     car() {
