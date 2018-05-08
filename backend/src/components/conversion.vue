@@ -81,7 +81,8 @@
       }
     },
     mounted() {
-        let url = '/apis/common/packageList'
+        // let url = 'common/packageList'
+        let url = 'http://aj.kingwingaviation.com/alliance-java/common/packageList'
         this.$http.get(url).then(data => {
             this.product = data.data.payload
             console.log(data)
