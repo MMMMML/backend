@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
 
 const personal = () => import('@/components/mine/personal.vue')
 const contact = () => import('@/components/mine/contact.vue')
@@ -91,4 +92,12 @@ const router = new VueRouter({
     }
   }
 })
+
+router.afterEach((to, from ,next) => {
+  let { channel } = to.query
+  if (channel) {
+    axios.post(`wechat/channel/setCookie?channel=${channel}`)
+  }
+})
+
 export default router

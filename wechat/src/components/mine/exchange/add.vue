@@ -61,7 +61,7 @@
           <button @click='selectCar' class='select'>选择车辆</button>
           <div class="carInput">
             <select-province :propProvince='carInfo.pre' @province='getProvince'></select-province>
-            <input type="text" v-model="carInfo.end" placeholder="请输入车牌号码">
+            <input type="text" style='font-size: 14px;' v-model="carInfo.end" placeholder="请输入车牌号码">
           </div>
           <div class="warning" v-show='validateArr[validateArr.length - 1].isCarNo'>
             <img style="width: 14px;height: 14px;" src="../../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
@@ -365,12 +365,6 @@
           })
         })
 
-        let newArr = Array.from(new Set(arr))
-        if (newArr !== arr) {
-          alert('同一个产品中不能重复填写一个证件信息')
-          return
-        }
-
         if (this.initialTimeLimit && this.datePlaceholder === '请选择开始日期') {
           alert('请选择开始日期')
           return
@@ -390,7 +384,6 @@
           })
         }
 
-        console.log(this.validateArr)
         let flag = true
         this.validateArr.forEach(item => {
           if (item.isChinaName === true || item.isIdNumber === true || item.isCarWPMI === true || item.isCarUser === true) {
@@ -398,6 +391,12 @@
           }
         })
         if (!flag) return
+
+        let newArr = Array.from(new Set(arr))
+        if (this.personUserInfo.length > 1 && newArr.length !== arr.length) {
+          alert('同一个产品中不能重复填写一个证件信息')
+          return
+        }
 
         // 正式发起请求 先做是否实名认证校验
         var params = {
