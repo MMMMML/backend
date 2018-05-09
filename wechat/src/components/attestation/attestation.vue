@@ -43,7 +43,7 @@
         <div style="display:flex;align-items: center;">
           <!-- <div class="btn" @click="gaincode()">time </div> -->
           <!-- <time class="btn" @countDown='gaincode'></time> -->
-          <count class='btn' :start='start' @countDown ='start = false' @click.native = 'gaincode' :class='{"active": start}'></count>
+          <count :start='start' @countDown ='start = false' @click.native = 'gaincode'></count>
         </div>
 
       </div>
@@ -67,21 +67,6 @@
   .warning img {
     width: 14px;
     height: 14px;
-  }
-
-  .btn {
-    // width: 22vw;
-    color: white;
-    background: red;
-    /* font-size: 0.5rem; */
-    text-align: center;
-    height: 25px;
-    font-size: 14px;
-    line-height: 25px;
-    border-radius: 20px;
-    &.active {
-      background: #ccc;
-    }
   }
 
   .human-input {
@@ -181,8 +166,8 @@
           console.log(this.user.idType)
         }
       })
-      let redirect = this.$route.query.redirect
-      this.url = redirect || '/'
+      let redirect = location.href.split('redirect=')[1]
+      this.url = decodeURIComponent(redirect) || '/'
       console.log(this.url)
     },
     methods: {
@@ -272,9 +257,7 @@
               ...obj,
               verified: true
             }
-            // const userinfo = res.data.payload
             Storage.session.set('userInfo', JSON.stringify(obj))
-            // window.location.href = this.url
             this.$router.replace(this.url)
           }
         })

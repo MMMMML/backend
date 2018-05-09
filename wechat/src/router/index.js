@@ -1,19 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
 
-import personal from '@/components/mine/personal.vue'
-import contact from '@/components/mine/contact.vue'
-import vehicle from '@/components/mine/commonvehicle.vue'
-import vehicledetail from '@/components/mine/vehicle-detail.vue'
-import editotherinfo from '@/components/mine/editotherinfo.vue'
-import editmobile from '@/components/mine/editmobile.vue'
-import attestation from '@/components/attestation/attestation.vue'
-import bodyguard from '@/components/bodyguard/bodyguard.vue'
-import guarantee from '@/components/bodyguard/guarantee.vue'
-import protect from '@/components/bodyguard/protect.vue'
-import protectdetail from '@/components/bodyguard/protectdetail.vue'
-import bindcar from '@/components/mine/bindcar.vue'
-import bindcardetail from '@/components/mine/bindcardetail.vue'
+const personal = () => import('@/components/mine/personal.vue')
+const contact = () => import('@/components/mine/contact.vue')
+const vehicle = () => import('@/components/mine/commonvehicle.vue')
+const vehicledetail = () => import('@/components/mine/vehicle-detail.vue')
+const editotherinfo = () => import('@/components/mine/editotherinfo.vue')
+const editmobile = () => import('@/components/mine/editmobile.vue')
+const attestation = () => import('@/components/attestation/attestation.vue')
+const bodyguard = () => import('@/components/bodyguard/bodyguard.vue')
+const guarantee = () => import('@/components/bodyguard/guarantee.vue')
+const protect = () => import('@/components/bodyguard/protect.vue')
+const protectdetail = () => import('@/components/bodyguard/protectdetail.vue')
+const bindcar = () => import('@/components/mine/bindcar.vue')
+const bindcardetail = () => import('@/components/mine/bindcardetail.vue')
 
 const Home = () => import('@/components/home')
 const Mine = () => import('@/components/mine/mine.vue')
@@ -96,4 +97,12 @@ const router = new VueRouter({
     }
   }
 })
+
+router.afterEach((to, from ,next) => {
+  let { channel } = to.query
+  if (channel) {
+    axios.post(`wechat/channel/setCookie?channel=${channel}`)
+  }
+})
+
 export default router

@@ -3,9 +3,10 @@
     <div class="must">
       <div class="man">
         <p class="human-name">车牌号码</p>
-        <input type="text" class="inputs-name" style="font-size:14px" v-model="list.plateNumber" placeholder="请输入车牌号码">
-        <div style="height:30px;margin-top: 2vh">
-            <button class="btn" >选择车辆</button>
+        <select-province :propProvince='list.pre' @province='handleProvince'></select-province>
+        <input type="text" class="inputs-name" style="font-size:14px" v-model="list.end" placeholder="请输入车牌号码">
+        <div class='select_car'>
+          <button class="btn" >选择车辆</button>
         </div>
       </div>
       <div class="man">
@@ -23,7 +24,7 @@
       </div>
       <div class="man">
         <p class="human-name">使用性质</p>
-        <input type="text" readonly class="inputs-name" style="font-size:14px" v-model="text">
+        <input type="text" readonly class="inputs-name" style="font-size:14px" v-model="list.text">
       </div>
       <div class="man" style="border-bottom:none">
         <p class="human-name">车辆识别代号</p>
@@ -34,7 +35,41 @@
     <div class="button" @click="confirm()">确认</div>
   </div>
 </template>
-<style scoped>
+<style scoped lang='less'>
+  .must {
+    background: #fff;
+    width: 100%;
+    .man {
+      display: flex;
+      align-items: center;
+      height: 49px;
+      line-height: 49px;
+      border-bottom: 1px solid #eee;
+      padding-right: 10px;
+      .human-name {
+        width: 32%;
+        padding-left: 5%;
+        height: 100%;
+      }
+      p {
+        margin: 0;
+      }
+      .inputs-name {
+        width: 45%;
+        border: none;
+        height: 48px;
+        margin-bottom: 0;
+      }
+      .select_car {
+        display: flex;
+        align-items: center;
+      }
+      img {
+        width: 8px;
+        height: 13px;
+      }
+    }
+  }
   .button {
     color: #fff;
     background: red;
@@ -54,61 +89,22 @@
     line-height: 19px;
     font-size: 14px;
   }
-  .inputs-name {
-    width: 45%;
-    border: none;
-    height: 59px;
-    margin-bottom: 0;
-  }
-
-  .title {
-    width: 100%;
-    padding-left: 5%;
-    font-size: 18px;
-    font-weight: 700;
-    height: 30px;
-    line-height: 30px;
-  }
-
-  .must {
-    background: #fff;
-    width: 100%;
-  }
-
-  .human-name {
-    width: 32%;
-    padding-left: 5%;
-  }
-
-  .man {
-    display: flex;
-    height: 60px;
-    line-height: 60px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .man img {
-    width: 8px;
-    height: 13px;
-  }
-
 </style>
 <script>
   import MobileSelect from 'mobile-select'
+  import SelectProvince from '@/base/selectProvince'  
   export default {
     data() {
       return {
         list:{
-            vehicleType: '请选择车辆类型',
-        },
-        lists: [],
-        plateNumber: '',
-        plateNumber: '',
-        vehicleType: '',
-        owner: '',
-        vin: '',
-        text: '非运营车辆',
-       
+          vehicleType: '请选择车辆类型',
+          plateNumber: '',
+          owner: '',
+          vin: '',
+          text: '非运营车辆',
+          pre: '',
+          end: ''
+        }
       }
     },
     mounted() {
@@ -145,56 +141,69 @@
       });
     },
     created(){
-        var url = 'wechat/commonVehicle/list'
-          this.$http.get(url).then(data => {
-              console.log(data)
-          this.lists = data.data.payload
-        //   if(data.data.code==200){
-        //     this.$router.push('/bindcar')
-        //   }
+      var url = 'wechat/commonVehicle/list'
+      this.$http.get(url).then(data => {
+        this.lists = data.data.payload
         this.objlist = []
-           this.lists.map(item => {
+        this.lists.map(item => {
           this.obj = {}
           this.owner = item.owner
           this.plateNumber = item.plateNumber
           this.obj.owner = item.owner
           this.obj.value = item.plateNumber
-           this.obj.vehicleType = item.vehicleType
+          this.obj.vehicleType = item.vehicleType
           this.obj.plateNumber = item.plateNumber
           this.obj.vin = item.vin
           this.objlist.push(this.obj)
         })
-         let arr = [{
+        let arr = [{
           data: this.objlist
         }]
-        console.log(arr)
-          var mobileSelect = new MobileSelect({
+        var mobileSelect = new MobileSelect({
           trigger: '.btn',
-          title: '选择保障车辆',
+          title: '选择绑定车辆',
           wheels: arr,
           triggerDisplayData: false,
           callback: (indexArr, data) => {
-            this.list = data[0]
+            // console.log(data[0])
+            let res = data[0]
+            this.$set(this.list, 'pre', '')
+            this.$set(this.list, 'end', '')
+            Object.keys(this.list).forEach(item => {
+              if (item === 'plateNumber') {
+                this.list['pre'] = res['plateNumber'].substr(0, 1)
+                this.list['end'] = res['plateNumber'].substr(1)
+              } if (item === 'pre' || item === 'end') {
+              } else {
+                this.list[item] = res[item] || this.list[item]
+              }
+            })
           }
-        });
         })
+      })
     },
     methods: {
-      confirm: function () {
+      confirm() {
         var url = 'wechat/auth/bindVehicle'
         var params = {
           userid: window.sessionStorage.getItem('id')
         }
-        this.$http.post(url, Object.assign(this.list, params)).then(data => {
-          this.list = data.data.payload
-          if(data.data.code==200){
-            this.$router.push('/bindcar')
+        this.list.plateNumber = this.list.pre + this.list.end
+        this.$http.post(url, Object.assign(this.list, params)).then(res => {
+          if (res.data.code === 200) {
+            this.list = res.data.payload
+            this.$router.go(-1)
+          } else {
+            alert(res.data.message)
           }
         })
       },
-     
-
-
+      handleProvince(province) {
+        this.$set(this.list, 'pre', province)
+      }
+    },
+    components: {
+      SelectProvince
     }
   }
 

@@ -40,32 +40,28 @@
           </div>
       </div>
       <!-- 手机号 -->
-      <router-link class="mui-tab-item" to='/editmobile'>
-      <div class="message">
-          <div class="msg">
-              <p style="width:20%;margin-left: 12%;">手机号</p>
-              <p style="width:60%">{{user.mobile?user.mobile:'未填写'}}</p>
-                  <img style="" src="../../assets/image/mine/Chevron@3x.png" alt="">
-          </div>
-      </div>
+      <router-link tag='div' class="message" to='/editmobile'>
+        <div class="msg">
+          <p style="width:20%;margin-left: 12%;">手机号</p>
+          <p style="width:60%">{{user.mobile?user.mobile:'未填写'}}</p>
+          <img style="" src="../../assets/image/mine/Chevron@3x.png" alt="">
+        </div>
       </router-link>
       <!-- 身份证 -->
       <div class="message">
-          <div class="msg">
-              <p style="width:20%;margin-left: 12%;">身份证</p>
-              <p style="width:50%">{{user.idNumber?user.idNumber:'未填写'}}</p>
-              <p style="width:15%;">{{user.verified==false?'未绑定':'已绑定'}}</p>
-          </div>
+        <div class="msg">
+          <p style="width:20%;margin-left: 12%;">身份证</p>
+          <p style="width:50%">{{user.idNumber?user.idNumber:'未填写'}}</p>
+          <p style="width:15%;">{{user.verified==false?'未绑定':'已绑定'}}</p>
+        </div>
       </div>
       <!-- 常用车辆 -->
-      <router-link class="mui-tab-item" to='/bindcar'>
-      <div class="message">
-          <div class="msg">
-              <p style="width:20%;margin-left: 12%;">绑定车辆</p>
-              <p style="width:60%">{{user.bindVehicleCount}}</p>
-               <img  src="../../assets/image/mine/Chevron@3x.png" alt="">
-          </div>
-      </div>
+      <router-link tag='div' class="message" to='/bindcar'>
+        <div class="msg">
+          <p style="width:20%;margin-left: 12%;">绑定车辆</p>
+          <p style="width:60%">{{user.bindVehicleCount}}</p>
+          <img  src="../../assets/image/mine/Chevron@3x.png" alt="">
+        </div>
       </router-link>
       <!-- 邮箱 -->
       <!-- <div class="message">

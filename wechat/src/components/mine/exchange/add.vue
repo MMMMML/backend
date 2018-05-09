@@ -28,6 +28,9 @@
         <div class="item vux-1px-b">
           <p class="item_label">证件类型</p>
           <p class="item_value" @click='handleCheckID(index)'>{{ item.idType | format }}</p>
+          <div>
+            <img class="up-arrow" src="../../../assets/image/mine/Chevron@3x.png" alt="">
+          </div>
         </div>
         <div class="item vux-1px-b">
           <p class="item_label">证件号码</p>
@@ -58,7 +61,7 @@
           <button @click='selectCar' class='select'>选择车辆</button>
           <div class="carInput">
             <select-province :propProvince='carInfo.pre' @province='getProvince'></select-province>
-            <input type="text" v-model="carInfo.end" placeholder="请输入车牌号码">
+            <input type="text" style='font-size: 14px;' v-model="carInfo.end" placeholder="请输入车牌号码">
           </div>
           <div class="warning" v-show='validateArr[validateArr.length - 1].isCarNo'>
             <img style="width: 14px;height: 14px;" src="../../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
@@ -68,9 +71,10 @@
         <div class="item vux-1px-b">
           <p class='item_label'>车辆类型</p>
           <p class="item_value" @click='handleCheckCarType'>{{ carInfo.vehicleType || '请选择车辆类型' }}</p>
-          <!-- <div>
-            <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
+          <div>
+            <img class="up-arrow" src="../../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
+          <!-- 
           <div class="warning" >
             <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
             <span>证件号码不能为空</span>
@@ -287,6 +291,9 @@
               usingNature: '0'
             })
           })
+          let obj = {
+            data: newArr
+          }
           this.carSelect = new MobileSelect({
             trigger: '.init',
             title: '选择权益车',
@@ -294,15 +301,18 @@
             triggerDisplayData: false,
             callback: (indexArr, data) => {
               let res = data[0]
+              this.$set(this.carInfo, 'pre', '')
+              this.$set(this.carInfo, 'end', '')
               Object.keys(this.carInfo).forEach(item => {
                 if (item === 'plateNumber') {
                   this.carInfo['pre'] = res['value'].substr(0, 1)
                   this.carInfo['end'] = res['value'].substr(1)
-                  // this.carInfo[item] = res['value']
+                } if (item === 'pre' || item === 'end') {
                 } else {
                   this.carInfo[item] = res[item]
                 }
               })
+              console.log(this.carInfo)
             }
           })
         })
@@ -338,16 +348,19 @@
         return vin.length === 17
       },
       getProvince(province) {
-        this.carInfo.pre = province
+        this.$set(this.carInfo, 'pre', province)
       },
       handlePay() {
         // 做表单校验
+        let arr = []
         this.personUserInfo.forEach((item, index) => {
           Object.keys(item).forEach((key, idx) => {
             if (key === 'realName') {
               this.validateArr[index].isChinaName = !this._isChinaName(item[key])
             } else if (key === 'idNumber' && item['idType'] === '0') {
               this.validateArr[index].isIdNumber = !this._isIdNumber(item[key])
+            } else if (key === 'idNumber') {
+              arr.push(item[key])
             }
           })
         })
@@ -371,7 +384,6 @@
           })
         }
 
-        console.log(this.validateArr)
         let flag = true
         this.validateArr.forEach(item => {
           if (item.isChinaName === true || item.isIdNumber === true || item.isCarWPMI === true || item.isCarUser === true) {
@@ -379,6 +391,12 @@
           }
         })
         if (!flag) return
+
+        let newArr = Array.from(new Set(arr))
+        if (this.personUserInfo.length > 1 && newArr.length !== arr.length) {
+          alert('同一个产品中不能重复填写一个证件信息')
+          return
+        }
 
         // 正式发起请求 先做是否实名认证校验
         var params = {
@@ -393,7 +411,7 @@
           if (data.code === 200) {
             let effectTime = data.payload.effectTime.substr(0, 10).replace(/-/g, '/'),
                 expireTime = data.payload.expireTime.substr(0, 10).replace(/-/g, '/'),
-                name = data.payload.name
+                name = data.payload.packageName
             str += `effectTime=${effectTime}&expireTime=${expireTime}&name=${name}`
           } else {
             str += `msg=${data.message}`
@@ -447,6 +465,7 @@
         display: flex;
         height: 48px;
         line-height: 48px;
+        padding-right: 10px;
         .item_label {
           width: 90px;
           height: 100%;
@@ -549,7 +568,7 @@
           }
           .select {
             position: absolute;
-            right: 10px;
+            left: 72%;
             top: 50%;
             width: 80px;
             height: 24px;

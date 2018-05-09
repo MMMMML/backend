@@ -1,14 +1,15 @@
 <template>
   <div>
+    <span id="trigger"></span>
     <div class="must">
       <div class="man">
         <p class="human-name">车牌号码</p>
-        <input type="text" class="inputs-name" style="font-size:14px" v-model="plateNumber" placeholder="请输入车牌号码">
+        <input type="text" :readonly='disabled' class="inputs-name" style="font-size:14px" v-model="plateNumber" placeholder="请输入车牌号码">
       </div>
       <div class="man">
         <p class="human-name">车辆类型</p>
         <!-- <p>{{list.vehicleType}}</p> -->
-        <p id="trigger" style="width:58%;margin-left: 1rem;">{{idType}}</p>
+        <p style="width:58%;margin-left: 1rem;" @click='selectCar'>{{ idType }}</p>
         <div>
           <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
         </div>
@@ -16,16 +17,16 @@
       <div class="man">
         <p class="human-name">所有人</p>
         <!-- <p>{{list.owner}}</p> -->
-        <input type="text" class="inputs-name" style="font-size:14px" v-model="owner" placeholder="请输入所有人">
+        <input :readonly='disabled' type="text" class="inputs-name" style="font-size:14px" v-model="owner" placeholder="请输入所有人">
       </div>
       <div class="man">
         <p class="human-name">使用性质</p>
-        <input type="text" readonly class="inputs-name" style="font-size:14px" v-model="text" placeholder="请输入所有人">
+        <input type="text" disabled class="inputs-name" style="font-size:14px" v-model="text" placeholder="请输入所有人">
       </div>
       <div class="man" style="border-bottom:none">
         <p class="human-name">车辆识别代号</p>
         <!-- <p>{{list.vin}}</p> -->
-        <input type="text" class="inputs-name" style="font-size:14px" v-model="vin" placeholder="请输入车辆识别代号">
+        <input :readonly='disabled' type="text" class="inputs-name" style="font-size:14px" v-model="vin" placeholder="请输入车辆识别代号">
       </div>
     </div>
     <div class="button" @click="confirm()">确认</div>
@@ -94,16 +95,23 @@
       return {
         list: [],
         plateNumber: '',
-        plateNumber: '',
         vehicleType: '',
         owner: '',
         vin: '',
         text: '非运营车辆',
         idType: '请选择车辆类型',
+        disabled: false
+      }
+    },
+    created() {
+      this.id = this.$route.query.id
+      if (this.id) {
+        this._getDetail()
+        this.disabled = true
       }
     },
     mounted() {
-      var mobileSelect1 = new MobileSelect({
+      this.mobileSelect1 = new MobileSelect({
         trigger: '#trigger',
         title: '选择车辆类型',
         wheels: [{
@@ -133,31 +141,46 @@
           this.idType = data[0].id; //返回选中的json数据
           console.log(this.idType)
         }
-      });
-
+      })
     },
     methods: {
-      confirm: function () {
-        var url = 'wechat/commonVehicle/add'
-        var params = {
-          userid: window.sessionStorage.getItem('id'),
-          plateNumber: this.plateNumber,
-          vehicleType: this.idType,
-          owner: this.owner,
-          vin: this.vin
+      confirm() {
+        if (!this.id) {
+          var url = 'wechat/commonVehicle/add'
+          var params = {
+            userid: window.sessionStorage.getItem('id'),
+            plateNumber: this.plateNumber,
+            vehicleType: this.idType,
+            owner: this.owner,
+            vin: this.vin
+          }
+          this.$http.post(url, params).then(data => {
+            this.list = data.data.payload
+            if(data.data.code ==500){
+              alert(data.data.message)
+            }
+            if(data.data.code==200){
+              this.$router.go(-1)
+            }
+          })
+        } else {
+          this.$router.go(-1)
         }
-        this.$http.post(url, params).then(data => {
-          this.list = data.data.payload
-          if(data.data.code ==500){
-            alert(data.data.message)
-          }
-          if(data.data.code==200){
-            this.$router.push('/vehicle')
-          }
+      },
+      selectCar() {
+        if (!this.disabled) {
+          this.mobileSelect1.show()          
+        }
+      },
+      _getDetail() {
+        this.$http.get(`wechat/commonVehicle/detail?id=${this.id}`).then(res => {
+          let data = res.data.payload
+          this.plateNumber = data.plateNumber
+          this.idType = data.vehicleType
+          this.owner = data.owner
+          this.vin = data.vin
         })
       }
-
-
     }
   }
 

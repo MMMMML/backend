@@ -18,6 +18,9 @@
         <div class="item vux-1px-b">
           <p class="item_label">证件类型</p>
           <p class="item_value" @click='handleCheckID(index)'>{{ item.idType | format }}</p>
+          <div>
+            <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
+          </div>
         </div>
         <div class="item vux-1px-b">
           <p class="item_label">证件号码</p>
@@ -41,14 +44,14 @@
           </div>
         </div>
       </div>
-      <div class='info_wrapper' v-if='(packageId === "A" && index === 0) || (packageId === "C" && activePro)'>
+      <div class='info_wrapper' v-if='(packageId === "A" && index === 0) || (packageId === "C" && activePro) || (packageId === "D" && index === 0)'>
         <h4>权益车辆</h4>
         <div class="item vux-1px-b">
           <p class='item_label'>车牌号码</p>
           <button @click='selectCar' class='select'>选择车辆</button>
           <div class="carInput">
             <select-province :propProvince='carInfo.pre' @province='handleProvince'></select-province>
-            <input type="text" v-model="carInfo.end" placeholder="请输入车牌号码">
+            <input type="text" style='font-size: 14px;' v-model="carInfo.end" placeholder="请输入车牌号码">
           </div>
           <div class="warning" v-show='validateArr[validateArr.length - 1].isCarNo'>
             <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
@@ -58,9 +61,10 @@
         <div class="item vux-1px-b">
           <p class='item_label'>车辆类型</p>
           <p class="item_value" @click='handleCheckCarType'>{{ carInfo.vehicleType || '请选择车辆类型' }}</p>
-          <!-- <div>
+          <div>
             <img class="up-arrow" src="../../assets/image/mine/Chevron@3x.png" alt="">
           </div>
+          <!-- 
           <div class="warning" >
             <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
             <span>证件号码不能为空</span>
@@ -89,7 +93,7 @@
       </div>
     </div>
 
-    <pay-btn :total='price' @buy='handlePay'></pay-btn>
+    <pay-btn class='btn_box' :total='price' @buy='handlePay'></pay-btn>
   </div>
 </template>
 
@@ -149,7 +153,7 @@
         })
       }
       // 在最后一个增加对权益车辆的校验 在A产品和C产品中activePro为true
-      if (this.packageId === 'A' || (this.packageId === 'C' && this.activePro)) {
+      if (this.packageId === 'A' || (this.packageId === 'C' && this.activePro) || (this.packageId === 'D' && this.activePro)) {
         this.validateArr.push({
           isCarNo: false,
           isCarUser: false,
@@ -310,7 +314,7 @@
         this.IDType.show()
       },
       handleProvince(province) {
-        this.carInfo.pre = province
+        this.$set(this.carInfo, 'pre', province)
       },
       write(index) {
         let oldObj = this.personUserInfo[index]
@@ -346,18 +350,19 @@
             }
           })
         })
-
         // 对carInfo做处理
         this.carInfo.plateNumber = this.carInfo.pre + this.carInfo.end
-        Object.keys(this.carInfo).forEach(item => {
-          if (item === 'owner') {
-            this.validateArr[this.validateArr.length - 1].isCarUser = !this._isChinaName(this.carInfo[item])
-          } else if (item === 'plateNumber') {
-            this.validateArr[this.validateArr.length - 1].isCarNo = !this._isCarNo(this.carInfo[item])
-          } else if (item === 'vin') {
-            this.validateArr[this.validateArr.length - 1].isCarWPMI = !this._isCarvin(this.carInfo[item])
-          }
-        })
+        if (this.packageId === 'A' || (this.packageId === 'C' && this.activePro) || (this.packageId === 'D' && this.activePro)) {
+          Object.keys(this.carInfo).forEach(item => {
+            if (item === 'owner') {
+              this.validateArr[this.validateArr.length - 1].isCarUser = !this._isChinaName(this.carInfo[item])
+            } else if (item === 'plateNumber') {
+              this.validateArr[this.validateArr.length - 1].isCarNo = !this._isCarNo(this.carInfo[item])
+            } else if (item === 'vin') {
+              this.validateArr[this.validateArr.length - 1].isCarWPMI = !this._isCarvin(this.carInfo[item])
+            }
+          })
+        }
 
         let flag = true
         this.validateArr.forEach(item => {
@@ -366,6 +371,26 @@
           }
         })
         if (!flag) return
+
+        if (this.packageId === 'D' && !this.activePro) {
+        //   if (this.carInfo: {
+        //   plateNumber: '',
+        //   vehicleType: '',
+        //   owner: '',
+        //   usingNature: '0',
+        //   vin: ''
+        // },)
+          let cancel = true
+          Object.keys(this.carInfo).forEach(item => {
+            if (!this.carInfo[item]) {
+              cancel = false
+            }
+          })
+
+          if (!cancel) {
+            
+          }
+        }
 
         // 正式发起请求 先做是否实名认证校验
         Check().then(res => {
@@ -417,6 +442,14 @@
     components: {
       PayBtn,
       SelectProvince
+    },
+    watch: {
+      carInfo: {
+        handler(newVal) {
+          console.log(newVal)
+        },
+        deep: true
+      }
     }
   }
 
@@ -449,6 +482,7 @@
           line-height: 48px;
           position: relative;
           font-size: 14px;
+          padding-right: 10px;
           .item_label {
             width: 90px;
             height: 100%;
@@ -517,7 +551,7 @@
           }
           .select {
             position: absolute;
-            right: 10px;
+            left: 72%;
             top: 50%;
             width: 80px;
             height: 24px;
@@ -533,6 +567,11 @@
           }
         }
       }
+    }
+    .btn_box {
+      position: fixed;
+      bottom: 0;
+      left: 0;
     }
   }
 
