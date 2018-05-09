@@ -36,6 +36,9 @@ const tijiao = () => import('@/components/mine/tijiao')
 const success = () => import('@/components/pay/success')
 
 const Test = () => import('@/components/test')
+const evcard = () => import('@/components/evcard/evcard')
+const draw = () => import('@/components/evcard/draw')
+const results = () => import('@/components/evcard/result')
 
 Vue.use(VueRouter)
 Vue.use(require('vue-wechat-title'))
@@ -80,7 +83,10 @@ const router = new VueRouter({
     { path: '/result', component: ExchangeResult },
     { path: '/add', component: ExchangeAdd, meta: { title: '权益兑换' }},
     { path: '/tijiao', component: tijiao, meta: { title: '提交建议'}},
-    { path: '/success', component: success, meta: { title: '购买成功'}}
+    { path: '/success', component: success, meta: { title: '购买成功'}},
+    { path: '/evcard', component: evcard, meta: { title: '主页面'}},
+    { path: '/draw', component: draw, meta: { title: '领取页面'}},
+    { path: '/results', component: results, meta: { title: '结果页面'}}
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
