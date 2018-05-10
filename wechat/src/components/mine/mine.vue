@@ -102,8 +102,8 @@ export default {
           'icon': [stretcher, stretcher_no]
         },
         'firstAid': {
-          'title': '院前急救',
-          'icon': [call, call_no]
+          'title': '直升机院前急救',
+          'icon': [helicopter, helicopter_no]
         },
         'roadRescue': {
           'title': '道路救援',
@@ -111,10 +111,10 @@ export default {
         },
         'ambulance': {
           'title': '120协调',
-          'icon': [helicopter, helicopter_no]
+          'icon': [call, call_no]
         },
         'scooter': {
-          'title': '代步车',
+          'title': '出险代步车',
           'icon': [car, car_no]
         }
       }

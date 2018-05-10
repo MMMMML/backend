@@ -114,6 +114,7 @@
       this.mobileSelect1 = new MobileSelect({
         trigger: '#trigger',
         title: '选择车辆类型',
+        triggerDisplayData: false,
         wheels: [{
           data: [{
               id: '轿车',
@@ -139,7 +140,6 @@
         }],
         callback: (indexArr, data) => {
           this.idType = data[0].id; //返回选中的json数据
-          console.log(this.idType)
         }
       })
     },
