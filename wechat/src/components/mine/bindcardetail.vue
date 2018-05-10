@@ -135,8 +135,8 @@
           ]
         }],
         callback: (indexArr, data) => {
-          this.idType = data[0].id; //返回选中的json数据
-          console.log(this.idType)
+          this.list.vehicleType = data[0].id; //返回选中的json数据
+          this.idType = data[0].id
         }
       });
     },
