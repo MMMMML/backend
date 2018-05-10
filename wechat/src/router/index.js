@@ -36,7 +36,7 @@ const Member = () => import('@/components/mine/member')
 const tijiao = () => import('@/components/mine/tijiao')
 const success = () => import('@/components/pay/success')
 
-const Test = () => import('@/components/test')
+// const Test = () => import('@/components/test')
 const evcard = () => import('@/components/evcard/evcard')
 const draw = () => import('@/components/evcard/draw')
 const results = () => import('@/components/evcard/result')
