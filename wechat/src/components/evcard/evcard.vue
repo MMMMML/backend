@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div @click="sure()">
+    <div @click="sure()" style="position: fixed;bottom: -3px;left: 0;">
       <img style="width:100%" src="../../assets/image/evcard/btn.png" alt="">
     </div>
   </div>
@@ -73,6 +73,7 @@
     // width: 100vw;
     // height: 100vh;
     background-size: 100% auto;
+    padding-bottom: 100px;
     .cloud {
       position: relative;
       padding-top: 122%;
