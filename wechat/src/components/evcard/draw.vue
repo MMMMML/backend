@@ -69,9 +69,21 @@
           <div class="datepicker" style="margin-left:0">{{pickerEnd}}</div>
         </div>
       </div>
-
-      <div class="agree">
-        <!-- <input class="checkbox" type="checkbox"> -->
+      <!-- <mt-radio  v-model="item.state" @click="alocked(item)" :options="options"></mt-radio> -->
+      <span @click='radioActive = !radioActive' style="position: absolute;top: 27.3rem;left: 1rem;">
+        <img style='width: 20px;' v-if='radioActive' src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1783587168,1525005384&fm=175&app=25&f=JPEG?w=218&h=146&s=8D2A727E1D03725542BDC0D7030010E3" alt="">
+        <img style='width: 20px;' v-else src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1641948861,2527843094&fm=175&app=25&f=JPEG?w=218&h=146&s=07029045D2437355AC10949F030080E3" alt="">
+      </span>
+<div>
+  <div class="agree-nav" style="font-size:14px;line-height: 25px;position: absolute;
+    top: 27rem;left: 4vw;">
+              &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我已阅读并同意
+              <span style="color:#338ac7;" @click="five()">《5日权益使用须知》</span>及
+              <span style="color:#338ac7" @click="duty()">《免责声明》</span>
+            </div>
+</div>
+      <!-- <input class="checkbox" type="checkbox"> -->
+      <!-- <div class="agree">
         <div class="checkbox-wrap">
           <input ref="checkbox" type="checkbox" class="checkbox" value="guangpan" v-model="item.state" @click="alocked(item)" name="choose"
             id="guangpan">
@@ -84,10 +96,10 @@
           </label>
         </div>
 
-      </div>
+      </div> -->
       </div>
       
-      <div class="button" @click="gain()">
+      <div class="button" @click="gain()" id="button">
         <!-- <img src="../../assets/image/evcard/按钮.png" alt=""> -->
       </div>
       <div class="warp" v-if="ishow">
@@ -272,6 +284,12 @@
       background: url('http://owvihnwpv.bkt.clouddn.com/%E6%8C%89%E9%92%AE.png') no-repeat;
       // margin-top: 10vh;
       background-size:100%; 
+      margin: 0 auto;
+      // position: absolute;
+      // bottom: 5%;
+      // left: 50%;
+      // text-align: center;
+      // transform: translateX(-50%);
       
     }
     .warp {
@@ -301,6 +319,7 @@
 </style>
 <script>
   import MobileSelect from 'mobile-select'
+  import { Radio } from 'mint-ui';
   import {
     format
   } from 'date-fns'
@@ -328,11 +347,15 @@
         idNumber: '',
         item: {
           state: false
-        }
+        },
+        radioActive: false
         // isPhoneNo: false,
         // isIdNumber: false,
+        
       }
     },
+     created() {
+     },
     mounted() {
       var mobileSelect1 = new MobileSelect({
         trigger: '#tigger',
@@ -361,6 +384,14 @@
           console.log(this.idType)
         }
       })
+        var h = document.body.scrollHeight;
+        window.onresize = function(){
+        if (document.body.scrollHeight < h) {
+            document.getElementById("button").style.display = "none";
+        }else{
+            document.getElementById("button").style.display = "block";
+        }
+    };
     },
     methods: {
       alocked: function (item) {
@@ -405,7 +436,7 @@
         this.ishow2 = false
       },
       gain: function () {
-        console.log(this.item.state)
+        console.log(this.redioActive)
         this.isChinaName = false
         this.isPhoneNo = false
         // this.isIdNumber = false
@@ -436,7 +467,7 @@
         } else {
           this.isDate = false
         }
-        if (this.item.state == false) {
+        if (this.radioActive == false) {
           alert('请确认打勾！')
           return;
         }
