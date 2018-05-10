@@ -366,13 +366,13 @@
 
         let flag = true
         this.validateArr.forEach(item => {
-          if (item.isChinaName === true || item.isIdNumber === true) {
+          if (item.isChinaName || item.isIdNumber || item.isCarNo || item.isCarUser || item.isCarWPMI) {
             flag = false
           }
         })
         if (!flag) return
 
-        if (this.packageId === 'D' && !this.activePro) {
+        // if (this.packageId === 'D' && !this.activePro) {
         //   if (this.carInfo: {
         //   plateNumber: '',
         //   vehicleType: '',
@@ -380,17 +380,17 @@
         //   usingNature: '0',
         //   vin: ''
         // },)
-          let cancel = true
-          Object.keys(this.carInfo).forEach(item => {
-            if (!this.carInfo[item]) {
-              cancel = false
-            }
-          })
+        //   let cancel = true
+        //   Object.keys(this.carInfo).forEach(item => {
+        //     if (!this.carInfo[item]) {
+        //       cancel = false
+        //     }
+        //   })
 
-          if (!cancel) {
+        //   if (!cancel) {
             
-          }
-        }
+        //   }
+        // }
 
         // 正式发起请求 先做是否实名认证校验
         Check().then(res => {

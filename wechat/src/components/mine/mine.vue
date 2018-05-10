@@ -102,7 +102,7 @@ export default {
           'icon': [stretcher, stretcher_no]
         },
         'firstAid': {
-          'title': '直升机院前急救',
+          'title': '直升机院前救援',
           'icon': [helicopter, helicopter_no]
         },
         'roadRescue': {
