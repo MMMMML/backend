@@ -25,23 +25,23 @@
       <p style="text-align:left;padding:1rem 20px" class="weight">享有权益</p>
       <div class="equity-list">
         <div v-show="fly1">
-          <img src="../../assets/image/product/icon-helicopter.png" alt="">
+          <img src="../../assets/image/product/icon-helicopter@2x.png" alt="">
           <p>直升机院前救援</p>
         </div>
         <div v-show="fly2">
-          <img  src="../../assets/image/product/icon-call.png" alt="">
+          <img  src="../../assets/image/product/icon-call@2x.png" alt="">
           <p>120协调</p>
         </div>
         <div v-show="fly3"> 
-          <img  src="../../assets/image/product/icon-stretcher.png" alt="">
+          <img  src="../../assets/image/product/icon-stretcher@2x.png" alt="">
           <p>直升机医疗转运9折</p>
         </div>
         <div v-show="fly4">
-          <img  src="../../assets/image/product/icon-truck.png" alt="">
+          <img  src="../../assets/image/product/icon-truck@2x.png" alt="">
           <p>道路救援</p>
         </div>
         <div v-show="fly5">
-          <img  src="../../assets/image/product/icon-car.png" alt="">
+          <img  src="../../assets/image/product/icon-car@2x.png" alt="">
           <p>代步车服务</p>
         </div>
       </div>
@@ -179,8 +179,8 @@ p {
   }
 
   .equity-list img {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
   }
   .message{
     background: #fff;

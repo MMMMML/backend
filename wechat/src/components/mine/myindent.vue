@@ -129,7 +129,6 @@
         let url = `wechat/order/getListForFront?userid=${window.sessionStorage.getItem('id')}`
         this.$http.get(url).then(data => {
           this.indent = data.data.payload
-          console.log(data)
           if(data.data.payload ==''){
             this.isshow = true
           }
@@ -151,15 +150,11 @@
         MessageBox.confirm('确定取消订单？').then(action => {
           let url = `wechat/order/cancelOrder?id=${id}`
           this.$http.post(url).then(data => {
-            // this.indent = data.data.payload
-            console.log(data)
             if (data.data.code == 200) {
                 this._list()
             }
-
           })
-        });
-
+        })
       },
       payment:function(){
           
