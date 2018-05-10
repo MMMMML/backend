@@ -3,102 +3,88 @@
     <div class="container">
       <div class="box">
         <div class="input">
-        <p>姓名</p>
-        <input type="text" v-model="realName" placeholder="请输入证件姓名">
-        <div class="warning" v-show="isChinaName">
-          <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
-          <span>姓名格式错误，请重新填写</span>
+          <p>姓名</p>
+          <input type="text" v-model="realName" placeholder="请输入证件姓名">
+          <div class="warning" v-show="isChinaName">
+            <img style="width: 14px;height: 14px;" src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="">
+            <span>姓名格式错误，请重新填写</span>
+          </div>
         </div>
-      </div>
-      <div class="input">
-        <p>证件类型</p>
-        <div id="tigger" style="width: 100vw;cursor: pointer;font-size: 14px;color: #aaa;margin-left: 1.3rem  !important;">{{idType}}</div>
+        <div class="input">
+          <p>证件类型</p>
+          <div id="tigger" style="width: 100vw;cursor: pointer;font-size: 14px;color: #aaa;margin-left: 1.3rem  !important;">{{idType}}</div>
+          <div>
+            <img class="up-arrow" style="width: 8px;height: 13px;margin-right:5px;" src="../../assets/image/mine/Chevron@3x.png" alt="">
+          </div>
+        </div>
+        <div class="input">
+          <p>证件号码</p>
+          <input type="text" v-model="idNumber" placeholder="请输入证件号码">
+          <div class="warning" v-show="isIdNumber">
+            <img src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="" style="width: 14px; height: 14px;">
+            <span>证件号码不能为空，请重新填写</span>
+          </div>
+        </div>
+        <div class="input">
+          <p>手机号码</p>
+          <input type="text" v-model="mobile" placeholder="请输入手机号码">
+          <div class="warning" v-show="isPhoneNo">
+            <img src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="" style="width: 14px; height: 14px;">
+            <span>手机号码错误，请重新填写</span>
+          </div>
+        </div>
+        <div class="input">
+          <p>验证码</p>
+          <input type="text" style="width:68%" v-model="vcode" placeholder="请输入验证码">
+          <!-- <count class='btn' :start='start' @countDown ='start = false' @click.native = 'gaincode' :class='{"active": start}'></count> -->
+          <!-- <button class="btn" @click="gaincode()">获取验证码</button> -->
+          <div style="display:flex;align-items: center;">
+            <count :start='start' style="background:#ccc;margin-right: 5px;" @countDown='start = false' @click.native='gaincode'></count>
+          </div>
+          <!-- <input type="button" value="nihao"> -->
+          <div class="warning" v-show="isVcode">
+            <img src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="" style="width: 14px; height: 14px;">
+            <span>验证码不能为空，请重新填写</span>
+          </div>
+        </div>
+        <div class="input">
+          <p>生效日期</p>
+          <div style="position: relative;width:100%">
+            <div class="datepicker" style="margin-left:4.5vw !important" @click="openPicker()">{{pickerStart}}</div>
+            <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
+              year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
+            </mt-datetime-picker>
+          </div>
+          <div class="warning" v-show="isDate">
+            <img src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="" style="width: 14px; height: 14px;">
+            <span>请选择生效日期</span>
+          </div>
+          <div>
+            <img class="up-arrow" style="width: 8px;height: 13px;margin-right:5px;" src="../../assets/image/mine/Chevron@3x.png" alt="">
+          </div>
+        </div>
+        <div class="input">
+          <p>失效日期</p>
+          <div style="position: relative;width:100%">
+            <div class="datepicker" style="margin-left:0">{{pickerEnd}}</div>
+          </div>
+        </div>
+        <!-- <mt-radio  v-model="item.state" @click="alocked(item)" :options="options"></mt-radio> -->
+        <span @click='radioActive = !radioActive' style="position: absolute;top: 27.3rem;left: 1rem;">
+          <img style='width: 20px;height: 20px;' v-if='radioActive' src="../../assets/image/evcard/timg.jpg" alt="">
+          <img style='width: 20px;height: 20px;' v-else src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1641948861,2527843094&fm=175&app=25&f=JPEG?w=218&h=146&s=07029045D2437355AC10949F030080E3"
+            alt="">
+        </span>
         <div>
-          <img class="up-arrow" style="width: 8px;height: 13px;margin-right:5px;" src="../../assets/image/mine/Chevron@3x.png" alt="">
+          <div class="agree-nav" style="font-size:14px;line-height: 25px;position: absolute;
+    top: 27.3rem;left: 12vw;padding-right: 10px;">
+            我已阅读并同意
+            <span style="color:#338ac7;" @click="five()">《5日权益使用须知》</span>及
+            <span style="color:#338ac7" @click="duty()">《免责声明》</span>
+          </div>
         </div>
       </div>
-      <div class="input">
-        <p>证件号码</p>
-        <input type="text" v-model="idNumber" placeholder="请输入证件号码">
-        <div class="warning" v-show="isIdNumber">
-          <img src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="" style="width: 14px; height: 14px;">
-          <span>证件号码不能为空，请重新填写</span>
-        </div>
-      </div>
-      <div class="input">
-        <p>手机号码</p>
-        <input type="text" v-model="mobile" placeholder="请输入手机号码">
-        <div class="warning" v-show="isPhoneNo">
-          <img src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="" style="width: 14px; height: 14px;">
-          <span>手机号码错误，请重新填写</span>
-        </div>
-      </div>
-      <div class="input">
-        <p>验证码</p>
-        <input type="text" style="width:68%" v-model="vcode" placeholder="请输入验证码">
-        <!-- <count class='btn' :start='start' @countDown ='start = false' @click.native = 'gaincode' :class='{"active": start}'></count> -->
-        <!-- <button class="btn" @click="gaincode()">获取验证码</button> -->
-        <div style="display:flex;align-items: center;">
-          <count :start='start' style="background:#ccc;margin-right: 5px;" @countDown ='start = false' @click.native = 'gaincode'></count>
-        </div>
-        <!-- <input type="button" value="nihao"> -->
-        <div class="warning" v-show="isVcode">
-          <img src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="" style="width: 14px; height: 14px;">
-          <span>验证码不能为空，请重新填写</span>
-        </div>
-      </div>
-      <div class="input">
-        <p>生效日期</p>
-        <div style="position: relative;width:100%">
-          <div class="datepicker" style="margin-left:4.5vw !important" @click="openPicker()">{{pickerStart}}</div>
-          <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
-            year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
-          </mt-datetime-picker>
-        </div>
-        <div class="warning" v-show="isDate">
-          <img src="../../assets/image/mine/小图标_警示_小号@3x.png" alt="" style="width: 14px; height: 14px;">
-          <span>请选择生效日期</span>
-        </div>
-        <div>
-          <img class="up-arrow" style="width: 8px;height: 13px;margin-right:5px;" src="../../assets/image/mine/Chevron@3x.png" alt="">
-        </div>
-      </div>
-      <div class="input">
-        <p>失效日期</p>
-        <div style="position: relative;width:100%">
-          <div class="datepicker" style="margin-left:0">{{pickerEnd}}</div>
-        </div>
-      </div>
-      <!-- <mt-radio  v-model="item.state" @click="alocked(item)" :options="options"></mt-radio> -->
-      <span @click='radioActive = !radioActive' style="position: absolute;top: 27.3rem;left: 1rem;">
-        <img style='width: 20px;' v-if='radioActive' src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1783587168,1525005384&fm=175&app=25&f=JPEG?w=218&h=146&s=8D2A727E1D03725542BDC0D7030010E3" alt="">
-        <img style='width: 20px;' v-else src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1641948861,2527843094&fm=175&app=25&f=JPEG?w=218&h=146&s=07029045D2437355AC10949F030080E3" alt="">
-      </span>
-<div>
-  <div class="agree-nav" style="font-size:14px;line-height: 25px;position: absolute;
-    top: 27rem;left: 4vw;">
-              &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我已阅读并同意
-              <span style="color:#338ac7;" @click="five()">《5日权益使用须知》</span>及
-              <span style="color:#338ac7" @click="duty()">《免责声明》</span>
-            </div>
-</div>
-      <!-- <input class="checkbox" type="checkbox"> -->
-      <!-- <div class="agree">
-        <div class="checkbox-wrap">
-          <input ref="checkbox" type="checkbox" class="checkbox" value="guangpan" v-model="item.state" @click="alocked(item)" name="choose"
-            id="guangpan">
-          <label for="guangpan">
-            <div class="agree-nav" style="font-size:14px;line-height: 25px;">
-              &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我已阅读并同意
-              <span style="color:#338ac7;" @click="five()">《5日权益使用须知》</span>及
-              <span style="color:#338ac7" @click="duty()">《免责声明》</span>
-            </div>
-          </label>
-        </div>
 
-      </div> -->
-      </div>
-      
       <div class="button" @click="gain()" id="button">
         <!-- <img src="../../assets/image/evcard/按钮.png" alt=""> -->
       </div>
@@ -195,9 +181,7 @@
   .container {
     background: white;
     min-height: 100vh;
-    position: relative;
-    
-    // .box{
+    position: relative; // .box{
     //  background: red;
     //   height: 87vh;
     // }
@@ -281,16 +265,14 @@
       margin: 0 auto;
       width: 50vw;
       height: 10vh;
-      background: url('http://owvihnwpv.bkt.clouddn.com/%E6%8C%89%E9%92%AE.png') no-repeat;
-      // margin-top: 10vh;
-      background-size:100%; 
+      background: url('http://owvihnwpv.bkt.clouddn.com/%E6%8C%89%E9%92%AE.png') no-repeat; // margin-top: 10vh;
+      background-size: 100%;
       margin: 0 auto;
-      // position: absolute;
-      // bottom: 5%;
-      // left: 50%;
-      // text-align: center;
-      // transform: translateX(-50%);
-      
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
     }
     .warp {
       width: 100vw;
@@ -319,7 +301,9 @@
 </style>
 <script>
   import MobileSelect from 'mobile-select'
-  import { Radio } from 'mint-ui';
+  import {
+    Radio
+  } from 'mint-ui';
   import {
     format
   } from 'date-fns'
@@ -345,17 +329,13 @@
         realName: '',
         mobile: '',
         idNumber: '',
-        item: {
-          state: false
-        },
         radioActive: false
         // isPhoneNo: false,
         // isIdNumber: false,
-        
+
       }
     },
-     created() {
-     },
+    created() {},
     mounted() {
       var mobileSelect1 = new MobileSelect({
         trigger: '#tigger',
@@ -384,14 +364,14 @@
           console.log(this.idType)
         }
       })
-        var h = document.body.scrollHeight;
-        window.onresize = function(){
+      var h = document.body.scrollHeight;
+      window.onresize = function () {
         if (document.body.scrollHeight < h) {
-            document.getElementById("button").style.display = "none";
-        }else{
-            document.getElementById("button").style.display = "block";
+          document.getElementById("button").style.display = "none";
+        } else {
+          document.getElementById("button").style.display = "block";
         }
-    };
+      };
     },
     methods: {
       alocked: function (item) {
@@ -532,7 +512,7 @@
         })
       },
     },
-     components:{
+    components: {
       Count
     },
   }
