@@ -39,7 +39,7 @@
           <!-- <count class='btn' :start='start' @countDown ='start = false' @click.native = 'gaincode' :class='{"active": start}'></count> -->
           <!-- <button class="btn" @click="gaincode()">获取验证码</button> -->
           <div style="display:flex;align-items: center;">
-            <count :start='start' style="background:#ccc;margin-right: 5px;" @countDown='start = false' @click.native='gaincode'></count>
+            <count :start='start' style="background:#F189A2;margin-right: 5px;" @countDown='start = false' @click.native='gaincode'></count>
           </div>
           <!-- <input type="button" value="nihao"> -->
           <div class="warning" v-show="isVcode">
@@ -50,7 +50,7 @@
         <div class="input">
           <p>生效日期</p>
           <div style="position: relative;width:100%">
-            <div class="datepicker" style="margin-left:4.5vw !important" @click="openPicker()">{{pickerStart}}</div>
+            <div class="datepicker" style="margin-left:1.1rem !important" @click="openPicker()">{{pickerStart}}</div>
             <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
               year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
             </mt-datetime-picker>
@@ -222,7 +222,7 @@
       .datepicker {
         font-size: 14px;
         color: #aaa;
-        margin-left: 4vw !important;
+        margin-left: 0.9rem!important;
       }
     }
     .agree {
@@ -269,7 +269,7 @@
       background-size: 100%;
       margin: 0 auto;
       position: absolute;
-      bottom: 0;
+      bottom: 2%;
       left: 50%;
       transform: translateX(-50%);
 
