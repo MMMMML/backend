@@ -29,7 +29,7 @@
               <div class="rides" v-show="item.key==101">
                 <div class='ride' style="padding-right:10px;">
                   <img src="../../assets/image/product/icon-helicopter@2x.png" alt="">
-                  <p>直升机院前急救</p>
+                  <p>直升机院前救援</p>
                 </div>
                 <div class='ride'>
                   <img src="../../assets/image/product/icon-call@2x.png" alt="">
