@@ -5,7 +5,7 @@
       <div class="success">
         <p>恭喜您获得</p>
         <h4>{{resp.packageMainName}}</h4>
-        <p>{{resp.benefitEffectTime}} 至 {{resp.benefitExpireTime}}</p>
+        <p>{{resp.benefitEffectTime | format}} 至 {{resp.benefitExpireTime | format}}</p>
       </div>
     </div>
     <div class="btn">
@@ -24,8 +24,6 @@ export default {
   },
   mounted(){
       this.resp =JSON.parse(window.sessionStorage.getItem('businessInfo'))
-      console.log(this.resp)
-
   },
   methods: {
     goHome() {
@@ -33,6 +31,13 @@ export default {
     },
     goMine() {
       this.$router.push('/mine')
+    }
+  },
+  filters: {
+    format(val) {
+      if (val) {
+        return val.substr(0, 10)
+      }
     }
   }
 }

@@ -37,7 +37,7 @@
                 </div>
               </div>
               <div class="ride" v-show="item.key==103">
-                <img src="../../assets/image/product/icon-helicopter@2x.png" alt="">
+                <img src="../../assets/image/product/icon-stretcher@2x.png" alt="">
                 <p>医疗转运9折</p>
               </div>
               <div class="member-person">
