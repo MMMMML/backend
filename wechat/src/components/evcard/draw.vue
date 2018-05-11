@@ -163,10 +163,8 @@
           <p>空降联盟救援区域已覆盖23个省市：辽宁、北京、天津、河北、河南、山东、山西、江苏、上海、陕西、安徽、浙江、江西、福建、广东、海南、湖北、四川、重庆、贵州、广西、云南、湖南</p>
           <p class="warp-title">【权益费用】</p>
           <p>1、在符合权益服务标准且在权益有效期内的用户，每次只需支付一元调度费即可呼叫直升机救援</p>
-          <p>2、用户所需服务范围如超过所领取权益规定的服务范围，相关费用按照标准进行收费（标准费用见权益服务标准费用条款）</p>
+          <p>2、用户所需服务范围如超过所领取权益规定的服务范围，相关费用按照标准进行收费（费用参考：直升机院前救援综合费用：人民币20万—30万/每次，根据机型不同，费用也会有所不同）</p>
           <p>3、用户领取相关权益后，有权利不接受权益服务，并可申请取消或终止权益资格，但已支付的权益服务费用将不会获得返还</p>
-          <p class="warp-title">【权益服务标准费用】</p>
-          <p>直升机院前救援费用：综合费用人民币20万—30万/每次，根据机型不同，费用也会有所不同</p>
 
         </div>
         <div style="text-align:center;margin-top:10px" @click="close()">
@@ -263,9 +261,9 @@
     }
     .button {
       margin: 0 auto;
-      width: 50vw;
-      height: 10vh;
-      background: url('http://owvihnwpv.bkt.clouddn.com/%E6%8C%89%E9%92%AE.png') no-repeat; // margin-top: 10vh;
+      width: 55vw;
+      height: 12vh;
+      background: url('http://owvihnwpv.bkt.clouddn.com/btn.png') no-repeat; // margin-top: 10vh;
       background-size: 100%;
       margin: 0 auto;
       position: absolute;
