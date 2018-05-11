@@ -50,6 +50,7 @@ axios.interceptors.response.use(
   },
   error => {
     if (error.toString().includes('401')) {
+
       const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
       // const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
       window.location.href = redirect
