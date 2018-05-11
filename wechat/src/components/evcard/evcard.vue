@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div @click="sure()" style="position: fixed;bottom: -3px;left: 0;">
+    <div @click="sure()" style="position: fixed;bottom: -30px;left: 0;">
       <img style="width:100%" src="../../assets/image/evcard/btn.png" alt="">
     </div>
   </div>

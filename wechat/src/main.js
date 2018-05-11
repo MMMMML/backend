@@ -28,7 +28,7 @@ axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance/api/'
 // 调试
 // axios.defaults.baseURL = '/apis'
 // 测试
-// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {
@@ -50,8 +50,13 @@ axios.interceptors.response.use(
   },
   error => {
     if (error.toString().includes('401')) {
+<<<<<<< HEAD
       const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
       // const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
+=======
+      // const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
+      const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
+>>>>>>> 0de3f1b94ab774d6233c97a01a2e455deec3d34f
       window.location.href = redirect
     }
     return Promise.reject(error)

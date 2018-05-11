@@ -39,7 +39,7 @@
           <!-- <count class='btn' :start='start' @countDown ='start = false' @click.native = 'gaincode' :class='{"active": start}'></count> -->
           <!-- <button class="btn" @click="gaincode()">获取验证码</button> -->
           <div style="display:flex;align-items: center;">
-            <count :start='start' style="background:#ccc;margin-right: 5px;" @countDown='start = false' @click.native='gaincode'></count>
+            <count :start='start' style="background:#F189A2;margin-right: 5px;" @countDown='start = false' @click.native='gaincode'></count>
           </div>
           <!-- <input type="button" value="nihao"> -->
           <div class="warning" v-show="isVcode">
@@ -50,7 +50,7 @@
         <div class="input">
           <p>生效日期</p>
           <div style="position: relative;width:100%">
-            <div class="datepicker" style="margin-left:4.5vw !important" @click="openPicker()">{{pickerStart}}</div>
+            <div class="datepicker" style="margin-left:1.1rem !important" @click="openPicker()">{{pickerStart}}</div>
             <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
               year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
             </mt-datetime-picker>
@@ -70,9 +70,9 @@
           </div>
         </div>
         <!-- <mt-radio  v-model="item.state" @click="alocked(item)" :options="options"></mt-radio> -->
-        <span @click='radioActive = !radioActive' style="position: absolute;top: 27.3rem;left: 1rem;">
-          <img style='width: 20px;height: 20px;' v-if='radioActive' src="../../assets/image/evcard/timg.jpg" alt="">
-          <img style='width: 20px;height: 20px;' v-else src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1641948861,2527843094&fm=175&app=25&f=JPEG?w=218&h=146&s=07029045D2437355AC10949F030080E3"
+        <span @click='radioActive = !radioActive' style="position: absolute;top: 27.4rem;left: 1rem;">
+          <img style='width: 20px;height: 20px;' v-if='radioActive' src="http://owvihnwpv.bkt.clouddn.com/button-%E5%B7%B2%E5%8B%BE%E9%80%89@2x.png" alt="">
+          <img style='width: 20px;height: 20px;' v-else src="http://owvihnwpv.bkt.clouddn.com/button-%E6%9C%AA%E5%8B%BE%E9%80%89@2x.png"
             alt="">
         </span>
         <div>
@@ -163,10 +163,8 @@
           <p>空降联盟救援区域已覆盖23个省市：辽宁、北京、天津、河北、河南、山东、山西、江苏、上海、陕西、安徽、浙江、江西、福建、广东、海南、湖北、四川、重庆、贵州、广西、云南、湖南</p>
           <p class="warp-title">【权益费用】</p>
           <p>1、在符合权益服务标准且在权益有效期内的用户，每次只需支付一元调度费即可呼叫直升机救援</p>
-          <p>2、用户所需服务范围如超过所领取权益规定的服务范围，相关费用按照标准进行收费（标准费用见权益服务标准费用条款）</p>
+          <p>2、用户所需服务范围如超过所领取权益规定的服务范围，相关费用按照标准进行收费（费用参考：直升机院前救援综合费用：人民币20万—30万/每次，根据机型不同，费用也会有所不同）</p>
           <p>3、用户领取相关权益后，有权利不接受权益服务，并可申请取消或终止权益资格，但已支付的权益服务费用将不会获得返还</p>
-          <p class="warp-title">【权益服务标准费用】</p>
-          <p>直升机院前救援费用：综合费用人民币20万—30万/每次，根据机型不同，费用也会有所不同</p>
 
         </div>
         <div style="text-align:center;margin-top:10px" @click="close()">
@@ -222,7 +220,7 @@
       .datepicker {
         font-size: 14px;
         color: #aaa;
-        margin-left: 4vw !important;
+        margin-left: 0.9rem!important;
       }
     }
     .agree {
@@ -263,13 +261,13 @@
     }
     .button {
       margin: 0 auto;
-      width: 50vw;
-      height: 10vh;
-      background: url('http://owvihnwpv.bkt.clouddn.com/%E6%8C%89%E9%92%AE.png') no-repeat; // margin-top: 10vh;
+      width: 55vw;
+      height: 12vh;
+      background: url('http://owvihnwpv.bkt.clouddn.com/btn.png') no-repeat; // margin-top: 10vh;
       background-size: 100%;
       margin: 0 auto;
       position: absolute;
-      bottom: 0;
+      bottom: 2%;
       left: 50%;
       transform: translateX(-50%);
 
