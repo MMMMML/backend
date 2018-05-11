@@ -82,7 +82,7 @@
     },
     mounted() {
         // let url = 'common/packageList'
-        let url = 'http://aj.kingwingaviation.com/alliance-java/common/packageList'
+        let url = 'http://aj.kingwingaviation.com/alliance/api/common/packageList'
         this.$http.get(url).then(data => {
             this.product = data.data.payload
             console.log(data)
@@ -100,7 +100,7 @@
 
       check: function (id) {
         let url = `redeemCode/exportCodeCsv.csv?batchId=${id.id}`
-        const base = 'http://aj.kingwingaviation.com/alliance-java/backend/'
+        const base = 'http://aj.kingwingaviation.com/alliance/api/backend/'
         location.href = `${base}${url}`
         
       },
