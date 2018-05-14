@@ -12,7 +12,6 @@ import './assets/css/app.css'
 import axios from 'axios'
 import router from './router'
 import { getSessionId, getWxFrom } from '@/util'
-import Storage from 'good-storage'
 
 // import VConsole from 'vconsole'
 import { Field, DatetimePicker, Radio, Indicator } from 'mint-ui'
@@ -52,7 +51,7 @@ axios.interceptors.response.use(
     if (error.toString().includes('401')) {
       // const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
       const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
-      // window.location.href = redirect
+      window.location.href = redirect
     }
     return Promise.reject(error)
   }
