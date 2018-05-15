@@ -7,7 +7,7 @@
         <p class="weight" style="font-size:17px;">空降会员</p>
         <div style="display:flex;align-items: center;">
           <img style="width:14px;height:14px;margin-bottom: 3px;" src="../../assets/image/mine/button-已认证@3x.png" alt="">
-          <p style="padding-top: 0.5rem;padding-left: 5px;">{{user.verified==false?'未认证':'已认证'}}</p>
+          <p style="padding-top: 0.5rem;padding-left: 5px;">{{user.verified ? '已认证' : '未认证'}}</p>
         </div>
         <router-link class="mui-tab-item" to="/personal">
           <p>查看并编辑个人资料</p>
