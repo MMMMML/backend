@@ -25,7 +25,7 @@ FastClick.attach(document.body)
 // 正式
 // axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance/api/'
 // 调试
-axios.defaults.baseURL = '/apis'
+// axios.defaults.baseURL = '/apis'
 // 测试
 axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.defaults.withCredentials = true
