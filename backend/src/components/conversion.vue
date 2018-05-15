@@ -100,7 +100,8 @@
 
       check: function (id) {
         let url = `redeemCode/exportCodeCsv.csv?batchId=${id.id}`
-        const base = 'http://aj.kingwingaviation.com/alliance/api/backend/'
+        // const base = 'http://aj.kingwingaviation.com/alliance/api/backend/' //正式
+        const base = 'http://aj.kingwingaviation.com/alliance-java/backend' //测试
         location.href = `${base}${url}`
         
       },

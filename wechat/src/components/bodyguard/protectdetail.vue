@@ -151,7 +151,7 @@
     height: 59px !important;
     margin: 0;
     font-size: 14px;
-    width: 60%;
+    width: 42%;
 
   }
 
@@ -521,7 +521,6 @@
             alert(data.data.message)
           }
           if (data.data.code == 200) {
-
             window.sessionStorage.setItem('orderId', data.data.payload.orderId)
             this.$router.push('/myindentinfo')
           }

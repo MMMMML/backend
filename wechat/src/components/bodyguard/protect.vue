@@ -211,7 +211,7 @@
         <p> 021-60554929</p>
       </div>
       <div class="notice-logo">
-        <img src='../../assets/image/product/icon_logo_color.png' alt="">
+        <img style='width:100%' src='../../assets/image/product/icon_logo_color.png' alt="">
       </div>
     </div>
 
