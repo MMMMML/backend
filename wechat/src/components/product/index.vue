@@ -626,7 +626,7 @@ import axios from 'axios'
           } else if (this.id === 'C') {
             return this.activePro ? (this.main.price * 100 + 85 * 100) / 100 : this.main.price
           } else if (this.id === 'D') {
-            return this.activePro ? (this.main.price * 100 + this.vas[0].price * 100) / 100 : this.main.price
+            return this.activePro ? (this.main.price * 100 + 39 * 100) / 100 : this.main.price
           }
         }
       },

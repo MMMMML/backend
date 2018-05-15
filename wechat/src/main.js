@@ -12,7 +12,6 @@ import './assets/css/app.css'
 import axios from 'axios'
 import router from './router'
 import { getSessionId, getWxFrom } from '@/util'
-import Storage from 'good-storage'
 
 // import VConsole from 'vconsole'
 import { Field, DatetimePicker, Radio, Indicator } from 'mint-ui'
@@ -28,7 +27,7 @@ FastClick.attach(document.body)
 // 调试
 axios.defaults.baseURL = '/apis'
 // 测试
-// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {

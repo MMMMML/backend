@@ -94,6 +94,7 @@
     </div>
 
     <pay-btn class='btn_box' :total='price' @buy='handlePay'></pay-btn>
+    <Confirm @confirm='handleConfirm' ref='confirm' title='提示' text='确定要放弃道路救援服务?'></Confirm>
   </div>
 </template>
 
@@ -103,6 +104,7 @@
   import Check from '@/util/checkIDAuth'
   import Storage from 'good-storage'
   import SelectProvince from '@/base/selectProvince'
+  import Confirm from '@/base/confirm'
   export default {
     data() {
       return {
@@ -153,7 +155,7 @@
         })
       }
       // 在最后一个增加对权益车辆的校验 在A产品和C产品中activePro为true
-      if (this.packageId === 'A' || (this.packageId === 'C' && this.activePro) || (this.packageId === 'D' && this.activePro)) {
+      if (this.packageId === 'A' || (this.packageId === 'C' && this.activePro) || this.packageId === 'D') {
         this.validateArr.push({
           isCarNo: false,
           isCarUser: false,
@@ -306,6 +308,18 @@
           })
         })
       },
+      _formatProductD() {
+        this.productD = true
+        Object.keys(this.carInfo).forEach(item => {
+          if (item === 'owner') {
+            this.validateArr[this.validateArr.length - 1].isCarUser = !this._isChinaName(this.carInfo[item])
+          } else if (item === 'plateNumber') {
+            this.validateArr[this.validateArr.length - 1].isCarNo = !this._isCarNo(this.carInfo[item])
+          } else if (item === 'vin') {
+            this.validateArr[this.validateArr.length - 1].isCarWPMI = !this._isCarvin(this.carInfo[item])
+          }
+        })
+      },
       handleCheckCarType() {
         this.CarType.show()
       },
@@ -340,7 +354,7 @@
         return vin.length === 17
       },
       handlePay() {
-        // 做表单校验
+        // 做权益人表单校验  这是必填的
         this.personUserInfo.forEach((item, index) => {
           Object.keys(item).forEach((key, idx) => {
             if (key === 'realName') {
@@ -350,9 +364,9 @@
             }
           })
         })
-        // 对carInfo做处理
+        // 对carInfo做处理 当D产品的权益车辆信息填写的时候再去做校验
         this.carInfo.plateNumber = this.carInfo.pre + this.carInfo.end
-        if (this.packageId === 'A' || (this.packageId === 'C' && this.activePro) || (this.packageId === 'D' && this.activePro)) {
+        if (this.packageId === 'A' || (this.packageId === 'C' && this.activePro)) {
           Object.keys(this.carInfo).forEach(item => {
             if (item === 'owner') {
               this.validateArr[this.validateArr.length - 1].isCarUser = !this._isChinaName(this.carInfo[item])
@@ -364,6 +378,17 @@
           })
         }
 
+        if (this.packageId === 'D') {
+          this.productD = false      
+          if (!this.activePro) {
+            if (this.carInfo.owner || this.carInfo.plateNumber.length !== 10 || this.carInfo.vin) {
+              this._formatProductD()
+            }
+          } else {
+            this._formatProductD()
+          }
+        }
+        // 当D产品添加增值权益的时候才校验这个~
         let flag = true
         this.validateArr.forEach(item => {
           if (item.isChinaName || item.isIdNumber || item.isCarNo || item.isCarUser || item.isCarWPMI) {
@@ -372,26 +397,13 @@
         })
         if (!flag) return
 
-        // if (this.packageId === 'D' && !this.activePro) {
-        //   if (this.carInfo: {
-        //   plateNumber: '',
-        //   vehicleType: '',
-        //   owner: '',
-        //   usingNature: '0',
-        //   vin: ''
-        // },)
-        //   let cancel = true
-        //   Object.keys(this.carInfo).forEach(item => {
-        //     if (!this.carInfo[item]) {
-        //       cancel = false
-        //     }
-        //   })
-
-        //   if (!cancel) {
-            
-        //   }
-        // }
-
+        if (this.packageId === 'D' && !this.activePro && !this.productD) {
+          this.$refs.confirm.show()
+        } else {
+          this.handleConfirm()
+        }
+      },
+      handleConfirm() {
         // 正式发起请求 先做是否实名认证校验
         Check().then(res => {
           var params = {
@@ -441,15 +453,8 @@
     },
     components: {
       PayBtn,
-      SelectProvince
-    },
-    watch: {
-      carInfo: {
-        handler(newVal) {
-          console.log(newVal)
-        },
-        deep: true
-      }
+      SelectProvince,
+      Confirm
     }
   }
 
