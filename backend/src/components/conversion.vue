@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import moment from 'date-fns'
   export default {
     data() {
       return {
@@ -94,6 +95,9 @@
             let url = 'redeemCode/pagedList'
             this.http.post(url).then(data => {
             this.list = data.data.payload.list
+            this.list.map(item=>{
+              item.endtime = moment.format(item.endtime,"YYYY-MM-DD")
+            })
         });
         },
 
