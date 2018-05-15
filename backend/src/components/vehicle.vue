@@ -38,6 +38,10 @@
         </el-table-column>
         <el-table-column prop="state" label="权益状态">
         </el-table-column>
+        <el-table-column prop="effect_time" label="生效日期">
+        </el-table-column>
+        <el-table-column prop="expire_time" label="失效日期">
+        </el-table-column>
         <el-table-column fixed="right" label="所有权益" width="100">
           <template slot-scope="scope">
             <el-button type="text" @click="check(scope.row)" size="small">查看</el-button>
@@ -52,6 +56,7 @@
   </div>
 </template>
 <script>
+import moment from 'date-fns'
   export default {
     data() {
       return {
@@ -79,6 +84,8 @@
           console.log(data)
           this.list.map(item=>{
               item.state = item.state =='true'?'有效':'过期'
+              item.effect_time = moment.format(item.effect_time, "YYYY-MM-DD")
+              item.expire_time = moment.format(item.expire_time, "YYYY-MM-DD")
           })
         });
       },

@@ -31,7 +31,11 @@
         </el-table-column>
          <el-table-column prop="benefits" label="享有权益">
         </el-table-column>
-        <el-table-column prop="expireTime" label="权益状态">
+        <el-table-column prop="expireTimes" label="权益状态">
+        </el-table-column>
+        <el-table-column prop="effectTime" label="生效时间">
+        </el-table-column>
+        <el-table-column prop="expireTime" label="失效时间">
         </el-table-column>
         <el-table-column fixed="right" label="查看记录" width="100">
           <template slot-scope="scope">
@@ -74,9 +78,11 @@
           const {list,total} = data.data.payload
           this.list = list
           this.listnum = total
-          var date = moment.format((new Date()), "YYYY-MM-DD HH:mm:ss")
+          var date = moment.format((new Date()), "YYYY-MM-DD")
           this.list.map(item => {
-            item.expireTime = item.expireTime >= date ? '有效' : '过期'
+            item.expireTimes = item.expireTimes >= date ? '有效' : '过期'
+            item.effectTime = moment.format(item.effectTime, "YYYY-MM-DD")
+            item.expireTime = moment.format(item.expireTime, "YYYY-MM-DD")
           })
         })
       },

@@ -75,6 +75,7 @@
 
 
 <script>
+ import moment from 'date-fns'
 export default {
   data(){
       return{
@@ -84,7 +85,7 @@ export default {
         id:'',
         mobile:'',
         idNumber:'',
-         centerDialogVisible : false,
+        centerDialogVisible : false,
         listnum: 0,
         pageSize: 20,
         currentPage: 1,
@@ -101,6 +102,9 @@ export default {
         const { list, total } = data.data.payload
         this.list = list
         this.listnum = total
+        this.list.map(item=>{
+          item.create_time = moment.format(item.create_time, "YYYY-MM-DD")
+        })
       });
     },
     getPageData(val){
