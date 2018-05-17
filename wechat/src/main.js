@@ -53,9 +53,9 @@ axios.interceptors.response.use(
       const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
       window.location.href = redirect
     } else if (error.toString().includes('400')) {
-      let url = location.host + location.pathname +  '#/attestation?redirect=mine'
+      let url = '//' + location.host + location.pathname +  '#/attestation?redirect=mine'
       setTimeout(() => {
-        window.location.href = '/#/attestation?redirect=mine'        
+        window.location.href = url
       }, 500)
     }
     return Promise.reject(error)

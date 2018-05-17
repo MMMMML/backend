@@ -16,6 +16,7 @@
             <div class='contace_text'>
               <p>所有人：{{item.owner}}</p>
               <p>车牌号码：{{item.plateNumber}}</p>
+              <img src="../../assets/image/mine/icon-edit@3x.png" alt="">
             </div>
           </div>
         </van-cell-group>
@@ -64,6 +65,7 @@
           font-size: 14px;
           overflow: hidden;
           padding-left: 20px;
+          position: relative;
           p {
             width: 100%;
             color: #414141;
@@ -74,6 +76,13 @@
             &:last-child{
               margin-top: 10px;
             }
+          }
+          img {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translate3d(0, -50%, 0);
+            width: 22px;
           }
         }
       }

@@ -1,19 +1,30 @@
 <template>
   <div class="container">
-      <div>
-          <textarea v-model="value" name="" id="" cols="30" rows="10" placeholder="请输入您的建议"></textarea>
-          <button @click="commit()">提交</button>
-      </div>
+    <div class="content">
+      <textarea v-model="value" name="" id="" cols="30" rows="10" placeholder="请输入您的建议"></textarea>      
+    </div>
+    <div class='btn' @click="commit()">提交</div>
   </div>
 </template>
-<style scoped>
-button{
-  width: 100%;
-  color: white;
-  background: red;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+<style scoped lang='less'>
+.container {
+  width: 100vw;
+  height: 100vh;
+  .content {
+    width: 100%;
+  }
+  .btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;    
+    color: white;
+    background: red;
+    letter-spacing: 4px;
+  }
 }
 </style>
 <script>

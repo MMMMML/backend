@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <div class='info_wrapper' v-if='(packageId === "A" && index === 0) || (packageId === "C" && activePro) || (packageId === "D" && index === 0)'>
+      <div class='info_wrapper' v-if='(packageId === "A" && index === 0) || (packageId === "C" && activePro) || (packageId === "D" && index === 1)'>
         <h4>权益车辆</h4>
         <div class="item vux-1px-b">
           <p class='item_label'>车牌号码</p>
@@ -147,7 +147,7 @@
           idType: '',
           idNumber: '',
           mobile: '',
-          active: false
+          active: true
         })
         this.validateArr.push({
           isChinaName: false,
@@ -365,7 +365,9 @@
           })
         })
         // 对carInfo做处理 当D产品的权益车辆信息填写的时候再去做校验
-        this.carInfo.plateNumber = this.carInfo.pre + this.carInfo.end
+        if (this.carInfo.end) {
+          this.carInfo.plateNumber = this.carInfo.pre + this.carInfo.end          
+        }
         if (this.packageId === 'A' || (this.packageId === 'C' && this.activePro)) {
           Object.keys(this.carInfo).forEach(item => {
             if (item === 'owner') {
@@ -379,9 +381,9 @@
         }
 
         if (this.packageId === 'D') {
-          this.productD = false      
+          this.productD = false
           if (!this.activePro) {
-            if (this.carInfo.owner || this.carInfo.plateNumber.length !== 10 || this.carInfo.vin) {
+            if (this.carInfo.owner || (this.carInfo.plateNumber && this.carInfo.plateNumber.length !== 10) || this.carInfo.vin) {
               this._formatProductD()
             }
           } else {
@@ -398,12 +400,16 @@
         if (!flag) return
 
         if (this.packageId === 'D' && !this.activePro && !this.productD) {
+          Object.keys(this.carInfo).forEach(item => {
+            this.carInfo[item] = ''
+          })
           this.$refs.confirm.show()
         } else {
           this.handleConfirm()
         }
       },
       handleConfirm() {
+        
         // 正式发起请求 先做是否实名认证校验
         Check().then(res => {
           var params = {
@@ -501,12 +507,12 @@
             position: relative;
             button {
               position: absolute;
-              right: 20px;
+              right: 8px;
               width: 80px;
               height: 24px;
               border-radius: 10px;
-              background: #A0A0A0;
-              color: #fafafa;
+              background: #ccc;
+              color: #fff;
               text-align: center;
               line-height: 24px;
               padding: 0;

@@ -74,7 +74,7 @@
           </div>
       </div>
     </div>
-    <div style="margin-top:10px" v-for="(car,key) in vehicleItems" :key='key'>
+    <div style="margin-top:10px" v-for="car in vehicleItems" :key='car.vin'>
        
         <div class="message">
           <p style="padding:10px 0 10px 20px"  class="weight">权益车辆</p>
@@ -108,7 +108,7 @@
           </div>
       </div>
     </div>
-    <div class="payment" v-show="benefitOrder.paidStatus==0">
+    <div class="payment vux-1px-t" v-show="benefitOrder.paidStatus==0">
       <p>合计：<span style='color: red;'>￥{{benefitOrder.totalPrice}}</span></p>
       <p class="payment-buy"  @click="payment()" >支付</p>
     </div>
@@ -117,8 +117,9 @@
   </div>
 </template>
 <style scoped lang='less'>
+@import '~vux/src/styles/1px.less';
 .container{
-  padding-bottom: 45px;
+  padding-bottom: 55px;
   color: #4b4b4b;
 }
 p {
@@ -193,25 +194,22 @@ p {
     line-height: 40px;
 }
 .payment {
-    height: 50px;
+    height: 45px;
     width: 100%;
     background: #fff;
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
-    line-height: 50px;
+    line-height: 45px;
     padding-left: 20px;
     position: fixed;
     bottom: 0;
-    border-top: 1px solid #eee;
-
   }
 
   .payment-buy {
     height: 100%;
     width: 100px;
     color: white;
-    line-height: 50px;
+    line-height: 45px;
     background: red;
     text-align: center;
   }
@@ -321,7 +319,6 @@ export default {
                 }
               })
             })
-            
             }
           })
   }

@@ -48,12 +48,6 @@
                     <p>至</p>
                     <p>{{list.expire_time}}</p>
                   </swiper-slide>
-                  <!-- <swiper-slide class="member-person-slide" v-for='(list, index) of 4' :key='index'>
-                    <p class="member-person-slide-title">1</p>
-                    <p>2</p>
-                    <p>至</p>
-                    <p>3</p>
-                  </swiper-slide> -->
                 </swiper>
               </div>
             </div>
@@ -100,12 +94,20 @@
                   <p>道路救援</p>
                 </div>
                 <div class="member-square">
-                  <div class="square" v-for='(resp, index) of res.value' :key='index'>
+                  <!-- <div class="square" v-for='(resp, index) of res.value' :key='index'>
                     <p class="square-title">{{resp.main_name}}</p>
                     <p>{{resp.effect_time}}</p>
                     <p>至</p>
                     <p>{{resp.expire_time}}</p>
-                  </div>
+                  </div> -->
+                  <swiper :options="swiperOption" ref="mySwiper">
+                    <swiper-slide class="member-person-slide" v-for='(resp, index) of res.value' :key='index'>
+                      <p class="member-person-slide-title">{{resp.main_name}}</p>
+                      <p>{{resp.effect_time}}</p>
+                      <p>至</p>
+                      <p>{{resp.expire_time}}</p>
+                    </swiper-slide>
+                  </swiper>
                 </div>
               </div>
             </div>
@@ -215,24 +217,24 @@
     display: flex;
     flex-flow: row nowrap;
     padding-left: 15px;
-    .member-person-slide {
-      width: 110px !important;
-      height: 120px;
-      padding: 0 5px;
-      text-align: center;
-      border: 1px solid #eee;
-      border-radius: 5px;
-      display: inline-block;
-      .member-person-slide-title {
-        line-height: 40px;
-        border-bottom: 1px solid #eee;
-      }
+  }
+  .member-person-slide {
+    width: 110px !important;
+    height: 120px;
+    padding: 0 5px;
+    text-align: center;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    .member-person-slide-title {
+      line-height: 40px;
+      border-bottom: 1px solid #eee;
     }
   }
 }
 </style>
 <script>
 import Storage from 'good-storage'
+import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   data(){
@@ -245,7 +247,8 @@ export default {
       swiperOption: {
         pagination: '.swiper-pagination',
         spaceBetween: 5,
-        freeMode: true
+        freeMode: true,
+        slidesPerView: 3
       }
     }
   },
@@ -263,12 +266,6 @@ export default {
     this.$http.get(urlCar).then(data => {
       this.memberCars = data.data.payload
     })
-  },
-  updated() {
-    let swiperList = document.getElementsByClassName('swiper-wrapper')
-    for (let i = 0;i < swiperList.length;i++) {
-      swiperList[i].style.display = 'flex'
-    }
   },
   methods:{
     car() {

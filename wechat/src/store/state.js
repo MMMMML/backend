@@ -9,7 +9,8 @@ const state = {
     emergencyPhone: '',
     familyHistory: '',
     otherInfo: ''
-  }
+  },
+  modalFlag: true
 }
 
 export default state

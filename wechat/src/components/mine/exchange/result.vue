@@ -1,12 +1,11 @@
 <template>
   <div class="container">
     <div class="content">
-      <img v-if='msg' src="../../../assets/image/mine/error@2x.png" alt="">
-      <img v-else src="../../../assets/image/mine/complete@2x.png" alt="">
+      <img v-if='msg' src="../../../assets/image/product/exchange_fail.png" alt="">
+      <img v-else src="../../../assets/image/product/exchange_success.png" alt="">
       <div v-if='msg' class="fail">
         <h3>兑换失败</h3>
         <p>{{ msg }}</p>
-        <p>下次再来哦！</p>
       </div>
       <div v-else class='text'>
         <span>恭喜您获得</span>
@@ -16,7 +15,7 @@
     </div>
     <div class="btn">
       <div class="left" @click='goHome'>返回首页</div>
-      <div class="right" v-if='!msg' @click='goMine'>我的权益</div>
+      <div class="right" @click='goMine'>{{ msg ? '继续兑换' : '我的权益' }}</div>
     </div>
   </div>
 </template>
@@ -33,10 +32,10 @@ export default {
   },
   mounted() {
     const { effectTime, expireTime, name, msg } = this.$route.query
-    if (effectTime || expireTime || name || msg) {
-      document.title = '权益兑换'
+    if (!msg) {
+      document.title = '兑换成功'      
     } else {
-      document.title = '购买成功'
+      document.title = '兑换失败'
     }
 
     this.msg = msg
@@ -78,10 +77,10 @@ export default {
     }
     .text {
       text-align: center;
-      color: #888;
+      color: #4b4b4b;
       font-size: 14px;
       p {
-        color: #656565;
+        color: #f00;
         margin: 0;
         line-height: 28px;
         font-size: 18px;
@@ -95,13 +94,13 @@ export default {
     .fail {
       text-align: center;
       h3 {
-        color: #4B4B4B;
+        color: #f00;
         font-size: 18px;
         line-height: 24px;
         margin-bottom: 5px;
       }
       p {
-        color: #D24232;
+        color: #4b4b4b;
         line-height: 20px;
         margin: 0;
       }
@@ -116,10 +115,16 @@ export default {
     display: flex;
     div {
       flex: 1;
-      border: 1px solid #ccc;
+      box-shadow: 0px -1px 2px #ccc;
       text-align: center;
-      color: #4b4b4b;
+    }
+    .left {
       background: #fff;
+      color: #f00;
+    }
+    .right {
+      background: #f00;
+      color: #fff;
     }
   }
 }

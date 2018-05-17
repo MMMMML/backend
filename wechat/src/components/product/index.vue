@@ -24,6 +24,17 @@
           </div>
         </div>
       </div>
+      <div class="radio_box" v-if='id === "E"'>
+        <div class="item" v-for='(item, index) of productE' :key='index' @click='handleRadio(index)'>
+          <p v-show='activeIndex !== index'></p>
+          <img v-show='activeIndex === index' src="../../assets/image/product/icon-选中.png" alt="">
+          <div class="text">
+            <span>{{ item.label.substr(0, 4) }}</span>
+            <br>
+            <span>{{ item.label.substr(4) }}</span>
+          </div>
+        </div>
+      </div>
       <!-- 日期 -->
       <div class="date" v-if='id === "A"'>
         <h3>生效日期</h3>
@@ -33,7 +44,7 @@
             <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate='startDate' :endDate='endDate' type="date" @confirm="handleConfirm"
               year-format="{value} 年" month-format="{value} 月" date-format="{value} 日">
             </mt-datetime-picker>
-            <img style="width:14px;position: absolute;margin-left:100px;top: 50%;transform: translateY(-50%);" class="date-icon" src="../../assets/image/product/icon-calendar@3x.png"
+            <img style="width:14px;position: absolute;margin-left:110px;top: 50%;transform: translateY(-50%);" class="date-icon" src="../../assets/image/product/icon-calendar@3x.png"
               alt="">
           </div>
         </div>
@@ -73,7 +84,11 @@
       </div>
       <div v-show="show[0]" class='showText'>
         <p class="title-icon">权益人限定</p>
-        <p class='title_normal'>中国公民（含港澳台地区）或在中国持合法证件的外籍人士</p>
+        <p class="title_normal" v-if='id === "E"'>
+          1.中国公民（包含港澳台地区）或在中国持合法证件的外籍人士（本产品仅支持大陆居民身份证购买，港澳台及外籍人士可致电空降联盟客服400-111-9299购买）<br />
+          2.权益人包含至多两位成年人和至多两位18周岁以下的未成年人
+        </p>
+        <p class='title_normal' v-else>中国公民（含港澳台地区）或在中国持合法证件的外籍人士</p>
         <p class="title-icon">增值权益车辆要求</p>
         <p class='title_normal'>9座（含）以下、重量不超过3.5吨、长度不超过6米的非营运性四轮机动车辆</p>
         <p class="title-icon">权益有效期</p>
@@ -83,7 +98,7 @@
         <p class='title_normal' v-if='id === "C"'>购买后次日零时生效，有效期为生效之日起一年<br>
         备注：车辆相关权益生效时间详见服务说明
         </p>
-        <p class="title_normal" v-if='id === "D"'>
+        <p class="title_normal" v-if='id === "D" || id === "E"'>
           购买后次日零时生效，有效期为生效之日起一年
         </p>
         <p class="title-icon">权益覆盖城市</p>
@@ -113,12 +128,20 @@
           【附加39元】<br>
           包含权益人在有效期内的出险代步车服务费用
         </p>
+        <p class='title_normal' v-if='id === "E"'>
+          【基础999元】<br>
+          包含两位成年权益人和一位18周岁以下的未成年权益人或一位成年权益人和两位18周岁以下的未成年权益人在有效期内的直升机院前救援、地面120协调,、直升机医疗转运9折权益、道路救援和出险代步车服务费用
+        </p>
+        <p class='title_normal' v-if='id === "E"'>
+          【附加269元】<br>
+          包含一位18周岁以下的未成年权益人在有效期内的直升机院前救援、地面120协调,、直升机医疗转运9折权益
+        </p>
         <p class='title_normal'>
           【每次呼叫1元】<br>
           实际发生直升机院前救援时，权益人在有效期内每呼叫一次需支付1元呼叫调度费
         </p>
         <p class="title-icon">服务热线</p>
-        <p class='title_normal'>021-60554929</p>
+        <p class='title_normal'>400-111-9299</p>
       </div>
       <div class="notice-part" @click="showItem(1)"> 
         <p>直升机救援服务</p>
@@ -165,7 +188,7 @@
             5、权益人酒后驾驶、无合法有效驾驶证驾驶，或驾驶无有效行驶证的机动车而发生的后果
         </p>
       </div>
-      <div v-show='show[1] && (id === "C" || id === "D")' class='showText'>
+      <div v-show='show[1] && (id === "C" || id === "D" || id === "E")' class='showText'>
         <p class="title-icon">一、权益说明</p>
         <p class='title_normal'>
           成为空降联盟直升机救援服务权益人后，您可获得以下权益：<br>
@@ -293,7 +316,7 @@
           ● 权益人如需使用出险代步车服务，请携带本人驾驶证正副本、二代身份证、可用额度5000元以上国内信用卡(自驾押金预授权及交通违章押金)<br />
           ● 权益人上述所有证件有效期的剩余期限均须在一个月以上<br />
           ● 相关费用须由权益人本人国内信用卡及国内借记卡支付，不接受现金付款<br/>
-          <span v-if='id === "C" || id === "D"'>● 年度救援权益的用户，在符合服务标准的情况下可免费使用3次出险代步车服务，超过3次之后可享受空降联盟提供的租赁车尊享折扣礼券<br /></span>
+          <span v-if='id === "C" || id === "D" || id === "E"'>● 年度救援权益的用户，在符合服务标准的情况下可免费使用3次出险代步车服务，超过3次之后可享受空降联盟提供的租赁车尊享折扣礼券<br /></span>
           <span v-if='id === "A"'>● 7天综合救援权益有效期内的用户，在符合服务标准的情况下可以免费使用1次代步车<br /></span>
           ● 因服务点营业时间限定，故出险代步车服务受理时间范围为9点至18点，非本时间段，用户可以选择乘坐出租车，空降联盟将会依据权益人的出租车发票承担相应出租车费用，费用上限为100元
         </p>
@@ -323,7 +346,7 @@
         <p class='title_normal'>2、年度权益用户：用户购买服务权益后次日零时正式生效，有效期为生效之日起一年</p>
         <p class="title-icon">二、救援服务流程</p>
         <p class='title_normal'>
-          请谨记空降联盟救援服务热线(021-60554929)<br>
+          请谨记空降联盟救援服务热线(400-111-9299)<br>
           实际发生救援需求时：<br>
           1、用户拨打专属服务热线提出救援服务请求<br>
           2、客服沟通并确认救援信息（包括被救援对象姓名、突发病症或伤情、事故准确地点）等资料（自费用户还需确认案件的费用标准及支付方式等）；为保证救援服务正确且高效地完成， 用户需积极配合空降联盟客服中心沟通工作<br>
@@ -337,7 +360,7 @@
           3、	空降联盟救援服务人员或指定120车辆到达服务现场后，用户未在现场且未收到用户取消服务的请求，则该次服务将被计入有效服务；空降联盟有权对用户进行回访了解原因，如出现恶意谎报救援行为，空降联盟有权对该用户账号中所有权益进行暂停服务处理，并保留追究法律责任的权利<br>
           4、	用户车辆故障发生地区属于交管部门管辖范围（如高架等），且必须由交管单位指定的服务厂商进行拖吊作业，施救人员及救援车辆将于就近位置提供接车服务；交管单位指定的服务厂商拖吊服务需由用户另行与该服务厂商确认费用<br>
           5、	由于特殊原因造成直升机无法实施救援时（相关情况请参考直升机救援服务条款），空降联盟将协调120进行地面救援<br>
-          6、	本服务属于出行救援权益，请用户确保信息填写正确完整、如信息填写有误或需变更，请及时致电空降联盟服务热线进行修改(021-60554929)，因用户原因导致信息填写错误或未及时申请变更造成救援延误，空降联盟将不负相关责任
+          6、	本服务属于出行救援权益，请用户确保信息填写正确完整、如信息填写有误或需变更，请及时致电空降联盟服务热线进行修改(400-111-9299)，因用户原因导致信息填写错误或未及时申请变更造成救援延误，空降联盟将不负相关责任
         </p>
         <p class="title-icon">四、服务对象</p>
         <p class='title_normal'> 空降联盟为目前已部署救援直升机的省市范围内的用户和车辆提供救援保障服务，包括该范围内购买空降联盟服务权益的中国公民（含港澳台地区居民）或在中国持合法证件的外籍人士</p>
@@ -352,7 +375,7 @@
         </p>
         <p class="title-icon">七、权益服务商及标准费用</p>
         <p class='title_normal'>
-          1、空降联盟作为综合性救援平台，提供各种不同类型的救援服务权益，不同的救援服务权益由不同服务商提供，如需了解服务商详细信息请致电空降联盟服务热线(021-60554929)<br>
+          1、空降联盟作为综合性救援平台，提供各种不同类型的救援服务权益，不同的救援服务权益由不同服务商提供，如需了解服务商详细信息请致电空降联盟服务热线(400-111-9299)<br>
           2、权益服务标准费用<br>
           &nbsp;&nbsp;（1）直升机院前救援费用：综合费用人民币20万—30万/每次，根据机型不同费用有所不同<br>
           &nbsp;&nbsp;（2）直升机转运费用：人民币7万/每小时，飞行小时数是指直升机实际飞行时间，自旋翼转动起至旋翼停止转动止。起步计费1小时，超出部分以0.5小时为单位计费，具体计费细则以转运前签署的《直升机医疗转运服务合同》为准<br>
@@ -384,6 +407,7 @@ import PayBtn from '@/base/pay_bottom_btn'
 import banner4 from '@/assets/image/product/banner4.jpeg'
 import banner1 from '@/assets/image/home/banner_1.png'
 import bannerD from '@/assets/image/home/productD.jpg'
+import bannerE from '@/assets/image/home/productE.jpg'
 import helicopter from '@/assets/image/product/icon-helicopter@2x.png'
 import call from '@/assets/image/product/icon-call@2x.png'
 import truck from '@/assets/image/product/icon-truck@2x.png'
@@ -393,15 +417,6 @@ import carNo from '@/assets/image/product/icon-car-no@2x.png'
 import truckNo from '@/assets/image/product/icon-truck-no@2x.png'
 import Auth from '@/base/auth'
 import { AuthModal } from '@/util/mixin'
-// import duan1 from '@/assets/image/new_product/small_1.png'
-// import duan2 from '@/assets/image/new_product/small_2.png'
-// import duan3 from '@/assets/image/new_product/small_3.png'
-// import chang1 from '@/assets/image/new_product/lang_1.png'
-// import chang2 from '@/assets/image/new_product/lang_2.png'
-// import chang3 from '@/assets/image/new_product/lang_3.png'
-// import chang4 from '@/assets/image/new_product/lang_4.png'
-// import chang5 from '@/assets/image/new_product/lang_5.png'
-// import chang6 from '@/assets/image/new_product/lang_6.png'
 import axios from 'axios'
   export default {
     mixins: [AuthModal],
@@ -500,12 +515,46 @@ import axios from 'axios'
               }]
             }
           }
+        }, {
+          url: bannerE,
+          title: '家庭全年综合救援权益',
+          tips: ['全年守护', '家庭尊享', '赠道路救援', '增出险代步车服务'],
+          explain: '幸福没有终点，守护永不停歇，一个人坚强，两个人成长，一家人平安才是生命中最大的幸福！你的专属皇家护卫队已被任命，肩负荣耀使命，时刻守卫你和家人至高无上的生命安全。更有家庭尊享的道路救援和出险代步车服务全年护驾，带至亲的家人看更多的风景，让幸福永无止境！',
+          privilege: {
+            base: [{
+              tip: '直升机院前救援',
+              url: helicopter
+            }, {
+              tip: '120协调',
+              url: call
+            }, {
+              tip: '医疗转运9折',
+              url: trans
+            }, {
+              tip: '道路救援',
+              url: truck
+            }, {
+              tip: '出险代步车',
+              url: car
+            }]
+          }
         }],
         offcial: [],
         id: '',
         car: '',
         activePro: false,
-        dialog: false
+        dialog: false,
+        productE: [{
+          label: '2成年人1未成年人',
+          value: '1'
+        }, {
+          label: '1成年人2未成年人',
+          value: '2'
+        }, {
+          label: '2成年人2未成年人',
+          value: '3'
+        }],
+        activeIndex: 0
       }
     },
     created() {
@@ -513,7 +562,8 @@ import axios from 'axios'
       let x = {
         'A': '急速全明星',
         'C': '空降骑士',
-        'D': '丘比特之心'
+        'D': '丘比特之心',
+        'E': '皇家护卫队'
       }
       document.title = x[this.id]
       this._getProductData()
@@ -534,9 +584,13 @@ import axios from 'axios'
         share.desc = '命运可以改变，我永远在你身边'
         share.url = 'productC.jpg'
       } else if (this.id === 'D') {
-        share.title = 'D产品',
-        share.desc = 'D产品'
-        share.url = 'productC.jpg'
+        share.title = '即刻传递丘比特之心，和最爱的TA一起浪迹天涯再也不怕！',
+        share.desc = '每天都要保护你，我比时间更爱你'
+        share.url = 'productD.jpg'
+      } else if (this.id === 'E') {
+        share.title = '任命皇家护卫队，全年守护你和家人至高无上的生命安全！',
+        share.desc = '守护你们，是我一生最重要的决定'
+        share.url = 'productE.jpg'
       }
 
       this.$http.post(url, params).then(data => {
@@ -571,6 +625,9 @@ import axios from 'axios'
       })
     },
     methods: {
+      handleRadio(index) {
+        this.activeIndex = index
+      },
       _getProductData() {
         this.$http.get(`/wechat/package/queryPackageById?id=${this.id}`).then(response => {
           let data = response.data.payload
@@ -604,12 +661,17 @@ import axios from 'axios'
             alert('请选择日期')
             return
           }
+        } else if (this.id === 'E') {
+          Storage.session.set('type', this.activeIndex + 1)
+          Storage.session.set('pirce', this.price)
         }
         let url = {
           'A': `/pay?packageId=A&counter=${this.counter}&price=${this.price}&benefitEffectTime=${this.pickerStart}`,
           'C': `/pay?packageId=C&activePro=${this.activePro}&price=${this.price}`,
-          'D': `/pay?packageId=D&activePro=${this.activePro}&price=${this.price}&counter=2`
+          'D': `/pay?packageId=D&activePro=${this.activePro}&price=${this.price}&counter=2`,
+          'E': '/protectdetail'
         }
+        
         this.redirect = url[this.id]
         this._check().then(res => {
           this.$router.push(url[this.id])
@@ -627,6 +689,8 @@ import axios from 'axios'
             return this.activePro ? (this.main.price * 100 + 85 * 100) / 100 : this.main.price
           } else if (this.id === 'D') {
             return this.activePro ? (this.main.price * 100 + 39 * 100) / 100 : this.main.price
+          } else if (this.id === 'E') {
+            return this.activeIndex !== 2 ? this.main.price : (this.main.price * 100 + this.main.addPrice * 100) / 100
           }
         }
       },
@@ -634,7 +698,8 @@ import axios from 'axios'
         let enums = {
           'A': 0,
           'C': 1,
-          'D': 2
+          'D': 2,
+          'E': 3
         }
         return this.allInfo[enums[this.id]]
       }
@@ -712,6 +777,7 @@ import axios from 'axios'
         width: 100%;
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         .privilege-spuare {
           text-align: center;
           width: 25%;
@@ -723,6 +789,9 @@ import axios from 'axios'
             font-size: 12px;
             white-space: nowrap;
             margin-bottom: 0;
+          }
+          &:nth-of-type(5) {
+            margin-top: 19px;
           }
         }
       }
@@ -741,6 +810,27 @@ import axios from 'axios'
           align-items: center;
           padding-left: 5px;
           font-size: 12px;
+        }
+      }
+      .radio_box {
+        display: flex;
+        padding: 0 10px;
+        justify-content: space-between;
+        margin: 17px 0 10px 0;
+        .item {
+          display: flex;
+          align-items: center;
+          p {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            margin: 0;
+          }
+          span {
+            margin-left: 5px;
+            font-size: 14px;
+          }
         }
       }
       .wrapper {

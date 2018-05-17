@@ -88,11 +88,18 @@ export default {
   created() {
     var url = 'wechat/auth/userCenter';
     this.$http.get(url).then(data => {
-      let {
+      var {
         user,
         members
       } = data.data.payload
       this.user = user
+      members = {
+        firstAid: members.firstAid,
+        ambulance: members.ambulance,
+        medicalTransfer: members.medicalTransfer,
+        roadRescue: members.roadRescue,
+        scooter: members.scooter
+      }
       let arr = Object.entries(members).sort((a, b) => {
         return b[1] - a[1]
       })

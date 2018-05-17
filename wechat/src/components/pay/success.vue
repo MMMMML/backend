@@ -1,11 +1,33 @@
 <template>
   <div class="container">
     <div class="content">
-      <img src="../../assets/image/mine/complete@2x.png" alt="">
+      <img src="../../assets/image/product/success.png" alt="">
+      <span>购买成功</span>
+      <!-- <img src="../../assets/image/mine/complete@2x.png" alt="">
       <div class="success">
         <p>恭喜您获得</p>
         <h4>{{resp.packageMainName}}</h4>
         <p>{{resp.benefitEffectTime | format}} 至 {{resp.benefitExpireTime | format}}</p>
+      </div> -->
+    </div>
+    <div class="text">
+      <div class="success">
+        <p>
+          <span>权益名称</span>
+          <span>{{resp.packageMainName}}</span>
+        </p>
+        <p>
+          <span>订单编号</span>
+          <span>{{ resp.outTradeNo }}</span>
+        </p>
+        <p>
+          <span>有效期</span>
+          <span>{{resp.benefitEffectTime | format}} 至 {{resp.benefitExpireTime | format}}</span>
+        </p>
+        <p>
+          <span>合计</span>
+          <span>￥{{ resp.totalPrice }}元</span>
+        </p>
       </div>
     </div>
     <div class="btn">
@@ -19,11 +41,11 @@
 export default {
   data() {
     return {
-        resp:''
+      resp:''
     }
   },
   mounted(){
-      this.resp =JSON.parse(window.sessionStorage.getItem('businessInfo'))
+    this.resp =JSON.parse(window.sessionStorage.getItem('businessInfo'))
   },
   methods: {
     goHome() {
@@ -36,7 +58,8 @@ export default {
   filters: {
     format(val) {
       if (val) {
-        return val.substr(0, 10)
+        let x = val.substr(0, 10)
+        return x.replace(/-/g, '/')
       }
     }
   }
@@ -47,54 +70,50 @@ export default {
 .container {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-flow: column nowrap;
+  background: #f0f0f0;
   .content {
-    flex: 1;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
+    height: 100px;
+    width: 100%;
     background: #fff;
-    padding-top: 70px;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
     img {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 22px;
+      width: 50px;
+      height: 50px;
+      margin-right: 20px;
     }
-    .text {
-      text-align: center;
-      color: #888;
-      font-size: 14px;
-      p {
-        color: #656565;
-        margin: 0;
-        line-height: 28px;
-        font-size: 18px;
-      }
-      span {
+    span {
+      color: #4b4b4b;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  .text {
+    padding: 16px 20px 14px;
+    background: #fff;
+    margin-top: 10px;
+    color: #4b4b4b;    
+    p {
+      line-height: 20px;
+      margin: 0;
+      span:first-child {
         display: inline-block;
-        height: 20px;
-        line-height: 20px;
+        width: 56px;
+        margin-right: 14px;
       }
-    }
-    .success {
-      text-align: center;
-      h4 {
-        color: #4B4B4B;
-        font-size: 18px;
-        line-height: 24px;
-        margin-bottom: 5px;
+      span:last-child {
+        color: #4a4a4a;
       }
-      p {
-        color: #4B4B4B;
-        line-height: 20px;
-        margin: 0;
-        font-size: 16px;
-        // font-weight: 700;
+      &~p {
+        margin-top: 5px;
       }
     }
   }
   .btn {
+    position: fixed;
+    left: 0;
+    bottom: 0;
     width: 100%;
     height: 45px;
     color: #fff;
@@ -103,10 +122,16 @@ export default {
     display: flex;
     div {
       flex: 1;
-      border: 1px solid #ccc;
+      box-shadow: 0px -1px 2px #ccc;
       text-align: center;
-      color: #4b4b4b;
+    }
+    .left {
       background: #fff;
+      color: #f00;
+    }
+    .right {
+      background: #f00;
+      color: #fff;
     }
   }
 }
