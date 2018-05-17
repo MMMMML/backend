@@ -229,15 +229,16 @@
 
   .mint-radiolist {
     display: flex;
-    .mint-cell-wrapper {
+   
+  }
+   .mint-cell-wrapper {
       padding: 0 !important;
       font-size: 12px !important;
+      background-size: 120% 0;
     }
-  }
-
-  .mint-cell {
-    width: 33.33%;
-  }
+  // .mint-cell {
+  //   width: 33.33%;
+  // }
 
   .mint-radiolist-label {
     padding: 0;
@@ -277,6 +278,7 @@
       font-size: 14px;
       margin-top: 10px;
       color: #4B4B4B;
+      line-height: 20px;
     }
   }
 
