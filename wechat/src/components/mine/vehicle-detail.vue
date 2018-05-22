@@ -108,6 +108,9 @@
       if (this.id) {
         this._getDetail()
         this.disabled = true
+        document.title = '车辆信息'
+      } else {
+        document.title = '添加车辆'
       }
     },
     mounted() {

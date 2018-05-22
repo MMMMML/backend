@@ -75,7 +75,6 @@
     margin: 0;
     font-size: 14px;
     width: 50%;
-
   }
 
   .button {

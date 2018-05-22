@@ -9,8 +9,7 @@
           </div>
           <div class="operate">
             <div class="operate-btn vux-1px-t vux-1px-r" @click='cancel'>{{cancelBtnText}}</div>
-            <div v-if='!tel' class="operate-btn vux-1px-t" @click='confirm'>{{confirmBtnText}}</div>
-            <a v-else class="operate-btn vux-1px-t" @click='confirm' :href='telphone'>
+            <a class="operate-btn vux-1px-t" @click='confirm'>
               <span>{{confirmBtnText}}</span>
             </a>
           </div>
@@ -38,10 +37,6 @@
       cancelBtnText: {
         type: String,
         default: '取消'
-      },
-      tel: {
-        type: Boolean,
-        default: true
       }
     },
     data () {
@@ -63,11 +58,6 @@
       confirm () {
         this.hide()
         this.$emit('confirm')
-      }
-    },
-    computed: {
-      telphone () {
-        return `tel:${this.text}`
       }
     }
   }
@@ -101,11 +91,13 @@
         background: #fff;
         padding-top: 1px;
         .textWrapper{
-          height: 96px;
+          // height: 96px;
           display: flex;
           flex-flow: column nowrap;
           justify-content: center;
           align-items: center;
+          padding: 10px 15px;
+          text-align: center;
           .text{
             font-size: 14px;
             color: #666;
@@ -113,6 +105,7 @@
             &:nth-child(2) {
               margin-top: 20px;
               font-size: 16px;
+              line-height: 22px;
             }
           }
         }

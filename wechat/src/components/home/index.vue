@@ -22,6 +22,15 @@
       </div>
     </div>
     <Tab></Tab>
+    <div v-show='modalFlag' class="mask" @touchmove='handleTouchMove'>
+      <div class="modal" @click='handleClick'>
+        <div class="btn_image">
+          <img class='heart_left' src="./heart5.png" alt="">
+          <img class='heart_right' src="./heart5.png" alt="">
+        </div>
+        <img @click.stop='handleClose' class='close_image' src="./button-window-close@2x.png" alt="">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -30,6 +39,7 @@ import Cookies from 'js-cookie'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Tab from '@/base/tab'
 import 'swiper/dist/css/swiper.css'
+import { mapGetters, mapMutations } from 'vuex'
 let index = 1
 export default {
   data() {
@@ -45,17 +55,19 @@ export default {
           title: '命运可以改变，我永远在你身边',
           content: '单人全年空中直升机医疗救援+地面120协调服务',
           path: '/product?id=C'
-         }, {
-          src: require('../../assets/image/home/banner.png'),
+         },
+        {
+          src: require('../../assets/image/home/banner_c.jpeg'),
           title: '每天都要保护你，我比时间更爱你',
           content: '双人全年空中直升机医疗救援+地面120协调+道路救援服务',
           path: '/product?id=D'
         }, {
-          src: require('../../assets/image/product/banner-皇家护卫@3x.png'),
+          src: require('../../assets/image/home/banner_e.jpeg'),
           title: '守护你们，是我一生最重要的决定',
           content: '家庭全年直升机医疗救援+地面120协调+道路救援+出险代步车服务',
-          path: '/protect'
-        }, {
+          path: '/product?id=E'
+        }, 
+        {
           src: require('../../assets/image/home/banner_4.jpeg'),
           title: '世界真大，任性出发',
           content: '自驾7日直升机院前救援+地面120协调+道路救援+出险代步车服务',
@@ -77,30 +89,32 @@ export default {
     this.swiper.on('slideChangeTransitionEnd', () => {
       that.index = this.swiper.activeIndex
     })
-    var _mtac = {};
-      (function () {
-        var mta = document.createElement("script");
-        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
-        mta.setAttribute("name", "MTAH5");
-        mta.setAttribute("sid", "500608350");
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(mta, s);
-      })()
   },
   methods:{
     goProduct(path) {
       this.$router.push(path)
-    }
+    },
+    handleTouchMove(e) {
+      e.preventDefault()
+    },
+    handleClick() {
+      this.$router.push('/product?id=D')
+    },
+    handleClose() {
+      this.SET_MODAL_FLAG(false)
+    },
+    ...mapMutations(['SET_MODAL_FLAG'])
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
+    ...mapGetters(['modalFlag'])
   },
   components: {
     swiper,
     swiperSlide,
     Tab
-  },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper
-    }
   }
 }
 </script>
@@ -171,6 +185,100 @@ export default {
         }
       }
     }
+  }
+  .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .modal {
+      width: 300px;
+      height: 400px;
+      border-radius: 4px;
+      background: no-repeat url('http://owvihnwpv.bkt.clouddn.com/xiari.png') 0 0 ~'/' 100% 100%;
+      position: relative;
+      .btn_image {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 131px;
+        transform: translate3d(-50%, 0, 0);
+        width: 131px;
+        height: 70px;
+        .heart_left {
+          position: absolute;
+          left: 27px;
+          top: 29px;
+          width: 8px;
+          height: 8px;
+          animation: myLeftUp 1.5s ease-out infinite;
+        }
+        .heart_right {
+          position: absolute;
+          right: 27px;
+          top: 29px;
+          width: 8px;
+          height: 8px;
+          animation: myRightUp 1.5s ease-out infinite;
+        }
+      }
+      .close_image {
+        position: absolute;
+        right: 0;
+        top: -42px;
+        width: 26px;
+      }
+    }
+  }
+}
+@keyframes myLeftUp {
+  0% {
+    top: 29px;
+    left: 27px;
+    opacity: 1;
+  }
+  70% {
+    left: 10px;
+    top: -10px;
+    opacity: 0;
+  }
+  90% {
+    top: 29px;
+    left: 27px;
+    opacity: 0;
+  }
+  100% {
+    top: 29px;
+    left: 27px;
+    opacity: 0;
+  }
+}
+@keyframes myRightUp {
+  0% {
+    top: 29px;
+    right: 27px;
+    opacity: 1;
+  }
+  70% {
+    right: 10px;
+    top: -10px;
+    opacity: 0;
+  }
+  90% {
+    top: 29px;
+    right: 27px;
+    opacity: 0;
+  }
+  100% {
+    top: 29px;
+    right: 27px;
+    opacity: 0;
   }
 }
 </style>

@@ -10,6 +10,9 @@
           :startDate='startDate' :endDate='endDate'
         >
         </mt-datetime-picker>
+        <div>
+          <img width='8' height='13' class="up-arrow" src="../../../assets/image/mine/Chevron@3x.png" alt="">
+        </div>
       </div>
     </div>
     <div class="must" v-for='(item, index) of personUserInfo' :key='index'>
@@ -461,6 +464,7 @@
       height: 50px;
       background: #fff;
       padding-left: 20px;
+      margin-bottom: 10px;
       .item {
         display: flex;
         height: 48px;
@@ -488,7 +492,6 @@
       .info_wrapper {
         background: #fff;
         padding-left: 20px;
-        margin-top: 10px;
         h4 {
           margin: 0;
           line-height: 42px;
@@ -500,6 +503,7 @@
           line-height: 48px;
           position: relative;
           font-size: 14px;
+          padding-right: 10px;
           .item_label {
             width: 90px;
             height: 100%;
@@ -582,6 +586,9 @@
             transform: translate3d(0, -50%, 0);
             z-index: 99;
           }
+        }
+        &~.info_wrapper {
+          margin-top: 10px;          
         }
       }
     }

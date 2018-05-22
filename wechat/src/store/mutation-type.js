@@ -1,1 +1,2 @@
 export const SET_COMMON_PEOPLE = 'SET_COMMON_PEOPLE'
+export const SET_MODAL_FLAG = 'SET_MODAL_FLAG'

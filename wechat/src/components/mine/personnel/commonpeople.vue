@@ -4,7 +4,7 @@
       <h3>权益人</h3>
       <div class="man vux-1px-b">
         <p class="human-name">姓名</p>
-        <input type="text" :disabled='readonly' class="human-input" v-model='form.realName' placeholder="请输入真实姓名">
+        <input type="text" :disabled='readonly' class="human-input" :class='{"disabled": readonly}' v-model='form.realName' placeholder="请输入真实姓名">
       </div>
       <div class="man vux-1px-b">
         <p class="human-name">证件类型</p>
@@ -12,7 +12,7 @@
       </div>
       <div class="man vux-1px-b">
         <p class="human-name">证件号码</p>
-        <input type="text" :disabled='readonly' class="human-input" v-model='form.idNumber' placeholder="请输入证件号码">        
+        <input type="text" :disabled='readonly' class="human-input" :class='{"disabled": readonly}' v-model='form.idNumber' placeholder="请输入证件号码">        
       </div>
       <div class="man">
         <p class="human-name">手机号码</p>
@@ -106,9 +106,12 @@
     &~.must {
       margin-top: 10px;
     }
+    .disabled {
+      color: #999;
+    }
   }
   .button {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -237,5 +240,4 @@ export default {
     }
   }
 }
-
 </script>

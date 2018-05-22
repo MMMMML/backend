@@ -49,7 +49,7 @@
           <p>【空降热线】</p>
           <img src="../../assets/image/evcard/3.png" alt="">
           <span>谨记空降联盟咨询/救援热线
-            <span style="color:#f44975">021-60554929</span>
+            <span style="color:#f44975">400-111-9299</span>
           </span>
         </div>
         <div class="line">
