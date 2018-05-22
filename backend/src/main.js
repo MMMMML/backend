@@ -10,6 +10,7 @@ import appConfig from './appconfig'
 import http from './common/http'
 import auth from './common/auth'
 import axios from 'axios'
+import '@/common/iconfont'
 window.common = {
   copy: (obj) => {
     var newObj = obj instanceof Array ? [] : {};

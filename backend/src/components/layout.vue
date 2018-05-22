@@ -132,12 +132,12 @@
 
 
   .mess {
-    height: 57px;
-    line-height: 57px;
-    background: #3a3632;
+    height: 59px;
+    line-height: 59px;
+    background: #4e4c64;
     color: #fff;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
+    /* border-bottom: 1px solid;
+    border-right: 1px solid; */
   }
 
   .el-submenu__title:hover {
@@ -146,7 +146,7 @@
   }
 
   .el-header {
-    background-color: #3a3632;
+    background-color: #4e4c64;
     line-height: 64px;
     color: #fff;
     padding-left: 20px;
@@ -165,13 +165,14 @@
     left: 0;
     right: 0;
     height: 100%;
-    background: #3a3632;
+      background:-webkit-gradient(linear, 0 0, 0 bottom, from(#4e4c64), to(#365f65));    
+    /* background-size:auto; */
     overflow-x: hidden;
     overflow-y: scroll;
   }
 
   .el-menu {
-    background: #3a3632;
+    background: transparent;
     color: #fff;
     border-right: none;
   }

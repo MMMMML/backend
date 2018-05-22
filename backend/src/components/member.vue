@@ -1,11 +1,14 @@
 <template>
    <div>
        <el-form :inline="true"  class="demo-form-inline">
-  <el-form-item label="账号ID">
-    <el-input v-model="id" placeholder="请输入账号ID"></el-input>
+  <el-form-item label='昵称'>
+    <el-input v-model="nickName" placeholder="请输入昵称"></el-input>
   </el-form-item>
   <el-form-item label="手机号">
     <el-input v-model="mobile" placeholder="请输入手机号"></el-input>
+  </el-form-item>
+  <el-form-item label="姓名">
+    <el-input v-model="realName" placeholder="请输入姓名"></el-input>
   </el-form-item>
    <el-form-item label="证件号">
     <el-input v-model="idNumber" placeholder="请输入证件号"></el-input>
@@ -36,7 +39,11 @@
       <el-table :data="list" border style="width: 100%">
         <el-table-column fixed prop="id" label="账号ID">
         </el-table-column>
+        <el-table-column fixed prop="nick_name" label="昵称">
+        </el-table-column>
         <el-table-column prop="mobile" label="手机号">
+        </el-table-column>
+        <el-table-column prop="real_name" label="姓名">
         </el-table-column>
         <el-table-column prop="id_number" label="证件号">
         </el-table-column>
@@ -51,7 +58,7 @@
         </el-table-column>
         <el-table-column fixed="right" label="消费记录" width="100">
           <template slot-scope="scope">
-            <el-button type="text" size="small">查看</el-button>
+            <el-button type="text" @click="examine(scope.row)" size="small">查看</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -83,6 +90,8 @@ export default {
         endDate:'', 
         list:[],
         id:'',
+        nickName:'',
+        realName:'',
         mobile:'',
         idNumber:'',
         centerDialogVisible : false,
@@ -111,8 +120,9 @@ export default {
       this.currentPage = val;
       var url = 'user/queryList';
       var params = {
-          id:this.id,
+          nickName:this.nickName,
           mobile:this.mobile,
+          realName:this.realName,
           idNumber:this.idNumber,
           startDate:this.startDate,
           endDate:this.endDate,
@@ -128,6 +138,11 @@ export default {
       console.log(row.id)
       window.sessionStorage.setItem('userId',row.id)
       window.location.hash='/layout/account'
+    },
+    examine:function(row){
+      console.log(row.id)
+      window.sessionStorage.setItem('userId',row.id)
+      window.location.hash='/layout/expenditure'
     }
   }
 }

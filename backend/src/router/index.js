@@ -23,6 +23,8 @@ import vehicle from "@/components/vehicle";
 import safe from "@/components/safeguard-account";
 import vehiclecar from "@/components/vehicle-account";
 import conversion from "@/components/conversion";
+import expenditure from "@/components/expenditure";
+import particular from "@/components/particular";
 
 Vue.use(Router);
 
@@ -104,6 +106,20 @@ export default new Router({
           component: conversion,
           props: {
             name: "权益码管理"
+          }
+        },
+        {
+          path: "expenditure", //测试面包屑导航加上的路由,没啥用
+          component: expenditure,
+          props: {
+            name: "消费记录"
+          }
+        },
+        {
+          path: "particular", //测试面包屑导航加上的路由,没啥用
+          component: particular,
+          props: {
+            name: "订单详情"
           }
         },
         {

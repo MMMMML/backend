@@ -60,10 +60,14 @@
           </template>
         </el-table-column>
       </el-table>
-
-      <!-- <el-pagination class="mart" style="float:right" :page-size="pageSize" @current-change="getPageData" :current-page.sync="currentPage"
+      <el-pagination
+        class="mart" 
+        style="float:right"
+        :page-size="pageSize" 
+        @current-change="getPageData"
+        :current-page.sync="currentPage"
         layout="prev, pager, next, jumper,total" :total="listnum">
-      </el-pagination> -->
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -78,7 +82,10 @@ import moment from 'date-fns'
         name:'',
         generateTimeStart:'',
         generateTimeEnd:'',
-        packageId:''
+        packageId:'',
+        listnum: 0,
+        pageSize: 20,
+        currentPage: 1,
       }
     },
     mounted() {
@@ -88,24 +95,38 @@ import moment from 'date-fns'
             this.product = data.data.payload
             console.log(data)
         });
-      this._reload()
+        let urls = 'redeemCode/pagedList'
+        this._handlePage(urls)
     },
     methods: {
-         _reload(){
-            let url = 'redeemCode/pagedList'
-            this.http.post(url).then(data => {
-            this.list = data.data.payload.list
-            this.list.map(item=>{
-              item.endtime = moment.format(item.endtime,"YYYY-MM-DD")
-            })
-        });
-        },
-
-
+       _handlePage(...args) {
+        this.http.get(...args).then(data => {
+        const { list, total } = data.data.payload
+        this.list = list
+        this.listnum = total
+        this.list.map(item=>{
+          item.endtime = moment.format(item.endtime, "YYYY-MM-DD")
+        })
+      });
+    },
+  getPageData(val){
+      this.currentPage = val;
+      var url = 'redeemCode/pagedList';
+      var params = {
+          id:this.id,
+          mobile:this.mobile,
+          idNumber:this.idNumber,
+          startDate:this.startDate,
+          endDate:this.endDate,
+          pageIndex: val,
+      }
+      // let obj = { params }
+      this._handlePage(url, params)
+    },
       check: function (id) {
         let url = `redeemCode/exportCodeCsv.csv?batchId=${id.id}`
         // const base = 'http://aj.kingwingaviation.com/alliance/api/backend/' //正式
-        const base = 'http://aj.kingwingaviation.com/alliance-java/backend' //测试
+        const base = 'http://aj.kingwingaviation.com/alliance-java/backend/' //测试
         location.href = `${base}${url}`
         
       },
@@ -123,24 +144,7 @@ import moment from 'date-fns'
         });
       },
       search:function(){
-          let url = 'redeemCode/pagedList'
-          let params = {
-            batchNo:this.batchNo,		
-            name:this.name,			
-            packageId:this.packageId,		
-            generateTimeStart:this.generateTimeStart,	
-            generateTimeEnd:this.generateTimeEnd		 
-          }
-           this.http.post(url,params).then(data => {
-            this.list = data.data.payload.list
-            console.log(data)
-            // if(data.data.code==200){
-            //     this._reload()
-            // }
-            // if(data.data.code==500){
-            //     alert(data.data.message)
-            // }
-        });
+         this.getPageData(1)
       }
 
 

@@ -35,7 +35,7 @@
      <div>
       <p class="header">会员记录</p>
        <div>
-      <el-table :data="members" border style="width: 100%">
+      <el-table :data="members" border style="width: 100%" @cell-click='check'>
         <el-table-column fixed prop="service" label="业务类型" :formatter='formatter'>
         </el-table-column>
         <el-table-column prop="serviceId" label="业务编号">
@@ -43,6 +43,10 @@
         <el-table-column prop="num" label="变更数量">
         </el-table-column>
         <el-table-column prop="changeTime" label="变更时间">
+        </el-table-column>
+        <el-table-column prop="effectTime" label="生效时间">
+        </el-table-column>
+        <el-table-column prop="expireTime" label="失效时间">
         </el-table-column>
          <el-table-column fixed prop="remark" label="备注">
         </el-table-column>
@@ -110,7 +114,15 @@ export default {
         }
         return service
       },
-  }
+     
+     check:function(row){
+       if(row.serviceType==1){
+      window.sessionStorage.setItem('getOrderDetail',row.serviceId)
+      window.location.hash='/layout/particular'
+    }
+ 
+  },
+   }
 }
 </script>
 

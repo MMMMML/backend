@@ -11,12 +11,6 @@
       <el-form-item label="手机号">
         <el-input readonly v-model="userInfo.mobile" ></el-input>
       </el-form-item>
-      <el-form-item label="微信号">
-        <el-input readonly v-model="userInfo.wechat_no"></el-input>
-      </el-form-item>
-      <el-form-item label="邮箱地址">
-        <el-input readonly v-model="userInfo.email" ></el-input>
-      </el-form-item>
     </el-form>
 
     <div>
@@ -81,25 +75,11 @@
         </el-table-column>
         <el-table-column prop="plate_number" label="号码号牌">
         </el-table-column>
-        <el-table-column prop="contact" label="车辆联系人">
-        </el-table-column>
-        <el-table-column prop="contact_mobile" label="联系人电话">
-        </el-table-column>
         <el-table-column prop="vehicle_type" label="车辆类型">
         </el-table-column>
          <el-table-column fixed prop="using_nature" label="使用性质">
         </el-table-column>
-        <el-table-column prop="brand" label="品牌型号">
-        </el-table-column>
         <el-table-column prop="vin" label="车辆识别代号">
-        </el-table-column>
-        <el-table-column prop="engine_no" label="发动机号">
-        </el-table-column>
-        <el-table-column prop="owner_address" label="住所">
-        </el-table-column>
-        <el-table-column prop="reg_date" label="注册日期">
-        </el-table-column>
-        <el-table-column prop="release_date" label="发证日期">
         </el-table-column>
       </el-table>
     </div>
@@ -107,7 +87,7 @@
     <el-button type="primary" class="history" onclick="javascript:history.back(-1);">返回</el-button>
   </div>
 </template>
-<style>
+<style scoped>
 .header{
     font-size: 20px;
     margin: 25px 0;
