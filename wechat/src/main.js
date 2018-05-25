@@ -25,9 +25,9 @@ FastClick.attach(document.body)
 // 正式
 // axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance/api/'
 // 调试
-// axios.defaults.baseURL = '/apis'
+axios.defaults.baseURL = '/apis'
 // 测试
-axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
+// axios.defaults.baseURL = 'http://aj.kingwingaviation.com/alliance-java/'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {
@@ -50,8 +50,8 @@ axios.interceptors.response.use(
   error => {
     if (error.toString().includes('401')) {
       // const redirect = `http://aj.kingwingaviation.com/alliance/api/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
-      const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
-      window.location.href = redirect
+      // const redirect = `http://aj.kingwingaviation.com/alliance-java/wechat/auth/fuwuLogin?state=${encodeURIComponent(location.href)}`
+      // window.location.href = redirect
     } else if (error.toString().includes('400')) {
       let url = '//' + location.host + location.pathname +  '#/attestation?redirect=mine'
       setTimeout(() => {
@@ -68,7 +68,6 @@ Vue.component(Radio.name, Radio)
 Vue.use(Vuelazyload, {
   loading: require('./assets/image/loading.png')
 })
-
 const vm = new Vue({
   el: '#app',
   router,

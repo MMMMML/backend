@@ -74,7 +74,6 @@ export default {
           this.http.post(url).then(data=>{
               console.log(data)
             if(data.data.code==200){
-              console.log(data.data.payload.access_token)
                this.auth.setUser(data.data.payload.access_token)
                console.log(data.data.payload.sessionId)
                window.sessionStorage.setItem('sesstionid',data.data.payload.sessionId)

@@ -5,9 +5,9 @@
       <p>订单编号：{{benefitOrder.id}}</p>
       <p>订单状态：{{benefitOrder.paidStatus}}</p>
       <p>产品名称：{{benefitPackage.mainName}}</p>
-      <p>下单时间：{{benefitOrder.benefitExpireTime}}</p>
+      <p>下单时间：{{benefitOrder.createTime}}</p>
       <p>服务费用：{{benefitOrder.totalPrice}}</p>
-      <p>有效时间：{{benefitOrder.benefitExpireTime}}至{{benefitOrder.benefitEffectTime}}</p>
+      <p>有效时间：{{benefitOrder.benefitEffectTime}}至{{benefitOrder.benefitExpireTime}}</p>
     </div>
 
     <div>
